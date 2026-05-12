@@ -157,3 +157,35 @@ def compute_segment_times(
     out['min_speed'] = min_speeds
     out['time_s'] = times
     return out
+
+
+def compute_segment_deltas(
+    times_a: pd.DataFrame,
+    times_b: pd.DataFrame,
+) -> pd.DataFrame:
+    """
+    Compute per-segment time delta between two drivers.
+
+    Args:
+        times_a: output of compute_segment_times for driver A.
+        times_b: output of compute_segment_times for driver B.
+            Both must have the same Segment values in the same order.
+
+    Returns:
+        DataFrame with columns:
+          Segment, kind, start_m, end_m, min_speed, time_a_s, time_b_s, delta_s
+        where:
+          - min_speed = elementwise min(times_a.min_speed, times_b.min_speed)
+            (the deeper of the two; used for category classification).
+          - delta_s = time_b_s - time_a_s.
+            POSITIVE = driver A faster than driver B.
+    """
+    if not (times_a['Segment'].values == times_b['Segment'].values).all():
+        raise ValueError("times_a and times_b must have identical Segment ordering")
+
+    out = times_a[['Segment', 'kind', 'start_m', 'end_m']].copy()
+    out['min_speed'] = np.minimum(times_a['min_speed'].values, times_b['min_speed'].values)
+    out['time_a_s'] = times_a['time_s'].values
+    out['time_b_s'] = times_b['time_s'].values
+    out['delta_s'] = out['time_b_s'] - out['time_a_s']
+    return out
