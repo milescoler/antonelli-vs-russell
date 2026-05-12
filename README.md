@@ -10,10 +10,10 @@ This project compares the two Mercedes drivers' qualifying laps across the 2026 
 
 After the first 4 rounds of 2026:
 
-- **Lap-time gap to Russell:** {TBD} seconds on average across qualifying.
-- **Where Antonelli loses time:** {TBD — e.g. "slow-speed corners, particularly braking-zone entries"}.
-- **Where he's already competitive:** {TBD — e.g. "high-speed sections; the gap closes to near zero in fast corners"}.
-- **Trajectory:** {TBD — e.g. "the gap has narrowed by ~30% from Round 1 to Round 4"}.
+- **Lap-time gap to Russell:** Antonelli is 0.16 s/lap faster than Russell on average across qualifying (R1: −0.29 s, RUS faster; R2: +0.22 s; R3: +0.30 s; R4: +0.40 s, ANT faster).
+- **Where Antonelli loses time:** medium-speed corners (130–200 kph), at −0.46 s/lap on average. This signal is driven primarily by a single Japan outlier — Suzuka's S-curves (C7/C8, ~189 kph minimum speed) contribute −0.62 s in that category alone, nearly 10× the medium-corner delta seen at other rounds.
+- **Where he's already competitive:** fast corners (>200 kph) and slow corners (<130 kph) are essentially level with Russell (−0.003 s and +0.009 s respectively). On straights Antonelli actually gains +0.11 s/lap.
+- **Trajectory:** the gap has shifted in Antonelli's favour every single round — from −0.29 s (Russell faster) at Australia to +0.40 s (Antonelli faster) at Miami, a monotone swing of 0.69 s across four rounds.
 
 ![Headline chart: per-segment time delta across four races](figures/headline_segment_delta.png)
 
@@ -29,7 +29,7 @@ Comparing teammates controls for that. Same chassis, same power unit, same engin
 
 ## Method
 
-**Data:** FastF1 telemetry for the 2026 qualifying sessions of {race list}. Each driver's fastest valid lap is used.
+**Data:** FastF1 telemetry for the 2026 qualifying sessions of the Australian, Chinese, Japanese and Miami Grands Prix. Each driver's fastest valid lap is used.
 
 **Segmentation:** Track segments are auto-generated from FastF1's `circuit_info.corners`, grouping nearby corners into single segments (default threshold: 250m). This produces 12-20 segments per circuit.
 
@@ -68,9 +68,15 @@ pip install -r requirements.txt
 jupyter lab notebooks/01_antonelli_vs_russell.ipynb
 ```
 
-First run downloads ~{X}MB of FastF1 session data into `./fastf1_cache/` (gitignored). Subsequent runs are local and fast.
+First run downloads ~411 MB of FastF1 session data into `./fastf1_cache/` (gitignored). Subsequent runs are local and fast.
 
-Tested with FastF1 {version}, Python 3.12.
+After install, verify the math wires correctly:
+
+```bash
+pytest tests/
+```
+
+Tested with FastF1 3.8.1, Python 3.12.
 
 ---
 
@@ -78,7 +84,7 @@ Tested with FastF1 {version}, Python 3.12.
 
 A short list of what this analysis does _not_ control for:
 
-- **Sample size.** {N} qualifying sessions. Findings are directional, not conclusive.
+- **Sample size.** 4 qualifying sessions. Findings are directional, not conclusive.
 - **Q-session timing.** Q1, Q2, Q3 happen on an evolving track. If one driver's best lap is in Q3 and the other's is in Q2, track conditions differ. The notebook flags these cases.
 - **Traffic.** Out-laps, in-laps, and other cars on track affect achievable lap time.
 - **Tire age within Q.** Same compound, but tire-age within a Q-session run can differ by a few laps.
@@ -98,6 +104,6 @@ These caveats matter. The project is a careful look at what the available teleme
 
 ## About
 
-Built by Cole Richards. UCLA Statistics & Data Science, June 2026. [Portfolio](https://milescoler.github.io) · [LinkedIn]({TBD})
+Built by Cole Richards. UCLA Statistics & Data Science, June 2026. [Portfolio](https://milescoler.github.io)
 
 Data via [FastF1](https://github.com/theOehrly/Fast-F1) by Philipp Schaefer. Not affiliated with Formula 1 or Mercedes.
