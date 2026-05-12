@@ -33,7 +33,9 @@ Comparing teammates controls for that. Same chassis, same power unit, same engin
 
 **Segmentation:** Track segments are auto-generated from FastF1's `circuit_info.corners`, grouping nearby corners into single segments (default threshold: 250m). This produces 12-20 segments per circuit.
 
-**Time delta:** Both drivers' speed traces are resampled onto a uniform 5m distance grid. Time per step is `Δd / speed`. Segment time is the sum of step times within each segment's distance bounds. Segment delta is `Russell_time − Antonelli_time` (positive = Antonelli faster).
+**Time delta:** Both drivers' telemetry — including FastF1's per-sample `Time` channel — is resampled onto a uniform 5m distance grid. Segment time is read directly from that resampled `Time` channel as `Time[last_step] − Time[first_step]` within the segment's distance bounds. Segment delta is `Russell_time − Antonelli_time` (positive = Antonelli faster).
+
+*An earlier version of the analysis integrated `Δd / speed` per step instead. On 2 of the 4 races the accumulated residual exceeded the 0.1s sanity-check threshold below, so the method switched to reading FastF1's sample times directly. Residuals are now ≤ 0.1s on all four races — see the notebook's sanity-check section.*
 
 **Sanity check:** The sum of segment deltas across a lap is verified to match the actual lap-time delta within 0.1s. Larger discrepancies indicate a bug.
 

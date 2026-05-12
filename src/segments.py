@@ -2,11 +2,9 @@
 Circuit segmentation and per-segment time-delta computation.
 """
 
-# Imports
 import numpy as np
 import pandas as pd
 
-# Constants
 DEFAULT_GRID_STEP_M = 5.0
 DEFAULT_CORNER_GROUP_THRESHOLD_M = 250.0
 MIN_STRAIGHT_LENGTH_M = 100.0

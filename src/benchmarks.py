@@ -5,9 +5,7 @@ the interpretive layer (segment categories, Q-session derivation, metadata).
 
 from __future__ import annotations
 from typing import Optional
-import warnings
 
-import numpy as np
 import pandas as pd
 
 from src.loaders import (
