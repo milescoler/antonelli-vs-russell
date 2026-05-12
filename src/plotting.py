@@ -75,3 +75,33 @@ def plot_category_deltas(
         fig.savefig(save_path, dpi=150, bbox_inches='tight')
 
     return fig
+
+
+def plot_lap_delta_by_round(
+    meta_df: pd.DataFrame,
+    save_path: Optional[Path] = None,
+) -> plt.Figure:
+    """
+    Trajectory chart: total lap-time delta by race round.
+
+    Args:
+        meta_df: one row per race. Required columns: round, event_name, lap_delta_s.
+        save_path: if given, save PNG at 150 dpi.
+    """
+    df = meta_df.sort_values('round').reset_index(drop=True)
+    fig, ax = plt.subplots(figsize=(8, 4.5))
+    ax.plot(df['round'], df['lap_delta_s'], marker='o', color='#1f77b4', linewidth=2, markersize=8)
+    ax.axhline(0, color='black', linewidth=0.8)
+    ax.set_xticks(df['round'])
+    ax.set_xticklabels([f"R{r}\n{n}" for r, n in zip(df['round'], df['event_name'])])
+    ax.set_ylabel('Lap-time delta (s)\npositive → Antonelli faster')
+    ax.set_title('Antonelli vs Russell — total qualifying lap delta by round')
+    ax.grid(axis='y', linestyle='--', alpha=0.35)
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    fig.tight_layout()
+    if save_path is not None:
+        save_path = Path(save_path)
+        save_path.parent.mkdir(parents=True, exist_ok=True)
+        fig.savefig(save_path, dpi=150, bbox_inches='tight')
+    return fig
