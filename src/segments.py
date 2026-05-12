@@ -23,25 +23,31 @@ def resample_to_distance_grid(
     Args:
         telemetry: DataFrame from FastF1's get_telemetry(), with a Distance column.
         step_m: distance grid spacing in meters.
-        channels: which columns to interpolate. Defaults to Speed, Throttle, Brake, X, Y.
+        channels: which columns to interpolate. Defaults to Speed, Time, Throttle, Brake, X, Y.
+            Time is converted to seconds-as-float before interpolation so the output
+            DataFrame has a float Time column (not a Timedelta).
 
     Returns:
         DataFrame with uniform Distance column and interpolated channels.
     """
-    # Handle default channels list if None
     if channels is None:
-        channels = ['Speed', 'Throttle', 'Brake', 'X', 'Y']
-    
-    # Sort by distance and drop duplicates
+        channels = ['Speed', 'Time', 'Throttle', 'Brake', 'X', 'Y']
+
     telem_clean = telemetry.sort_values('Distance').drop_duplicates(subset='Distance')
+    telem_clean = telem_clean[telem_clean['Distance'] >= 0]
     target_distance = np.arange(0, telem_clean['Distance'].max(), step_m)
     out = {'Distance': target_distance}
-    
+
     for channel in channels:
         if channel not in telem_clean.columns:
             continue
-        out[channel] = np.interp(target_distance, telem_clean['Distance'].values, telem_clean[channel].values)
-    
+        source = telem_clean[channel]
+        if channel == 'Time':
+            source_values = source.dt.total_seconds().values
+        else:
+            source_values = source.values
+        out[channel] = np.interp(target_distance, telem_clean['Distance'].values, source_values)
+
     return pd.DataFrame(out)
 
 def build_segments_from_corners(
@@ -126,39 +132,43 @@ def build_segments_from_corners(
 def compute_segment_times(
     telem_resampled: pd.DataFrame,
     segments: pd.DataFrame,
-    step_m: float = DEFAULT_GRID_STEP_M,
 ) -> pd.DataFrame:
     """
     Compute per-segment time and min-speed from resampled telemetry.
 
+    Uses the telemetry's Time channel directly: per-segment time is
+    Time[last_step_in_segment] - Time[first_step_in_segment]. This avoids
+    the accumulated error of integrating speed over distance.
+
     Args:
         telem_resampled: output of resample_to_distance_grid; must have
-            Distance (meters), Speed (kph).
+            Distance (meters), Speed (kph), and Time (seconds as float —
+            resample_to_distance_grid converts Timedelta -> seconds for us).
         segments: output of build_segments_from_corners; must have
             Segment, start_m, end_m, kind.
-        step_m: distance grid step in meters; must match the step used when
-            resampling.
 
     Returns:
         The input `segments` frame with two added columns:
           - min_speed (kph): min of Speed within [start_m, end_m).
-          - time_s (seconds): sum of (step_m / speed_m_per_s) within [start_m, end_m).
+          - time_s (seconds): Time[end] - Time[start] over the grid steps in segment.
+        If a segment has fewer than 2 grid steps inside it, time_s is set to 0.0
+        and min_speed to NaN.
     """
-    speed_m_per_s = telem_resampled['Speed'].values * (1000.0 / 3600.0)
     distance = telem_resampled['Distance'].values
+    speed_kph = telem_resampled['Speed'].values
+    time_s = telem_resampled['Time'].values
 
     min_speeds = []
     times = []
     for row in segments.itertuples():
         mask = (distance >= row.start_m) & (distance < row.end_m)
-        seg_speed_kph = telem_resampled['Speed'].values[mask]
-        seg_speed_mps = speed_m_per_s[mask]
-        if len(seg_speed_mps) == 0:
+        if mask.sum() < 2:
             min_speeds.append(float('nan'))
             times.append(0.0)
             continue
-        min_speeds.append(float(seg_speed_kph.min()))
-        times.append(float((step_m / seg_speed_mps).sum()))
+        seg_time_values = time_s[mask]
+        min_speeds.append(float(speed_kph[mask].min()))
+        times.append(float(seg_time_values[-1] - seg_time_values[0]))
 
     out = segments.copy()
     out['min_speed'] = min_speeds
