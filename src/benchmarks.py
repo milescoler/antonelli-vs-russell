@@ -116,6 +116,12 @@ def compare_teammates(
         }
 
     Sign convention: delta_s = time_b_s - time_a_s, so POSITIVE = drv_a faster.
+
+    Category thresholds (fixed, not per-circuit):
+      slow_corner   < 130 kph min_speed
+      medium_corner   130–200 kph min_speed
+      fast_corner  >= 200 kph min_speed
+      straight      regardless of speed
     """
     session = load_qualifying_session(year, round_or_name)
     lap_a = get_fastest_valid_lap(session, drv_a)
