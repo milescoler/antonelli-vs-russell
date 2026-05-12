@@ -50,15 +50,22 @@ def build_segments_from_corners(
     threshold_m: float = DEFAULT_CORNER_GROUP_THRESHOLD_M,
 ) -> pd.DataFrame:
     """
-    Build a DataFrame of track segments based on corner locations and distances.
+    Build a DataFrame of track segments by clustering corners and filling the
+    straights between them.
 
     Args:
-        circuit_info: DataFrame with 'Position' and 'Compound' columns.
+        circuit_info: FastF1 CircuitInfo object (has a `corners` DataFrame with
+            a `Distance` column).
         lap_distance_m: Total lap distance in meters.
-        threshold_m: Distance threshold for grouping corners into segments.
+        threshold_m: Corners within this distance of each other are merged into
+            a single segment.
 
     Returns:
-        DataFrame with 'Start', 'End', and 'Compound' columns.
+        DataFrame with columns:
+          - Segment: label (e.g. 'C1', 'S2')
+          - start_m, end_m: segment bounds in meters
+          - kind: 'corner' or 'straight'
+        Sorted by start_m.
     """
     corners = circuit_info.corners.sort_values('Distance').reset_index(drop=True)
     groups = []
