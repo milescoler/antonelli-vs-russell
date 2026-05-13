@@ -23,28 +23,72 @@ from src.segments import (
 SLOW_CORNER_MAX_KPH = 130.0
 FAST_CORNER_MIN_KPH = 200.0
 
-# Sensor-freeze detection: when a car's Speed channel reports only a handful
-# of unique values across many samples within a segment, the sensor has frozen
-# and the segment's speed/distance/X/Y data is unreliable. The Time channel
-# (and therefore lap-level time deltas) is independent and remains correct.
-SENSOR_FREEZE_MIN_SAMPLES = 20
-SENSOR_FREEZE_MAX_UNIQUE_SPEEDS = 5
+# Sensor-freeze detection. Two failure modes are guarded against:
+#   1. Stuck Speed channel — the sensor reports only a handful of unique values
+#      across many samples. Detected with a sliding 20-sample window so the
+#      check fires even when a segment has a healthy entry and only the
+#      latter portion is frozen.
+#   2. Truncated telemetry — the driver's reported `Distance.max()` falls short
+#      of the segment's `end_m` by more than EDGE_TOL_M. The segment-time
+#      computation then sees only a fraction of the segment, producing wildly
+#      distorted per-segment deltas.
+# In both cases, lap-level and sector-level time deltas remain valid because
+# they come from FastF1's `Time` channel and timing-line measurements, which
+# are independent of the car telemetry.
+SENSOR_FREEZE_WINDOW = 50
+SENSOR_FREEZE_MAX_UNIQUE = 5
+SENSOR_FREEZE_MIN_DISTANCE_M = 300.0
+SENSOR_FREEZE_EDGE_TOL_M = 50.0
+
+
+def _find_freeze_distance_ranges(tel: pd.DataFrame) -> list:
+    """Return (start_d, end_d) ranges where Speed shows <= 5 unique values
+    across any 50-sample window, AND the contiguous flagged region spans
+    >= 300 m of distance. The distance gate prevents false positives at
+    natural slow-corner apexes and at top-speed cruising sections, where
+    speed can be locally near-constant but only over short distances."""
+    speed = tel['Speed'].values
+    distance = tel['Distance'].values
+    n = len(speed)
+    if n < SENSOR_FREEZE_WINDOW:
+        return []
+    frozen_idx = set()
+    for i in range(n - SENSOR_FREEZE_WINDOW + 1):
+        if pd.Series(speed[i:i + SENSOR_FREEZE_WINDOW]).nunique() <= SENSOR_FREEZE_MAX_UNIQUE:
+            frozen_idx.update(range(i, i + SENSOR_FREEZE_WINDOW))
+    if not frozen_idx:
+        return []
+    sorted_idx = sorted(frozen_idx)
+    ranges = []
+    start = sorted_idx[0]
+    prev = sorted_idx[0]
+    for i in sorted_idx[1:]:
+        if i - prev > 1:
+            if distance[prev] - distance[start] >= SENSOR_FREEZE_MIN_DISTANCE_M:
+                ranges.append((float(distance[start]), float(distance[prev])))
+            start = i
+        prev = i
+    if distance[prev] - distance[start] >= SENSOR_FREEZE_MIN_DISTANCE_M:
+        ranges.append((float(distance[start]), float(distance[prev])))
+    return ranges
 
 
 def _detect_sensor_freeze(tel: pd.DataFrame, segments: pd.DataFrame) -> list:
-    """Per-segment: True if the Speed sensor looks healthy, False if frozen."""
-    distance = tel['Distance'].values
-    speed = tel['Speed'].values
+    """Per-segment: True if this driver's telemetry looks usable in that
+    segment, False if either the sensor is frozen or the segment extends
+    past the driver's reported telemetry distance."""
+    max_d = float(tel['Distance'].max())
+    freeze_ranges = _find_freeze_distance_ranges(tel)
     flags = []
     for row in segments.itertuples():
-        mask = (distance >= row.start_m) & (distance < row.end_m)
-        if mask.sum() < SENSOR_FREEZE_MIN_SAMPLES:
-            # Too few samples to judge — assume OK; the segment-time computation
-            # already handles low-sample-count cases separately.
-            flags.append(True)
+        if row.end_m > max_d + SENSOR_FREEZE_EDGE_TOL_M:
+            flags.append(False)
             continue
-        nunique = int(pd.Series(speed[mask]).nunique())
-        flags.append(nunique > SENSOR_FREEZE_MAX_UNIQUE_SPEEDS)
+        overlaps_freeze = any(
+            row.start_m < fr_end and row.end_m > fr_start
+            for fr_start, fr_end in freeze_ranges
+        )
+        flags.append(not overlaps_freeze)
     return flags
 
 

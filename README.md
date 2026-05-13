@@ -10,10 +10,10 @@ I built this to dig into Kimi Antonelli's 2026 season racing for Mercedes by com
 
 After the first 4 rounds of 2026:
 
-- **Antonelli has overtaken Russell.** He was 0.29 s slower at Australia (R1) but has been faster every round since, with the margin growing each race: R2 +0.22 s → R3 +0.30 s → R4 +0.40 s. The four-race mean is +0.16 s in his favour, but across the 4 races there is a clear monotone trend.
-- **Where Antonelli loses time:** medium-speed corners (130–200 kph), at −0.14 s/lap on average — a small but consistent deficit. *(An earlier version of this finding put the medium-corner gap at −0.46 s/lap, but it turned out two Japan segments had a frozen telemetry sensor that misclassified them; see [Limitations](#limitations).)*
-- **Where he's gaining the most:** straights, **+0.17 s/lap** — the largest and most consistent positive across all four rounds. Fast corners (>200 kph) and slow corners (<130 kph) are essentially level with Russell (−0.003 s and +0.009 s respectively).
-- **Trajectory:** the gap has shifted in Antonelli's favour every single round — from −0.29 s (Russell faster) at Australia to +0.40 s (Antonelli faster) at Miami, a monotone swing of 0.69 s across four rounds.
+- **Antonelli has overtaken Russell.** He was 0.29 s slower at Australia (R1) but has been faster every round since, with the margin growing each race: R2 +0.22 s → R3 +0.30 s → R4 +0.40 s. The four-race mean is +0.16 s in his favour, with a clear monotone trend. Sector-time data confirms each lap-level delta.
+- **Trajectory is the strongest signal.** The category-level breakdown is much quieter — once the sensor-quality filter removes five compromised Japan segments, all four categories (slow / medium / fast corners and straights) collapse to within ±0.01 s/lap of each other. Antonelli's lap-time advantage is spread across the lap, not concentrated in any single phase.
+- **Earlier per-category claims were Japan-freeze artifacts.** A first pass reported +0.17 s/lap on straights and −0.46 s/lap in medium corners — both numbers were almost entirely driven by five Japan segments where Antonelli's speed sensor was frozen near 189 kph for over 1.3 km of the lap. See [Limitations](#limitations) for the detection and the fix.
+- **Honest summary:** n=4 races and one of them partially compromised. The trajectory is what I'd defend; the category breakdown is something I'd want more clean races to claim with confidence.
 
 ![Headline chart: per-segment time delta across four races](figures/headline_segment_delta.png)
 
@@ -25,7 +25,7 @@ For a finer-grained view, the figure below maps the local time-delta slope onto 
 
 ## Why teammate comparison
 
-Driver-vs-field comparisons in F1 are dominated by car performance. A Mercedes driver beating the midfield median tells you about the W17, not the driver.
+Driver-vs-field comparisons in F1 are dominated by car performance. A Mercedes driver beating the midfield median tells you more about car performance than driver skill.
 
 Comparing teammates controls for that. Same chassis, same power unit, same engineering team, same tire allocation. What's left is mostly driver — with caveats covered in [Limitations](#limitations).
 
@@ -95,7 +95,7 @@ A short list of what this analysis does _not_ control for:
 - **Traffic.** Out-laps, in-laps, and other cars on track affect achievable lap time.
 - **Tire age within Q.** Same compound, but tire-age within a Q-session run can differ by a few laps.
 - **Setup divergence.** Mercedes drivers don't always run identical setups. Public data can't distinguish driver delta from setup delta.
-- **Telemetry sensor freezes.** FastF1's car telemetry occasionally stops reporting changes for long stretches — Antonelli's Japan lap is the clearest case in this dataset, with the speed sensor stuck at 189 kph from ≈ 4000 m to the end of the lap. When that happens, integrated `Distance`, `Speed`, and the X/Y trajectory all become unreliable in the affected segments. Lap-level and sector-level deltas are unaffected (those come from timing-line beams, independent of the car telemetry), and I checked Japan's sector splits to confirm Antonelli's +0.30 s lap advantage is real. The notebook detects sensor freezes by checking unique-`Speed`-value counts per segment, lists which segments were flagged, and excludes them from the category headline.
+- **Telemetry sensor freezes.** FastF1's car telemetry occasionally stops reporting changes for long stretches — Antonelli's Japan lap is the clearest case in this dataset, with the speed sensor stuck at 189 kph and `nGear` stuck in 4th from ≈ 4000 m to the end of the lap. When that happens, integrated `Distance`, `Speed`, and the X/Y trajectory all become unreliable in the affected segments. Lap-level and sector-level deltas are unaffected (those come from timing-line beams, independent of the car telemetry), and I cross-checked Japan's sector splits to confirm Antonelli's +0.30 s lap advantage is real. The notebook detects freezes with a sliding-window check (≤ 5 unique `Speed` values across any 50-sample window spanning ≥ 300 m of distance) plus an out-of-range check (segments that extend past either driver's reported telemetry distance). Five Japan segments are flagged and excluded from the category headline. **This filter materially changed the headline:** earlier passes reported large per-category deltas (+0.17 s/lap on straights, −0.46 s/lap in medium corners) that turned out to be the freeze artifacts. Once excluded, the category-level signal collapses to ≈ 0 s/lap everywhere and the trajectory becomes the only robust finding.
 
 These caveats matter. I treated this as a careful look at what the available telemetry shows, not a definitive verdict on relative driver skill.
 
