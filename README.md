@@ -1,8 +1,8 @@
 # Antonelli vs Russell: A Segment-Level Look at the 2026 Mercedes Rookie
 
-**Where is Kimi Antonelli closing the gap to George Russell, and where is he still losing time?**
+**Antonelli has overtaken Russell on qualifying pace. Where, and where is Russell still ahead?**
 
-This project compares the two Mercedes drivers' qualifying laps across the 2026 season, broken down by track segment. Same car, same engineers — so the differences are about the drivers.
+I built this to dig into Kimi Antonelli's rookie season at Mercedes by comparing his qualifying laps to George Russell's, broken down by track segment. Same car, same engineers — so the differences are mostly about the drivers (with caveats covered in [Limitations](#limitations)).
 
 ---
 
@@ -10,7 +10,7 @@ This project compares the two Mercedes drivers' qualifying laps across the 2026 
 
 After the first 4 rounds of 2026:
 
-- **Lap-time gap to Russell:** Antonelli is 0.16 s/lap faster than Russell on average across qualifying (R1: −0.29 s, RUS faster; R2: +0.22 s; R3: +0.30 s; R4: +0.40 s, ANT faster).
+- **Antonelli has overtaken Russell.** He was 0.29 s slower at Australia (R1) but has been faster every round since, with the margin growing each race: R2 +0.22 s → R3 +0.30 s → R4 +0.40 s. The four-race mean is +0.16 s in his favour, but that average conceals a clearly monotone trend.
 - **Where Antonelli loses time:** medium-speed corners (130–200 kph), at −0.46 s/lap on average. This signal is driven primarily by a single Japan outlier — Suzuka's S-curves (C7/C8, ~189 kph minimum speed) contribute −0.62 s in that category alone, nearly 10× the medium-corner delta seen at other rounds.
 - **Where he's already competitive:** fast corners (>200 kph) and slow corners (<130 kph) are essentially level with Russell (−0.003 s and +0.009 s respectively). On straights Antonelli actually gains +0.11 s/lap.
 - **Trajectory:** the gap has shifted in Antonelli's favour every single round — from −0.29 s (Russell faster) at Australia to +0.40 s (Antonelli faster) at Miami, a monotone swing of 0.69 s across four rounds.
@@ -92,11 +92,11 @@ A short list of what this analysis does _not_ control for:
 - **Tire age within Q.** Same compound, but tire-age within a Q-session run can differ by a few laps.
 - **Setup divergence.** Mercedes drivers don't always run identical setups. Public data can't distinguish driver delta from setup delta.
 
-These caveats matter. The project is a careful look at what the available telemetry shows, not a definitive verdict on relative driver skill.
+These caveats matter. I treated this as a careful look at what the available telemetry shows, not a definitive verdict on relative driver skill.
 
 ---
 
-## What's next
+## What I'd build next
 
 - Extend across the rest of the 2026 season as races complete.
 - Add race-pace comparison (stint-level, fuel-corrected) once enough race data accumulates.
@@ -106,6 +106,6 @@ These caveats matter. The project is a careful look at what the available teleme
 
 ## About
 
-Built by Cole Richards. UCLA Statistics & Data Science, June 2026. [Portfolio](https://milescoler.github.io)
+I'm Cole Richards — UCLA Statistics & Data Science, June 2026. [Portfolio](https://milescoler.github.io)
 
 Data via [FastF1](https://github.com/theOehrly/Fast-F1) by Philipp Schaefer. Not affiliated with Formula 1 or Mercedes.
