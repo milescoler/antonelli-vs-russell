@@ -3,7 +3,7 @@
 
 **At every one of the same 4 tracks, Antonelli has gained 0.3–0.7 s on Russell year-over-year.**
 
-![Year-over-year: Antonelli vs Russell at the same 4 tracks](../figures/year_over_year.png)
+![Year-over-year: Antonelli vs Russell at the same 4 tracks](figures/year_over_year.png)
 
 ## The question
 
@@ -21,10 +21,10 @@ A Python pipeline on top of FastF1 telemetry. For each qualifying session it pul
 
 ## What I learned about doing this kind of work
 
-My first pass reported a +0.17 s/lap straights advantage and a −0.46 s/lap medium-corner deficit for Antonelli. Both turned out to be data-quality artifacts — at Japan, Antonelli's speed sensor froze near 189 kph for over 1.3 km of the lap, distorting integrated distance and inflating the per-segment deltas in that region. Adding a freeze-detection check (≤ 5 unique `Speed` values across any 50-sample window spanning ≥ 300 m of distance, plus an out-of-range check) caught five Japan segments; with them excluded, every category collapses to within ±0.01 s/lap of zero, and the year-over-year and within-2026 trajectories become the only findings the data actually supports. Watching my own headline collapse under a stricter filter was the most useful thing the project taught me.
+My first pass reported a +0.17 s/lap straights advantage and a -0.46 s/lap medium-corner deficit for Antonelli. Both turned out to be data-quality artifacts — at Japan, Antonelli's speed sensor froze near 189 kph for over 1.3 km of the lap, distorting integrated distance and inflating the per-segment deltas in that region. Adding a freeze-detection check (≤ 5 unique `Speed` values across any 50-sample window spanning ≥ 300 m of distance, plus an out-of-range check) caught five Japan segments; with them excluded, every category collapses to within ±0.01 s/lap of zero, and the year-over-year and within-2026 trajectories become the only findings the data actually supports. Watching my own headline collapse under a stricter filter was the most useful thing the project taught me.
 
 ---
 
-**Repo:** github.com/{your-handle}/antonelli-vs-russell · **Cole Richards** · UCLA Statistics & Data Science · milescoler@gmail.com · [milescoler.github.io](https://milescoler.github.io)
+**Repo:** github.com/milescoler/antonelli-vs-russell · **Cole Richards** · UCLA Statistics & Data Science · milescoler@gmail.com · [milescoler.github.io](https://milescoler.github.io)
 
 Built in Python with FastF1, pandas, matplotlib, and pytest.

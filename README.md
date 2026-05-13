@@ -73,7 +73,7 @@ antonelli-vs-russell/
 ## Reproducing
 
 ```bash
-git clone https://github.com/{your-handle}/antonelli-vs-russell.git
+git clone https://github.com/milescoler/antonelli-vs-russell.git
 cd antonelli-vs-russell
 pip install -r requirements.txt
 jupyter lab notebooks/01_antonelli_vs_russell.ipynb
