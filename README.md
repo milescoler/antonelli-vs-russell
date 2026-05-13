@@ -1,8 +1,8 @@
 # Antonelli vs Russell: A Segment-Level Look at the 2026 Mercedes Rookie
 
-**Antonelli has overtaken Russell on qualifying pace. Where, and where is Russell still ahead?**
+**Antonelli has overtaken Russell on qualifying pace. How is he winning?**
 
-I built this to dig into Kimi Antonelli's rookie season at Mercedes by comparing his qualifying laps to George Russell's, broken down by track segment. Same car, same engineers — so the differences are mostly about the drivers (with caveats covered in [Limitations](#limitations)).
+I built this to dig into Kimi Antonelli's 2026 season racing for Mercedes by comparing his qualifying laps to George Russell's, broken down by track segment. They're driving the same car, with the same team of engineers — so the differences are mostly about the drivers (with caveats covered in [Limitations](#limitations)).
 
 ---
 
@@ -10,12 +10,16 @@ I built this to dig into Kimi Antonelli's rookie season at Mercedes by comparing
 
 After the first 4 rounds of 2026:
 
-- **Antonelli has overtaken Russell.** He was 0.29 s slower at Australia (R1) but has been faster every round since, with the margin growing each race: R2 +0.22 s → R3 +0.30 s → R4 +0.40 s. The four-race mean is +0.16 s in his favour, but that average conceals a clearly monotone trend.
+- **Antonelli has overtaken Russell.** He was 0.29 s slower at Australia (R1) but has been faster every round since, with the margin growing each race: R2 +0.22 s → R3 +0.30 s → R4 +0.40 s. The four-race mean is +0.16 s in his favour, but across the 4 races there is a clear monotone trend.
 - **Where Antonelli loses time:** medium-speed corners (130–200 kph), at −0.46 s/lap on average. This signal is driven primarily by a single Japan outlier — Suzuka's S-curves (C7/C8, ~189 kph minimum speed) contribute −0.62 s in that category alone, nearly 10× the medium-corner delta seen at other rounds.
 - **Where he's already competitive:** fast corners (>200 kph) and slow corners (<130 kph) are essentially level with Russell (−0.003 s and +0.009 s respectively). On straights Antonelli actually gains +0.11 s/lap.
 - **Trajectory:** the gap has shifted in Antonelli's favour every single round — from −0.29 s (Russell faster) at Australia to +0.40 s (Antonelli faster) at Miami, a monotone swing of 0.69 s across four rounds.
 
 ![Headline chart: per-segment time delta across four races](figures/headline_segment_delta.png)
+
+For a finer-grained view, the figure below maps the local time-delta slope onto each circuit. **Blue** = Antonelli is gaining on Russell at that part of the track; **red** = Russell is gaining on Antonelli. Corner numbers are overlaid for orientation.
+
+![Track-map: where each driver gains time across the lap](figures/track_delta_map.png)
 
 ---
 
@@ -35,7 +39,7 @@ Comparing teammates controls for that. Same chassis, same power unit, same engin
 
 **Time delta:** Both drivers' telemetry — including FastF1's per-sample `Time` channel — is resampled onto a uniform 5m distance grid. Segment time is read directly from that resampled `Time` channel as `Time[last_step] − Time[first_step]` within the segment's distance bounds. Segment delta is `Russell_time − Antonelli_time` (positive = Antonelli faster).
 
-*An earlier version of the analysis integrated `Δd / speed` per step instead. On 2 of the 4 races the accumulated residual exceeded the 0.1s sanity-check threshold below, so the method switched to reading FastF1's sample times directly. Residuals are now ≤ 0.1s on all four races — see the notebook's sanity-check section.*
+_An earlier version of the analysis integrated `Δd / speed` per step instead. On 2 of the 4 races the accumulated residual exceeded the 0.1s sanity-check threshold below, so the method switched to reading FastF1's sample times directly. Residuals are now ≤ 0.1s on all four races — see the notebook's sanity-check section._
 
 **Sanity check:** The sum of segment deltas across a lap is verified to match the actual lap-time delta within 0.1s. Larger discrepancies indicate a bug.
 

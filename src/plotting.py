@@ -77,6 +77,79 @@ def plot_category_deltas(
     return fig
 
 
+def plot_track_delta_map(
+    x: np.ndarray,
+    y: np.ndarray,
+    slope: np.ndarray,
+    corners: Optional[pd.DataFrame] = None,
+    *,
+    ax: Optional[plt.Axes] = None,
+    title: Optional[str] = None,
+    vmax: Optional[float] = None,
+) -> tuple:
+    """
+    Track-shape (X/Y) view colored by the local slope of the cumulative time
+    delta. Positive slope = driver A is gaining time at that part of the track;
+    negative slope = driver B is gaining.
+
+    Args:
+        x, y: 1D arrays of equal length — the track coordinates from one
+            driver's distance-grid-resampled telemetry.
+        slope: 1D array, same length as x/y. Local d(delta_s)/d(distance)
+            at each grid step. Sign convention matches delta_s: positive =
+            driver A faster at that point.
+        corners: optional DataFrame from FastF1 circuit_info.corners with
+            columns Number, X, Y (and optionally Letter). Used to overlay
+            corner-number labels at corner positions.
+        ax: matplotlib Axes to draw into (created if None).
+        title: subplot title.
+        vmax: symmetric color limit. If None, uses the 95th percentile of
+            abs(slope) to avoid one outlier saturating the scale.
+
+    Returns:
+        (ax, mappable) where mappable is the scatter PathCollection — pass
+        it to fig.colorbar to add a shared colorbar across subplots.
+    """
+    if ax is None:
+        _, ax = plt.subplots(figsize=(8, 7))
+
+    if vmax is None:
+        vmax = float(np.percentile(np.abs(slope), 95)) or 1e-6
+
+    mappable = ax.scatter(
+        x, y, c=slope, cmap='RdBu', s=10,
+        vmin=-vmax, vmax=vmax, edgecolors='none',
+    )
+
+    if corners is not None and len(corners) > 0:
+        has_letter = 'Letter' in corners.columns
+        for c in corners.itertuples():
+            label = str(c.Number)
+            if has_letter:
+                ltr = getattr(c, 'Letter', None)
+                if isinstance(ltr, str) and ltr.strip():
+                    label = f"{c.Number}{ltr}"
+            ax.annotate(
+                label,
+                xy=(c.X, c.Y),
+                fontsize=7,
+                ha='center', va='center',
+                bbox=dict(boxstyle='circle,pad=0.18', fc='white',
+                          ec='gray', lw=0.5, alpha=0.85),
+                zorder=5,
+            )
+
+    ax.set_aspect('equal')
+    ax.set_xticks([])
+    ax.set_yticks([])
+    for spine in ax.spines.values():
+        spine.set_visible(False)
+    if title:
+        ax.set_title(title, fontsize=11)
+
+    return ax, mappable
+
+
 def plot_lap_delta_by_round(
     meta_df: pd.DataFrame,
     save_path: Optional[Path] = None,
