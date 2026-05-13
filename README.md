@@ -4,6 +4,8 @@
 
 I built this to dig into Kimi Antonelli's 2026 season racing for Mercedes by comparing his qualifying laps to George Russell's, broken down by track segment. They're driving the same car, with the same team of engineers — so the differences are mostly about the drivers (with caveats covered in [Limitations](#limitations)).
 
+> **One-page summary for skimmers:** [`case_study.pdf`](case_study.pdf) · **Full notebook (no code):** [`notebooks/01_antonelli_vs_russell_no_code.pdf`](notebooks/01_antonelli_vs_russell_no_code.pdf)
+
 ---
 
 ## Headline findings
@@ -55,15 +57,20 @@ _An earlier version of the analysis integrated `Δd / speed` per step instead. O
 ```
 antonelli-vs-russell/
 ├── README.md
+├── case_study.pdf                            # 1-page hiring summary
 ├── requirements.txt
 ├── notebooks/
-│   └── 01_antonelli_vs_russell.ipynb     # main analysis
+│   ├── 01_antonelli_vs_russell.ipynb         # main analysis
+│   ├── 01_antonelli_vs_russell.pdf           # full notebook, with code
+│   ├── 01_antonelli_vs_russell_no_code.pdf   # clean reading version
+│   └── archive/                              # earlier scratch exploration
 ├── src/
 │   ├── loaders.py        # FastF1 session, lap, telemetry loading
-│   ├── benchmarks.py     # teammate comparison logic
+│   ├── benchmarks.py     # teammate comparison + sensor-quality filter
 │   ├── segments.py       # circuit segmentation + time-delta math
 │   └── plotting.py       # styled chart helpers
 ├── figures/              # exported PNGs used in this README
+├── docs/                 # case study + design / implementation notes
 └── tests/
     └── test_segments.py  # lap-delta consistency check
 ```
@@ -79,13 +86,15 @@ pip install -r requirements.txt
 jupyter lab notebooks/01_antonelli_vs_russell.ipynb
 ```
 
-First run downloads ~411 MB of FastF1 session data into `./fastf1_cache/` (gitignored). Subsequent runs are local and fast.
+The notebook's first run downloads ~411 MB of FastF1 session data into `./fastf1_cache/` (gitignored). Subsequent runs are local and fast.
 
-After install, verify the math wires correctly:
+After the notebook has populated the cache, verify the math wires correctly:
 
 ```bash
 pytest tests/
 ```
+
+(The test is a single end-to-end consistency check on the cached Miami session; it skips gracefully if the cache hasn't been populated yet.)
 
 Tested with FastF1 3.8.1, Python 3.12.
 

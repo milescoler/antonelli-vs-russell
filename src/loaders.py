@@ -65,13 +65,20 @@ def get_fastest_valid_lap(session, driver_code: str):
 
 def get_lap_telemetry(lap) -> pd.DataFrame:
     """
-    Get lap telemetry for a lap. Distance in meters, Speed in kph.
+    Get lap telemetry for a lap.
 
     Args:
         lap: FastF1 lap object.
 
     Returns:
-        Telemetry as a pandas DataFrame, with columns ["Distance", "Speed", "nGear", "DRS", "Throttle", "Brake", "LapTime", "LapNumber", "Position"]
+        Telemetry as a pandas DataFrame. Columns commonly used downstream:
+          - Distance (m): cumulative distance from lap start (integrated from speed)
+          - Speed (kph): instantaneous speed
+          - Time (Timedelta): time from lap start
+          - X, Y (track coordinates): position on the circuit
+          - Throttle, Brake, nGear, DRS, RPM: control / state channels
+          - Status, Source: telemetry provenance flags
+        Other FastF1-provided columns may also be present.
 
     Raises:
         ValueError: If no telemetry found for the lap.

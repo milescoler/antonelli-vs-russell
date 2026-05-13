@@ -3,7 +3,7 @@
 
 **At every one of the same 4 tracks, Antonelli has gained 0.3–0.7 s on Russell year-over-year.**
 
-![Year-over-year: Antonelli vs Russell at the same 4 tracks](figures/year_over_year.png)
+![Year-over-year: Antonelli vs Russell at the same 4 tracks](../figures/year_over_year.png)
 
 ## The question
 
