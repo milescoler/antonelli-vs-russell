@@ -23,6 +23,30 @@ from src.segments import (
 SLOW_CORNER_MAX_KPH = 130.0
 FAST_CORNER_MIN_KPH = 200.0
 
+# Sensor-freeze detection: when a car's Speed channel reports only a handful
+# of unique values across many samples within a segment, the sensor has frozen
+# and the segment's speed/distance/X/Y data is unreliable. The Time channel
+# (and therefore lap-level time deltas) is independent and remains correct.
+SENSOR_FREEZE_MIN_SAMPLES = 20
+SENSOR_FREEZE_MAX_UNIQUE_SPEEDS = 5
+
+
+def _detect_sensor_freeze(tel: pd.DataFrame, segments: pd.DataFrame) -> list:
+    """Per-segment: True if the Speed sensor looks healthy, False if frozen."""
+    distance = tel['Distance'].values
+    speed = tel['Speed'].values
+    flags = []
+    for row in segments.itertuples():
+        mask = (distance >= row.start_m) & (distance < row.end_m)
+        if mask.sum() < SENSOR_FREEZE_MIN_SAMPLES:
+            # Too few samples to judge — assume OK; the segment-time computation
+            # already handles low-sample-count cases separately.
+            flags.append(True)
+            continue
+        nunique = int(pd.Series(speed[mask]).nunique())
+        flags.append(nunique > SENSOR_FREEZE_MAX_UNIQUE_SPEEDS)
+    return flags
+
 
 def _derive_q_session(session, lap) -> Optional[int]:
     """
@@ -144,6 +168,13 @@ def compare_teammates(
     deltas['category'] = [
         _classify_segment(k, m) for k, m in zip(deltas['kind'], deltas['min_speed'])
     ]
+
+    # Flag segments where either driver's speed sensor looks frozen — in those
+    # segments min_speed is unreliable and the category label may be wrong
+    # (the time delta itself is still reliable, since Time is independent).
+    ok_a = _detect_sensor_freeze(tel_a, deltas)
+    ok_b = _detect_sensor_freeze(tel_b, deltas)
+    deltas['sensor_ok'] = [a and b for a, b in zip(ok_a, ok_b)]
 
     q_a = _derive_q_session(session, lap_a)
     q_b = _derive_q_session(session, lap_b)
