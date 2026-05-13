@@ -77,6 +77,69 @@ def plot_category_deltas(
     return fig
 
 
+def plot_yoy_lap_deltas(
+    tracks: list,
+    deltas_2025: list,
+    deltas_2026: list,
+    *,
+    save_path: Optional[Path] = None,
+    flagged_2025: Optional[list] = None,
+    flagged_2026: Optional[list] = None,
+) -> plt.Figure:
+    """
+    Year-over-year lap-delta comparison: two lines, same 4 tracks, one point
+    per (year, track). Positive = Antonelli faster than Russell.
+
+    Args:
+        tracks: list of track labels in calendar order, e.g. ['Australia', ...].
+        deltas_2025, deltas_2026: lap_delta_s for each track, same order.
+        flagged_2025, flagged_2026: optional list of bool (one per track);
+            True marks a track where the comparison has a known caveat
+            (e.g. Q-session mismatch, telemetry-quality issue). Flagged points
+            are drawn with a hollow marker and asterisked label.
+    """
+    fig, ax = plt.subplots(figsize=(9, 5))
+    x = np.arange(len(tracks))
+
+    def _plot_year(deltas, flagged, color, label, marker_style, linestyle):
+        ax.plot(x, deltas, color=color, linewidth=2, linestyle=linestyle, zorder=2)
+        if flagged is None:
+            flagged = [False] * len(tracks)
+        for xi, yi, fl in zip(x, deltas, flagged):
+            ax.scatter(
+                xi, yi, s=90, color=color, edgecolors=color,
+                facecolors='white' if fl else color, linewidth=2, zorder=3,
+                marker=marker_style,
+            )
+        # Single legend entry per year
+        ax.plot([], [], color=color, marker=marker_style, linewidth=2,
+                linestyle=linestyle, markersize=10, label=label)
+
+    _plot_year(deltas_2025, flagged_2025, '#888888', '2025 (rookie year)',
+               's', '--')
+    _plot_year(deltas_2026, flagged_2026, '#1f77b4', '2026 (sophomore)',
+               'o', '-')
+
+    ax.axhline(0, color='black', linewidth=0.8)
+    ax.set_xticks(x)
+    ax.set_xticklabels(tracks)
+    ax.set_ylabel('Lap-time delta (s)\npositive → Antonelli faster')
+    ax.set_title(
+        'Antonelli vs Russell — same 4 tracks, rookie year vs sophomore year'
+    )
+    ax.grid(axis='y', linestyle='--', alpha=0.35)
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.legend(loc='lower right', frameon=False)
+
+    fig.tight_layout()
+    if save_path is not None:
+        save_path = Path(save_path)
+        save_path.parent.mkdir(parents=True, exist_ok=True)
+        fig.savefig(save_path, dpi=150, bbox_inches='tight')
+    return fig
+
+
 def plot_track_delta_map(
     x: np.ndarray,
     y: np.ndarray,

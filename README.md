@@ -10,16 +10,21 @@ I built this to dig into Kimi Antonelli's 2026 season racing for Mercedes by com
 
 After the first 4 rounds of 2026:
 
-- **Antonelli has overtaken Russell.** He was 0.29 s slower at Australia (R1) but has been faster every round since, with the margin growing each race: R2 +0.22 s → R3 +0.30 s → R4 +0.40 s. The four-race mean is +0.16 s in his favour, with a clear monotone trend. Sector-time data confirms each lap-level delta.
-- **Trajectory is the strongest signal.** The category-level breakdown is much quieter — once the sensor-quality filter removes five compromised Japan segments, all four categories (slow / medium / fast corners and straights) collapse to within ±0.01 s/lap of each other. Antonelli's lap-time advantage is spread across the lap, not concentrated in any single phase.
+- **Year-over-year: Antonelli has gained 0.3–0.7 s on Russell at every one of these 4 tracks vs his 2025 rookie season** (mean **+0.53 s/track**). His rookie year started almost a full second behind Russell at Australia and only just crossed ahead by Miami (R6). In 2026 he started at −0.29 s and was ahead from R2 onwards. The closing arc isn't just sustained — it's being compressed.
+- **2026 trajectory: monotone gain every round.** He was 0.29 s slower at Australia (R1) but has been faster every round since, with the margin growing: R2 +0.22 s → R3 +0.30 s → R4 +0.40 s. Four-race mean +0.16 s in his favour. Sector-time data confirms each lap-level delta.
+- **Segment-level breakdown is essentially flat.** Once the sensor-quality filter removes five compromised Japan segments, all four categories (slow / medium / fast corners and straights) collapse to within ±0.01 s/lap of each other. Antonelli's advantage is spread across the lap, not concentrated in any single phase.
 - **Earlier per-category claims were Japan-freeze artifacts.** A first pass reported +0.17 s/lap on straights and −0.46 s/lap in medium corners — both numbers were almost entirely driven by five Japan segments where Antonelli's speed sensor was frozen near 189 kph for over 1.3 km of the lap. See [Limitations](#limitations) for the detection and the fix.
-- **Honest summary:** n=4 races and one of them partially compromised. The trajectory is what I'd defend; the category breakdown is something I'd want more clean races to claim with confidence.
+- **Honest summary:** n=4 races each year, one race per year compromised at the segment level. The year-over-year comparison and the within-2026 trajectory are what I'd defend; the segment-level category claims are something I'd want more clean races to claim with confidence.
 
 ![Headline chart: per-segment time delta across four races](figures/headline_segment_delta.png)
 
 For a finer-grained view, the figure below maps the local time-delta slope onto each circuit. **Blue** = Antonelli is gaining on Russell at that part of the track; **red** = Russell is gaining on Antonelli. Corner numbers are overlaid for orientation.
 
 ![Track-map: where each driver gains time across the lap](figures/track_delta_map.png)
+
+The chart below puts Antonelli's 2026 lap-deltas against his rookie-year 2025 lap-deltas at the same 4 tracks. Hollow markers flag a known caveat (e.g., Q-session mismatch at 2025 Australia, where Antonelli's fastest valid lap was in Q1 and Russell's in Q3 — track evolution likely inflates that gap).
+
+![Year-over-year: Antonelli vs Russell at the same 4 tracks](figures/year_over_year.png)
 
 ---
 
