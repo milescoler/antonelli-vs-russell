@@ -21,6 +21,8 @@ A Python pipeline on top of FastF1 telemetry. For each qualifying session it pul
 - **Independent cross-check:** Sector delta data confirms each lap-level delta, including a Japan lap where the car's telemetry was partially compromised.
 - **Where the time comes from:** At fast corners (≥ 200 kph), Antonelli brakes about 21 m later than Russell on average and gets back to full throttle about 23 m sooner — the late-brake / early-throttle commitment signature. At slower corners his approach is the opposite (he brakes earlier and accelerates later), but the fast-corner gain wins out on net.
 
+![Brake-on and throttle-full timing Δ vs Russell, by corner-speed bucket. Both bars below zero in the fast-corner bucket is the late-brake / early-throttle signature; the other buckets show the opposite pattern.](../figures/corner_buckets.png)
+
 ## What I learned about doing this kind of work
 
 My initial analysis reported a +0.17 s/lap straights advantage and a -0.46 s/lap medium-corner deficit for Antonelli. Both turned out to be data-quality issues — at Japan, Antonelli's speed sensor froze near 189 kph for over 1.3 km of the lap, distorting the per-segment distances and inflating the per-segment times in that region. Adding a freeze-detection filter (≤ 5 unique `Speed` values across any 50-sample window spanning ≥ 300 m of distance, plus an out-of-range check) caught five Japan segments. With them excluded, every category collapsed to within ±0.01 s/lap of zero — which is what pushed me into the corner-cycle analysis above to find where the lap time actually comes from. Watching my initial headline collapse under a stricter filter was the most useful thing this project taught me.
