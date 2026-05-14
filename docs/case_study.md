@@ -19,6 +19,7 @@ A Python pipeline on top of FastF1 telemetry. For each qualifying session it pul
 - **Year-over-year:** Antonelli has gained between 0.3 and 0.7 s on Russell at all four tracks since his rookie year (**mean +0.53 s/track**).
 - **2026 trajectory:** He was 0.29 s slower than Russell at Australia (R1) but has been faster every round since, with the margin growing each race (R2 +0.22 s → R4 +0.40 s, four-race mean +0.16 s).
 - **Independent cross-check:** Sector delta data confirms each lap-level delta, including a Japan lap where the car's telemetry was partially compromised.
+- **Where the time comes from:** At fast corners (≥ 200 kph), Antonelli brakes about 21 m later than Russell on average and gets back to full throttle about 23 m sooner — the late-brake / early-throttle commitment signature. At slower corners his approach is the opposite (he brakes earlier and accelerates later), but the fast-corner gain wins out on net.
 
 ## What I learned about doing this kind of work
 
