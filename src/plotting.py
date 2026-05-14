@@ -77,6 +77,103 @@ def plot_category_deltas(
     return fig
 
 
+def plot_corner_bucket_summary(
+    corner_df: pd.DataFrame,
+    save_path: Optional[Path] = None,
+    real_braking_threshold_m: float = 20.0,
+) -> plt.Figure:
+    """
+    Compact headline chart for the corner-cycle finding: a single grouped bar
+    plot of brake-on Δ and throttle-full Δ vs Russell, grouped by corner-speed
+    bucket. Each Δ is in meters; the sign convention matches the rest of the
+    project — NEGATIVE means Antonelli's advantage (he brakes later or gets
+    to full throttle sooner).
+
+    Args:
+        corner_df: output of compute_corner_signatures (one or more races
+            concatenated). Required columns: mean_apex_kph, brake_on_a,
+            brake_on_b, brake_on_delta, throttle_full_delta, sensor_ok.
+        real_braking_threshold_m: drop corners where either driver braked
+            less than this many meters before apex (flat-out kinks).
+    """
+    real = corner_df[
+        corner_df['sensor_ok']
+        & (corner_df['brake_on_a'] > real_braking_threshold_m)
+        & (corner_df['brake_on_b'] > real_braking_threshold_m)
+    ].copy()
+
+    def bucket(v):
+        if v < 100: return 'Very slow\n(<100 kph)'
+        if v < 150: return 'Slow\n(100–150)'
+        if v < 200: return 'Medium\n(150–200)'
+        return 'Fast\n(≥200)'
+
+    real['bucket'] = real['mean_apex_kph'].apply(bucket)
+    order = ['Very slow\n(<100 kph)', 'Slow\n(100–150)',
+             'Medium\n(150–200)', 'Fast\n(≥200)']
+    means = real.groupby('bucket')[['brake_on_delta', 'throttle_full_delta']].mean().reindex(order)
+    counts = real.groupby('bucket').size().reindex(order)
+
+    x = np.arange(len(order))
+    w = 0.36
+    fig, ax = plt.subplots(figsize=(10.5, 5.6))
+    bars_brake = ax.bar(
+        x - w / 2, means['brake_on_delta'], w,
+        color='#1f77b4', alpha=0.9, label='Brake-on Δ (m before apex)',
+    )
+    bars_thr = ax.bar(
+        x + w / 2, means['throttle_full_delta'], w,
+        color='#ff7f0e', alpha=0.9, label='Throttle-full Δ (m after apex)',
+    )
+
+    for bars in (bars_brake, bars_thr):
+        for bar in bars:
+            h = bar.get_height()
+            ax.annotate(
+                f'{h:+.0f} m',
+                xy=(bar.get_x() + bar.get_width() / 2, h),
+                xytext=(0, 4 if h >= 0 else -14),
+                textcoords='offset points',
+                ha='center', va='bottom' if h >= 0 else 'top',
+                fontsize=10, fontweight='medium',
+            )
+
+    ax.axhline(0, color='black', linewidth=0.9)
+    ax.set_xticks(x)
+    ax.set_xticklabels([f'{lbl}\nn={counts[lbl]}' for lbl in order])
+    ax.set_ylabel('Distance Δ vs Russell (m)')
+    ax.set_title(
+        'How is Antonelli winning?\n'
+        'Brake-on and throttle-full timing Δ by corner-speed bucket  '
+        '(negative = Antonelli\'s advantage)',
+        fontsize=12,
+    )
+
+    ymin, ymax = ax.get_ylim()
+    bound = max(abs(ymin), abs(ymax)) * 1.15
+    ax.set_ylim(-bound, bound)
+    ax.text(
+        -0.45, bound * 0.9, '↑ Russell advantage',
+        fontsize=9, color='#555', ha='left', va='top',
+    )
+    ax.text(
+        -0.45, -bound * 0.9, '↓ Antonelli advantage',
+        fontsize=9, color='#555', ha='left', va='bottom',
+    )
+
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.grid(axis='y', linestyle='--', alpha=0.3)
+    ax.legend(loc='upper right', frameon=False, fontsize=10)
+
+    fig.tight_layout()
+    if save_path is not None:
+        save_path = Path(save_path)
+        save_path.parent.mkdir(parents=True, exist_ok=True)
+        fig.savefig(save_path, dpi=150, bbox_inches='tight')
+    return fig
+
+
 def plot_corner_signatures(
     corner_df: pd.DataFrame,
     save_path: Optional[Path] = None,

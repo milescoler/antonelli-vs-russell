@@ -25,6 +25,10 @@ For a finer-grained view, the figure below maps the local time-delta slope onto 
 
 ![Track-map: where each driver gains time across the lap](figures/track_delta_map.png)
 
+The chart below puts Antonelli's brake-on and throttle-full timing deltas against Russell, bucketed by corner speed. At fast corners (≥200 kph) both bars are clearly below zero — he brakes later AND gets to full throttle sooner. At slower corners, it's the opposite.
+
+![Corner-cycle: brake / throttle timing by corner-speed bucket](figures/corner_buckets.png)
+
 The chart below puts Antonelli's 2026 lap-deltas against his rookie-year 2025 lap-deltas at the same 4 tracks. Hollow markers flag a known caveat (e.g., Q-session mismatch at 2025 Australia, where Antonelli's fastest valid lap was in Q1 and Russell's in Q3 — track evolution likely inflates that gap).
 
 ![Year-over-year: Antonelli vs Russell at the same 4 tracks](figures/year_over_year.png)
