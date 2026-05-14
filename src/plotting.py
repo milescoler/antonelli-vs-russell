@@ -77,6 +77,76 @@ def plot_category_deltas(
     return fig
 
 
+def plot_corner_signatures(
+    corner_df: pd.DataFrame,
+    save_path: Optional[Path] = None,
+    real_braking_threshold_m: float = 20.0,
+    clip_y: float = 100.0,
+) -> plt.Figure:
+    """
+    Two-panel scatter showing, per corner, where the brake-on and throttle-on
+    timing differences between the two drivers live as a function of how fast
+    the corner is. Each point = one corner (across all races).
+
+    Args:
+        corner_df: output of compute_corner_signatures, optionally concatenated
+            across multiple races. Must contain mean_apex_kph, brake_on_delta,
+            throttle_full_delta, sensor_ok, brake_on_a, brake_on_b, race.
+        save_path: PNG output path (optional).
+        real_braking_threshold_m: drop corners where either driver braked less
+            than this many meters before apex (i.e., flat-out kinks).
+        clip_y: cap the y-axis at ± this value to keep outliers visible but
+            not stretching the scale.
+    """
+    real = corner_df[
+        corner_df['sensor_ok']
+        & (corner_df['brake_on_a'] > real_braking_threshold_m)
+        & (corner_df['brake_on_b'] > real_braking_threshold_m)
+    ].copy()
+
+    fig, axes = plt.subplots(1, 2, figsize=(13, 4.8))
+    races = sorted(real['race'].unique())
+    cmap = plt.get_cmap('tab10')
+    race_colors = {r: cmap(i) for i, r in enumerate(races)}
+
+    for ax, col, ylabel, title in [
+        (axes[0], 'brake_on_delta',
+         'Brake-on Δ (m)\nnegative → Antonelli brakes LATER',
+         'When does each driver start braking?'),
+        (axes[1], 'throttle_full_delta',
+         'Throttle-full Δ (m)\nnegative → Antonelli to full throttle SOONER',
+         'When does each driver get back to full throttle?'),
+    ]:
+        for race in races:
+            sub = real[real['race'] == race]
+            ax.scatter(
+                sub['mean_apex_kph'], sub[col].clip(-clip_y, clip_y),
+                color=race_colors[race], s=55, alpha=0.8, label=race,
+                edgecolors='black', linewidths=0.4,
+            )
+        ax.axhline(0, color='black', linewidth=0.8)
+        ax.axvline(200, color='gray', linewidth=0.8, linestyle='--', alpha=0.7)
+        ax.set_xlabel('Mean apex speed (kph)')
+        ax.set_ylabel(ylabel)
+        ax.set_title(title, fontsize=11)
+        ax.set_ylim(-clip_y, clip_y)
+        ax.grid(linestyle='--', alpha=0.3)
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
+
+    axes[1].legend(loc='lower left', frameon=False, fontsize=9)
+    fig.suptitle(
+        'How is Antonelli winning? Brake / throttle timing by corner speed',
+        fontsize=13,
+    )
+    fig.tight_layout()
+    if save_path is not None:
+        save_path = Path(save_path)
+        save_path.parent.mkdir(parents=True, exist_ok=True)
+        fig.savefig(save_path, dpi=150, bbox_inches='tight')
+    return fig
+
+
 def plot_yoy_lap_deltas(
     tracks: list,
     deltas_2025: list,

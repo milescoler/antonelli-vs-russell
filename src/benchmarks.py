@@ -6,6 +6,7 @@ the interpretive layer (segment categories, Q-session derivation, metadata).
 from __future__ import annotations
 from typing import Optional
 
+import numpy as np
 import pandas as pd
 
 from src.loaders import (
@@ -22,6 +23,11 @@ from src.segments import (
 
 SLOW_CORNER_MAX_KPH = 130.0
 FAST_CORNER_MIN_KPH = 200.0
+
+# Corner-signature analysis (apex speed + brake / throttle timing).
+BRAKE_LOOKBACK_M = 250.0
+THROTTLE_LOOKAHEAD_M = 250.0
+THROTTLE_FULL_PCT = 99.0
 
 # Sensor-freeze detection. Two failure modes are guarded against:
 #   1. Stuck Speed channel — the sensor reports only a handful of unique values
@@ -239,3 +245,109 @@ def compare_teammates(
         'q_mismatch': q_mismatch,
     }
     return {'segments': deltas, 'meta': meta}
+
+
+def _corner_brake_throttle(tel: pd.DataFrame, corner_distance: float) -> tuple:
+    """For one corner at `corner_distance` (meters), return
+    (brake_on_distance, throttle_full_distance) for this driver:
+
+      brake_on_distance: how many meters BEFORE the apex this driver started
+        braking. Larger = brakes earlier; smaller = brakes later.
+      throttle_full_distance: how many meters AFTER the apex this driver
+        first reaches THROTTLE_FULL_PCT (99%). Larger = slower to full
+        throttle; smaller = back on it sooner.
+
+    Returns NaN values if there isn't enough telemetry in the lookback /
+    lookahead window for a meaningful read. Returns 0.0 for brake_on if
+    no braking is detected within the window (a flat-out corner).
+    """
+    d = tel['Distance'].values
+    brake = tel['Brake'].values
+    throttle = tel['Throttle'].values
+    is_brake = brake.astype(float) > 0
+
+    back_mask = (d < corner_distance) & (d > corner_distance - BRAKE_LOOKBACK_M)
+    if back_mask.sum() < 5:
+        brake_on = float('nan')
+    else:
+        on_idx = np.where(is_brake[back_mask])[0]
+        brake_on = 0.0 if len(on_idx) == 0 else corner_distance - d[back_mask][on_idx[0]]
+
+    fwd_mask = (d >= corner_distance) & (d < corner_distance + THROTTLE_LOOKAHEAD_M)
+    if fwd_mask.sum() < 5:
+        throttle_full = float('nan')
+    else:
+        full_idx = np.where(throttle[fwd_mask] >= THROTTLE_FULL_PCT)[0]
+        if len(full_idx) == 0:
+            throttle_full = THROTTLE_LOOKAHEAD_M
+        else:
+            throttle_full = d[fwd_mask][full_idx[0]] - corner_distance
+
+    return brake_on, throttle_full
+
+
+def compute_corner_signatures(
+    year: int,
+    round_or_name,
+    drv_a: str = 'ANT',
+    drv_b: str = 'RUS',
+) -> pd.DataFrame:
+    """For each circuit-info corner in a qualifying session, compute:
+
+      - mean apex speed (kph) across the two drivers, plus per-driver apex speeds
+      - apex_delta_kph = ANT_apex - RUS_apex (positive = ANT carries more speed)
+      - brake_on_a, brake_on_b: meters before apex where each driver started braking
+      - brake_on_delta = ANT - RUS  (NEGATIVE = ANT brakes LATER)
+      - throttle_full_a, throttle_full_b: meters after apex to reach 99% throttle
+      - throttle_full_delta = ANT - RUS  (NEGATIVE = ANT to full throttle SOONER)
+      - sensor_ok: True if neither driver's telemetry is freeze-flagged at this
+        corner's apex Distance (and the corner is within both drivers' max distance)
+
+    Returns one DataFrame row per corner.
+    """
+    session = load_qualifying_session(year, round_or_name)
+    lap_a = get_fastest_valid_lap(session, drv_a)
+    lap_b = get_fastest_valid_lap(session, drv_b)
+    tel_a = get_lap_telemetry(lap_a).sort_values('Distance').drop_duplicates(subset='Distance')
+    tel_b = get_lap_telemetry(lap_b).sort_values('Distance').drop_duplicates(subset='Distance')
+    freeze_a = _find_freeze_distance_ranges(tel_a)
+    freeze_b = _find_freeze_distance_ranges(tel_b)
+    corners = session.get_circuit_info().corners
+
+    max_d_a = float(tel_a['Distance'].max())
+    max_d_b = float(tel_b['Distance'].max())
+
+    rows = []
+    for c in corners.itertuples():
+        d = float(c.Distance)
+        in_range = (d <= max_d_a) and (d <= max_d_b)
+        in_freeze = (
+            any(fs <= d <= fe for fs, fe in freeze_a) or
+            any(fs <= d <= fe for fs, fe in freeze_b)
+        )
+        sensor_ok = in_range and not in_freeze
+
+        sp_a = float(np.interp(d, tel_a['Distance'], tel_a['Speed']))
+        sp_b = float(np.interp(d, tel_b['Distance'], tel_b['Speed']))
+        b_on_a, t_full_a = _corner_brake_throttle(tel_a, d)
+        b_on_b, t_full_b = _corner_brake_throttle(tel_b, d)
+
+        letter = c.Letter if isinstance(c.Letter, str) and c.Letter.strip() else ''
+        rows.append({
+            'race': str(session.event['EventName']),
+            'corner': f'T{c.Number}{letter}',
+            'distance_m': d,
+            'apex_a_kph': sp_a,
+            'apex_b_kph': sp_b,
+            'mean_apex_kph': (sp_a + sp_b) / 2.0,
+            'apex_delta_kph': sp_a - sp_b,
+            'brake_on_a': b_on_a,
+            'brake_on_b': b_on_b,
+            'brake_on_delta': (b_on_a - b_on_b) if not (np.isnan(b_on_a) or np.isnan(b_on_b)) else float('nan'),
+            'throttle_full_a': t_full_a,
+            'throttle_full_b': t_full_b,
+            'throttle_full_delta': (t_full_a - t_full_b) if not (np.isnan(t_full_a) or np.isnan(t_full_b)) else float('nan'),
+            'sensor_ok': sensor_ok,
+        })
+
+    return pd.DataFrame(rows)
