@@ -59,6 +59,14 @@ The existing qualifying analysis is retained as Chapter 1, **with Canada (R5) ad
 all hard-coded "first 4 rounds", monotone-trend, and aggregate numbers updated to the
 5-race values (see §7).
 
+**Load-bearing detail:** adding `'Canada'` to `RACES` in notebook `01` does *not* only
+pull the 2026 Canada qualifying session — it also pulls the **2025 Canada** session into
+the year-over-year chart (`results_2025 = {race: compare_teammates(2025, race) for race
+in RACES}`). So the YoY chart now spans **5 tracks**, and *both* Canada Q sessions (2025
+and 2026) are load-bearing. Both are confirmed present in `fastf1_cache/`. During
+implementation, confirm the YoY Q-mismatch (`q_mismatch`) flag status for Canada in each
+year so the regenerated chart's hollow-marker set is intentional.
+
 ### Rigor level (chosen: "robust middle", Approach C)
 Defensible descriptive metrics with light modeling only where stable. **No** fuel-load
 correction model, **no** track-evolution model, **no** undercut/overcut math — with 5
@@ -120,9 +128,14 @@ def tire_deg(year: int, race: str, drivers: list[str]) -> pd.DataFrame:
     """Per driver per clean stint: linear slope of clean-lap time vs TyreLife
     (s/lap), compound, n clean laps. Stints with < 5 clean laps yield slope=NaN."""
 
-def gap_to_leader(year: int, race: str, driver: str) -> pd.DataFrame:
-    """Per-lap cumulative gap (s) of `driver` to the race leader, for the
-    gap-to-leader trace."""
+def gap_to_rival(year: int, race: str, driver: str) -> pd.DataFrame:
+    """Per-lap signed gap (s) of `driver` to the nearest meaningful rival, for
+    the race-control trace. When `driver` is NOT leading, returns gap *behind*
+    the leader (positive = behind). When `driver` IS the leader, returns gap
+    *ahead* of P2 (negative = leading by that margin). One consistent column
+    (`gap_s`) with a `leading` boolean flag so the plot can render both cases.
+    This single semantics resolves the leader/non-leader ambiguity in one place,
+    inside race.py — the notebook does not special-case it."""
 ```
 
 The per-race P2 finisher is resolved inside `race.py` (e.g. a private
@@ -135,7 +148,8 @@ Four new functions, matching the existing signature style (take a tidy df, optio
 - `plot_start_conversion(start_df, save_path=None)` — grid → lap-1 → finish per race.
 - `plot_stint_pace(pace_df, save_path=None)` — median clean-lap per stint, ANT vs RUS
   vs P2, labeled by compound.
-- `plot_gap_trace(gap_df, save_path=None)` — per-lap gap-to-leader, per race.
+- `plot_gap_trace(gap_df, save_path=None)` — per-lap gap-to-rival trace, per race
+  (gap behind leader when chasing; gap ahead of P2 when leading).
 - `plot_tire_deg(deg_df, save_path=None)` — degradation slope (s/lap) per comparable
   stint, ANT vs RUS.
 
@@ -146,7 +160,7 @@ FastF1 R session ──load_race_session──▶ laps
    laps ──get_clean_laps──▶ green-flag laps (shared filter)
        ├─▶ start_summary  ─▶ start df    ─▶ plot_start_conversion
        ├─▶ stint_pace     ─▶ pace df     ─▶ plot_stint_pace
-       ├─▶ gap_to_leader  ─▶ gap trace   ─▶ plot_gap_trace
+       ├─▶ gap_to_rival   ─▶ gap trace   ─▶ plot_gap_trace
        └─▶ tire_deg       ─▶ slope df    ─▶ plot_tire_deg
 ```
 
@@ -173,9 +187,13 @@ qualifying chapter (notebook `01`) and the race chapters (notebook `02`).
 - Chart: slope / small-multiples, grid → lap-1 → finish per race. Canada (P2 → led by
   L2) and Australia (P2 → P2, the loss) both visible.
 - Narrative note: Canada's lead came on lap 2; Russell's later DNF is what sealed the win.
+- Australia framing: this is a *finishing*-position loss (P2 grid → P2 finish), not a
+  start-phase failure — the start chart will correctly show ~0 positions gained there.
+  The narrative must not imply the start mechanism explains the Australia loss; it's the
+  honest counter-case where front-row pace simply wasn't enough to pass Russell.
 
 ### Component B — Race pace & control
-- `stint_pace` + `gap_to_leader` → `plot_stint_pace`, `plot_gap_trace`.
+- `stint_pace` + `gap_to_rival` → `plot_stint_pace`, `plot_gap_trace`.
 - Metric 1: median green-flag lap per stint (no in/out/pit/L1, TrackStatus==1), ANT vs
   RUS vs P2 finisher, labeled by compound; like-compound only.
 - Metric 2: per-lap gap-to-leader trace per race — "pulled away" (China/Japan/Miami) vs
