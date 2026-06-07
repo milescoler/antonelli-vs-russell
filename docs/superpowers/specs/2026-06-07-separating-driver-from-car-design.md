@@ -177,12 +177,15 @@ For a given `track` and a set of `years`:
   DNF handling) so a retirement's ~back-of-grid classified position cannot masquerade
   as "bad at this track".
 - **Season baseline (finish):** `baseline_finish(d, y)` = mean classified finishing
-  position of driver `d` across **all** classified rounds in season `y`.
-  **Edge case:** if `d` has no *other* classified round that season (a one-off entry, or
-  the track round is their only finish), the baseline is undefined and that driver-year
-  contributes **no** delta — it is dropped, not treated as zero overperformance.
+  position of driver `d` across all classified rounds in season `y` **other than the
+  track round itself** (excluding the track round so a result can't inflate its own
+  baseline). **Edge case:** if `d` has no other classified round that season (a one-off
+  entry, or the track round is their only finish), the baseline is undefined and that
+  driver-year contributes **no** delta — it is dropped, not treated as zero
+  overperformance.
 - **Track overperformance (finish):** for each year `y` the driver was classified at the
-  track, `track_delta_finish(d, track, y) = baseline_finish(d, y) − finish(d, track, y)`.
+  track, `track_delta_finish(d, track, y) = baseline_finish(d, y) − finish(d, track, y)`
+  (with `baseline_finish` taken over the season's other rounds, per above).
   **Positive = finished better here than their season norm** (lower position number is
   better, hence baseline − track).
 - **Driver track affinity:** mean of `track_delta_finish(d, track, y)` over the years in
