@@ -109,6 +109,7 @@ new test files; one orchestration script.
 | [src/loaders.py](../../../src/loaders.py) | FastF1 qualifying session/lap/telemetry loading | done — unchanged |
 | [src/segments.py](../../../src/segments.py) | Segment math | done — unchanged |
 | [src/benchmarks.py](../../../src/benchmarks.py) | `compare_teammates`, corner signatures (qualifying) | done — unchanged |
+| `src/season.py` | **New.** Single source of truth: the `RACES` list + default `years` window, imported by all three notebooks and the refresh script | to build |
 | `src/race.py` | **New (Ch2).** All race-session logic (per the 2026-05-29 plan) | to build |
 | `src/track_history.py` | **New (Ch3).** Cross-year per-track overperformance | to build |
 | [src/plotting.py](../../../src/plotting.py) | Existing plots + 4 race plots + 3 track-history plots | extend |
@@ -177,6 +178,9 @@ For a given `track` and a set of `years`:
   as "bad at this track".
 - **Season baseline (finish):** `baseline_finish(d, y)` = mean classified finishing
   position of driver `d` across **all** classified rounds in season `y`.
+  **Edge case:** if `d` has no *other* classified round that season (a one-off entry, or
+  the track round is their only finish), the baseline is undefined and that driver-year
+  contributes **no** delta — it is dropped, not treated as zero overperformance.
 - **Track overperformance (finish):** for each year `y` the driver was classified at the
   track, `track_delta_finish(d, track, y) = baseline_finish(d, y) − finish(d, track, y)`.
   **Positive = finished better here than their season norm** (lower position number is
@@ -286,10 +290,10 @@ FastF1 imports, 150 dpi, `bbox_inches='tight'`, hidden top/right spines.
 5. Print a summary of what was fetched/regenerated.
 
 The README gains an **"Updating after a new race"** section: add the new track string to
-`RACES` in one place, run `python scripts/refresh.py`, commit. The figures and PDFs are
-the regenerated artifacts. `scripts/refresh.py` reads `RACES` from a single shared source
-(a small `src/season.py` constant or a top-of-script list imported by both notebooks) so
-there is exactly **one** place to edit per new race.
+`RACES` in `src/season.py` (the **single** edit point), run `python scripts/refresh.py`,
+commit. The figures and PDFs are the regenerated artifacts. Both notebooks and the refresh
+script import `RACES` (and the default `years` window) from `src/season.py`, so there is
+exactly **one** place to edit per new race.
 
 ## 9. Data flow
 
@@ -333,7 +337,7 @@ cache-gated test).
 - `src/track_history.py`, `tests/test_track_history.py` (Ch3).
 - `notebooks/02_how_antonelli_wins_races.ipynb` (+ with-code & no-code PDFs).
 - `notebooks/03_driver_vs_car_track_history.ipynb` (+ with-code & no-code PDFs).
-- `scripts/refresh.py` (and a single shared `RACES` source — `src/season.py` or equivalent).
+- `src/season.py` (single source of truth: `RACES` + default `years`) and `scripts/refresh.py`.
 - New figures: `start_conversion.png`, `stint_pace.png`, `gap_trace.png`, `tire_deg.png`,
   `track_affinity_monaco.png`, `driver_vs_car_monaco.png`, `track_summary.png`.
 
@@ -370,9 +374,6 @@ cache-gated test).
   time; confirmed available. The deep historical window also triggers many results-only
   downloads on first Ch3 run (fast, but not free) — `scripts/refresh.py` should report
   progress and the README should note the first run is slower.
-- **Single `RACES` source location.** `src/season.py` constant vs a top-of-notebook list
-  imported by the script — pick one during implementation so there is exactly one edit
-  point per new race (the refresh-after-each-race requirement hinges on this).
 - **Team identity over 16 years** (Ch3): team names change (rebrands/ownership). Decide
   during implementation whether to map historical team names to a canonical lineage or
   treat each `TeamName` string as-is; the honest default is as-is, with a caveat, unless
