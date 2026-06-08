@@ -565,3 +565,95 @@ def plot_tire_deg(deg_df: pd.DataFrame, save_path: Optional[Path] = None) -> plt
         save_path.parent.mkdir(parents=True, exist_ok=True)
         fig.savefig(save_path, dpi=150, bbox_inches="tight")
     return fig
+
+
+# ---------------------------------------------------------------------------
+# Chapter 3 — cross-year track-history charts (overperformance vs baseline)
+# ---------------------------------------------------------------------------
+
+def plot_track_affinity(affinity_df: pd.DataFrame, group_col: str = "driver",
+                        title: str = "", highlight: Optional[str] = None,
+                        top_n: int = 12, save_path: Optional[Path] = None) -> plt.Figure:
+    """Horizontal bars of overperformance vs season baseline at one track.
+    Positive = finishes/qualifies better here than their season norm (car divided
+    out). Small-n rows (small_n==True) are drawn lighter. `highlight` (a value in
+    group_col) is accented. Shows the top_n by affinity.
+
+    Required columns: <group_col>, affinity, n_years, small_n."""
+    df = affinity_df.head(top_n).iloc[::-1]  # best at top
+    fig, ax = plt.subplots(figsize=(8, max(3, 0.45 * len(df))))
+    for _, row in df.iterrows():
+        base = "#1f77b4" if not row["small_n"] else "#b8cfe5"
+        color = "#d62728" if (highlight is not None and row[group_col] == highlight) else base
+        ax.barh(str(row[group_col]), row["affinity"], color=color)
+    ax.axvline(0, color="black", linewidth=0.8)
+    ax.set_xlabel("Overperformance vs season baseline (positions; + = better here)")
+    ax.set_title(title or f"Who overperforms at this track ({group_col})")
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    fig.tight_layout()
+    if save_path is not None:
+        save_path = Path(save_path)
+        save_path.parent.mkdir(parents=True, exist_ok=True)
+        fig.savefig(save_path, dpi=150, bbox_inches="tight")
+    return fig
+
+
+def plot_driver_vs_car_spread(driver_df: pd.DataFrame, team_df: pd.DataFrame,
+                              track: str = "", top_n: int = 8,
+                              save_path: Optional[Path] = None) -> plt.Figure:
+    """Two panels for one track: top driver overperformance vs top team
+    overperformance. Lets the reader judge whether the track is driver-dependent
+    (drivers carry the signal) or car-dependent (teams do).
+    Required columns: driver/team, affinity, small_n."""
+    fig, (ax_d, ax_t) = plt.subplots(1, 2, figsize=(12, max(3, 0.5 * top_n)))
+    for ax, df, gcol, label in [(ax_d, driver_df, "driver", "Drivers"),
+                                (ax_t, team_df, "team", "Teams")]:
+        d = df.head(top_n).iloc[::-1]
+        colors = ["#1f77b4" if not s else "#b8cfe5" for s in d["small_n"]]
+        ax.barh(d[gcol].astype(str), d["affinity"], color=colors)
+        ax.axvline(0, color="black", linewidth=0.8)
+        ax.set_title(label)
+        ax.set_xlabel("Overperformance (+ = better than baseline)")
+        ax.spines["top"].set_visible(False)
+        ax.spines["right"].set_visible(False)
+    fig.suptitle(f"{track}: is it a driver track or a car track?", fontsize=12)
+    fig.tight_layout()
+    if save_path is not None:
+        save_path = Path(save_path)
+        save_path.parent.mkdir(parents=True, exist_ok=True)
+        fig.savefig(save_path, dpi=150, bbox_inches="tight")
+    return fig
+
+
+def plot_track_summary(summary_df: pd.DataFrame, save_path: Optional[Path] = None) -> plt.Figure:
+    """Compact per-2026-track context. For each track: a bar = Mercedes historical
+    team overperformance (car strength here), and a marker = Antonelli's own
+    overperformance. Reading: Mercedes-strong tracks vs tracks where ANT himself
+    carries the result.
+
+    Required columns: track, merc_affinity, ant_overperf (NaN allowed),
+    driver_track (bool: is this a driver-dependent track?)."""
+    df = summary_df.copy()
+    fig, ax = plt.subplots(figsize=(9, max(3, 0.6 * len(df))))
+    ypos = range(len(df))
+    bar_colors = ["#9b59b6" if dt else "#7f7f7f" for dt in df["driver_track"]]
+    ax.barh(list(ypos), df["merc_affinity"], color=bar_colors, alpha=0.7,
+            label="Mercedes hist. overperf (car)")
+    ax.scatter(df["ant_overperf"], list(ypos), color="#d62728", zorder=3,
+               label="Antonelli overperf (driver)")
+    ax.axvline(0, color="black", linewidth=0.8)
+    ax.set_yticks(list(ypos))
+    ax.set_yticklabels(df["track"])
+    ax.set_xlabel("Overperformance vs season baseline (+ = better)")
+    ax.set_title("Each 2026 track: car strength vs Antonelli's own edge\n"
+                 "(purple bar = driver-dependent track)")
+    ax.legend(fontsize=8)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    fig.tight_layout()
+    if save_path is not None:
+        save_path = Path(save_path)
+        save_path.parent.mkdir(parents=True, exist_ok=True)
+        fig.savefig(save_path, dpi=150, bbox_inches="tight")
+    return fig
