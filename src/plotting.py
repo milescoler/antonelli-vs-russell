@@ -472,12 +472,14 @@ def plot_stint_pace(pace_df: pd.DataFrame, save_path: Optional[Path] = None) -> 
         stints = sorted(sub["stint"].unique())
         width = 0.8 / max(len(drivers), 1)
         for j, d in enumerate(drivers):
-            ds = sub[sub["driver"] == d].set_index("stint")
+            # drop_duplicates guards against a driver appearing twice (e.g. when
+            # the per-race P2 field reference is also ANT/RUS).
+            ds = sub[sub["driver"] == d].drop_duplicates("stint").set_index("stint")
             xs, ys, comps = [], [], []
             for k, st in enumerate(stints):
                 if st in ds.index:
                     xs.append(k + j * width)
-                    ys.append(ds.loc[st, "median_laptime_s"])
+                    ys.append(float(ds.loc[st, "median_laptime_s"]))
                     comps.append(str(ds.loc[st, "compound"])[:1])
             ax.bar(xs, ys, width=width, color=dcolor[d], label=d)
             for x, y, c in zip(xs, ys, comps):
