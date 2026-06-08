@@ -63,7 +63,7 @@ def plot_category_deltas(
     ax.set_xticks(x)
     ax.set_xticklabels([CATEGORY_LABELS[c] for c in cats_present])
     ax.set_ylabel('Time delta per category (s)\npositive → Antonelli faster')
-    ax.set_title('Where does Antonelli gain or lose time vs Russell?\n2026 Qualifying, first 4 rounds')
+    ax.set_title('Where does Antonelli gain or lose time vs Russell?\n2026 Qualifying, first 6 rounds')
     ax.grid(axis='y', linestyle='--', alpha=0.35, zorder=0)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
@@ -292,7 +292,7 @@ def plot_yoy_lap_deltas(
     ax.set_xticklabels(tracks)
     ax.set_ylabel('Lap-time delta (s)\npositive → Antonelli faster')
     ax.set_title(
-        'Antonelli vs Russell — same 4 tracks, rookie year vs sophomore year'
+        'Antonelli vs Russell — same 6 tracks, rookie year vs sophomore year'
     )
     ax.grid(axis='y', linestyle='--', alpha=0.35)
     ax.spines['top'].set_visible(False)
