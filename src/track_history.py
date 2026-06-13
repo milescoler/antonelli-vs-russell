@@ -42,6 +42,8 @@ def load_results(year: int, track: str) -> pd.DataFrame:
         "year": year,
         "round": int(session.event["RoundNumber"]),
         "track": track,
+        "country": str(session.event.get("Country", "")),
+        "location": str(session.event.get("Location", "")),
         "driver": res["Abbreviation"].astype(str).values,
         "team": res["TeamName"].astype(str).values,
         "grid": pd.to_numeric(res["GridPosition"], errors="coerce").values,
@@ -71,6 +73,8 @@ def season_table(year: int) -> pd.DataFrame:
             "year": year,
             "round": rnd,
             "track": str(ev["EventName"]),
+            "country": str(ev.get("Country", "")),
+            "location": str(ev.get("Location", "")),
             "driver": res["Abbreviation"].astype(str).values,
             "team": res["TeamName"].astype(str).values,
             "grid": pd.to_numeric(res["GridPosition"], errors="coerce").values,
@@ -79,6 +83,22 @@ def season_table(year: int) -> pd.DataFrame:
             "classified": [_is_classified(s) for s in res["Status"]],
         }))
     return pd.concat(frames, ignore_index=True) if frames else pd.DataFrame()
+
+
+def _match_track(st: pd.DataFrame, track: str) -> pd.DataFrame:
+    """Rows of a season table at `track`. Matches the 2026 race name (which is a
+    country or location, e.g. 'Canada', 'Miami') against the schedule's Country
+    and Location fields as well as the EventName — robust to the
+    'Canada'->'Canadian GP' / 'China'->'Chinese GP' adjective mismatch, and
+    (unlike FastF1's fuzzy resolver) returns NOTHING when the track wasn't on
+    that season's calendar rather than mis-matching a different GP."""
+    tl = track.lower()
+    m = st["track"].astype(str).str.lower().str.contains(tl, na=False)
+    if "country" in st.columns:
+        m = m | st["country"].astype(str).str.lower().eq(tl)
+    if "location" in st.columns:
+        m = m | st["location"].astype(str).str.lower().eq(tl)
+    return st[m]
 
 
 def _affinity_rows(track: str, years, metric: str, group_col: str) -> pd.DataFrame:
@@ -97,7 +117,7 @@ def _affinity_rows(track: str, years, metric: str, group_col: str) -> pd.DataFra
         st = season_table(y)
         if st.empty:
             continue
-        trk = st[st["track"].str.contains(track, case=False, na=False)]
+        trk = _match_track(st, track)
         if trk.empty:
             continue
         trk_round = int(trk["round"].iloc[0])
