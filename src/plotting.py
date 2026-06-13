@@ -63,7 +63,7 @@ def plot_category_deltas(
     ax.set_xticks(x)
     ax.set_xticklabels([CATEGORY_LABELS[c] for c in cats_present])
     ax.set_ylabel('Time delta per category (s)\npositive → Antonelli faster')
-    ax.set_title('Where does Antonelli gain or lose time vs Russell?\n2026 Qualifying, first 4 rounds')
+    ax.set_title('Where does Antonelli gain or lose time vs Russell?\n2026 Qualifying, first 6 rounds')
     ax.grid(axis='y', linestyle='--', alpha=0.35, zorder=0)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
@@ -292,7 +292,7 @@ def plot_yoy_lap_deltas(
     ax.set_xticklabels(tracks)
     ax.set_ylabel('Lap-time delta (s)\npositive → Antonelli faster')
     ax.set_title(
-        'Antonelli vs Russell — same 4 tracks, rookie year vs sophomore year'
+        'Antonelli vs Russell — same 6 tracks, rookie year vs sophomore year'
     )
     ax.grid(axis='y', linestyle='--', alpha=0.35)
     ax.spines['top'].set_visible(False)
@@ -407,4 +407,255 @@ def plot_lap_delta_by_round(
         save_path = Path(save_path)
         save_path.parent.mkdir(parents=True, exist_ok=True)
         fig.savefig(save_path, dpi=150, bbox_inches='tight')
+    return fig
+
+
+# ---------------------------------------------------------------------------
+# Chapter 2 — race-winning mechanism charts (start / pace / gap / tire)
+# ---------------------------------------------------------------------------
+
+def plot_start_conversion(start_df: pd.DataFrame, save_path: Optional[Path] = None) -> plt.Figure:
+    """Per race, a 3-point slope line (grid -> end of lap 1 -> finish) for
+    ANT, RUS, and the per-race P2 finisher. Y-axis is track position, inverted
+    so P1 sits at the top. Highlights Canada (ANT P2->led->win) and Monaco
+    (ANT pole->win), with Australia the honest counter-case (P2->P2).
+
+    Required columns: race, driver, code, grid, lap1_pos, finish.
+    """
+    races = list(dict.fromkeys(start_df["race"]))  # preserve order
+    role_color = {"ANT": "#1f77b4", "RUS": "#7f7f7f", "P2": "#d62728"}
+    fig, axes = plt.subplots(1, len(races), figsize=(3.2 * len(races), 4.2), sharey=True)
+    if len(races) == 1:
+        axes = [axes]
+    stages = ["grid", "lap1_pos", "finish"]
+    stage_labels = ["Grid", "End L1", "Finish"]
+    for ax, rc in zip(axes, races):
+        sub = start_df[start_df["race"] == rc]
+        for _, row in sub.iterrows():
+            ys = [row[s] for s in stages]
+            label = row["driver"] if row["driver"] != "P2" else f"P2 ({row['code']})"
+            ax.plot(range(3), ys, marker="o", color=role_color[row["driver"]], label=label)
+        ax.set_title(rc.replace(" Grand Prix", ""), fontsize=10)
+        ax.set_xticks(range(3))
+        ax.set_xticklabels(stage_labels, fontsize=8)
+        ax.grid(axis="y", linestyle="--", alpha=0.35)
+        ax.spines["top"].set_visible(False)
+        ax.spines["right"].set_visible(False)
+    axes[0].invert_yaxis()
+    axes[0].set_ylabel("Track position (P1 = top)")
+    axes[-1].legend(fontsize=8, loc="lower right")
+    fig.suptitle("Grid → lap 1 → finish: how Antonelli's races unfold", fontsize=12)
+    fig.tight_layout()
+    if save_path is not None:
+        save_path = Path(save_path)
+        save_path.parent.mkdir(parents=True, exist_ok=True)
+        fig.savefig(save_path, dpi=150, bbox_inches="tight")
+    return fig
+
+
+def plot_stint_pace(pace_df: pd.DataFrame, save_path: Optional[Path] = None) -> plt.Figure:
+    """Median clean-lap time per stint, ANT vs RUS vs field (P2 finisher code),
+    grouped by race. Each bar annotated with its tire compound. Lower = faster.
+    Compare bars WITHIN a race and only across matching compounds.
+
+    Required columns: race, driver, stint, compound, median_laptime_s.
+    'driver' here is the actual code (ANT/RUS/<P2 code>)."""
+    races = list(dict.fromkeys(pace_df["race"]))
+    fig, axes = plt.subplots(1, len(races), figsize=(3.4 * len(races), 4.2))
+    if len(races) == 1:
+        axes = [axes]
+    drivers = list(dict.fromkeys(pace_df["driver"]))
+    colors = plt.cm.tab10.colors
+    dcolor = {d: colors[i % 10] for i, d in enumerate(drivers)}
+    for ax, rc in zip(axes, races):
+        sub = pace_df[pace_df["race"] == rc]
+        stints = sorted(sub["stint"].unique())
+        width = 0.8 / max(len(drivers), 1)
+        for j, d in enumerate(drivers):
+            # drop_duplicates guards against a driver appearing twice (e.g. when
+            # the per-race P2 field reference is also ANT/RUS).
+            ds = sub[sub["driver"] == d].drop_duplicates("stint").set_index("stint")
+            xs, ys, comps = [], [], []
+            for k, st in enumerate(stints):
+                if st in ds.index:
+                    xs.append(k + j * width)
+                    ys.append(float(ds.loc[st, "median_laptime_s"]))
+                    comps.append(str(ds.loc[st, "compound"])[:1])
+            ax.bar(xs, ys, width=width, color=dcolor[d], label=d)
+            for x, y, c in zip(xs, ys, comps):
+                ax.text(x, y, c, ha="center", va="bottom", fontsize=7)
+        ax.set_title(rc.replace(" Grand Prix", ""), fontsize=10)
+        ax.set_xticks([k + width for k in range(len(stints))])
+        ax.set_xticklabels([f"Stint {s}" for s in stints], fontsize=8)
+        ax.set_ylabel("Median clean lap (s)")
+        if len(sub):
+            lo, hi = sub["median_laptime_s"].min(), sub["median_laptime_s"].max()
+            ax.set_ylim(lo - 0.5, hi + 1.0)
+        ax.spines["top"].set_visible(False)
+        ax.spines["right"].set_visible(False)
+    axes[-1].legend(fontsize=8)
+    fig.suptitle("Race pace by stint (lower = faster); letter = compound", fontsize=12)
+    fig.tight_layout()
+    if save_path is not None:
+        save_path = Path(save_path)
+        save_path.parent.mkdir(parents=True, exist_ok=True)
+        fig.savefig(save_path, dpi=150, bbox_inches="tight")
+    return fig
+
+
+def plot_gap_trace(gap_df: pd.DataFrame, save_path: Optional[Path] = None) -> plt.Figure:
+    """Per-lap race-control trace. y = gap_s (negative when ANT leads/ahead of
+    P2, positive when chasing the leader). One line per race. The y=0 line is
+    the lead/chase boundary.
+
+    Required columns: race, lap, gap_s, leading."""
+    races = list(dict.fromkeys(gap_df["race"]))
+    fig, ax = plt.subplots(figsize=(10, 5.5))
+    colors = plt.cm.tab10.colors
+    for i, rc in enumerate(races):
+        sub = gap_df[gap_df["race"] == rc]
+        ax.plot(sub["lap"], sub["gap_s"], color=colors[i % 10],
+                label=rc.replace(" Grand Prix", ""))
+    ax.axhline(0, color="black", linewidth=0.8)
+    ax.set_xlabel("Lap")
+    ax.set_ylabel("Gap (s): negative = Antonelli leading / ahead of P2")
+    ax.set_title("How Antonelli controls the race: gap trace per round")
+    ax.grid(axis="y", linestyle="--", alpha=0.35)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.legend(fontsize=8)
+    fig.tight_layout()
+    if save_path is not None:
+        save_path = Path(save_path)
+        save_path.parent.mkdir(parents=True, exist_ok=True)
+        fig.savefig(save_path, dpi=150, bbox_inches="tight")
+    return fig
+
+
+def plot_tire_deg(deg_df: pd.DataFrame, save_path: Optional[Path] = None) -> plt.Figure:
+    """Tire-degradation slope (s lost per lap of tire age) for comparable
+    stints, ANT vs RUS. Lower = better tire management. Stints with NaN slope
+    (fewer than MIN_DEG_LAPS clean laps) are omitted from bars and listed as a
+    caption note rather than shown as zero.
+
+    Required columns: race, driver, stint, compound, deg_slope_s_per_lap, n_clean."""
+    fittable = deg_df.dropna(subset=["deg_slope_s_per_lap"]).copy()
+    fittable["label"] = (fittable["race"].str.replace(" Grand Prix", "", regex=False)
+                         + "\nS" + fittable["stint"].astype(str)
+                         + " " + fittable["compound"].str[:1])
+    drivers = list(dict.fromkeys(fittable["driver"]))
+    labels = list(dict.fromkeys(fittable["label"]))
+    colors = {"ANT": "#1f77b4", "RUS": "#7f7f7f"}
+    fig, ax = plt.subplots(figsize=(max(8, 1.1 * len(labels)), 5))
+    width = 0.8 / max(len(drivers), 1)
+    for j, d in enumerate(drivers):
+        ds = fittable[fittable["driver"] == d].set_index("label")
+        xs = [k + j * width for k, lab in enumerate(labels) if lab in ds.index]
+        ys = [ds.loc[lab, "deg_slope_s_per_lap"] for lab in labels if lab in ds.index]
+        ax.bar(xs, ys, width=width, color=colors.get(d, "#999"), label=d)
+    ax.axhline(0, color="black", linewidth=0.8)
+    ax.set_xticks([k + width / 2 for k in range(len(labels))])
+    ax.set_xticklabels(labels, fontsize=7)
+    ax.set_ylabel("Degradation (s lost per lap of tire age)\nlower = better")
+    ax.set_title("Tire management by stint: Antonelli vs Russell")
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.legend(fontsize=8)
+    fig.tight_layout()
+    if save_path is not None:
+        save_path = Path(save_path)
+        save_path.parent.mkdir(parents=True, exist_ok=True)
+        fig.savefig(save_path, dpi=150, bbox_inches="tight")
+    return fig
+
+
+# ---------------------------------------------------------------------------
+# Chapter 3 — cross-year track-history charts (overperformance vs baseline)
+# ---------------------------------------------------------------------------
+
+def plot_track_affinity(affinity_df: pd.DataFrame, group_col: str = "driver",
+                        title: str = "", highlight: Optional[str] = None,
+                        top_n: int = 12, save_path: Optional[Path] = None) -> plt.Figure:
+    """Horizontal bars of overperformance vs season baseline at one track.
+    Positive = finishes/qualifies better here than their season norm (car divided
+    out). Small-n rows (small_n==True) are drawn lighter. `highlight` (a value in
+    group_col) is accented. Shows the top_n by affinity.
+
+    Required columns: <group_col>, affinity, n_years, small_n."""
+    df = affinity_df.head(top_n).iloc[::-1]  # best at top
+    fig, ax = plt.subplots(figsize=(8, max(3, 0.45 * len(df))))
+    for _, row in df.iterrows():
+        base = "#1f77b4" if not row["small_n"] else "#b8cfe5"
+        color = "#d62728" if (highlight is not None and row[group_col] == highlight) else base
+        ax.barh(str(row[group_col]), row["affinity"], color=color)
+    ax.axvline(0, color="black", linewidth=0.8)
+    ax.set_xlabel("Overperformance vs season baseline (positions; + = better here)")
+    ax.set_title(title or f"Who overperforms at this track ({group_col})")
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    fig.tight_layout()
+    if save_path is not None:
+        save_path = Path(save_path)
+        save_path.parent.mkdir(parents=True, exist_ok=True)
+        fig.savefig(save_path, dpi=150, bbox_inches="tight")
+    return fig
+
+
+def plot_driver_vs_car_spread(driver_df: pd.DataFrame, team_df: pd.DataFrame,
+                              track: str = "", top_n: int = 8,
+                              save_path: Optional[Path] = None) -> plt.Figure:
+    """Two panels for one track: top driver overperformance vs top team
+    overperformance. Lets the reader judge whether the track is driver-dependent
+    (drivers carry the signal) or car-dependent (teams do).
+    Required columns: driver/team, affinity, small_n."""
+    fig, (ax_d, ax_t) = plt.subplots(1, 2, figsize=(12, max(3, 0.5 * top_n)))
+    for ax, df, gcol, label in [(ax_d, driver_df, "driver", "Drivers"),
+                                (ax_t, team_df, "team", "Teams")]:
+        d = df.head(top_n).iloc[::-1]
+        colors = ["#1f77b4" if not s else "#b8cfe5" for s in d["small_n"]]
+        ax.barh(d[gcol].astype(str), d["affinity"], color=colors)
+        ax.axvline(0, color="black", linewidth=0.8)
+        ax.set_title(label)
+        ax.set_xlabel("Overperformance (+ = better than baseline)")
+        ax.spines["top"].set_visible(False)
+        ax.spines["right"].set_visible(False)
+    fig.suptitle(f"{track}: is it a driver track or a car track?", fontsize=12)
+    fig.tight_layout()
+    if save_path is not None:
+        save_path = Path(save_path)
+        save_path.parent.mkdir(parents=True, exist_ok=True)
+        fig.savefig(save_path, dpi=150, bbox_inches="tight")
+    return fig
+
+
+def plot_track_summary(summary_df: pd.DataFrame, save_path: Optional[Path] = None) -> plt.Figure:
+    """Compact per-2026-track context. For each track: a bar = Mercedes historical
+    team overperformance (car strength here), and a marker = Antonelli's own
+    overperformance. Reading: Mercedes-strong tracks vs tracks where ANT himself
+    carries the result.
+
+    Required columns: track, merc_affinity, ant_overperf (NaN allowed),
+    driver_track (bool: is this a driver-dependent track?)."""
+    df = summary_df.copy()
+    fig, ax = plt.subplots(figsize=(9, max(3, 0.6 * len(df))))
+    ypos = range(len(df))
+    bar_colors = ["#9b59b6" if dt else "#7f7f7f" for dt in df["driver_track"]]
+    ax.barh(list(ypos), df["merc_affinity"], color=bar_colors, alpha=0.7,
+            label="Mercedes hist. overperf (car)")
+    ax.scatter(df["ant_overperf"], list(ypos), color="#d62728", zorder=3,
+               label="Antonelli overperf (driver)")
+    ax.axvline(0, color="black", linewidth=0.8)
+    ax.set_yticks(list(ypos))
+    ax.set_yticklabels(df["track"])
+    ax.set_xlabel("Overperformance vs season baseline (+ = better)")
+    ax.set_title("Each 2026 track: car strength vs Antonelli's own edge\n"
+                 "(purple bar = driver-dependent track)")
+    ax.legend(fontsize=8)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    fig.tight_layout()
+    if save_path is not None:
+        save_path = Path(save_path)
+        save_path.parent.mkdir(parents=True, exist_ok=True)
+        fig.savefig(save_path, dpi=150, bbox_inches="tight")
     return fig

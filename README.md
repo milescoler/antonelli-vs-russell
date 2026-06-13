@@ -1,83 +1,129 @@
-# Antonelli vs Russell: A Segment-Level Look at the 2026 Mercedes Drivers
+# Separating the Driver from the Car: How Good Is Kimi Antonelli, Really?
 
-**Antonelli has overtaken Russell on qualifying pace. How is he winning?**
+**Antonelli has won 5 of the last 6 races. How much of that is him, and how much is the Mercedes?**
 
-I built this to dig into Kimi Antonelli's 2026 season racing for Mercedes by comparing his qualifying laps to George Russell's, broken down by track segment. They're driving the same car, with the same team of engineers — so the differences are mostly about the drivers (with caveats covered in [Limitations](#limitations)).
+That question is hard because driver and car are tangled together in every result. This project pulls them apart three different ways, each controlling for the car from a different angle. The throughline: **a fast car flatters a driver everywhere — so the interesting signal is whatever survives once you divide the car out.**
 
-> **One-page summary:** [`case_study.pdf`](case_study.pdf) · **Full notebook (no code):** [`notebooks/01_antonelli_vs_russell_no_code.pdf`](notebooks/01_antonelli_vs_russell_no_code.pdf)
-
----
-
-## Headline findings
-
-After the first 4 rounds of 2026:
-
-- **Year-over-year: Antonelli has gained 0.3–0.7 s on Russell at every one of these 4 tracks vs his 2025 rookie season** (mean **+0.53 s/track**). His rookie year started almost a full second behind Russell at Australia and only just crossed ahead by Miami. In 2026 he started at -0.29 s and was ahead from R2 (Race 2, China) onwards. He's clearly closing in on his teammate, and the gap looks to be growing.
-- **2026 trajectory: monotone gain every round.** He was 0.29 s slower at Australia (R1) but has been faster every round since, with the margin growing: R2 +0.22 s → R3 +0.30 s → R4 +0.40 s. Four-race mean +0.16 s in his favor.
-- **Segment-level breakdown is essentially flat.** After implementing a speed sensor quality filter due to an issue in Japan's race, all four categories (slow / medium / fast corners and straights) collapse to within ±0.01 s/lap of each other. Antonelli's advantage is spread across the lap, not concentrated in any single phase.
-- **But the corner-cycle analysis tells a story.** Bucketing by corner speed and looking at brake-on and throttle-on timing, at fast corners (≥200 kph) Antonelli brakes about **21 m later** than Russell on average AND gets back to full throttle about **23 m sooner** — the classic late-brake/early-throttle commitment signature. At slower corners his approach is the opposite (he brakes earlier and accelerates later); the fast-corner gain is where the net lap-time advantage comes from. Sample size is small (12 fast-corner data points across 4 races), but the pattern is consistent.
-- **Earlier per-category claims were due to a speed sensor freeze in Japan.** My first pass (before the sensor-freeze fix) reported +0.17 s/lap on straights and -0.46 s/lap in medium corners — **but both numbers were almost entirely driven by five Japan segments where Antonelli's speed sensor was frozen near 189 kph for over 1.3 km of the lap.** See [Limitations](#limitations) for the detection and the fix.
-- **Summary:** There have only been 4 races this year, and one of the four races had telemetry issues that impacted the segment-level analysis. The year-over-year comparison and the 2026 trajectory are what I'd defend; the segment-level category claims are something I'd want more clean races before claiming with confidence.
-
-![Headline chart: per-segment time delta across four races](figures/headline_segment_delta.png)
-
-For a finer-grained view, the figure below maps the local time-delta slope onto each circuit. **Blue** = Antonelli is gaining on Russell at that part of the track. **Red** = Russell is gaining on Antonelli. Corner numbers are overlaid for orientation.
-
-![Track-map: where each driver gains time across the lap](figures/track_delta_map.png)
-
-The chart below puts Antonelli's brake-on and throttle-full timing deltas against Russell, bucketed by corner speed. At fast corners (≥200 kph) both bars are clearly below zero — he brakes later AND gets to full throttle sooner. At slower corners, it's the opposite.
-
-![Corner-cycle: brake / throttle timing by corner-speed bucket](figures/corner_buckets.png)
-
-The chart below puts Antonelli's 2026 lap-deltas against his rookie-year 2025 lap-deltas at the same 4 tracks. Hollow markers flag a known caveat (e.g., Q-session mismatch at 2025 Australia, where Antonelli's fastest valid lap was in Q1 and Russell's in Q3 — track evolution likely inflates that gap).
-
-![Year-over-year: Antonelli vs Russell at the same 4 tracks](figures/year_over_year.png)
+> **One-page summary:** [`case_study.pdf`](case_study.pdf)
+> **Notebooks (no code):** [Ch1 — Qualifying](notebooks/01_antonelli_vs_russell_no_code.pdf) · [Ch2 — Race wins](notebooks/02_how_antonelli_wins_races_no_code.pdf) · [Ch3 — Track history](notebooks/03_driver_vs_car_track_history_no_code.pdf)
 
 ---
 
-## Why teammate comparison
+## The three chapters
 
-Driver-vs-field comparisons in F1 are dominated by car performance. A Mercedes driver beating the midfield median tells us more about car performance than driver skill.
+| Chapter | Question | How it removes the car | Notebook |
+|--------|----------|------------------------|----------|
+| **1 — Qualifying** | Is he faster than his teammate? | Same car, same season (Russell) | [`01`](notebooks/01_antonelli_vs_russell.ipynb) |
+| **2 — Race wins** | How does he convert pace into wins? | Same car, same race (Russell + the per-race P2 finisher) | [`02`](notebooks/02_how_antonelli_wins_races.ipynb) |
+| **3 — Track history** | Are his wins at "driver tracks" or "car tracks"? | Same track, across years (overperformance vs each season's own baseline) | [`03`](notebooks/03_driver_vs_car_track_history.ipynb) |
 
-Comparing teammates controls for that. Same chassis, same power unit, same engineering team, same tire allocation. What's left is mostly driver — with caveats covered in [Limitations](#limitations).
+**2026 race record through Monaco (R6):**
+
+| Round | Race | Grid → Finish | |
+|---|---|---|---|
+| 1 | Australia | P2 → **P2** | the one loss (lost to Russell) |
+| 2 | China | P1 → **P1** | win from pole |
+| 3 | Japan | P1 → **P1** | win from pole |
+| 4 | Miami | P1 → **P1** | win from pole |
+| 5 | Canada | P2 → **P1** | led by L2; Russell (pole) retired |
+| 6 | Monaco | P1 → **P1** | pole to flag-to-flag win |
+
+---
+
+## Chapter 1 — Qualifying (getting to the front)
+
+Antonelli and Russell drive the same Mercedes, so their fastest-lap delta is mostly driver.
+
+- **He out-qualifies Russell more often than not, but the trend is noisy, not monotone.** Round by round (positive = Antonelli faster): R1 −0.29 → R2 +0.22 → R3 +0.30 → R4 +0.40 → **R5 −0.07** → **R6 +0.39**, six-race mean **+0.16 s**. The clean climb the first four rounds suggested broke at Canada, then snapped back with a dominant Monaco pole.
+- **The segment-level split is essentially flat** — straights +0.009, slow corners +0.011, fast corners −0.003, medium corners −0.014 s/lap (all within ±0.014). His edge isn't concentrated in one phase of the lap.
+- **Where a concrete mechanism *does* show up is fast-corner commitment:** at corners ≥200 kph he brakes ~**15 m later** and gets to full throttle ~**19 m sooner** than Russell (14 data points across six races — directional).
+- **The most durable signal is year-over-year.** Against his 2025 rookie season at the same six tracks, Antonelli has gained **+0.55 s/track** on Russell (range 0.29–0.77). A clear, consistent compression of the gap to his teammate.
+
+![Year-over-year: Antonelli vs Russell, rookie vs sophomore, same 6 tracks](figures/year_over_year.png)
+
+![Headline: per-segment time delta across six races](figures/headline_segment_delta.png)
+
+![Where each driver gains time across the lap](figures/track_delta_map.png)
+
+---
+
+## Chapter 2 — Race wins (converting it)
+
+Qualifying explains the grid; it doesn't explain the wins. Same teammate control, plus the actual P2 finisher of each race as a field reference. Sign convention: **positive = Antonelli better**. Clean lap = green-flag racing lap (`TrackStatus == '1'`, not lap 1, not in/out/pit).
+
+- **Start & lap 1.** Monaco is the clean case (pole → flag-to-flag); Canada is the converted-then-inherited case (P2 → led by lap 2 → won after Russell's retirement); Australia is the honest counter-case (P2 → P2 — a finishing-position loss, not a start failure).
+- **Pace & control.** On the four pole-to-win races the per-lap gap trace shows Antonelli leading and *extending*. Canada is the exception — that lead was partly inherited. Stint pace is read only across matching compounds, and is **not** fuel-corrected (named, not modelled).
+- **Tire degradation.** Per-stint clean-lap slope vs tire age, ANT vs Russell, like-compound only; stints under 5 clean laps report NaN rather than a noisy number.
+
+![Grid → lap 1 → finish, per race](figures/start_conversion.png)
+![Race-control gap trace per round](figures/gap_trace.png)
+![Race pace by stint](figures/stint_pace.png)
+![Tire degradation by stint](figures/tire_deg.png)
+
+---
+
+## Chapter 3 — Track history (driver track or car track?)
+
+The teammate comparison removes the car *within* a season. This removes it *across* seasons. For each driver-year we take *(their average finish over the season's **other** rounds) − (their finish at this track)*: positive means they did better here than their own season norm, with car quality largely divided out. Averaged over many years that's a driver's **track affinity**; the same arithmetic on **teams** exposes track-specific *car* strengths. `finish` excludes DNF rounds; `grid` (qualifying) is the DNF-free cross-check.
+
+- **Monaco, the centerpiece.** Restricting to drivers/teams with ≥3 years at the circuit, the largest *persistent* overperformance belongs to teams about as much as to any single driver — so in this dataset Monaco reads as much like a **car track** as the archetypal "driver's track." A useful, slightly counter-reputational result.
+- **Every 2026 track in context.** Each circuit is tagged driver- vs car-dependent and shown against Mercedes' historical standing and Antonelli's own (tiny-sample) overperformance — so each of his wins gets a "how much was the car here?" read.
+
+![Monaco: driver overperformance (≥3 yrs)](figures/track_affinity_monaco.png)
+![Monaco: driver track or car track?](figures/driver_vs_car_monaco.png)
+![Each 2026 track: car strength vs Antonelli's own edge](figures/track_summary.png)
+
+> **Data note:** Chapter 3 runs on this project's data source, whose history is internally consistent but **not** real-world F1. Every claim here is *"in this dataset"* — read from the numbers, not from real-world reputation.
+
+---
+
+## Updating after a new race
+
+The whole pipeline is driven by one list. To bring the project current after a Grand Prix:
+
+1. Append the new race to `RACES` in [`src/season.py`](src/season.py) — the single edit point.
+2. Run `python scripts/refresh.py` (fetches any missing session, re-executes all three notebooks, regenerates every figure and PDF).
+3. Commit the regenerated artifacts.
+
+The first Chapter-3 run is slow — it downloads ~16 seasons of results-only data into `fastf1_cache/` (gitignored). After that it's local and fast.
 
 ---
 
 ## Method
 
-**Data:** FastF1 telemetry for the 2026 qualifying sessions of the Australian, Chinese, Japanese and Miami Grand Prix. Each driver's fastest valid lap is used.
+**Qualifying (Ch1):** FastF1 telemetry for 2026 qualifying. Each driver's fastest valid lap, resampled onto a uniform 5 m distance grid; segment time read from FastF1's `Time` channel; segment delta = `Russell − Antonelli` (positive = Antonelli faster). A sensor-quality filter excludes segments where a frozen `Speed` sensor corrupts the telemetry (see Limitations).
 
-**Segmentation:** Track segments are auto-generated from FastF1's `circuit_info.corners`, grouping nearby corners into single segments (default threshold: 250m). This produces 12-20 segments per circuit.
+**Race (Ch2):** FastF1 Race sessions, laps only. Metrics build on a shared clean-lap filter (`TrackStatus == '1'`, not lap 1, not in/out/pit). Start conversion, per-stint median pace, per-lap gap-to-rival, and tire-degradation slope.
 
-**Time delta:** Both drivers' telemetry — including FastF1's per-sample `Time` channel — is resampled onto a uniform 5m distance grid. Segment time is read directly from that resampled `Time` channel as `Time[last_step] − Time[first_step]` within the segment's distance bounds. Segment delta is `Russell_time − Antonelli_time` (positive = Antonelli faster).
-
-_An earlier version of the analysis integrated `Δd / speed` per step instead. On 2 of the 4 races the accumulated residual exceeded the 0.1s sanity-check threshold below, so the method switched to reading FastF1's sample times directly. Residuals are now ≤ 0.1s on all four races — see the notebook's sanity-check section._
-
-**Sanity check:** The sum of segment deltas across a lap is verified to match the actual lap-time delta within 0.1s. Larger discrepancies indicate a bug.
+**Track history (Ch3):** results-only loads across `YEARS` (2010–2025). Overperformance = season baseline (over a driver's other rounds) minus their result at the track; aggregated per driver and per team, with a small-n flag (`MIN_TRACK_YEARS = 3`).
 
 ---
 
 ## Project structure
 
 ```
-antonelli-vs-russell/
+f1_project/
 ├── README.md
-├── case_study.pdf                            # 1-page summary
+├── case_study.pdf
 ├── requirements.txt
 ├── notebooks/
-│   ├── 01_antonelli_vs_russell.ipynb         # main analysis
-│   ├── 01_antonelli_vs_russell.pdf           # full notebook, with code
-│   ├── 01_antonelli_vs_russell_no_code.pdf   # clean reading version
-│   └── archive/                              # earlier scratch exploration
+│   ├── 01_antonelli_vs_russell.ipynb            # Ch1 — qualifying
+│   ├── 02_how_antonelli_wins_races.ipynb        # Ch2 — race wins
+│   ├── 03_driver_vs_car_track_history.ipynb     # Ch3 — track history
+│   └── *_no_code.pdf / *.pdf                     # exported reading copies
 ├── src/
-│   ├── loaders.py        # FastF1 session, lap, telemetry loading
-│   ├── benchmarks.py     # teammate comparison + sensor-quality filter
-│   ├── segments.py       # circuit segmentation + time-delta math
-│   └── plotting.py       # styled chart helpers
-├── figures/              # exported PNGs used in this README
-├── docs/                 # case study + design / implementation notes
-└── tests/
-    └── test_segments.py  # lap-delta consistency check
+│   ├── season.py          # single source of truth: RACES + YEARS
+│   ├── loaders.py         # FastF1 qualifying session/lap/telemetry loading
+│   ├── benchmarks.py      # teammate comparison + sensor-quality filter (Ch1)
+│   ├── segments.py        # circuit segmentation + time-delta math (Ch1)
+│   ├── race.py            # race-session metrics: start/pace/tire/gap (Ch2)
+│   ├── track_history.py   # cross-year overperformance engine (Ch3)
+│   └── plotting.py        # all styled chart helpers
+├── scripts/
+│   └── refresh.py         # one-command season refresh
+├── figures/               # exported PNGs used in this README
+├── docs/                  # case study + design specs / implementation plans
+└── tests/                 # invariant tests for each module
 ```
 
 ---
@@ -86,43 +132,25 @@ antonelli-vs-russell/
 
 ```bash
 git clone https://github.com/milescoler/antonelli-vs-russell.git
-cd antonelli-vs-russell
+cd f1_project
 pip install -r requirements.txt
-jupyter lab notebooks/01_antonelli_vs_russell.ipynb
+python scripts/refresh.py     # fetch data, run all notebooks, regenerate outputs
+pytest tests/                 # invariant checks (skip cleanly if cache is empty)
 ```
 
-The notebook's first run downloads ~411 MB of FastF1 session data into `./fastf1_cache/` (gitignored). Subsequent runs are local and fast.
-
-After the notebook has populated the cache, run this to check that the math is correct:
-
-```bash
-pytest tests/
-```
-
-(The test is a single end-to-end consistency check on the cached Miami session; it will skip if the cache has not been populated yet.)
-
-Tested with FastF1 3.8.1, Python 3.12.
+Tested with FastF1 3.8.x, Python 3.12. The first run downloads session data into `./fastf1_cache/` (gitignored); subsequent runs are local.
 
 ---
 
 ## Limitations
 
-A short list of what this analysis does _not_ control for:
-
-- **Sample size.** 4 qualifying sessions. Findings are directional, not conclusive.
-- **Q-session timing.** Q1, Q2, Q3 happen on an evolving track. If one driver's best lap is in Q3 and the other's is in Q2, track conditions differ. The notebook flags these cases.
-- **Traffic.** Out-laps, in-laps, and other cars on track affect achievable lap time.
-- **Tire age within Q.** Same compound, but tire-age within a Q-session run can differ by a few laps.
-- **Setup divergence.** Mercedes drivers don't always run identical setups. Public data can't distinguish driver delta from setup differences.
-- **Telemetry sensor freezes.** FastF1's car telemetry occasionally stops reporting changes for long stretches — Antonelli's Japan lap is the clearest case in this dataset, with the speed sensor stuck at 189 kph and `nGear` stuck in 4th from ≈ 4000 m to the end of the lap. When that happens, integrated `Distance`, `Speed`, and the X/Y trajectory all become unreliable in the affected segments. Lap-level and sector-level deltas are unaffected (those come from timing-line beams, independent of the car telemetry), and I cross-checked Japan's sector splits to confirm Antonelli's +0.30 s lap advantage is real. The notebook detects freezes with a sliding-window check (≤ 5 unique `Speed` values across any 50-sample window spanning ≥ 300 m of distance) plus an out-of-range check (segments that extend past either driver's reported telemetry distance). Five Japan segments are flagged and excluded from the category headline. **This filter changed the headline:** earlier passes reported large per-category deltas (+0.17 s/lap on straights, −0.46 s/lap in medium corners) that turned out to be the freeze artifacts. Once excluded, the category-level signal collapses to ≈ 0 s/lap everywhere and the trajectory becomes the only robust finding.
-
----
-
-## Future Work
-
-- Compare Antonelli's 2026 sophomore season performance to other Mercedes drivers' early career performance using this same segment-delta framework (e.g. George Russell and Lewis Hamilton).
-- Add race-pace comparison (stint-level, fuel-corrected) once enough race data accumulates.
-- Extend across the rest of the 2026 season as races complete.
+- **Sample size.** Six 2026 races, and the race-mechanism chapter has even thinner data than qualifying. Findings are directional, not conclusive.
+- **Synthetic historical data (Ch3).** Claims are "in this dataset," not real F1 history.
+- **DNF handling (Ch3).** Finish-based overperformance excludes DNF/lapped rounds — this removes luck/reliability noise but discards information; the grid cross-check is the DNF-free corroboration.
+- **Small samples (Ch3).** Drivers/teams below `MIN_TRACK_YEARS` are flagged; Antonelli's own 1–2 years are directional only; the driver-vs-car call is a qualitative read, not a fitted model.
+- **Team rebrands** over a 16-season window are treated as-is, not stitched into lineages.
+- **Q-session timing, traffic, tire age, setup divergence** (Ch1) and **no fuel/strategy correction, SC/VSC laps excluded** (Ch2) — named, not modelled away.
+- **Telemetry sensor freezes.** FastF1's car telemetry occasionally stops reporting changes for long stretches — Antonelli's Japan qualifying lap is the clearest case (speed stuck at 189 kph, `nGear` stuck in 4th from ≈4000 m). A sliding-window check flags and excludes five Japan segments from the Ch1 category headline; lap- and sector-level deltas (from timing beams) are unaffected.
 
 ---
 
@@ -130,4 +158,4 @@ A short list of what this analysis does _not_ control for:
 
 I'm Cole Richards — UCLA Statistics & Data Science, June 2026. [Portfolio](https://milescoler.github.io)
 
-Data via [FastF1](https://github.com/theOehrly/Fast-F1) by Philipp Schaefer. Not affiliated with Formula 1 or Mercedes.
+Data via [FastF1](https://github.com/theOehrly/Fast-F1). Not affiliated with Formula 1 or Mercedes.
