@@ -4,8 +4,8 @@ edit when a new race happens."""
 from src import season
 
 
-def test_races_through_monaco_in_order():
-    assert season.RACES == ['Australia', 'China', 'Japan', 'Miami', 'Canada', 'Monaco']
+def test_races_through_barcelona_in_order():
+    assert season.RACES == ['Australia', 'China', 'Japan', 'Miami', 'Canada', 'Monaco', 'Barcelona']
 
 
 def test_years_window_is_2010_through_2025():

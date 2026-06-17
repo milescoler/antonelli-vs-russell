@@ -1,6 +1,6 @@
 # Separating the Driver from the Car: How Good Is Kimi Antonelli, Really?
 
-**Antonelli has won 5 of the last 6 races. How much of that is him, and how much is the Mercedes?**
+**Antonelli won 5 of his first 7 races — then Barcelona broke the run: Russell out-qualified him and he retired. How much of the winning is him, and how much is the Mercedes?**
 
 That question is hard because driver and car are tangled together in every result. This project pulls them apart three different ways, each controlling for the car from a different angle. The throughline: **a fast car flatters a driver everywhere — so the interesting signal is whatever survives once you divide the car out.**
 
@@ -17,16 +17,17 @@ That question is hard because driver and car are tangled together in every resul
 | **2 — Race wins** | How does he convert pace into wins? | Same car, same race (Russell + the per-race P2 finisher) | [`02`](notebooks/02_how_antonelli_wins_races.ipynb) |
 | **3 — Track history** | Are his wins at "driver tracks" or "car tracks"? | Same track, across years (overperformance vs each season's own baseline) | [`03`](notebooks/03_driver_vs_car_track_history.ipynb) |
 
-**2026 race record through Monaco (R6):**
+**2026 race record through Barcelona (R7):**
 
 | Round | Race | Grid → Finish | |
 |---|---|---|---|
-| 1 | Australia | P2 → **P2** | the one loss (lost to Russell) |
+| 1 | Australia | P2 → **P2** | a finishing loss (lost to Russell) |
 | 2 | China | P1 → **P1** | win from pole |
 | 3 | Japan | P1 → **P1** | win from pole |
 | 4 | Miami | P1 → **P1** | win from pole |
 | 5 | Canada | P2 → **P1** | led by L2; Russell (pole) retired |
 | 6 | Monaco | P1 → **P1** | pole to flag-to-flag win |
+| 7 | Barcelona | P3 → **DNF** | streak-breaker: Russell took pole, then Antonelli retired |
 
 ---
 
@@ -34,14 +35,14 @@ That question is hard because driver and car are tangled together in every resul
 
 Antonelli and Russell drive the same Mercedes, so their fastest-lap delta is mostly driver.
 
-- **He out-qualifies Russell more often than not, but the trend is noisy, not monotone.** Round by round (positive = Antonelli faster): R1 −0.29 → R2 +0.22 → R3 +0.30 → R4 +0.40 → **R5 −0.07** → **R6 +0.39**, six-race mean **+0.16 s**. The clean climb the first four rounds suggested broke at Canada, then snapped back with a dominant Monaco pole.
-- **The segment-level split is essentially flat** — straights +0.009, slow corners +0.011, fast corners −0.003, medium corners −0.014 s/lap (all within ±0.014). His edge isn't concentrated in one phase of the lap.
-- **Where a concrete mechanism *does* show up is fast-corner commitment:** at corners ≥200 kph he brakes ~**15 m later** and gets to full throttle ~**19 m sooner** than Russell (14 data points across six races — directional).
-- **The most durable signal is year-over-year.** Against his 2025 rookie season at the same six tracks, Antonelli has gained **+0.55 s/track** on Russell (range 0.29–0.77). A clear, consistent compression of the gap to his teammate.
+- **He out-qualifies Russell more often than not, but the trend is noisy, not monotone.** Round by round (positive = Antonelli faster): R1 −0.29 → R2 +0.22 → R3 +0.30 → R4 +0.40 → **R5 −0.07** → **R6 +0.39** → **R7 −0.32**, seven-race mean **+0.09 s**. The clean early climb broke at Canada, snapped back with a dominant Monaco pole, then broke again at Barcelona — where Russell took pole and out-qualified him for the first time this season.
+- **The segment-level split is essentially flat** — straights +0.009, slow corners −0.005, fast corners −0.007, medium corners −0.011 s/lap (all within ±0.011). His edge isn't concentrated in one phase of the lap.
+- **Where a concrete mechanism *does* show up is fast-corner commitment:** at corners ≥200 kph he brakes ~**15 m later** and gets to full throttle ~**19 m sooner** than Russell (14 data points across seven races — directional).
+- **The most durable signal is year-over-year.** Against his 2025 rookie season at the same seven tracks, Antonelli has gained **+0.46 s/track** on Russell (range −0.06–0.77). Still a clear compression of the gap to his teammate — though Barcelona is the first track where he didn't improve on his rookie self.
 
-![Year-over-year: Antonelli vs Russell, rookie vs sophomore, same 6 tracks](figures/year_over_year.png)
+![Year-over-year: Antonelli vs Russell, rookie vs sophomore, same 7 tracks](figures/year_over_year.png)
 
-![Headline: per-segment time delta across six races](figures/headline_segment_delta.png)
+![Headline: per-segment time delta across seven races](figures/headline_segment_delta.png)
 
 ![Where each driver gains time across the lap](figures/track_delta_map.png)
 
@@ -51,7 +52,7 @@ Antonelli and Russell drive the same Mercedes, so their fastest-lap delta is mos
 
 Qualifying explains the grid; it doesn't explain the wins. Same teammate control, plus the actual P2 finisher of each race as a field reference. Sign convention: **positive = Antonelli better**. Clean lap = green-flag racing lap (`TrackStatus == '1'`, not lap 1, not in/out/pit).
 
-- **Start & lap 1.** Monaco is the clean case (pole → flag-to-flag); Canada is the converted-then-inherited case (P2 → led by lap 2 → won after Russell's retirement); Australia is the honest counter-case (P2 → P2 — a finishing-position loss, not a start failure).
+- **Start & lap 1.** Monaco is the clean case (pole → flag-to-flag); Canada is the converted-then-inherited case (P2 → led by lap 2 → won after Russell's retirement); Australia is the honest counter-case (P2 → P2 — a finishing-position loss, not a start failure); Barcelona is the bluntest counter-case yet (qualified only P3, briefly passed Russell, then retired — no finish at all).
 - **Pace & control.** On the four pole-to-win races the per-lap gap trace shows Antonelli leading and *extending*. Canada is the exception — that lead was partly inherited. Stint pace is read only across matching compounds, and is **not** fuel-corrected (named, not modelled).
 - **Tire degradation.** Per-stint clean-lap slope vs tire age, ANT vs Russell, like-compound only; stints under 5 clean laps report NaN rather than a noisy number.
 
@@ -144,7 +145,7 @@ Tested with FastF1 3.8.x, Python 3.12. The first run downloads session data into
 
 ## Limitations
 
-- **Sample size.** Six 2026 races, and the race-mechanism chapter has even thinner data than qualifying. Findings are directional, not conclusive.
+- **Sample size.** Seven 2026 races (one a DNF), and the race-mechanism chapter has even thinner data than qualifying. Findings are directional, not conclusive.
 - **Synthetic historical data (Ch3).** Claims are "in this dataset," not real F1 history.
 - **DNF handling (Ch3).** Finish-based overperformance excludes DNF/lapped rounds — this removes luck/reliability noise but discards information; the grid cross-check is the DNF-free corroboration.
 - **Small samples (Ch3).** Drivers/teams below `MIN_TRACK_YEARS` are flagged; Antonelli's own 1–2 years are directional only; the driver-vs-car call is a qualitative read, not a fitted model.

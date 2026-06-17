@@ -11,7 +11,9 @@ the ONLY place to edit per new race.
 """
 
 # 2026 season, in calendar order, through the most recent completed round.
-RACES = ['Australia', 'China', 'Japan', 'Miami', 'Canada', 'Monaco']
+# NOTE: round 7 is the *Barcelona* Grand Prix; do NOT use 'Spain', which FastF1
+# resolves to the separate Madrid round (Spanish GP, R14, Sept 13).
+RACES = ['Australia', 'China', 'Japan', 'Miami', 'Canada', 'Monaco', 'Barcelona']
 
 # Historical window for the cross-year track-history chapter (inclusive).
 YEARS = list(range(2010, 2026))  # 2010..2025
