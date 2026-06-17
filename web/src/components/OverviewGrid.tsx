@@ -11,6 +11,10 @@ function headline(t: TeamSummary): { code: string; text: string } | null {
   return { code: leader, text: `+${Math.abs(m).toFixed(3)}` }
 }
 
+/** Bigger teammate gap = higher up. Teams with no data sort last. */
+const gapSize = (t: TeamSummary) =>
+  t.summary.meanLapDelta_s === null ? -1 : Math.abs(t.summary.meanLapDelta_s)
+
 export function OverviewGrid({
   teams,
   selected,
@@ -20,9 +24,10 @@ export function OverviewGrid({
   selected: string | null
   onSelect: (slug: string) => void
 }) {
+  const ordered = [...teams].sort((x, y) => gapSize(y) - gapSize(x))
   return (
     <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-      {teams.map((t) => {
+      {ordered.map((t) => {
         const { a, b } = t.canonicalPair
         const h = headline(t)
         const active = t.slug === selected
