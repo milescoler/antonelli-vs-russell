@@ -183,6 +183,9 @@ def main():
         print(f"   {'wrote' if wrote else 'unchanged'} teams/{slug}.json "
               f"(Q:{len(qual_rounds)} R:{len(race_rounds)} yoy:{yoy is not None})")
 
+        # Compact summary so the overview grid (sparkline + headline stat) renders
+        # from index.json alone; full panels lazy-load the team file on click.
+        deltas = [q["lapDelta_s"] for q in qual_rounds if q["lapDelta_s"] is not None]
         index_teams.append({
             "slug": slug,
             "displayName": teams.team_display_name(team_name),
@@ -190,6 +193,11 @@ def main():
             "yoyAvailable": yoy is not None,
             "roundsCovered": sorted(covered),
             "hasSwap": canon["hasSwap"],
+            "summary": {
+                "meanLapDelta_s": serialize._num(sum(deltas) / len(deltas), 3) if deltas else None,
+                "lapDeltaByRound": deltas,
+                "yoyDeltaOfDeltas_s": yoy["deltaOfDeltas_s"] if yoy else None,
+            },
         })
 
     if not only:  # only rewrite the manifest on a full build

@@ -1,5 +1,5 @@
 import { HashRouter, NavLink, Route, Routes } from 'react-router-dom'
-import { Landing } from './pages/Landing'
+import { Dashboard } from './pages/Dashboard'
 import { TeamPage } from './pages/TeamPage'
 import { MethodPage } from './pages/MethodPage'
 
@@ -44,7 +44,7 @@ export function App() {
         <Nav />
         <main className="mx-auto max-w-5xl px-4 py-8">
           <Routes>
-            <Route path="/" element={<Landing />} />
+            <Route path="/" element={<Dashboard />} />
             <Route path="/team/:slug" element={<TeamPage />} />
             <Route path="/method" element={<MethodPage />} />
           </Routes>

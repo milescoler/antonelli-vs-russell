@@ -22,6 +22,12 @@ export interface RoundInfo {
   hasRace: boolean
 }
 
+export interface TeamSummaryStat {
+  meanLapDelta_s: number | null
+  lapDeltaByRound: number[]
+  yoyDeltaOfDeltas_s: number | null
+}
+
 export interface TeamSummary {
   slug: string
   displayName: string
@@ -29,6 +35,7 @@ export interface TeamSummary {
   yoyAvailable: boolean
   roundsCovered: number[]
   hasSwap: boolean
+  summary: TeamSummaryStat
 }
 
 export interface IndexData {
