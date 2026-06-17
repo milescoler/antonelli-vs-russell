@@ -1,0 +1,2707 @@
+{
+  "caveatsGlobal": {
+    "fuelNotCorrected": true,
+    "notes": [],
+    "syntheticHistory": false
+  },
+  "displayName": "Cadillac",
+  "pair": {
+    "a": {
+      "code": "PER",
+      "name": "Sergio Perez",
+      "number": 11
+    },
+    "b": {
+      "code": "BOT",
+      "name": "Valtteri Bottas",
+      "number": 77
+    }
+  },
+  "qualifying": {
+    "byRound": [
+      {
+        "caveats": {
+          "qMismatch": false,
+          "sensorFreezeAny": false
+        },
+        "cornerSignatureBuckets": [
+          {
+            "apexDeltaKph_mean": -0.0,
+            "brakeOnDelta_m_mean": 1.1,
+            "category": "slow_corner",
+            "nCorners": 3,
+            "throttleFullDelta_m_mean": -47.2
+          },
+          {
+            "apexDeltaKph_mean": 2.8,
+            "brakeOnDelta_m_mean": -4.0,
+            "category": "medium_corner",
+            "nCorners": 6,
+            "throttleFullDelta_m_mean": 21.7
+          },
+          {
+            "apexDeltaKph_mean": 4.5,
+            "brakeOnDelta_m_mean": 13.0,
+            "category": "fast_corner",
+            "nCorners": 5,
+            "throttleFullDelta_m_mean": -2.6
+          }
+        ],
+        "eventName": "Australian Grand Prix",
+        "isCanonicalPair": true,
+        "lapDelta_s": 0.639,
+        "lapTimeA_s": 82.605,
+        "lapTimeB_s": 83.244,
+        "pairThisRound": {
+          "aCode": "PER",
+          "bCode": "BOT"
+        },
+        "qSessionA": 2,
+        "qSessionB": 2,
+        "round": 1,
+        "segmentCategoryMeans": [
+          {
+            "category": "straight",
+            "meanDelta_s": 0.012,
+            "nSegments": 8
+          },
+          {
+            "category": "slow_corner",
+            "meanDelta_s": 0.192,
+            "nSegments": 3
+          },
+          {
+            "category": "medium_corner",
+            "meanDelta_s": -0.026,
+            "nSegments": 3
+          },
+          {
+            "category": "fast_corner",
+            "meanDelta_s": 0.066,
+            "nSegments": 1
+          }
+        ]
+      },
+      {
+        "caveats": {
+          "qMismatch": false,
+          "sensorFreezeAny": true
+        },
+        "cornerSignatureBuckets": [
+          {
+            "apexDeltaKph_mean": 3.6,
+            "brakeOnDelta_m_mean": 0.7,
+            "category": "slow_corner",
+            "nCorners": 1,
+            "throttleFullDelta_m_mean": -13.4
+          },
+          {
+            "apexDeltaKph_mean": -7.1,
+            "brakeOnDelta_m_mean": -8.8,
+            "category": "medium_corner",
+            "nCorners": 6,
+            "throttleFullDelta_m_mean": -16.2
+          },
+          {
+            "apexDeltaKph_mean": -2.3,
+            "brakeOnDelta_m_mean": 7.8,
+            "category": "fast_corner",
+            "nCorners": 9,
+            "throttleFullDelta_m_mean": 0.6
+          }
+        ],
+        "eventName": "Chinese Grand Prix",
+        "isCanonicalPair": true,
+        "lapDelta_s": -1.47,
+        "lapTimeA_s": 96.906,
+        "lapTimeB_s": 95.436,
+        "pairThisRound": {
+          "aCode": "PER",
+          "bCode": "BOT"
+        },
+        "qSessionA": 1,
+        "qSessionB": 1,
+        "round": 2,
+        "segmentCategoryMeans": [
+          {
+            "category": "straight",
+            "meanDelta_s": -0.048,
+            "nSegments": 7
+          },
+          {
+            "category": "slow_corner",
+            "meanDelta_s": -0.138,
+            "nSegments": 3
+          },
+          {
+            "category": "medium_corner",
+            "meanDelta_s": -0.012,
+            "nSegments": 4
+          },
+          {
+            "category": "fast_corner",
+            "meanDelta_s": 0.017,
+            "nSegments": 1
+          }
+        ]
+      },
+      {
+        "caveats": {
+          "qMismatch": false,
+          "sensorFreezeAny": false
+        },
+        "cornerSignatureBuckets": [
+          {
+            "apexDeltaKph_mean": 3.5,
+            "brakeOnDelta_m_mean": 0.4,
+            "category": "slow_corner",
+            "nCorners": 1,
+            "throttleFullDelta_m_mean": -10.3
+          },
+          {
+            "apexDeltaKph_mean": 5.5,
+            "brakeOnDelta_m_mean": -47.3,
+            "category": "medium_corner",
+            "nCorners": 6,
+            "throttleFullDelta_m_mean": -15.1
+          },
+          {
+            "apexDeltaKph_mean": -1.9,
+            "brakeOnDelta_m_mean": -30.6,
+            "category": "fast_corner",
+            "nCorners": 11,
+            "throttleFullDelta_m_mean": -4.6
+          }
+        ],
+        "eventName": "Japanese Grand Prix",
+        "isCanonicalPair": true,
+        "lapDelta_s": 0.124,
+        "lapTimeA_s": 92.206,
+        "lapTimeB_s": 92.33,
+        "pairThisRound": {
+          "aCode": "PER",
+          "bCode": "BOT"
+        },
+        "qSessionA": 1,
+        "qSessionB": 1,
+        "round": 3,
+        "segmentCategoryMeans": [
+          {
+            "category": "straight",
+            "meanDelta_s": 0.0,
+            "nSegments": 9
+          },
+          {
+            "category": "slow_corner",
+            "meanDelta_s": -0.014,
+            "nSegments": 1
+          },
+          {
+            "category": "medium_corner",
+            "meanDelta_s": 0.042,
+            "nSegments": 4
+          },
+          {
+            "category": "fast_corner",
+            "meanDelta_s": -0.009,
+            "nSegments": 3
+          }
+        ]
+      },
+      {
+        "caveats": {
+          "qMismatch": false,
+          "sensorFreezeAny": false
+        },
+        "cornerSignatureBuckets": [
+          {
+            "apexDeltaKph_mean": 2.0,
+            "brakeOnDelta_m_mean": -12.8,
+            "category": "slow_corner",
+            "nCorners": 8,
+            "throttleFullDelta_m_mean": 20.1
+          },
+          {
+            "apexDeltaKph_mean": -1.9,
+            "brakeOnDelta_m_mean": -3.7,
+            "category": "medium_corner",
+            "nCorners": 5,
+            "throttleFullDelta_m_mean": -36.3
+          },
+          {
+            "apexDeltaKph_mean": 3.0,
+            "brakeOnDelta_m_mean": -12.9,
+            "category": "fast_corner",
+            "nCorners": 6,
+            "throttleFullDelta_m_mean": 19.3
+          }
+        ],
+        "eventName": "Miami Grand Prix",
+        "isCanonicalPair": true,
+        "lapDelta_s": -0.338,
+        "lapTimeA_s": 91.967,
+        "lapTimeB_s": 91.629,
+        "pairThisRound": {
+          "aCode": "PER",
+          "bCode": "BOT"
+        },
+        "qSessionA": 1,
+        "qSessionB": 1,
+        "round": 4,
+        "segmentCategoryMeans": [
+          {
+            "category": "straight",
+            "meanDelta_s": 0.072,
+            "nSegments": 7
+          },
+          {
+            "category": "slow_corner",
+            "meanDelta_s": -0.236,
+            "nSegments": 4
+          },
+          {
+            "category": "fast_corner",
+            "meanDelta_s": 0.009,
+            "nSegments": 2
+          }
+        ]
+      },
+      {
+        "caveats": {
+          "qMismatch": false,
+          "sensorFreezeAny": false
+        },
+        "cornerSignatureBuckets": [
+          {
+            "apexDeltaKph_mean": 2.9,
+            "brakeOnDelta_m_mean": -4.0,
+            "category": "slow_corner",
+            "nCorners": 5,
+            "throttleFullDelta_m_mean": 2.7
+          },
+          {
+            "apexDeltaKph_mean": -1.8,
+            "brakeOnDelta_m_mean": -11.9,
+            "category": "medium_corner",
+            "nCorners": 7,
+            "throttleFullDelta_m_mean": 3.0
+          },
+          {
+            "apexDeltaKph_mean": 3.2,
+            "brakeOnDelta_m_mean": 0.0,
+            "category": "fast_corner",
+            "nCorners": 2,
+            "throttleFullDelta_m_mean": -4.4
+          }
+        ],
+        "eventName": "Canadian Grand Prix",
+        "isCanonicalPair": true,
+        "lapDelta_s": 0.843,
+        "lapTimeA_s": 75.429,
+        "lapTimeB_s": 76.272,
+        "pairThisRound": {
+          "aCode": "PER",
+          "bCode": "BOT"
+        },
+        "qSessionA": 1,
+        "qSessionB": 1,
+        "round": 5,
+        "segmentCategoryMeans": [
+          {
+            "category": "straight",
+            "meanDelta_s": 0.078,
+            "nSegments": 7
+          },
+          {
+            "category": "slow_corner",
+            "meanDelta_s": 0.067,
+            "nSegments": 5
+          },
+          {
+            "category": "fast_corner",
+            "meanDelta_s": 0.003,
+            "nSegments": 1
+          }
+        ]
+      },
+      {
+        "caveats": {
+          "qMismatch": true,
+          "sensorFreezeAny": false
+        },
+        "cornerSignatureBuckets": [
+          {
+            "apexDeltaKph_mean": -0.3,
+            "brakeOnDelta_m_mean": -18.7,
+            "category": "slow_corner",
+            "nCorners": 10,
+            "throttleFullDelta_m_mean": 5.7
+          },
+          {
+            "apexDeltaKph_mean": -0.5,
+            "brakeOnDelta_m_mean": -17.7,
+            "category": "medium_corner",
+            "nCorners": 5,
+            "throttleFullDelta_m_mean": -7.8
+          },
+          {
+            "apexDeltaKph_mean": 3.1,
+            "brakeOnDelta_m_mean": -8.9,
+            "category": "fast_corner",
+            "nCorners": 4,
+            "throttleFullDelta_m_mean": -11.1
+          }
+        ],
+        "eventName": "Monaco Grand Prix",
+        "isCanonicalPair": true,
+        "lapDelta_s": 0.536,
+        "lapTimeA_s": 74.747,
+        "lapTimeB_s": 75.283,
+        "pairThisRound": {
+          "aCode": "PER",
+          "bCode": "BOT"
+        },
+        "qSessionA": 1,
+        "qSessionB": 2,
+        "round": 6,
+        "segmentCategoryMeans": [
+          {
+            "category": "straight",
+            "meanDelta_s": 0.012,
+            "nSegments": 5
+          },
+          {
+            "category": "slow_corner",
+            "meanDelta_s": 0.147,
+            "nSegments": 3
+          },
+          {
+            "category": "fast_corner",
+            "meanDelta_s": 0.012,
+            "nSegments": 1
+          }
+        ]
+      },
+      {
+        "caveats": {
+          "qMismatch": false,
+          "sensorFreezeAny": false
+        },
+        "cornerSignatureBuckets": [
+          {
+            "apexDeltaKph_mean": 2.7,
+            "brakeOnDelta_m_mean": -4.3,
+            "category": "slow_corner",
+            "nCorners": 3,
+            "throttleFullDelta_m_mean": 28.1
+          },
+          {
+            "apexDeltaKph_mean": 0.4,
+            "brakeOnDelta_m_mean": -7.8,
+            "category": "medium_corner",
+            "nCorners": 6,
+            "throttleFullDelta_m_mean": -23.8
+          },
+          {
+            "apexDeltaKph_mean": -2.4,
+            "brakeOnDelta_m_mean": 24.1,
+            "category": "fast_corner",
+            "nCorners": 5,
+            "throttleFullDelta_m_mean": -9.5
+          }
+        ],
+        "eventName": "Barcelona Grand Prix",
+        "isCanonicalPair": true,
+        "lapDelta_s": 0.212,
+        "lapTimeA_s": 77.545,
+        "lapTimeB_s": 77.757,
+        "pairThisRound": {
+          "aCode": "PER",
+          "bCode": "BOT"
+        },
+        "qSessionA": 1,
+        "qSessionB": 1,
+        "round": 7,
+        "segmentCategoryMeans": [
+          {
+            "category": "straight",
+            "meanDelta_s": 0.029,
+            "nSegments": 8
+          },
+          {
+            "category": "slow_corner",
+            "meanDelta_s": 0.017,
+            "nSegments": 2
+          },
+          {
+            "category": "medium_corner",
+            "meanDelta_s": -0.016,
+            "nSegments": 2
+          },
+          {
+            "category": "fast_corner",
+            "meanDelta_s": -0.007,
+            "nSegments": 3
+          }
+        ]
+      }
+    ]
+  },
+  "race": {
+    "byRound": [
+      {
+        "caveats": {
+          "anyDnf": true,
+          "fuelNotCorrected": true,
+          "noCleanLapsDriver": [],
+          "smallSampleDeg": true
+        },
+        "eventName": "Australian Grand Prix",
+        "gapTrace": {
+          "driverCode": "PER",
+          "gap_s": [
+            10.63,
+            13.62,
+            15.82,
+            18.49,
+            22.53,
+            25.31,
+            28.9,
+            30.52,
+            31.97,
+            35.58,
+            49.66,
+            52.19,
+            47.01,
+            43.61,
+            47.98,
+            55.75,
+            60.01,
+            96.49,
+            86.19,
+            79.5,
+            83.44,
+            89.11,
+            93.09,
+            98.71,
+            99.78,
+            104.28,
+            108.88,
+            113.82,
+            117.26,
+            121.41,
+            128.77,
+            140.2,
+            149.84,
+            139.4,
+            145.61,
+            151.77,
+            156.02,
+            160.08,
+            164.44,
+            170.73,
+            176.87,
+            181.77,
+            203.93,
+            214.5,
+            217.33,
+            221.68,
+            224.71,
+            227.83,
+            231.2,
+            234.19,
+            237.63,
+            240.94,
+            244.0,
+            250.86,
+            257.15
+          ],
+          "laps": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55
+          ],
+          "leading": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "isCanonicalPair": true,
+        "pairThisRound": {
+          "aCode": "PER",
+          "bCode": "BOT"
+        },
+        "round": 1,
+        "start": [
+          {
+            "code": "PER",
+            "dnf": true,
+            "finish": 16,
+            "grid": 18,
+            "lap1Pos": 19,
+            "positionsGained": -1,
+            "role": "A",
+            "status": "Lapped"
+          },
+          {
+            "code": "BOT",
+            "dnf": true,
+            "finish": 19,
+            "grid": 19,
+            "lap1Pos": 15,
+            "positionsGained": 4,
+            "role": "B",
+            "status": "Retired"
+          },
+          {
+            "code": "ANT",
+            "dnf": false,
+            "finish": 2,
+            "grid": 2,
+            "lap1Pos": 7,
+            "positionsGained": -5,
+            "role": "P2",
+            "status": "Finished"
+          }
+        ],
+        "stintPace": [
+          {
+            "code": "ANT",
+            "compound": "MEDIUM",
+            "medianLaptime_s": 84.037,
+            "nClean": 9,
+            "stint": 1
+          },
+          {
+            "code": "ANT",
+            "compound": "HARD",
+            "medianLaptime_s": 82.967,
+            "nClean": 40,
+            "stint": 2
+          },
+          {
+            "code": "BOT",
+            "compound": "HARD",
+            "medianLaptime_s": 87.738,
+            "nClean": 9,
+            "stint": 1
+          },
+          {
+            "code": "BOT",
+            "compound": "HARD",
+            "medianLaptime_s": 91.359,
+            "nClean": 2,
+            "stint": 2
+          },
+          {
+            "code": "PER",
+            "compound": "MEDIUM",
+            "medianLaptime_s": 87.625,
+            "nClean": 13,
+            "stint": 1
+          },
+          {
+            "code": "PER",
+            "compound": "HARD",
+            "medianLaptime_s": 87.956,
+            "nClean": 21,
+            "stint": 2
+          },
+          {
+            "code": "PER",
+            "compound": "SOFT",
+            "medianLaptime_s": 86.21,
+            "nClean": 11,
+            "stint": 3
+          }
+        ],
+        "tireDeg": [
+          {
+            "code": "BOT",
+            "compound": "HARD",
+            "degSlope_s_per_lap": -0.2709,
+            "nClean": 9,
+            "stint": 1
+          },
+          {
+            "code": "BOT",
+            "compound": "HARD",
+            "degSlope_s_per_lap": null,
+            "nClean": 2,
+            "stint": 2
+          },
+          {
+            "code": "PER",
+            "compound": "MEDIUM",
+            "degSlope_s_per_lap": 0.0774,
+            "nClean": 13,
+            "stint": 1
+          },
+          {
+            "code": "PER",
+            "compound": "HARD",
+            "degSlope_s_per_lap": 0.019,
+            "nClean": 21,
+            "stint": 2
+          },
+          {
+            "code": "PER",
+            "compound": "SOFT",
+            "degSlope_s_per_lap": 0.1942,
+            "nClean": 11,
+            "stint": 3
+          }
+        ]
+      },
+      {
+        "caveats": {
+          "anyDnf": true,
+          "fuelNotCorrected": true,
+          "noCleanLapsDriver": [],
+          "smallSampleDeg": false
+        },
+        "eventName": "Chinese Grand Prix",
+        "gapTrace": {
+          "driverCode": "PER",
+          "gap_s": [
+            15.64,
+            17.71,
+            20.92,
+            24.46,
+            27.91,
+            31.29,
+            34.8,
+            38.58,
+            43.0,
+            57.95,
+            29.48,
+            17.51,
+            6.65,
+            9.45,
+            11.24,
+            14.25,
+            19.9,
+            22.16,
+            25.08,
+            28.45,
+            31.2,
+            34.21,
+            37.16,
+            40.38,
+            44.41,
+            47.83,
+            51.55,
+            54.54,
+            58.6,
+            62.45,
+            66.32,
+            70.13,
+            73.8,
+            77.96,
+            81.4,
+            84.94,
+            88.39,
+            92.97,
+            97.09,
+            100.53,
+            105.75,
+            108.95,
+            114.16,
+            122.79,
+            136.1,
+            141.8,
+            146.18,
+            150.7,
+            154.64,
+            157.5,
+            160.51,
+            164.76,
+            166.19,
+            169.09,
+            171.61
+          ],
+          "laps": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55
+          ],
+          "leading": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "isCanonicalPair": true,
+        "pairThisRound": {
+          "aCode": "PER",
+          "bCode": "BOT"
+        },
+        "round": 2,
+        "start": [
+          {
+            "code": "PER",
+            "dnf": true,
+            "finish": 15,
+            "grid": 21,
+            "lap1Pos": 17,
+            "positionsGained": 4,
+            "role": "A",
+            "status": "Lapped"
+          },
+          {
+            "code": "BOT",
+            "dnf": true,
+            "finish": 13,
+            "grid": 19,
+            "lap1Pos": 14,
+            "positionsGained": 5,
+            "role": "B",
+            "status": "Lapped"
+          },
+          {
+            "code": "RUS",
+            "dnf": false,
+            "finish": 2,
+            "grid": 2,
+            "lap1Pos": 4,
+            "positionsGained": -2,
+            "role": "P2",
+            "status": "Finished"
+          }
+        ],
+        "stintPace": [
+          {
+            "code": "BOT",
+            "compound": "MEDIUM",
+            "medianLaptime_s": 101.303,
+            "nClean": 8,
+            "stint": 1
+          },
+          {
+            "code": "BOT",
+            "compound": "HARD",
+            "medianLaptime_s": 99.695,
+            "nClean": 37,
+            "stint": 2
+          },
+          {
+            "code": "PER",
+            "compound": "MEDIUM",
+            "medianLaptime_s": 101.022,
+            "nClean": 8,
+            "stint": 1
+          },
+          {
+            "code": "PER",
+            "compound": "HARD",
+            "medianLaptime_s": 99.75,
+            "nClean": 37,
+            "stint": 2
+          },
+          {
+            "code": "RUS",
+            "compound": "MEDIUM",
+            "medianLaptime_s": 97.379,
+            "nClean": 8,
+            "stint": 1
+          },
+          {
+            "code": "RUS",
+            "compound": "HARD",
+            "medianLaptime_s": 96.158,
+            "nClean": 39,
+            "stint": 2
+          }
+        ],
+        "tireDeg": [
+          {
+            "code": "BOT",
+            "compound": "MEDIUM",
+            "degSlope_s_per_lap": -0.0693,
+            "nClean": 8,
+            "stint": 1
+          },
+          {
+            "code": "BOT",
+            "compound": "HARD",
+            "degSlope_s_per_lap": -0.0251,
+            "nClean": 37,
+            "stint": 2
+          },
+          {
+            "code": "PER",
+            "compound": "MEDIUM",
+            "degSlope_s_per_lap": 0.0468,
+            "nClean": 8,
+            "stint": 1
+          },
+          {
+            "code": "PER",
+            "compound": "HARD",
+            "degSlope_s_per_lap": 0.0031,
+            "nClean": 37,
+            "stint": 2
+          }
+        ]
+      },
+      {
+        "caveats": {
+          "anyDnf": true,
+          "fuelNotCorrected": true,
+          "noCleanLapsDriver": [],
+          "smallSampleDeg": false
+        },
+        "eventName": "Japanese Grand Prix",
+        "gapTrace": {
+          "driverCode": "PER",
+          "gap_s": [
+            10.46,
+            13.46,
+            16.75,
+            19.55,
+            22.03,
+            24.96,
+            28.09,
+            30.65,
+            33.61,
+            36.75,
+            39.2,
+            42.04,
+            45.13,
+            47.94,
+            51.11,
+            54.01,
+            57.0,
+            59.47,
+            62.45,
+            66.66,
+            78.56,
+            111.45,
+            59.37,
+            22.68,
+            20.83,
+            22.52,
+            8.3,
+            11.64,
+            14.57,
+            18.57,
+            21.5,
+            25.2,
+            28.56,
+            32.03,
+            35.18,
+            38.49,
+            41.75,
+            45.16,
+            48.49,
+            51.76,
+            55.64,
+            59.04,
+            62.86,
+            66.52,
+            69.86,
+            73.23,
+            76.12,
+            78.49,
+            82.24,
+            84.96,
+            88.06,
+            90.84,
+            92.41
+          ],
+          "laps": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53
+          ],
+          "leading": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "isCanonicalPair": true,
+        "pairThisRound": {
+          "aCode": "PER",
+          "bCode": "BOT"
+        },
+        "round": 3,
+        "start": [
+          {
+            "code": "PER",
+            "dnf": false,
+            "finish": 17,
+            "grid": 19,
+            "lap1Pos": 18,
+            "positionsGained": 1,
+            "role": "A",
+            "status": "Finished"
+          },
+          {
+            "code": "BOT",
+            "dnf": true,
+            "finish": 19,
+            "grid": 20,
+            "lap1Pos": 21,
+            "positionsGained": -1,
+            "role": "B",
+            "status": "Lapped"
+          },
+          {
+            "code": "PIA",
+            "dnf": false,
+            "finish": 2,
+            "grid": 3,
+            "lap1Pos": 1,
+            "positionsGained": 2,
+            "role": "P2",
+            "status": "Finished"
+          }
+        ],
+        "stintPace": [
+          {
+            "code": "BOT",
+            "compound": "HARD",
+            "medianLaptime_s": 98.823,
+            "nClean": 17,
+            "stint": 1
+          },
+          {
+            "code": "BOT",
+            "compound": "MEDIUM",
+            "medianLaptime_s": 97.066,
+            "nClean": 25,
+            "stint": 2
+          },
+          {
+            "code": "PER",
+            "compound": "MEDIUM",
+            "medianLaptime_s": 97.961,
+            "nClean": 19,
+            "stint": 1
+          },
+          {
+            "code": "PER",
+            "compound": "HARD",
+            "medianLaptime_s": 96.227,
+            "nClean": 26,
+            "stint": 2
+          },
+          {
+            "code": "PIA",
+            "compound": "MEDIUM",
+            "medianLaptime_s": 95.087,
+            "nClean": 16,
+            "stint": 1
+          },
+          {
+            "code": "PIA",
+            "compound": "HARD",
+            "medianLaptime_s": 93.496,
+            "nClean": 28,
+            "stint": 2
+          }
+        ],
+        "tireDeg": [
+          {
+            "code": "BOT",
+            "compound": "HARD",
+            "degSlope_s_per_lap": 0.0836,
+            "nClean": 17,
+            "stint": 1
+          },
+          {
+            "code": "BOT",
+            "compound": "MEDIUM",
+            "degSlope_s_per_lap": 0.0572,
+            "nClean": 25,
+            "stint": 2
+          },
+          {
+            "code": "PER",
+            "compound": "MEDIUM",
+            "degSlope_s_per_lap": 0.0202,
+            "nClean": 19,
+            "stint": 1
+          },
+          {
+            "code": "PER",
+            "compound": "HARD",
+            "degSlope_s_per_lap": -0.0286,
+            "nClean": 26,
+            "stint": 2
+          }
+        ]
+      },
+      {
+        "caveats": {
+          "anyDnf": true,
+          "fuelNotCorrected": true,
+          "noCleanLapsDriver": [],
+          "smallSampleDeg": true
+        },
+        "eventName": "Miami Grand Prix",
+        "gapTrace": {
+          "driverCode": "PER",
+          "gap_s": [
+            11.83,
+            15.58,
+            19.23,
+            21.03,
+            23.94,
+            29.15,
+            20.03,
+            18.67,
+            14.31,
+            15.72,
+            6.26,
+            10.34,
+            13.71,
+            17.49,
+            20.71,
+            24.25,
+            27.59,
+            31.11,
+            34.5,
+            37.81,
+            41.45,
+            44.66,
+            48.18,
+            51.44,
+            54.78,
+            58.0,
+            55.88,
+            46.21,
+            55.75,
+            73.39,
+            76.03,
+            79.36,
+            82.26,
+            85.61,
+            88.77,
+            94.27,
+            97.52,
+            100.64,
+            104.09,
+            108.38,
+            113.4,
+            117.58,
+            122.57,
+            125.92,
+            129.9,
+            133.77,
+            137.88,
+            142.14,
+            146.78,
+            151.24,
+            155.14,
+            158.52,
+            161.53,
+            165.04,
+            167.94,
+            170.61
+          ],
+          "laps": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56
+          ],
+          "leading": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "isCanonicalPair": true,
+        "pairThisRound": {
+          "aCode": "PER",
+          "bCode": "BOT"
+        },
+        "round": 4,
+        "start": [
+          {
+            "code": "PER",
+            "dnf": true,
+            "finish": 16,
+            "grid": 20,
+            "lap1Pos": 17,
+            "positionsGained": 3,
+            "role": "A",
+            "status": "Lapped"
+          },
+          {
+            "code": "BOT",
+            "dnf": true,
+            "finish": 18,
+            "grid": 19,
+            "lap1Pos": 21,
+            "positionsGained": -2,
+            "role": "B",
+            "status": "Lapped"
+          },
+          {
+            "code": "NOR",
+            "dnf": false,
+            "finish": 2,
+            "grid": 4,
+            "lap1Pos": 3,
+            "positionsGained": 1,
+            "role": "P2",
+            "status": "Finished"
+          }
+        ],
+        "stintPace": [
+          {
+            "code": "BOT",
+            "compound": "MEDIUM",
+            "medianLaptime_s": 96.617,
+            "nClean": 3,
+            "stint": 1
+          },
+          {
+            "code": "BOT",
+            "compound": "SOFT",
+            "medianLaptime_s": 96.665,
+            "nClean": 8,
+            "stint": 2
+          },
+          {
+            "code": "BOT",
+            "compound": "MEDIUM",
+            "medianLaptime_s": 96.481,
+            "nClean": 7,
+            "stint": 3
+          },
+          {
+            "code": "BOT",
+            "compound": "MEDIUM",
+            "medianLaptime_s": 98.091,
+            "nClean": 22,
+            "stint": 4
+          },
+          {
+            "code": "NOR",
+            "compound": "MEDIUM",
+            "medianLaptime_s": 93.048,
+            "nClean": 17,
+            "stint": 1
+          },
+          {
+            "code": "NOR",
+            "compound": "HARD",
+            "medianLaptime_s": 92.428,
+            "nClean": 27,
+            "stint": 2
+          },
+          {
+            "code": "PER",
+            "compound": "MEDIUM",
+            "medianLaptime_s": 96.52,
+            "nClean": 19,
+            "stint": 1
+          },
+          {
+            "code": "PER",
+            "compound": "HARD",
+            "medianLaptime_s": 95.821,
+            "nClean": 24,
+            "stint": 2
+          }
+        ],
+        "tireDeg": [
+          {
+            "code": "BOT",
+            "compound": "MEDIUM",
+            "degSlope_s_per_lap": null,
+            "nClean": 3,
+            "stint": 1
+          },
+          {
+            "code": "BOT",
+            "compound": "SOFT",
+            "degSlope_s_per_lap": 0.13,
+            "nClean": 8,
+            "stint": 2
+          },
+          {
+            "code": "BOT",
+            "compound": "MEDIUM",
+            "degSlope_s_per_lap": -0.0414,
+            "nClean": 7,
+            "stint": 3
+          },
+          {
+            "code": "BOT",
+            "compound": "MEDIUM",
+            "degSlope_s_per_lap": 0.0302,
+            "nClean": 22,
+            "stint": 4
+          },
+          {
+            "code": "PER",
+            "compound": "MEDIUM",
+            "degSlope_s_per_lap": -0.0093,
+            "nClean": 19,
+            "stint": 1
+          },
+          {
+            "code": "PER",
+            "compound": "HARD",
+            "degSlope_s_per_lap": 0.0147,
+            "nClean": 24,
+            "stint": 2
+          }
+        ]
+      },
+      {
+        "caveats": {
+          "anyDnf": true,
+          "fuelNotCorrected": true,
+          "noCleanLapsDriver": [],
+          "smallSampleDeg": true
+        },
+        "eventName": "Canadian Grand Prix",
+        "gapTrace": {
+          "driverCode": "PER",
+          "gap_s": [
+            12.2,
+            34.61,
+            42.76,
+            46.39,
+            49.43,
+            51.63,
+            53.77,
+            56.37,
+            59.66,
+            62.38,
+            65.37,
+            67.26,
+            69.19,
+            72.2,
+            92.59,
+            101.31,
+            104.57,
+            107.96,
+            110.98,
+            114.01,
+            117.63,
+            119.27,
+            121.79,
+            123.54,
+            123.81,
+            125.59,
+            127.79,
+            129.51,
+            166.08,
+            197.15,
+            161.33,
+            139.48,
+            141.47,
+            143.29,
+            144.31,
+            146.0,
+            147.45,
+            149.63,
+            155.21,
+            152.52
+          ],
+          "laps": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40
+          ],
+          "leading": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "isCanonicalPair": true,
+        "pairThisRound": {
+          "aCode": "PER",
+          "bCode": "BOT"
+        },
+        "round": 5,
+        "start": [
+          {
+            "code": "PER",
+            "dnf": true,
+            "finish": 17,
+            "grid": 20,
+            "lap1Pos": 17,
+            "positionsGained": 3,
+            "role": "A",
+            "status": "Retired"
+          },
+          {
+            "code": "BOT",
+            "dnf": true,
+            "finish": 16,
+            "grid": 21,
+            "lap1Pos": 18,
+            "positionsGained": 3,
+            "role": "B",
+            "status": "Lapped"
+          },
+          {
+            "code": "HAM",
+            "dnf": false,
+            "finish": 2,
+            "grid": 5,
+            "lap1Pos": 4,
+            "positionsGained": 1,
+            "role": "P2",
+            "status": "Finished"
+          }
+        ],
+        "stintPace": [
+          {
+            "code": "BOT",
+            "compound": "INTERMEDIATE",
+            "medianLaptime_s": 87.677,
+            "nClean": 1,
+            "stint": 1
+          },
+          {
+            "code": "BOT",
+            "compound": "SOFT",
+            "medianLaptime_s": 80.665,
+            "nClean": 4,
+            "stint": 2
+          },
+          {
+            "code": "BOT",
+            "compound": "MEDIUM",
+            "medianLaptime_s": 79.691,
+            "nClean": 13,
+            "stint": 3
+          },
+          {
+            "code": "BOT",
+            "compound": "SOFT",
+            "medianLaptime_s": 79.133,
+            "nClean": 16,
+            "stint": 4
+          },
+          {
+            "code": "BOT",
+            "compound": "MEDIUM",
+            "medianLaptime_s": 78.557,
+            "nClean": 13,
+            "stint": 5
+          },
+          {
+            "code": "HAM",
+            "compound": "SOFT",
+            "medianLaptime_s": 76.463,
+            "nClean": 25,
+            "stint": 1
+          },
+          {
+            "code": "HAM",
+            "compound": "MEDIUM",
+            "medianLaptime_s": 75.197,
+            "nClean": 30,
+            "stint": 2
+          },
+          {
+            "code": "PER",
+            "compound": "SOFT",
+            "medianLaptime_s": 79.057,
+            "nClean": 9,
+            "stint": 2
+          },
+          {
+            "code": "PER",
+            "compound": "MEDIUM",
+            "medianLaptime_s": 78.463,
+            "nClean": 11,
+            "stint": 3
+          },
+          {
+            "code": "PER",
+            "compound": "SOFT",
+            "medianLaptime_s": 78.112,
+            "nClean": 7,
+            "stint": 4
+          }
+        ],
+        "tireDeg": [
+          {
+            "code": "BOT",
+            "compound": "INTERMEDIATE",
+            "degSlope_s_per_lap": null,
+            "nClean": 1,
+            "stint": 1
+          },
+          {
+            "code": "BOT",
+            "compound": "SOFT",
+            "degSlope_s_per_lap": null,
+            "nClean": 4,
+            "stint": 2
+          },
+          {
+            "code": "BOT",
+            "compound": "MEDIUM",
+            "degSlope_s_per_lap": 0.0471,
+            "nClean": 13,
+            "stint": 3
+          },
+          {
+            "code": "BOT",
+            "compound": "SOFT",
+            "degSlope_s_per_lap": 0.0793,
+            "nClean": 16,
+            "stint": 4
+          },
+          {
+            "code": "BOT",
+            "compound": "MEDIUM",
+            "degSlope_s_per_lap": -0.3286,
+            "nClean": 13,
+            "stint": 5
+          },
+          {
+            "code": "PER",
+            "compound": "SOFT",
+            "degSlope_s_per_lap": -0.1902,
+            "nClean": 9,
+            "stint": 2
+          },
+          {
+            "code": "PER",
+            "compound": "MEDIUM",
+            "degSlope_s_per_lap": -0.1145,
+            "nClean": 11,
+            "stint": 3
+          },
+          {
+            "code": "PER",
+            "compound": "SOFT",
+            "degSlope_s_per_lap": -0.0683,
+            "nClean": 7,
+            "stint": 4
+          }
+        ]
+      },
+      {
+        "caveats": {
+          "anyDnf": true,
+          "fuelNotCorrected": true,
+          "noCleanLapsDriver": [],
+          "smallSampleDeg": true
+        },
+        "eventName": "Monaco Grand Prix",
+        "gapTrace": {
+          "driverCode": "PER",
+          "gap_s": [
+            12.65,
+            16.5,
+            19.98,
+            43.0,
+            48.37,
+            51.17,
+            53.01,
+            55.42,
+            70.63,
+            75.76,
+            76.28,
+            80.5,
+            83.41,
+            84.69,
+            88.31,
+            89.65,
+            91.73,
+            93.63,
+            96.47,
+            98.94,
+            101.38,
+            105.57,
+            108.53,
+            111.18,
+            113.83,
+            115.57,
+            117.05,
+            119.25,
+            121.17,
+            123.23,
+            125.95,
+            128.82,
+            131.88,
+            134.66,
+            139.94,
+            143.34,
+            129.54,
+            126.7,
+            131.58,
+            137.15,
+            141.92,
+            147.68,
+            151.64,
+            157.14,
+            159.61,
+            161.79,
+            165.25,
+            170.39,
+            175.18,
+            179.91,
+            186.91,
+            191.53,
+            195.62,
+            199.79,
+            206.66,
+            211.18,
+            217.1,
+            249.79,
+            290.92,
+            304.04,
+            253.98,
+            225.28,
+            188.47,
+            136.89,
+            134.04,
+            128.17,
+            2156.06,
+            42.4,
+            26.71,
+            3.97,
+            13.63,
+            18.86,
+            24.13,
+            27.69,
+            31.08,
+            34.71,
+            37.88,
+            39.15
+          ],
+          "laps": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78
+          ],
+          "leading": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "isCanonicalPair": true,
+        "pairThisRound": {
+          "aCode": "PER",
+          "bCode": "BOT"
+        },
+        "round": 6,
+        "start": [
+          {
+            "code": "PER",
+            "dnf": false,
+            "finish": 15,
+            "grid": 18,
+            "lap1Pos": 14,
+            "positionsGained": 4,
+            "role": "A",
+            "status": "Finished"
+          },
+          {
+            "code": "BOT",
+            "dnf": true,
+            "finish": 21,
+            "grid": 20,
+            "lap1Pos": 19,
+            "positionsGained": 1,
+            "role": "B",
+            "status": "Retired"
+          },
+          {
+            "code": "HAM",
+            "dnf": false,
+            "finish": 2,
+            "grid": 3,
+            "lap1Pos": 2,
+            "positionsGained": 1,
+            "role": "P2",
+            "status": "Finished"
+          }
+        ],
+        "stintPace": [
+          {
+            "code": "BOT",
+            "compound": "MEDIUM",
+            "medianLaptime_s": 81.293,
+            "nClean": 13,
+            "stint": 2
+          },
+          {
+            "code": "HAM",
+            "compound": "MEDIUM",
+            "medianLaptime_s": 77.099,
+            "nClean": 26,
+            "stint": 1
+          },
+          {
+            "code": "HAM",
+            "compound": "HARD",
+            "medianLaptime_s": 76.797,
+            "nClean": 30,
+            "stint": 2
+          },
+          {
+            "code": "HAM",
+            "compound": "SOFT",
+            "medianLaptime_s": 75.049,
+            "nClean": 7,
+            "stint": 6
+          },
+          {
+            "code": "PER",
+            "compound": "SOFT",
+            "medianLaptime_s": 80.992,
+            "nClean": 2,
+            "stint": 1
+          },
+          {
+            "code": "PER",
+            "compound": "MEDIUM",
+            "medianLaptime_s": 78.694,
+            "nClean": 3,
+            "stint": 2
+          },
+          {
+            "code": "PER",
+            "compound": "MEDIUM",
+            "medianLaptime_s": 79.775,
+            "nClean": 46,
+            "stint": 3
+          },
+          {
+            "code": "PER",
+            "compound": "SOFT",
+            "medianLaptime_s": 77.393,
+            "nClean": 7,
+            "stint": 7
+          }
+        ],
+        "tireDeg": [
+          {
+            "code": "BOT",
+            "compound": "MEDIUM",
+            "degSlope_s_per_lap": 0.0035,
+            "nClean": 13,
+            "stint": 2
+          },
+          {
+            "code": "PER",
+            "compound": "SOFT",
+            "degSlope_s_per_lap": null,
+            "nClean": 2,
+            "stint": 1
+          },
+          {
+            "code": "PER",
+            "compound": "MEDIUM",
+            "degSlope_s_per_lap": null,
+            "nClean": 3,
+            "stint": 2
+          },
+          {
+            "code": "PER",
+            "compound": "MEDIUM",
+            "degSlope_s_per_lap": 0.0456,
+            "nClean": 46,
+            "stint": 3
+          },
+          {
+            "code": "PER",
+            "compound": "SOFT",
+            "degSlope_s_per_lap": -0.6626,
+            "nClean": 7,
+            "stint": 7
+          }
+        ]
+      },
+      {
+        "caveats": {
+          "anyDnf": true,
+          "fuelNotCorrected": true,
+          "noCleanLapsDriver": [],
+          "smallSampleDeg": false
+        },
+        "eventName": "Barcelona Grand Prix",
+        "gapTrace": {
+          "driverCode": "PER",
+          "gap_s": [
+            10.48,
+            14.51,
+            18.41,
+            22.07,
+            25.41,
+            28.95,
+            32.36,
+            35.59,
+            39.29,
+            42.51,
+            45.8,
+            49.69,
+            71.15,
+            68.79,
+            64.62,
+            63.58,
+            66.93,
+            69.85,
+            73.65,
+            77.47,
+            80.43,
+            84.71,
+            89.33,
+            93.15,
+            96.37,
+            102.07,
+            105.91,
+            110.1,
+            113.34,
+            116.4,
+            124.88,
+            147.23,
+            147.39,
+            150.03,
+            151.42,
+            152.29,
+            152.43,
+            155.65,
+            186.41,
+            211.02,
+            184.01,
+            169.33,
+            171.84,
+            177.06,
+            180.37,
+            183.8,
+            187.42,
+            192.85,
+            199.21,
+            207.0,
+            210.91,
+            214.85,
+            218.48,
+            222.58,
+            228.62,
+            232.94,
+            237.02,
+            241.46,
+            247.19,
+            272.98,
+            299.83,
+            308.14,
+            289.86
+          ],
+          "laps": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63
+          ],
+          "leading": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "isCanonicalPair": true,
+        "pairThisRound": {
+          "aCode": "PER",
+          "bCode": "BOT"
+        },
+        "round": 7,
+        "start": [
+          {
+            "code": "PER",
+            "dnf": true,
+            "finish": 14,
+            "grid": 19,
+            "lap1Pos": 19,
+            "positionsGained": 0,
+            "role": "A",
+            "status": "Lapped"
+          },
+          {
+            "code": "BOT",
+            "dnf": true,
+            "finish": 21,
+            "grid": 20,
+            "lap1Pos": 20,
+            "positionsGained": 0,
+            "role": "B",
+            "status": "Retired"
+          },
+          {
+            "code": "RUS",
+            "dnf": false,
+            "finish": 2,
+            "grid": 1,
+            "lap1Pos": 1,
+            "positionsGained": 0,
+            "role": "P2",
+            "status": "Finished"
+          }
+        ],
+        "stintPace": [
+          {
+            "code": "BOT",
+            "compound": "MEDIUM",
+            "medianLaptime_s": 86.925,
+            "nClean": 12,
+            "stint": 1
+          },
+          {
+            "code": "PER",
+            "compound": "SOFT",
+            "medianLaptime_s": 86.053,
+            "nClean": 10,
+            "stint": 1
+          },
+          {
+            "code": "PER",
+            "compound": "HARD",
+            "medianLaptime_s": 86.336,
+            "nClean": 17,
+            "stint": 2
+          },
+          {
+            "code": "PER",
+            "compound": "HARD",
+            "medianLaptime_s": 84.883,
+            "nClean": 5,
+            "stint": 3
+          },
+          {
+            "code": "PER",
+            "compound": "MEDIUM",
+            "medianLaptime_s": 85.083,
+            "nClean": 19,
+            "stint": 4
+          },
+          {
+            "code": "RUS",
+            "compound": "MEDIUM",
+            "medianLaptime_s": 82.58,
+            "nClean": 10,
+            "stint": 1
+          },
+          {
+            "code": "RUS",
+            "compound": "HARD",
+            "medianLaptime_s": 82.844,
+            "nClean": 22,
+            "stint": 2
+          },
+          {
+            "code": "RUS",
+            "compound": "HARD",
+            "medianLaptime_s": 81.525,
+            "nClean": 22,
+            "stint": 3
+          }
+        ],
+        "tireDeg": [
+          {
+            "code": "BOT",
+            "compound": "MEDIUM",
+            "degSlope_s_per_lap": 0.2885,
+            "nClean": 12,
+            "stint": 1
+          },
+          {
+            "code": "PER",
+            "compound": "SOFT",
+            "degSlope_s_per_lap": 0.1857,
+            "nClean": 10,
+            "stint": 1
+          },
+          {
+            "code": "PER",
+            "compound": "HARD",
+            "degSlope_s_per_lap": 0.1718,
+            "nClean": 17,
+            "stint": 2
+          },
+          {
+            "code": "PER",
+            "compound": "HARD",
+            "degSlope_s_per_lap": 0.4053,
+            "nClean": 5,
+            "stint": 3
+          },
+          {
+            "code": "PER",
+            "compound": "MEDIUM",
+            "degSlope_s_per_lap": 0.0674,
+            "nClean": 19,
+            "stint": 4
+          }
+        ]
+      }
+    ]
+  },
+  "schemaVersion": 1,
+  "signConvention": "positive_means_a_faster",
+  "slug": "cadillac"
+}

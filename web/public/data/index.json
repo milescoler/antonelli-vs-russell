@@ -1,0 +1,384 @@
+{
+  "lastUpdated": "2026-06-17T21:50:51Z",
+  "rounds": [
+    {
+      "country": "Australia",
+      "eventDate": "2026-03-08",
+      "eventName": "Australian Grand Prix",
+      "format": "conventional",
+      "hasQualifying": true,
+      "hasRace": true,
+      "location": "Melbourne",
+      "round": 1,
+      "slug": "australian"
+    },
+    {
+      "country": "China",
+      "eventDate": "2026-03-15",
+      "eventName": "Chinese Grand Prix",
+      "format": "sprint_qualifying",
+      "hasQualifying": true,
+      "hasRace": true,
+      "location": "Shanghai",
+      "round": 2,
+      "slug": "chinese"
+    },
+    {
+      "country": "Japan",
+      "eventDate": "2026-03-29",
+      "eventName": "Japanese Grand Prix",
+      "format": "conventional",
+      "hasQualifying": true,
+      "hasRace": true,
+      "location": "Suzuka",
+      "round": 3,
+      "slug": "japanese"
+    },
+    {
+      "country": "United States",
+      "eventDate": "2026-05-03",
+      "eventName": "Miami Grand Prix",
+      "format": "sprint_qualifying",
+      "hasQualifying": true,
+      "hasRace": true,
+      "location": "Miami Gardens",
+      "round": 4,
+      "slug": "miami"
+    },
+    {
+      "country": "Canada",
+      "eventDate": "2026-05-24",
+      "eventName": "Canadian Grand Prix",
+      "format": "sprint_qualifying",
+      "hasQualifying": true,
+      "hasRace": true,
+      "location": "Montréal",
+      "round": 5,
+      "slug": "canadian"
+    },
+    {
+      "country": "Monaco",
+      "eventDate": "2026-06-07",
+      "eventName": "Monaco Grand Prix",
+      "format": "conventional",
+      "hasQualifying": true,
+      "hasRace": true,
+      "location": "Monte Carlo",
+      "round": 6,
+      "slug": "monaco"
+    },
+    {
+      "country": "Spain",
+      "eventDate": "2026-06-14",
+      "eventName": "Barcelona Grand Prix",
+      "format": "conventional",
+      "hasQualifying": true,
+      "hasRace": true,
+      "location": "Barcelona",
+      "round": 7,
+      "slug": "barcelona"
+    }
+  ],
+  "schemaVersion": 1,
+  "season": 2026,
+  "source": "FastF1 3.8.1",
+  "teams": [
+    {
+      "canonicalPair": {
+        "a": {
+          "code": "GAS",
+          "name": "Pierre Gasly",
+          "number": 10
+        },
+        "b": {
+          "code": "COL",
+          "name": "Franco Colapinto",
+          "number": 43
+        }
+      },
+      "displayName": "Alpine",
+      "hasSwap": false,
+      "roundsCovered": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "slug": "alpine",
+      "yoyAvailable": true
+    },
+    {
+      "canonicalPair": {
+        "a": {
+          "code": "ALO",
+          "name": "Fernando Alonso",
+          "number": 14
+        },
+        "b": {
+          "code": "STR",
+          "name": "Lance Stroll",
+          "number": 18
+        }
+      },
+      "displayName": "Aston Martin",
+      "hasSwap": false,
+      "roundsCovered": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "slug": "aston-martin",
+      "yoyAvailable": true
+    },
+    {
+      "canonicalPair": {
+        "a": {
+          "code": "BOR",
+          "name": "Gabriel Bortoleto",
+          "number": 5
+        },
+        "b": {
+          "code": "HUL",
+          "name": "Nico Hulkenberg",
+          "number": 27
+        }
+      },
+      "displayName": "Audi",
+      "hasSwap": false,
+      "roundsCovered": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "slug": "audi",
+      "yoyAvailable": false
+    },
+    {
+      "canonicalPair": {
+        "a": {
+          "code": "PER",
+          "name": "Sergio Perez",
+          "number": 11
+        },
+        "b": {
+          "code": "BOT",
+          "name": "Valtteri Bottas",
+          "number": 77
+        }
+      },
+      "displayName": "Cadillac",
+      "hasSwap": false,
+      "roundsCovered": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "slug": "cadillac",
+      "yoyAvailable": false
+    },
+    {
+      "canonicalPair": {
+        "a": {
+          "code": "LEC",
+          "name": "Charles Leclerc",
+          "number": 16
+        },
+        "b": {
+          "code": "HAM",
+          "name": "Lewis Hamilton",
+          "number": 44
+        }
+      },
+      "displayName": "Ferrari",
+      "hasSwap": false,
+      "roundsCovered": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "slug": "ferrari",
+      "yoyAvailable": true
+    },
+    {
+      "canonicalPair": {
+        "a": {
+          "code": "OCO",
+          "name": "Esteban Ocon",
+          "number": 31
+        },
+        "b": {
+          "code": "BEA",
+          "name": "Oliver Bearman",
+          "number": 87
+        }
+      },
+      "displayName": "Haas F1 Team",
+      "hasSwap": false,
+      "roundsCovered": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "slug": "haas-f1-team",
+      "yoyAvailable": true
+    },
+    {
+      "canonicalPair": {
+        "a": {
+          "code": "NOR",
+          "name": "Lando Norris",
+          "number": 1
+        },
+        "b": {
+          "code": "PIA",
+          "name": "Oscar Piastri",
+          "number": 81
+        }
+      },
+      "displayName": "McLaren",
+      "hasSwap": false,
+      "roundsCovered": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "slug": "mclaren",
+      "yoyAvailable": true
+    },
+    {
+      "canonicalPair": {
+        "a": {
+          "code": "ANT",
+          "name": "Kimi Antonelli",
+          "number": 12
+        },
+        "b": {
+          "code": "RUS",
+          "name": "George Russell",
+          "number": 63
+        }
+      },
+      "displayName": "Mercedes",
+      "hasSwap": false,
+      "roundsCovered": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "slug": "mercedes",
+      "yoyAvailable": true
+    },
+    {
+      "canonicalPair": {
+        "a": {
+          "code": "LAW",
+          "name": "Liam Lawson",
+          "number": 30
+        },
+        "b": {
+          "code": "LIN",
+          "name": "Arvid Lindblad",
+          "number": 41
+        }
+      },
+      "displayName": "Racing Bulls",
+      "hasSwap": false,
+      "roundsCovered": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "slug": "racing-bulls",
+      "yoyAvailable": false
+    },
+    {
+      "canonicalPair": {
+        "a": {
+          "code": "VER",
+          "name": "Max Verstappen",
+          "number": 3
+        },
+        "b": {
+          "code": "HAD",
+          "name": "Isack Hadjar",
+          "number": 6
+        }
+      },
+      "displayName": "Red Bull Racing",
+      "hasSwap": false,
+      "roundsCovered": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "slug": "red-bull-racing",
+      "yoyAvailable": false
+    },
+    {
+      "canonicalPair": {
+        "a": {
+          "code": "ALB",
+          "name": "Alexander Albon",
+          "number": 23
+        },
+        "b": {
+          "code": "SAI",
+          "name": "Carlos Sainz",
+          "number": 55
+        }
+      },
+      "displayName": "Williams",
+      "hasSwap": false,
+      "roundsCovered": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "slug": "williams",
+      "yoyAvailable": true
+    }
+  ]
+}
