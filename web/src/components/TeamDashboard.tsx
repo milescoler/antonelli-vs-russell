@@ -4,6 +4,7 @@ import { A_COLOR, B_COLOR, signed, takeaway } from '../lib/format'
 import { Badge, LegendDot, Panel } from './ui'
 import { shortEvent } from './charts/common'
 import { LapDeltaChart } from './charts/LapDeltaChart'
+import { TrackMap } from './charts/TrackMap'
 import { SegmentSplitChart } from './charts/SegmentSplitChart'
 import { GapTraceChart } from './charts/GapTraceChart'
 import { StintPaceChart } from './charts/StintPaceChart'
@@ -107,15 +108,22 @@ export function TeamDashboard({ slug }: { slug: string | null }) {
         {selected !== null && <RoundPicker rounds={rounds} value={selected} onChange={setSel} />}
       </div>
 
+      <Panel
+        title={qr ? `Track map — ${shortEvent(qr.eventName)} qualifying` : 'Track map'}
+        subtitle="The fastest lap, colored by which teammate is quicker through each part. Hover a corner for the braking & throttle detail."
+        right={qr ? <QualCaveats {...qr.caveats} /> : undefined}
+      >
+        {qr ? <TrackMap track={qr.track} aCode={a.code} bCode={b.code} /> : <NoRound />}
+      </Panel>
+
       <div className="grid gap-4 lg:grid-cols-2">
         <Panel
-          title={qr ? `Where the time goes — ${shortEvent(qr.eventName)}` : 'Qualifying detail'}
+          title="Where the time goes"
           subtitle="Mean per-segment delta by corner type. Positive = A faster."
-          right={qr ? <QualCaveats {...qr.caveats} /> : undefined}
         >
           {qr ? <SegmentSplitChart segments={qr.segmentCategoryMeans} /> : <NoRound />}
         </Panel>
-        <Panel title="Corner signatures" subtitle="How A drives the corner vs B, by corner speed.">
+        <Panel title="Corner signatures by speed" subtitle="How A drives the corner vs B, aggregated.">
           {qr ? <CornerBucketsTable buckets={qr.cornerSignatureBuckets} aCode={a.code} /> : <NoRound />}
         </Panel>
       </div>

@@ -61,6 +61,19 @@ export interface CornerBucket {
   nCorners: number
 }
 
+export interface TrackCorner {
+  x: number
+  y: number
+  apexDeltaKph: number | null
+  brakeOnDelta: number | null
+  throttleFullDelta: number | null
+}
+
+export interface TrackGeometry {
+  path: { x: number[]; y: number[]; delta: (number | null)[] }
+  corners: TrackCorner[]
+}
+
 export interface QualRound {
   round: number
   eventName: string
@@ -74,6 +87,7 @@ export interface QualRound {
   caveats: { qMismatch: boolean; sensorFreezeAny: boolean }
   segmentCategoryMeans: SegmentCategoryMean[]
   cornerSignatureBuckets: CornerBucket[]
+  track: TrackGeometry | null
 }
 
 export interface Yoy {

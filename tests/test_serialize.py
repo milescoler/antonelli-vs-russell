@@ -221,6 +221,44 @@ def test_build_yoy_computes_delta_of_means_over_overlap():
     assert yoy["deltaOfDeltas_s"] == 0.10
 
 
+# ---- track geometry ------------------------------------------------------
+
+def _path(rows):
+    """rows = list of (Distance, X, Y)."""
+    return pd.DataFrame(rows, columns=["Distance", "X", "Y"])
+
+
+def test_serialize_track_attaches_segment_delta_to_points():
+    path = _path([(0, 0, 0), (50, 10, 0), (100, 20, 0), (150, 20, 10), (199, 20, 20)])
+    segs = _segments([
+        ("S1", "straight", 0, 100, 250, 1.0, 1.10, 0.10, "straight", True),
+        ("C1", "corner", 100, 200, 90, 1.0, 0.90, -0.20, "slow_corner", True),
+        # a sensor-bad segment must contribute null delta (not a misleading color):
+        ("C2", "corner", 200, 300, 95, 1.0, 9.0, 8.0, "slow_corner", False),
+    ])
+    p2 = _path([(0, 0, 0), (50, 10, 0), (150, 20, 10), (250, 30, 20)])
+    out = serialize.serialize_track(p2, segs, _corners([]), max_points=10)
+    # Columnar path with parallel x/y/delta arrays of equal length.
+    assert len(out["path"]["x"]) == len(out["path"]["y"]) == len(out["path"]["delta"])
+    assert 0.1 in out["path"]["delta"]  # d=50 in S1
+    assert -0.2 in out["path"]["delta"]  # d=150 in C1
+    assert None in out["path"]["delta"]  # d=250 in sensor-bad C2 -> null
+
+
+def test_serialize_track_maps_corners_to_nearest_xy():
+    path = _path([(0, 0, 0), (100, 10, 5), (200, 20, 10)])
+    corner = _corners([("R", 1, 100, 80, 78, 80, 2.0, 30, 34, -4.0, 10, 12, -2.0, True)])
+    out = serialize.serialize_track(path, _segments([]), corner, max_points=10)
+    c = out["corners"][0]
+    assert c["x"] == 10 and c["y"] == 5  # nearest path point to distance 100
+    assert c["apexDeltaKph"] == 2.0 and c["brakeOnDelta"] == -4.0
+
+
+def test_serialize_track_none_when_no_path():
+    assert serialize.serialize_track(None, _segments([]), _corners([])) is None
+    assert serialize.serialize_track(_path([]), _segments([]), _corners([])) is None
+
+
 # ---- index manifest + determinism ----------------------------------------
 
 def test_build_index_has_required_keys():

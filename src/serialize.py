@@ -112,6 +112,62 @@ def serialize_corner_buckets(corner_df: pd.DataFrame) -> list[dict]:
     return out
 
 
+def _segment_delta_at(distance: float, seg_rows: list[dict]):
+    """delta_s of the segment containing `distance`. Returns None for a gap OR a
+    sensor-unreliable segment, so the map never paints a misleading color."""
+    for s in seg_rows:
+        if s["start_m"] <= distance < s["end_m"]:
+            return s["delta_s"] if bool(s["sensor_ok"]) else None
+    return None
+
+
+def serialize_track(
+    path_df: pd.DataFrame | None,
+    segments_df: pd.DataFrame,
+    corner_df: pd.DataFrame | None,
+    max_points: int = 140,
+) -> dict | None:
+    """Track-map geometry for the front end: a downsampled X/Y path (columnar, to
+    keep the payload small) with the containing-segment delta per point, so the
+    circuit can be drawn colored by who's faster where — plus corner markers at
+    their nearest path point. Raw telemetry X/Y units are kept; the client
+    normalizes them. Returns None when there's no path."""
+    if path_df is None or len(path_df) == 0:
+        return None
+    seg_rows = (
+        segments_df[["start_m", "end_m", "delta_s", "sensor_ok"]].to_dict("records")
+        if len(segments_df)
+        else []
+    )
+    xs = path_df["X"].tolist()
+    ys = path_df["Y"].tolist()
+    ds = path_df["Distance"].tolist()
+    n = len(ds)
+    step = max(1, n // max_points)
+    keep = list(range(0, n, step))
+
+    path = {
+        "x": [_num(xs[i], 1) for i in keep],
+        "y": [_num(ys[i], 1) for i in keep],
+        "delta": [_num(_segment_delta_at(ds[i], seg_rows), 3) for i in keep],
+    }
+
+    corners = []
+    if corner_df is not None and len(corner_df):
+        for _, c in corner_df.iterrows():
+            cd = float(c["distance_m"])
+            j = min(range(n), key=lambda k: abs(ds[k] - cd))
+            corners.append({
+                "x": _num(xs[j], 1),
+                "y": _num(ys[j], 1),
+                "apexDeltaKph": _num(c["apex_delta_kph"], 1),
+                "brakeOnDelta": _num(c["brake_on_delta"], 1),
+                "throttleFullDelta": _num(c["throttle_full_delta"], 1),
+                "ok": bool(c["sensor_ok"]),
+            })
+    return {"path": path, "corners": corners}
+
+
 def serialize_qualifying_round(
     compare_result: dict,
     corner_df: pd.DataFrame | None,
@@ -121,8 +177,10 @@ def serialize_qualifying_round(
     a_code: str,
     b_code: str,
     is_canonical: bool,
+    path_df: pd.DataFrame | None = None,
 ) -> dict:
-    """One qualifying round entry from compare_teammates(...) output + corners."""
+    """One qualifying round entry from compare_teammates(...) output + corners.
+    If `path_df` (resampled X/Y) is given, also embeds track-map geometry."""
     meta = compare_result["meta"]
     segments = compare_result["segments"]
     sensor_freeze = bool((~segments["sensor_ok"].astype(bool)).any())
@@ -144,6 +202,7 @@ def serialize_qualifying_round(
         },
         "segmentCategoryMeans": serialize_segment_category_means(segments),
         "cornerSignatureBuckets": serialize_corner_buckets(corner_df),
+        "track": serialize_track(path_df, segments, corner_df) if path_df is not None else None,
     }
 
 

@@ -31,7 +31,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from src.loaders import setup_cache              # noqa: E402
+from src.loaders import (                         # noqa: E402
+    setup_cache,
+    load_qualifying_session,
+    get_fastest_valid_lap,
+    get_lap_telemetry,
+)
+from src.segments import resample_to_distance_grid  # noqa: E402
 from src import teams, serialize, benchmarks, race  # noqa: E402
 import fastf1                                     # noqa: E402
 
@@ -71,6 +77,18 @@ def write_index(path: Path, index_obj: dict) -> bool:
 
 # ---- per-round analysis --------------------------------------------------
 
+def _track_path(season, rnd, a_code):
+    """Driver A's fastest-lap X/Y, resampled to the distance grid — for the
+    track-map geometry. Cache-backed; failures degrade to no map."""
+    try:
+        session = load_qualifying_session(season, rnd)
+        lap = get_fastest_valid_lap(session, a_code)
+        return resample_to_distance_grid(get_lap_telemetry(lap))
+    except Exception as exc:  # noqa: BLE001
+        print(f"      track path failed R{rnd} {a_code}: {exc!r}")
+        return None
+
+
 def _qualifying_round(season, ri, a_code, b_code):
     cr = benchmarks.compare_teammates(season, ri["round"], a_code, b_code)
     try:
@@ -78,9 +96,10 @@ def _qualifying_round(season, ri, a_code, b_code):
     except Exception as exc:  # noqa: BLE001
         print(f"      corners failed R{ri['round']} {a_code}/{b_code}: {exc!r}")
         corners = None
+    path_df = _track_path(season, ri["round"], a_code)
     return serialize.serialize_qualifying_round(
         cr, corners, round_number=ri["round"], event_name=ri["eventName"],
-        a_code=a_code, b_code=b_code, is_canonical=True,
+        a_code=a_code, b_code=b_code, is_canonical=True, path_df=path_df,
     )
 
 
