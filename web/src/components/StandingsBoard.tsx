@@ -57,7 +57,7 @@ function DriverRow({ driver, rank }: { driver: StandingDriver; rank: number }) {
         <div className="mt-0.5 text-[10px] text-zinc-500 tabular-nums">
           {driver.wins}W
           {' · '}
-          {driver.podiums}P podiums
+          {driver.podiums} podiums
           {driver.avgFinish !== null && ` · avg P${driver.avgFinish.toFixed(1)}`}
         </div>
       </div>

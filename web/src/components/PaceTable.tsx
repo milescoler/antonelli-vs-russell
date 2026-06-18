@@ -9,9 +9,8 @@ function paceBarWidth(row: PaceRow, maxMean: number, minMean: number): number {
   return Math.max(4, ((maxMean - row.mean) / (maxMean - minMean)) * 100)
 }
 
-function formatMean(mean: number | null, rank: number, unit: string): string {
+function formatMean(mean: number | null): string {
   if (mean === null) return '—'
-  if (rank === 1) return '0.00%'
   return `+${mean.toFixed(2)}%`
 }
 
@@ -67,7 +66,7 @@ export function PaceTable({ rows, unit }: { rows: PaceRow[]; unit: string }) {
 
               {/* mean value */}
               <span className="w-16 shrink-0 text-right text-xs font-semibold tabular-nums text-zinc-300">
-                {formatMean(row.mean, row.rank, unit)}
+                {formatMean(row.mean)}
               </span>
             </div>
           )
