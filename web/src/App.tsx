@@ -1,7 +1,7 @@
 import { HashRouter, NavLink, Route, Routes } from 'react-router-dom'
 import { Dashboard } from './pages/Dashboard'
-import { TeamPage } from './pages/TeamPage'
-import { MethodPage } from './pages/MethodPage'
+import { Telemetry } from './pages/Telemetry'
+import { About } from './pages/About'
 
 function Nav() {
   const link = ({ isActive }: { isActive: boolean }) =>
@@ -13,7 +13,7 @@ function Nav() {
         <NavLink to="/" className="flex items-center gap-2">
           <span className="h-5 w-1.5 rounded-sm bg-f1-red" />
           <span className="text-base font-black uppercase italic tracking-tight text-white">
-            Driver<span className="text-f1-red">/</span>Car
+            Pitwall
           </span>
           <span className="ml-1 text-[10px] font-bold uppercase tracking-widest text-zinc-500">
             F1 2026
@@ -23,8 +23,11 @@ function Nav() {
           <NavLink to="/" className={link} end>
             Dashboard
           </NavLink>
-          <NavLink to="/method" className={link}>
-            Method
+          <NavLink to="/telemetry" className={link}>
+            Telemetry
+          </NavLink>
+          <NavLink to="/about" className={link}>
+            About
           </NavLink>
         </nav>
       </div>
@@ -36,9 +39,8 @@ function Footer() {
   return (
     <footer className="mt-16 border-t border-carbon-line">
       <div className="mx-auto max-w-6xl px-4 py-6 text-xs text-zinc-600">
-        Teammate-controlled analysis · real qualifying, race & points data via FastF1 · predictions
-        are a transparent form heuristic, not official odds · not affiliated with Formula 1. Built by
-        Cole Richards.
+        Real qualifying, race and points data via FastF1 · not affiliated with Formula 1.
+        Built by Cole Richards.
       </div>
     </footer>
   )
@@ -52,8 +54,8 @@ export function App() {
         <main className="mx-auto max-w-6xl px-4 py-7">
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/team/:slug" element={<TeamPage />} />
-            <Route path="/method" element={<MethodPage />} />
+            <Route path="/telemetry" element={<Telemetry />} />
+            <Route path="/about" element={<About />} />
           </Routes>
         </main>
         <Footer />

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import type { DriverRatings, IndexData, StandingsData, TeamData } from '../types'
+import type { SeasonData, SessionTelemetry } from '../types'
 
 // import.meta.env.BASE_URL is the Vite `base` (ends with '/'), so data fetches
 // resolve correctly whether served at the root or a GitHub Pages subpath.
@@ -11,12 +11,12 @@ async function getJSON<T>(path: string): Promise<T> {
   return (await res.json()) as T
 }
 
-export function useIndex() {
-  const [data, setData] = useState<IndexData | null>(null)
+export function useSeason() {
+  const [data, setData] = useState<SeasonData | null>(null)
   const [error, setError] = useState<string | null>(null)
   useEffect(() => {
     let live = true
-    getJSON<IndexData>('index.json')
+    getJSON<SeasonData>('season.json')
       .then((d) => live && setData(d))
       .catch((e) => live && setError(String(e)))
     return () => {
@@ -26,45 +26,15 @@ export function useIndex() {
   return { data, error }
 }
 
-export function useRatings() {
-  const [data, setData] = useState<DriverRatings | null>(null)
-  const [error, setError] = useState<string | null>(null)
-  useEffect(() => {
-    let live = true
-    getJSON<DriverRatings>('driver_ratings.json')
-      .then((d) => live && setData(d))
-      .catch((e) => live && setError(String(e)))
-    return () => {
-      live = false
-    }
-  }, [])
-  return { data, error }
-}
-
-export function useStandings() {
-  const [data, setData] = useState<StandingsData | null>(null)
-  const [error, setError] = useState<string | null>(null)
-  useEffect(() => {
-    let live = true
-    getJSON<StandingsData>('standings.json')
-      .then((d) => live && setData(d))
-      .catch((e) => live && setError(String(e)))
-    return () => {
-      live = false
-    }
-  }, [])
-  return { data, error }
-}
-
-export function useTeam(slug: string | undefined) {
-  const [data, setData] = useState<TeamData | null>(null)
+export function useTelemetry(slug: string | undefined) {
+  const [data, setData] = useState<SessionTelemetry | null>(null)
   const [error, setError] = useState<string | null>(null)
   useEffect(() => {
     if (!slug) return
     let live = true
     setData(null)
     setError(null)
-    getJSON<TeamData>(`teams/${slug}.json`)
+    getJSON<SessionTelemetry>(`telemetry/${slug}.json`)
       .then((d) => live && setData(d))
       .catch((e) => live && setError(String(e)))
     return () => {
