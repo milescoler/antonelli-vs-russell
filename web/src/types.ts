@@ -162,15 +162,6 @@ export interface StandingRow {
   finishes: (number | null)[]
 }
 
-export interface PredictionDriver {
-  code: string
-  name: string
-  team: string
-  teamColor: string | null
-  winOdds: number | null
-  recentPoints: number | null
-}
-
 export interface NextRace {
   round: number
   eventName: string
@@ -185,7 +176,54 @@ export interface StandingsData {
   season: number
   nextRace: NextRace | null
   standings: StandingRow[]
-  prediction: { method: string; recentRounds: number; drivers: PredictionDriver[] }
+}
+
+export interface MarginRow {
+  code: string
+  name: string
+  team: string | null
+  teamColor: string | null
+  vs: string
+  marginPct: number | null
+  ciLow: number | null
+  ciHigh: number | null
+  n: number
+  winRate: number | null
+  signTestP: number | null
+  verdict: 'reliably_faster' | 'reliably_slower' | 'inconclusive'
+  deltas: (number | null)[]
+}
+
+export interface IslandComponent {
+  id: number
+  teamSeasons: { year: number; team: string }[]
+  drivers: string[]
+  multiTeam: boolean
+}
+
+export interface EqualCarDriver {
+  code: string
+  name: string
+  team: string | null
+  teamColor: string | null
+  theta: number | null
+  ciLow: number | null
+  ciHigh: number | null
+  rank: number
+}
+
+export interface EqualCarIsland {
+  component: number
+  multiTeam: boolean
+  drivers: EqualCarDriver[]
+}
+
+export interface DriverRatings {
+  schemaVersion: number
+  season: number
+  headline: { metric: string; note: string; ranking: MarginRow[] }
+  islands: { note: string; components: IslandComponent[] }
+  equalCar: { note: string; islands: EqualCarIsland[] }
 }
 
 export interface TeamData {

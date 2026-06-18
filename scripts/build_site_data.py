@@ -38,8 +38,9 @@ from src.loaders import (                         # noqa: E402
     get_lap_telemetry,
 )
 from src.segments import resample_to_distance_grid  # noqa: E402
-from src import teams, serialize, benchmarks, race, standings  # noqa: E402
+from src import teams, serialize, benchmarks, race, standings, ratings  # noqa: E402
 import fastf1                                     # noqa: E402
+import pandas as pd                               # noqa: E402
 
 CACHE = ROOT / "fastf1_cache"
 DATA_DIR = ROOT / "web" / "public" / "data"
@@ -136,6 +137,158 @@ def _yoy_for_team(season, round_infos, a_code, b_code, qual_rounds, prior_rounds
     return serialize.build_yoy(qual_rounds, q_prior)
 
 
+# ---- driver ratings (car-adjusted) ---------------------------------------
+
+def _qual_pace(year, rounds):
+    """Per-driver best qualifying lap (light load, no telemetry) for the rating
+    model. Returns rows {session, year, round, code, name, team, teamColor, lap_s}."""
+    rows = []
+    for rnd in rounds:
+        try:
+            s = fastf1.get_session(year, rnd, "Q")
+            s.load(laps=False, telemetry=False, weather=False, messages=False)
+        except Exception as exc:  # noqa: BLE001
+            print(f"   ratings: skip {year} Q R{rnd}: {exc!r}")
+            continue
+        for _, r in s.results.iterrows():
+            secs = [t.total_seconds() for t in (r.get("Q1"), r.get("Q2"), r.get("Q3")) if pd.notna(t)]
+            if not secs:
+                continue
+            tc = r.get("TeamColor")
+            rows.append({
+                "session": (year, rnd), "year": year, "round": int(rnd),
+                "code": str(r["Abbreviation"]), "name": str(r["FullName"]),
+                "team": str(r["TeamName"]), "teamColor": f"#{tc}" if isinstance(tc, str) and tc else None,
+                "lap_s": min(secs),
+            })
+    return rows
+
+
+def build_ratings(season, round_nums):
+    """Assemble the car-adjusted ratings doc: Layer-1 teammate margins (headline),
+    Layer-3 connectivity islands, Layer-2 equal-car grid with bootstrap CIs."""
+    pace_now = _qual_pace(season, round_nums)
+    prior_nums = [r["round"] for r in teams.list_completed_rounds(season - 1)]
+    pace_prior = _qual_pace(season - 1, prior_nums)
+    all_pace = pace_now + pace_prior
+
+    # session-normalized gaps (% off session fastest)
+    by_session = {}
+    for r in all_pace:
+        by_session.setdefault(r["session"], []).append(r)
+    gap = {}  # (session, code) -> gap_pct
+    for sess, rs in by_session.items():
+        for code, g in ratings.normalize_session({r["code"]: r["lap_s"] for r in rs}).items():
+            gap[(sess, code)] = g
+
+    meta = {r["code"]: r for r in pace_now}  # latest-season identity for display
+
+    # Layer 1 — teammate margin per driver (this season only)
+    per_driver = {}  # code -> {deltas, vs, ...}
+    for sess, rs in by_session.items():
+        if sess[0] != season:
+            continue
+        by_team = {}
+        for r in rs:
+            by_team.setdefault(r["team"], []).append(r)
+        for pair in by_team.values():
+            if len(pair) != 2:
+                continue
+            x, y = pair
+            gx, gy = gap[(sess, x["code"])], gap[(sess, y["code"])]
+            per_driver.setdefault(x["code"], {"deltas": [], "vs": y["code"]})["deltas"].append(gy - gx)
+            per_driver.setdefault(y["code"], {"deltas": [], "vs": x["code"]})["deltas"].append(gx - gy)
+
+    ranking = []
+    for code, d in per_driver.items():
+        m = ratings.teammate_margin(d["deltas"])
+        info = meta.get(code, {})
+        ranking.append({
+            "code": code, "name": info.get("name", code), "team": info.get("team"),
+            "teamColor": info.get("teamColor"), "vs": d["vs"],
+            "marginPct": m["mean"], "ciLow": m["ciLow"], "ciHigh": m["ciHigh"],
+            "n": m["n"], "winRate": m["winRate"], "signTestP": m["signTestP"],
+            "verdict": m["verdict"], "deltas": [serialize._num(x, 3) for x in d["deltas"]],
+        })
+    ranking.sort(key=lambda r: (r["marginPct"] is None, -(r["marginPct"] or 0), r["code"]))
+
+    # Layer 2/3 — model over both seasons. Canonicalize the Sauber->Audi rebrand
+    # to one lineage so it reads as continuity (a single team), not a transfer.
+    lineage = {"Kick Sauber": "Audi", "Sauber": "Audi"}
+    canon = lambda t: lineage.get(t, t)  # noqa: E731
+    model_rows = [
+        {"session": r["session"], "driver": r["code"],
+         "teamSeason": (r["year"], canon(r["team"])), "gap_pct": gap[(r["session"], r["code"])]}
+        for r in all_pace
+    ]
+    model = ratings.absolute_model(model_rows)
+    boot = ratings.session_bootstrap(model_rows, b=800, seed=0)
+    comp_of = model["componentOf"]
+    theta = model["theta"]
+
+    # Components/islands (Layer 3). multiTeam uses canonical team names.
+    drv_by_comp = {}
+    for code, idx in comp_of.items():
+        drv_by_comp.setdefault(idx, []).append(code)
+    components = []
+    for idx, members in enumerate(model["connectivity"]["components"]):
+        components.append({
+            "id": idx,
+            "teamSeasons": sorted([{"year": yr, "team": t} for (yr, t) in members],
+                                  key=lambda x: (x["year"], x["team"])),
+            "drivers": sorted(drv_by_comp.get(idx, [])),
+            "multiTeam": len({t for (_, t) in members}) > 1,
+        })
+
+    # Equal-car: per-island mini-grids (within an island the ordering is data-backed;
+    # theta is per-component-centered so it is NOT comparable across islands — we
+    # deliberately do not emit a single cross-island ladder).
+    equal_islands = []
+    for idx in sorted(drv_by_comp):
+        codes = drv_by_comp[idx]
+        drivers_sorted = sorted(codes, key=lambda c: (theta[c], c))
+        rows = []
+        for rank, c in enumerate(drivers_sorted, 1):
+            info = meta.get(c, {})
+            ci = boot.get(c, {})
+            rows.append({
+                "code": c, "name": info.get("name", c), "team": info.get("team"),
+                "teamColor": info.get("teamColor"), "theta": serialize._num(theta[c], 3),
+                "ciLow": ci.get("ciLow"), "ciHigh": ci.get("ciHigh"), "rank": rank,
+            })
+        equal_islands.append({
+            "component": idx,
+            "multiTeam": next(c["multiTeam"] for c in components if c["id"] == idx),
+            "drivers": rows,
+        })
+    equal_islands.sort(key=lambda i: (not i["multiTeam"], -len(i["drivers"]), i["component"]))
+
+    return {
+        "schemaVersion": serialize.SCHEMA_VERSION,
+        "season": season,
+        "headline": {
+            "metric": "Teammate margin",
+            "note": ("How decisively each driver beats their teammate in qualifying — "
+                     "same car, so it's mostly the driver. % of lap time, + = faster. "
+                     "A relative margin, not an absolute skill ranking."),
+            "ranking": ranking,
+        },
+        "islands": {
+            "note": ("Teams link onto one scale only when a driver drove for both. In "
+                     "2025–26 almost no one moved, so most teams are isolated — the "
+                     "data can't rank drivers across unlinked teams."),
+            "components": components,
+        },
+        "equalCar": {
+            "note": ("IF every car were equal, the modeled qualifying order — but only "
+                     "WITHIN a linked island (drivers connected by a shared seat). Across "
+                     "unlinked islands the data can't compare, so there's no single ladder; "
+                     "the one multi-team island is the real cross-team result."),
+            "islands": equal_islands,
+        },
+    }
+
+
 # ---- orchestration -------------------------------------------------------
 
 def main():
@@ -219,30 +372,23 @@ def main():
             },
         })
 
-    if not only:  # standings + manifest are season-wide; only on a full build
-        print("== standings + next-race prediction ==")
-        per_round = standings.season_results(season, round_nums)
-        table = standings.build_standings(per_round)
-        prediction = standings.predict_next(per_round)
-        nxt = teams.next_race(season)
+    if not only:  # season-wide artifacts; only on a full build
+        print("== car-adjusted driver ratings ==")
+        rating_doc = build_ratings(season, round_nums)
+        write_json_if_changed(DATA_DIR / "driver_ratings.json", rating_doc)
+        print(f"   wrote driver_ratings.json ({len(rating_doc['headline']['ranking'])} drivers, "
+              f"{len(rating_doc['islands']['components'])} islands)")
+
+        print("== championship standings (context) ==")
+        table = standings.build_standings(standings.season_results(season, round_nums))
         standings_doc = {
             "schemaVersion": serialize.SCHEMA_VERSION,
             "season": season,
-            "nextRace": nxt,
+            "nextRace": teams.next_race(season),
             "standings": table,
-            "prediction": {
-                "method": (
-                    "Heuristic: recency-weighted points over the last 3 races, "
-                    "raised to a power to concentrate on front-runners, normalized "
-                    "to shares. A transparent form index — not a trained model."
-                ),
-                "recentRounds": 3,
-                "drivers": prediction,
-            },
         }
         write_json_if_changed(DATA_DIR / "standings.json", standings_doc)
-        print(f"   wrote standings.json ({len(table)} drivers; next: "
-              f"{nxt['eventName'] if nxt else 'season over'})")
+        print(f"   wrote standings.json ({len(table)} drivers)")
 
         index = serialize.build_index(
             season=season, rounds=round_infos, teams=index_teams,

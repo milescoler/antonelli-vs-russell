@@ -1,0 +1,1008 @@
+{
+  "equalCar": {
+    "islands": [
+      {
+        "component": 7,
+        "drivers": [
+          {
+            "ciHigh": -0.512,
+            "ciLow": -1.291,
+            "code": "VER",
+            "name": "Max Verstappen",
+            "rank": 1,
+            "team": "Red Bull Racing",
+            "teamColor": "#4781D7",
+            "theta": -0.963
+          },
+          {
+            "ciHigh": 0.068,
+            "ciLow": -0.334,
+            "code": "HAD",
+            "name": "Isack Hadjar",
+            "rank": 2,
+            "team": "Red Bull Racing",
+            "teamColor": "#4781D7",
+            "theta": -0.109
+          },
+          {
+            "ciHigh": 0.861,
+            "ciLow": -0.104,
+            "code": "TSU",
+            "name": "TSU",
+            "rank": 3,
+            "team": null,
+            "teamColor": null,
+            "theta": 0.226
+          },
+          {
+            "ciHigh": 0.526,
+            "ciLow": 0.005,
+            "code": "LAW",
+            "name": "Liam Lawson",
+            "rank": 4,
+            "team": "Racing Bulls",
+            "teamColor": "#6C98FF",
+            "theta": 0.357
+          },
+          {
+            "ciHigh": 0.847,
+            "ciLow": -0.017,
+            "code": "LIN",
+            "name": "Arvid Lindblad",
+            "rank": 5,
+            "team": "Racing Bulls",
+            "teamColor": "#6C98FF",
+            "theta": 0.489
+          }
+        ],
+        "multiTeam": true
+      },
+      {
+        "component": 0,
+        "drivers": [
+          {
+            "ciHigh": -0.084,
+            "ciLow": -0.372,
+            "code": "GAS",
+            "name": "Pierre Gasly",
+            "rank": 1,
+            "team": "Alpine",
+            "teamColor": "#00A1E8",
+            "theta": -0.232
+          },
+          {
+            "ciHigh": 0.082,
+            "ciLow": -0.418,
+            "code": "DOO",
+            "name": "DOO",
+            "rank": 2,
+            "team": null,
+            "teamColor": null,
+            "theta": -0.17
+          },
+          {
+            "ciHigh": 0.604,
+            "ciLow": 0.207,
+            "code": "COL",
+            "name": "Franco Colapinto",
+            "rank": 3,
+            "team": "Alpine",
+            "teamColor": "#00A1E8",
+            "theta": 0.402
+          }
+        ],
+        "multiTeam": false
+      },
+      {
+        "component": 1,
+        "drivers": [
+          {
+            "ciHigh": -0.267,
+            "ciLow": -0.487,
+            "code": "ALO",
+            "name": "Fernando Alonso",
+            "rank": 1,
+            "team": "Aston Martin",
+            "teamColor": "#229971",
+            "theta": -0.371
+          },
+          {
+            "ciHigh": 0.487,
+            "ciLow": 0.267,
+            "code": "STR",
+            "name": "Lance Stroll",
+            "rank": 2,
+            "team": "Aston Martin",
+            "teamColor": "#229971",
+            "theta": 0.371
+          }
+        ],
+        "multiTeam": false
+      },
+      {
+        "component": 2,
+        "drivers": [
+          {
+            "ciHigh": 0.007,
+            "ciLow": -0.362,
+            "code": "HUL",
+            "name": "Nico Hulkenberg",
+            "rank": 1,
+            "team": "Audi",
+            "teamColor": "#F50537",
+            "theta": -0.156
+          },
+          {
+            "ciHigh": 0.362,
+            "ciLow": -0.007,
+            "code": "BOR",
+            "name": "Gabriel Bortoleto",
+            "rank": 2,
+            "team": "Audi",
+            "teamColor": "#F50537",
+            "theta": 0.156
+          }
+        ],
+        "multiTeam": false
+      },
+      {
+        "component": 3,
+        "drivers": [
+          {
+            "ciHigh": -0.066,
+            "ciLow": -0.407,
+            "code": "LEC",
+            "name": "Charles Leclerc",
+            "rank": 1,
+            "team": "Ferrari",
+            "teamColor": "#ED1131",
+            "theta": -0.205
+          },
+          {
+            "ciHigh": 0.407,
+            "ciLow": 0.066,
+            "code": "HAM",
+            "name": "Lewis Hamilton",
+            "rank": 2,
+            "team": "Ferrari",
+            "teamColor": "#ED1131",
+            "theta": 0.205
+          }
+        ],
+        "multiTeam": false
+      },
+      {
+        "component": 4,
+        "drivers": [
+          {
+            "ciHigh": 0.02,
+            "ciLow": -0.206,
+            "code": "BEA",
+            "name": "Oliver Bearman",
+            "rank": 1,
+            "team": "Haas F1 Team",
+            "teamColor": "#9C9FA2",
+            "theta": -0.096
+          },
+          {
+            "ciHigh": 0.206,
+            "ciLow": -0.02,
+            "code": "OCO",
+            "name": "Esteban Ocon",
+            "rank": 2,
+            "team": "Haas F1 Team",
+            "teamColor": "#9C9FA2",
+            "theta": 0.096
+          }
+        ],
+        "multiTeam": false
+      },
+      {
+        "component": 5,
+        "drivers": [
+          {
+            "ciHigh": 0.029,
+            "ciLow": -0.075,
+            "code": "NOR",
+            "name": "Lando Norris",
+            "rank": 1,
+            "team": "McLaren",
+            "teamColor": "#F47600",
+            "theta": -0.023
+          },
+          {
+            "ciHigh": 0.075,
+            "ciLow": -0.029,
+            "code": "PIA",
+            "name": "Oscar Piastri",
+            "rank": 2,
+            "team": "McLaren",
+            "teamColor": "#F47600",
+            "theta": 0.023
+          }
+        ],
+        "multiTeam": false
+      },
+      {
+        "component": 6,
+        "drivers": [
+          {
+            "ciHigh": -0.098,
+            "ciLow": -0.461,
+            "code": "RUS",
+            "name": "George Russell",
+            "rank": 1,
+            "team": "Mercedes",
+            "teamColor": "#00D7B6",
+            "theta": -0.252
+          },
+          {
+            "ciHigh": 0.461,
+            "ciLow": 0.098,
+            "code": "ANT",
+            "name": "Kimi Antonelli",
+            "rank": 2,
+            "team": "Mercedes",
+            "teamColor": "#00D7B6",
+            "theta": 0.252
+          }
+        ],
+        "multiTeam": false
+      },
+      {
+        "component": 8,
+        "drivers": [
+          {
+            "ciHigh": -0.069,
+            "ciLow": -0.499,
+            "code": "SAI",
+            "name": "Carlos Sainz",
+            "rank": 1,
+            "team": "Williams",
+            "teamColor": "#1868DB",
+            "theta": -0.265
+          },
+          {
+            "ciHigh": 0.499,
+            "ciLow": 0.069,
+            "code": "ALB",
+            "name": "Alexander Albon",
+            "rank": 2,
+            "team": "Williams",
+            "teamColor": "#1868DB",
+            "theta": 0.265
+          }
+        ],
+        "multiTeam": false
+      },
+      {
+        "component": 9,
+        "drivers": [
+          {
+            "ciHigh": 0.224,
+            "ciLow": -0.356,
+            "code": "PER",
+            "name": "Sergio Perez",
+            "rank": 1,
+            "team": "Cadillac",
+            "teamColor": "#909090",
+            "theta": -0.083
+          },
+          {
+            "ciHigh": 0.356,
+            "ciLow": -0.224,
+            "code": "BOT",
+            "name": "Valtteri Bottas",
+            "rank": 2,
+            "team": "Cadillac",
+            "teamColor": "#909090",
+            "theta": 0.083
+          }
+        ],
+        "multiTeam": false
+      }
+    ],
+    "note": "IF every car were equal, the modeled qualifying order — but only WITHIN a linked island (drivers connected by a shared seat). Across unlinked islands the data can't compare, so there's no single ladder; the one multi-team island is the real cross-team result."
+  },
+  "headline": {
+    "metric": "Teammate margin",
+    "note": "How decisively each driver beats their teammate in qualifying — same car, so it's mostly the driver. % of lap time, + = faster. A relative margin, not an absolute skill ranking.",
+    "ranking": [
+      {
+        "ciHigh": 2.578,
+        "ciLow": -0.796,
+        "code": "HUL",
+        "deltas": [
+          -0.104,
+          0.212,
+          -0.415,
+          4.895,
+          0.255,
+          1.084,
+          0.312
+        ],
+        "marginPct": 0.891,
+        "n": 7,
+        "name": "Nico Hulkenberg",
+        "signTestP": 0.453,
+        "team": "Audi",
+        "teamColor": "#F50537",
+        "verdict": "inconclusive",
+        "vs": "BOR",
+        "winRate": 0.714
+      },
+      {
+        "ciHigh": 1.189,
+        "ciLow": -0.012,
+        "code": "ALO",
+        "deltas": [
+          0.86,
+          0.309,
+          0.075,
+          1.376,
+          0.988,
+          -0.076
+        ],
+        "marginPct": 0.589,
+        "n": 6,
+        "name": "Fernando Alonso",
+        "signTestP": 0.219,
+        "team": "Aston Martin",
+        "teamColor": "#229971",
+        "verdict": "inconclusive",
+        "vs": "STR",
+        "winRate": 0.833
+      },
+      {
+        "ciHigh": 0.743,
+        "ciLow": 0.046,
+        "code": "SAI",
+        "deltas": [
+          0.494,
+          0.181,
+          0.205,
+          0.796,
+          -0.039,
+          0.727
+        ],
+        "marginPct": 0.394,
+        "n": 6,
+        "name": "Carlos Sainz",
+        "signTestP": 0.219,
+        "team": "Williams",
+        "teamColor": "#1868DB",
+        "verdict": "inconclusive",
+        "vs": "ALB",
+        "winRate": 0.833
+      },
+      {
+        "ciHigh": 1.012,
+        "ciLow": -0.237,
+        "code": "GAS",
+        "deltas": [
+          0.89,
+          0.526,
+          1.054,
+          -0.055,
+          -0.675,
+          1.067,
+          -0.094
+        ],
+        "marginPct": 0.388,
+        "n": 7,
+        "name": "Pierre Gasly",
+        "signTestP": 1.0,
+        "team": "Alpine",
+        "teamColor": "#00A1E8",
+        "verdict": "inconclusive",
+        "vs": "COL",
+        "winRate": 0.571
+      },
+      {
+        "ciHigh": 0.768,
+        "ciLow": -0.313,
+        "code": "BEA",
+        "deltas": [
+          0.229,
+          0.37,
+          -0.88,
+          0.492,
+          0.591,
+          -0.128,
+          0.916
+        ],
+        "marginPct": 0.227,
+        "n": 7,
+        "name": "Oliver Bearman",
+        "signTestP": 0.453,
+        "team": "Haas F1 Team",
+        "teamColor": "#9C9FA2",
+        "verdict": "inconclusive",
+        "vs": "OCO",
+        "winRate": 0.714
+      },
+      {
+        "ciHigh": 0.676,
+        "ciLow": -0.231,
+        "code": "VER",
+        "deltas": [
+          0.129,
+          -0.32,
+          0.94,
+          0.039,
+          0.472,
+          0.075
+        ],
+        "marginPct": 0.222,
+        "n": 6,
+        "name": "Max Verstappen",
+        "signTestP": 0.219,
+        "team": "Red Bull Racing",
+        "teamColor": "#4781D7",
+        "verdict": "inconclusive",
+        "vs": "HAD",
+        "winRate": 0.833
+      },
+      {
+        "ciHigh": 1.024,
+        "ciLow": -0.693,
+        "code": "PER",
+        "deltas": [
+          0.814,
+          -1.597,
+          0.14,
+          -0.385,
+          1.162,
+          0.744,
+          0.284
+        ],
+        "marginPct": 0.166,
+        "n": 7,
+        "name": "Sergio Perez",
+        "signTestP": 0.453,
+        "team": "Cadillac",
+        "teamColor": "#909090",
+        "verdict": "inconclusive",
+        "vs": "BOT",
+        "winRate": 0.714
+      },
+      {
+        "ciHigh": 0.762,
+        "ciLow": -0.496,
+        "code": "LAW",
+        "deltas": [
+          -0.029,
+          0.021,
+          -0.435,
+          0.722,
+          -0.85,
+          1.16,
+          0.341
+        ],
+        "marginPct": 0.133,
+        "n": 7,
+        "name": "Liam Lawson",
+        "signTestP": 1.0,
+        "team": "Racing Bulls",
+        "teamColor": "#6C98FF",
+        "verdict": "inconclusive",
+        "vs": "LIN",
+        "winRate": 0.571
+      },
+      {
+        "ciHigh": 0.464,
+        "ciLow": -0.268,
+        "code": "ANT",
+        "deltas": [
+          -0.373,
+          0.241,
+          0.336,
+          0.454,
+          -0.094,
+          0.547,
+          -0.427
+        ],
+        "marginPct": 0.098,
+        "n": 7,
+        "name": "Kimi Antonelli",
+        "signTestP": 1.0,
+        "team": "Mercedes",
+        "teamColor": "#00D7B6",
+        "verdict": "inconclusive",
+        "vs": "RUS",
+        "winRate": 0.571
+      },
+      {
+        "ciHigh": 0.21,
+        "ciLow": -0.116,
+        "code": "PIA",
+        "deltas": [
+          0.121,
+          0.063,
+          0.312,
+          -0.17,
+          -0.072,
+          0.196,
+          -0.119
+        ],
+        "marginPct": 0.047,
+        "n": 7,
+        "name": "Oscar Piastri",
+        "signTestP": 1.0,
+        "team": "McLaren",
+        "teamColor": "#F47600",
+        "verdict": "inconclusive",
+        "vs": "NOR",
+        "winRate": 0.571
+      },
+      {
+        "ciHigh": 0.359,
+        "ciLow": -0.275,
+        "code": "HAM",
+        "deltas": [
+          -0.192,
+          0.014,
+          -0.297,
+          -0.2,
+          0.149,
+          0.1,
+          0.72
+        ],
+        "marginPct": 0.042,
+        "n": 7,
+        "name": "Lewis Hamilton",
+        "signTestP": 1.0,
+        "team": "Ferrari",
+        "teamColor": "#ED1131",
+        "verdict": "inconclusive",
+        "vs": "LEC",
+        "winRate": 0.571
+      },
+      {
+        "ciHigh": 0.275,
+        "ciLow": -0.359,
+        "code": "LEC",
+        "deltas": [
+          0.192,
+          -0.014,
+          0.297,
+          0.2,
+          -0.149,
+          -0.1,
+          -0.72
+        ],
+        "marginPct": -0.042,
+        "n": 7,
+        "name": "Charles Leclerc",
+        "signTestP": 1.0,
+        "team": "Ferrari",
+        "teamColor": "#ED1131",
+        "verdict": "inconclusive",
+        "vs": "HAM",
+        "winRate": 0.429
+      },
+      {
+        "ciHigh": 0.116,
+        "ciLow": -0.21,
+        "code": "NOR",
+        "deltas": [
+          -0.121,
+          -0.063,
+          -0.312,
+          0.17,
+          0.072,
+          -0.196,
+          0.119
+        ],
+        "marginPct": -0.047,
+        "n": 7,
+        "name": "Lando Norris",
+        "signTestP": 1.0,
+        "team": "McLaren",
+        "teamColor": "#F47600",
+        "verdict": "inconclusive",
+        "vs": "PIA",
+        "winRate": 0.429
+      },
+      {
+        "ciHigh": 0.268,
+        "ciLow": -0.464,
+        "code": "RUS",
+        "deltas": [
+          0.373,
+          -0.241,
+          -0.336,
+          -0.454,
+          0.094,
+          -0.547,
+          0.427
+        ],
+        "marginPct": -0.098,
+        "n": 7,
+        "name": "George Russell",
+        "signTestP": 1.0,
+        "team": "Mercedes",
+        "teamColor": "#00D7B6",
+        "verdict": "inconclusive",
+        "vs": "ANT",
+        "winRate": 0.429
+      },
+      {
+        "ciHigh": 0.496,
+        "ciLow": -0.762,
+        "code": "LIN",
+        "deltas": [
+          0.029,
+          -0.021,
+          0.435,
+          -0.722,
+          0.85,
+          -1.16,
+          -0.341
+        ],
+        "marginPct": -0.133,
+        "n": 7,
+        "name": "Arvid Lindblad",
+        "signTestP": 1.0,
+        "team": "Racing Bulls",
+        "teamColor": "#6C98FF",
+        "verdict": "inconclusive",
+        "vs": "LAW",
+        "winRate": 0.429
+      },
+      {
+        "ciHigh": 0.693,
+        "ciLow": -1.024,
+        "code": "BOT",
+        "deltas": [
+          -0.814,
+          1.597,
+          -0.14,
+          0.385,
+          -1.162,
+          -0.744,
+          -0.284
+        ],
+        "marginPct": -0.166,
+        "n": 7,
+        "name": "Valtteri Bottas",
+        "signTestP": 0.453,
+        "team": "Cadillac",
+        "teamColor": "#909090",
+        "verdict": "inconclusive",
+        "vs": "PER",
+        "winRate": 0.286
+      },
+      {
+        "ciHigh": 0.231,
+        "ciLow": -0.676,
+        "code": "HAD",
+        "deltas": [
+          -0.129,
+          0.32,
+          -0.94,
+          -0.039,
+          -0.472,
+          -0.075
+        ],
+        "marginPct": -0.222,
+        "n": 6,
+        "name": "Isack Hadjar",
+        "signTestP": 0.219,
+        "team": "Red Bull Racing",
+        "teamColor": "#4781D7",
+        "verdict": "inconclusive",
+        "vs": "VER",
+        "winRate": 0.167
+      },
+      {
+        "ciHigh": 0.313,
+        "ciLow": -0.768,
+        "code": "OCO",
+        "deltas": [
+          -0.229,
+          -0.37,
+          0.88,
+          -0.492,
+          -0.591,
+          0.128,
+          -0.916
+        ],
+        "marginPct": -0.227,
+        "n": 7,
+        "name": "Esteban Ocon",
+        "signTestP": 0.453,
+        "team": "Haas F1 Team",
+        "teamColor": "#9C9FA2",
+        "verdict": "inconclusive",
+        "vs": "BEA",
+        "winRate": 0.286
+      },
+      {
+        "ciHigh": 0.237,
+        "ciLow": -1.012,
+        "code": "COL",
+        "deltas": [
+          -0.89,
+          -0.526,
+          -1.054,
+          0.055,
+          0.675,
+          -1.067,
+          0.094
+        ],
+        "marginPct": -0.388,
+        "n": 7,
+        "name": "Franco Colapinto",
+        "signTestP": 1.0,
+        "team": "Alpine",
+        "teamColor": "#00A1E8",
+        "verdict": "inconclusive",
+        "vs": "GAS",
+        "winRate": 0.429
+      },
+      {
+        "ciHigh": -0.046,
+        "ciLow": -0.743,
+        "code": "ALB",
+        "deltas": [
+          -0.494,
+          -0.181,
+          -0.205,
+          -0.796,
+          0.039,
+          -0.727
+        ],
+        "marginPct": -0.394,
+        "n": 6,
+        "name": "Alexander Albon",
+        "signTestP": 0.219,
+        "team": "Williams",
+        "teamColor": "#1868DB",
+        "verdict": "inconclusive",
+        "vs": "SAI",
+        "winRate": 0.167
+      },
+      {
+        "ciHigh": 0.012,
+        "ciLow": -1.189,
+        "code": "STR",
+        "deltas": [
+          -0.86,
+          -0.309,
+          -0.075,
+          -1.376,
+          -0.988,
+          0.076
+        ],
+        "marginPct": -0.589,
+        "n": 6,
+        "name": "Lance Stroll",
+        "signTestP": 0.219,
+        "team": "Aston Martin",
+        "teamColor": "#229971",
+        "verdict": "inconclusive",
+        "vs": "ALO",
+        "winRate": 0.167
+      },
+      {
+        "ciHigh": 0.796,
+        "ciLow": -2.578,
+        "code": "BOR",
+        "deltas": [
+          0.104,
+          -0.212,
+          0.415,
+          -4.895,
+          -0.255,
+          -1.084,
+          -0.312
+        ],
+        "marginPct": -0.891,
+        "n": 7,
+        "name": "Gabriel Bortoleto",
+        "signTestP": 0.453,
+        "team": "Audi",
+        "teamColor": "#F50537",
+        "verdict": "inconclusive",
+        "vs": "HUL",
+        "winRate": 0.286
+      }
+    ]
+  },
+  "islands": {
+    "components": [
+      {
+        "drivers": [
+          "COL",
+          "DOO",
+          "GAS"
+        ],
+        "id": 0,
+        "multiTeam": false,
+        "teamSeasons": [
+          {
+            "team": "Alpine",
+            "year": 2025
+          },
+          {
+            "team": "Alpine",
+            "year": 2026
+          }
+        ]
+      },
+      {
+        "drivers": [
+          "ALO",
+          "STR"
+        ],
+        "id": 1,
+        "multiTeam": false,
+        "teamSeasons": [
+          {
+            "team": "Aston Martin",
+            "year": 2025
+          },
+          {
+            "team": "Aston Martin",
+            "year": 2026
+          }
+        ]
+      },
+      {
+        "drivers": [
+          "BOR",
+          "HUL"
+        ],
+        "id": 2,
+        "multiTeam": false,
+        "teamSeasons": [
+          {
+            "team": "Audi",
+            "year": 2025
+          },
+          {
+            "team": "Audi",
+            "year": 2026
+          }
+        ]
+      },
+      {
+        "drivers": [
+          "HAM",
+          "LEC"
+        ],
+        "id": 3,
+        "multiTeam": false,
+        "teamSeasons": [
+          {
+            "team": "Ferrari",
+            "year": 2025
+          },
+          {
+            "team": "Ferrari",
+            "year": 2026
+          }
+        ]
+      },
+      {
+        "drivers": [
+          "BEA",
+          "OCO"
+        ],
+        "id": 4,
+        "multiTeam": false,
+        "teamSeasons": [
+          {
+            "team": "Haas F1 Team",
+            "year": 2025
+          },
+          {
+            "team": "Haas F1 Team",
+            "year": 2026
+          }
+        ]
+      },
+      {
+        "drivers": [
+          "NOR",
+          "PIA"
+        ],
+        "id": 5,
+        "multiTeam": false,
+        "teamSeasons": [
+          {
+            "team": "McLaren",
+            "year": 2025
+          },
+          {
+            "team": "McLaren",
+            "year": 2026
+          }
+        ]
+      },
+      {
+        "drivers": [
+          "ANT",
+          "RUS"
+        ],
+        "id": 6,
+        "multiTeam": false,
+        "teamSeasons": [
+          {
+            "team": "Mercedes",
+            "year": 2025
+          },
+          {
+            "team": "Mercedes",
+            "year": 2026
+          }
+        ]
+      },
+      {
+        "drivers": [
+          "HAD",
+          "LAW",
+          "LIN",
+          "TSU",
+          "VER"
+        ],
+        "id": 7,
+        "multiTeam": true,
+        "teamSeasons": [
+          {
+            "team": "Racing Bulls",
+            "year": 2025
+          },
+          {
+            "team": "Red Bull Racing",
+            "year": 2025
+          },
+          {
+            "team": "Racing Bulls",
+            "year": 2026
+          },
+          {
+            "team": "Red Bull Racing",
+            "year": 2026
+          }
+        ]
+      },
+      {
+        "drivers": [
+          "ALB",
+          "SAI"
+        ],
+        "id": 8,
+        "multiTeam": false,
+        "teamSeasons": [
+          {
+            "team": "Williams",
+            "year": 2025
+          },
+          {
+            "team": "Williams",
+            "year": 2026
+          }
+        ]
+      },
+      {
+        "drivers": [
+          "BOT",
+          "PER"
+        ],
+        "id": 9,
+        "multiTeam": false,
+        "teamSeasons": [
+          {
+            "team": "Cadillac",
+            "year": 2026
+          }
+        ]
+      }
+    ],
+    "note": "Teams link onto one scale only when a driver drove for both. In 2025–26 almost no one moved, so most teams are isolated — the data can't rank drivers across unlinked teams."
+  },
+  "schemaVersion": 1,
+  "season": 2026
+}

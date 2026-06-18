@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
-import { useIndex, useStandings } from '../lib/data'
+import { useIndex, useRatings, useStandings } from '../lib/data'
 import { OverviewGrid } from '../components/OverviewGrid'
 import { TeamDashboard } from '../components/TeamDashboard'
 import { StandingsTable } from '../components/StandingsTable'
-import { PredictionCard } from '../components/PredictionCard'
+import { DriverRanking } from '../components/DriverRanking'
+import { EqualCarGrid } from '../components/EqualCarGrid'
+import { Panel } from '../components/ui'
 
 export function Dashboard() {
   const { data, error } = useIndex()
+  const { data: ratings } = useRatings()
   const { data: st } = useStandings()
   const [selected, setSelected] = useState<string | null>(null)
   const detailRef = useRef<HTMLDivElement>(null)
@@ -30,43 +33,49 @@ export function Dashboard() {
           2026 season · {data ? `${data.rounds.length} rounds in` : 'loading'}
         </div>
         <h1 className="text-3xl font-black uppercase italic tracking-tight text-white sm:text-4xl">
-          Driver vs Car
+          Who's actually driving best?
         </h1>
         <p className="mt-2 max-w-2xl text-sm text-zinc-400">
-          Who's winning, how they're doing it, and who's in form for the next round — with the car
-          divided out by comparing teammates.
+          The car flatters everyone. The one fair test is teammates — same machinery, so the gap is
+          mostly the driver. This ranks every driver by how decisively they beat their teammate, and
+          is honest about where the data can (and can't) go further.
         </p>
       </section>
 
-      {/* WHO'S DOING THE BEST: next-race form + championship */}
-      <section className="grid gap-4 lg:grid-cols-2">
-        {st ? (
-          <PredictionCard
-            nextRace={st.nextRace}
-            drivers={st.prediction.drivers}
-            method={st.prediction.method}
-          />
+      {/* HEADLINE: car-adjusted driver ranking */}
+      <Panel
+        title="Driver Power Ranking — margin over teammate"
+        subtitle={ratings?.headline.note ?? 'Same car, so it’s mostly the driver. % of lap time; + = faster.'}
+      >
+        {ratings ? (
+          <DriverRanking ranking={ratings.headline.ranking} />
         ) : (
-          <LoadingCard label="prediction" />
+          <p className="py-8 text-center text-sm text-zinc-500">Loading ranking…</p>
         )}
-        <div className="rounded-lg border border-carbon-line bg-carbon-card p-4 sm:p-5">
-          <div className="f1-bar mb-3">
-            <h2 className="text-sm font-bold uppercase tracking-wide text-white">Championship</h2>
-            <p className="text-xs text-zinc-500">Real points — who's actually doing the best.</p>
-          </div>
+      </Panel>
+
+      {/* equal-car (what's actually comparable) + championship context */}
+      <section className="grid gap-4 lg:grid-cols-2">
+        <Panel
+          title="Equal-car — what the data can compare"
+          subtitle={ratings?.equalCar.note ?? ''}
+        >
+          {ratings ? <EqualCarGrid ratings={ratings} /> : <p className="text-sm text-zinc-500">Loading…</p>}
+        </Panel>
+        <Panel title="Championship" subtitle="Real points — who's actually scoring (context).">
           {st ? <StandingsTable rows={st.standings} limit={8} /> : <p className="text-sm text-zinc-500">Loading…</p>}
-        </div>
+        </Panel>
       </section>
 
       {/* HOW: the teammate battles */}
       <section>
         <div className="f1-bar mb-3">
           <h2 className="text-sm font-bold uppercase tracking-wide text-white">
-            How — teammate battles
+            How — go inside any teammate battle
           </h2>
           <p className="text-xs text-zinc-500">
-            Each team's season qualifying edge (positive = lower-car-number driver faster), biggest
-            gap first. Click a team for the full breakdown.
+            Biggest qualifying gap first. Click a team for the track map, segment split, and race
+            breakdown behind its number.
           </p>
         </div>
         {error && (
@@ -81,14 +90,6 @@ export function Dashboard() {
       <div ref={detailRef} className="scroll-mt-20 border-t border-carbon-line pt-6">
         <TeamDashboard slug={selected} />
       </div>
-    </div>
-  )
-}
-
-function LoadingCard({ label }: { label: string }) {
-  return (
-    <div className="rounded-lg border border-carbon-line bg-carbon-card p-6 text-sm text-zinc-500">
-      Loading {label}…
     </div>
   )
 }

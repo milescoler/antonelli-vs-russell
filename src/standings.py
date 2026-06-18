@@ -81,34 +81,3 @@ def build_standings(per_round: list[list[dict]]) -> list[dict]:
         })
     out.sort(key=lambda x: (-(x["points"] or 0), -x["wins"], x["avgFinish"] or 99))
     return out
-
-
-# ---- pure: next-race prediction (heuristic) ------------------------------
-
-def predict_next(per_round: list[list[dict]], recent_n: int = 3, power: float = 2.0,
-                 top: int = 6) -> list[dict]:
-    """Heuristic win odds for the next race: recency-weighted recent-form points,
-    raised to `power` to concentrate on front-runners, then normalized to shares.
-    NOT a probability model — a transparent form index. Returns the top `top`."""
-    recent = per_round[-recent_n:]
-    meta: dict[str, dict] = {}
-    score: dict[str, float] = {}
-    for i, rnd in enumerate(recent):
-        weight = i + 1  # most recent round weighted highest
-        for r in rnd:
-            score[r["code"]] = score.get(r["code"], 0.0) + weight * r["points"]
-            meta[r["code"]] = r
-    powered = {c: s ** power for c, s in score.items() if s > 0}
-    total = sum(powered.values()) or 1.0
-    ranked = sorted(powered.items(), key=lambda kv: -kv[1])[:top]
-    return [
-        {
-            "code": c,
-            "name": meta[c]["name"],
-            "team": meta[c]["team"],
-            "teamColor": meta[c]["teamColor"],
-            "winOdds": _num(p / total, 3),
-            "recentPoints": _num(score[c], 1),
-        }
-        for c, p in ranked
-    ]

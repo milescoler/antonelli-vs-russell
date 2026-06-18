@@ -7,60 +7,6 @@
     "location": "Spielberg",
     "round": 8
   },
-  "prediction": {
-    "drivers": [
-      {
-        "code": "HAM",
-        "name": "Lewis Hamilton",
-        "recentPoints": 129.0,
-        "team": "Ferrari",
-        "teamColor": "#ED1131",
-        "winOdds": 0.414
-      },
-      {
-        "code": "ANT",
-        "name": "Kimi Antonelli",
-        "recentPoints": 75.0,
-        "team": "Mercedes",
-        "teamColor": "#00D7B6",
-        "winOdds": 0.14
-      },
-      {
-        "code": "HAD",
-        "name": "Isack Hadjar",
-        "recentPoints": 58.0,
-        "team": "Red Bull Racing",
-        "teamColor": "#4781D7",
-        "winOdds": 0.084
-      },
-      {
-        "code": "RUS",
-        "name": "George Russell",
-        "recentPoints": 54.0,
-        "team": "Mercedes",
-        "teamColor": "#00D7B6",
-        "winOdds": 0.073
-      },
-      {
-        "code": "GAS",
-        "name": "Pierre Gasly",
-        "recentPoints": 52.0,
-        "team": "Alpine",
-        "teamColor": "#00A1E8",
-        "winOdds": 0.067
-      },
-      {
-        "code": "VER",
-        "name": "Max Verstappen",
-        "recentPoints": 51.0,
-        "team": "Red Bull Racing",
-        "teamColor": "#4781D7",
-        "winOdds": 0.065
-      }
-    ],
-    "method": "Heuristic: recency-weighted points over the last 3 races, raised to a power to concentrate on front-runners, normalized to shares. A transparent form index — not a trained model.",
-    "recentRounds": 3
-  },
   "schemaVersion": 1,
   "season": 2026,
   "standings": [

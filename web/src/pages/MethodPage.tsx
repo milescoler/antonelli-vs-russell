@@ -1,46 +1,51 @@
 export function MethodPage() {
   return (
-    <article className="prose-invert max-w-2xl space-y-5 text-zinc-300">
-      <h1 className="text-2xl font-bold text-white">Method & limitations</h1>
+    <article className="max-w-2xl space-y-5">
+      <div className="f1-bar">
+        <h1 className="text-2xl font-black uppercase italic tracking-tight text-white">
+          Method & honesty
+        </h1>
+      </div>
 
-      <p>
-        The throughline of this tool is simple: <strong>a fast car flatters a driver everywhere</strong>,
-        so the signal worth trusting is whatever survives once the car is divided out. The cleanest
-        way to divide it out is to compare <strong>teammates</strong> — same car, same season.
+      <p className="text-sm leading-relaxed text-zinc-400">
+        Every result tangles driver and car together. The one fair test is{' '}
+        <strong className="text-zinc-200">teammates</strong> — same car, same season — so whatever
+        separates them is mostly the driver. The whole tool is built on that, and is careful to claim
+        only what the data supports.
       </p>
 
-      <Section title="Qualifying (Chapter 1)">
-        FastF1 telemetry for each 2026 qualifying session. We take each driver's fastest valid lap,
-        resample it onto a uniform 5&nbsp;m distance grid, and read per-segment times from the
-        timing channel. The headline is the lap-time delta (positive = driver A faster, where A is
-        the lower car number). Segment-category means and corner signatures (apex speed, brake and
-        throttle points) show <em>where</em> the time comes from. A sliding-window check flags and
-        excludes segments where a frozen speed sensor corrupts the telemetry.
+      <Section title="The headline — margin over teammate">
+        For each qualifying session we take each driver's fastest lap as a percentage off the
+        session's fastest (track-normalized), then the gap to their teammate. Averaged over the
+        season that's the rating. Because it's ~7 rounds, we report a small-sample (Student-t)
+        interval and a sign test — so most duels honestly read <em>too close to call</em>. That's the
+        point: we'd rather say "not separable yet" than fake precision.
       </Section>
 
-      <Section title="Race (Chapter 2)">
-        FastF1 race sessions, laps only. Metrics build on a shared clean-lap filter (green-flag
-        racing laps, not lap 1, no in/out/pit laps): start conversion (grid → lap 1 → finish),
-        per-stint median pace read like-compound only, tire-degradation slope per stint, and a
-        per-lap gap to the rival. Pace and degradation are <strong>not</strong> fuel-corrected —
-        named, not modelled away.
+      <Section title="Why there's no simple 1–22 skill ladder">
+        To rank drivers <em>across</em> teams you need someone who drove for both, to link the teams
+        onto one scale. In 2025→2026 almost nobody moved — so Mercedes, Ferrari, McLaren and the rest
+        are <strong className="text-zinc-200">isolated islands</strong>. The data literally cannot say
+        whether, say, Antonelli outdrives Hamilton in equal cars. The "equal-car" view therefore only
+        compares drivers <em>within</em> a linked island (the Red Bull/Racing Bulls family, joined by
+        drivers who crossed between them) and shows everything with bootstrap intervals. The
+        Sauber→Audi rebrand is continuity, not a transfer, so it doesn't bridge teams.
       </Section>
 
-      <Section title="Year-over-year">
-        Shown only where the same pairing drove the same team last season. Tracks are matched across
-        years by circuit, so the comparison is genuinely same-car, same-place, one year apart.
+      <Section title="The race & track detail">
+        Behind each teammate battle: FastF1 race laps (clean green-flag laps only) for start
+        conversion, stint pace and tire degradation; and the qualifying telemetry drawn as a track
+        map colored by who's faster where. Pace and degradation aren't fuel-corrected — named, not
+        modelled away.
       </Section>
 
       <Section title="What this is not">
-        Not a driver-vs-the-field model — comparing a driver to the whole grid loses the car control
-        that makes this honest. Small samples (a partial season, thin race data) make findings
-        directional, not conclusive. DNFs, traffic, tire age and setup divergence are surfaced as
-        caveats rather than corrected away.
+        Not a win-probability model, not betting odds, not an absolute skill ranking. Championship
+        points are shown only as real-world context. Findings are directional; uncertainty is on
+        every chart.
       </Section>
 
-      <p className="text-sm text-zinc-500">
-        Data via FastF1. Sign convention shown on each chart. Built by Cole Richards.
-      </p>
+      <p className="text-xs text-zinc-600">Data via FastF1. Built by Cole Richards.</p>
     </article>
   )
 }
@@ -48,7 +53,7 @@ export function MethodPage() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section>
-      <h2 className="text-sm font-semibold uppercase tracking-wide text-sky-400">{title}</h2>
+      <h2 className="text-sm font-bold uppercase tracking-wide text-f1-red">{title}</h2>
       <p className="mt-1.5 text-sm leading-relaxed text-zinc-400">{children}</p>
     </section>
   )
