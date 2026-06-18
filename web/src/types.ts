@@ -149,6 +149,45 @@ export interface RaceRound {
   }
 }
 
+export interface StandingRow {
+  code: string
+  name: string
+  team: string
+  teamColor: string | null
+  points: number | null
+  wins: number
+  podiums: number
+  avgFinish: number | null
+  bestFinish: number | null
+  finishes: (number | null)[]
+}
+
+export interface PredictionDriver {
+  code: string
+  name: string
+  team: string
+  teamColor: string | null
+  winOdds: number | null
+  recentPoints: number | null
+}
+
+export interface NextRace {
+  round: number
+  eventName: string
+  country: string
+  location: string
+  eventDate: string
+  format: string
+}
+
+export interface StandingsData {
+  schemaVersion: number
+  season: number
+  nextRace: NextRace | null
+  standings: StandingRow[]
+  prediction: { method: string; recentRounds: number; drivers: PredictionDriver[] }
+}
+
 export interface TeamData {
   schemaVersion: number
   slug: string

@@ -58,6 +58,17 @@ def test_pairs_from_results_orders_a_b_by_car_number():
 
 # ---- _completed_from_schedule -------------------------------------------
 
+def test_next_from_schedule_returns_earliest_future_round():
+    sched = _schedule([
+        (6, "Monaco Grand Prix", pd.Timestamp("2026-06-07"), "Monaco", "Monte Carlo", "conventional"),
+        (7, "Barcelona Grand Prix", pd.Timestamp("2026-06-14"), "Spain", "Barcelona", "conventional"),
+        (8, "Austrian Grand Prix", pd.Timestamp("2026-06-28"), "Austria", "Spielberg", "conventional"),
+        (9, "British Grand Prix", pd.Timestamp("2026-07-05"), "United Kingdom", "Silverstone", "conventional"),
+    ])
+    nxt = teams._next_from_schedule(sched, today=date(2026, 6, 17))
+    assert nxt["round"] == 8 and nxt["country"] == "Austria"
+
+
 def test_completed_from_schedule_excludes_round_zero_and_future():
     sched = _schedule([
         (0, "Pre-Season Testing", pd.Timestamp("2026-02-20"), "Bahrain", "Sakhir", "testing"),

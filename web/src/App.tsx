@@ -5,17 +5,23 @@ import { MethodPage } from './pages/MethodPage'
 
 function Nav() {
   const link = ({ isActive }: { isActive: boolean }) =>
-    'text-sm transition ' + (isActive ? 'text-white' : 'text-zinc-400 hover:text-zinc-200')
+    'text-xs font-bold uppercase tracking-wider transition ' +
+    (isActive ? 'text-white' : 'text-zinc-500 hover:text-zinc-200')
   return (
-    <header className="border-b border-zinc-800/80 bg-zinc-950/60 backdrop-blur">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
-        <NavLink to="/" className="text-sm font-bold tracking-tight text-white">
-          Driver<span className="text-sky-400">vs</span>Car
-          <span className="ml-2 text-xs font-normal text-zinc-500">F1 2026</span>
+    <header className="sticky top-0 z-20 border-b border-carbon-line bg-carbon/90 backdrop-blur">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+        <NavLink to="/" className="flex items-center gap-2">
+          <span className="h-5 w-1.5 rounded-sm bg-f1-red" />
+          <span className="text-base font-black uppercase italic tracking-tight text-white">
+            Driver<span className="text-f1-red">/</span>Car
+          </span>
+          <span className="ml-1 text-[10px] font-bold uppercase tracking-widest text-zinc-500">
+            F1 2026
+          </span>
         </NavLink>
-        <nav className="flex items-center gap-4">
+        <nav className="flex items-center gap-5">
           <NavLink to="/" className={link} end>
-            Teams
+            Dashboard
           </NavLink>
           <NavLink to="/method" className={link}>
             Method
@@ -28,10 +34,11 @@ function Nav() {
 
 function Footer() {
   return (
-    <footer className="mt-16 border-t border-zinc-800/80">
-      <div className="mx-auto max-w-5xl px-4 py-6 text-xs text-zinc-600">
-        Teammate-controlled analysis · real qualifying & race data via FastF1 · not affiliated
-        with Formula 1. Built by Cole Richards.
+    <footer className="mt-16 border-t border-carbon-line">
+      <div className="mx-auto max-w-6xl px-4 py-6 text-xs text-zinc-600">
+        Teammate-controlled analysis · real qualifying, race & points data via FastF1 · predictions
+        are a transparent form heuristic, not official odds · not affiliated with Formula 1. Built by
+        Cole Richards.
       </div>
     </footer>
   )
@@ -42,7 +49,7 @@ export function App() {
     <HashRouter>
       <div className="min-h-screen text-zinc-200">
         <Nav />
-        <main className="mx-auto max-w-5xl px-4 py-8">
+        <main className="mx-auto max-w-6xl px-4 py-7">
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/team/:slug" element={<TeamPage />} />

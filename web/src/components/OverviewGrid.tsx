@@ -36,10 +36,10 @@ export function OverviewGrid({
             key={t.slug}
             onClick={() => onSelect(t.slug)}
             className={
-              'flex flex-col gap-2 rounded-xl border p-3 text-left transition ' +
+              'flex flex-col gap-2 rounded-lg border p-3 text-left transition ' +
               (active
-                ? 'border-sky-500 bg-sky-500/10 ring-1 ring-sky-500/40'
-                : 'border-zinc-800 bg-zinc-900/40 hover:border-zinc-600 hover:bg-zinc-900')
+                ? 'border-f1-red bg-f1-red/10 ring-1 ring-f1-red/30'
+                : 'border-carbon-line bg-carbon-card hover:border-zinc-600')
             }
           >
             <div className="flex items-start justify-between gap-2">

@@ -1,0 +1,508 @@
+{
+  "nextRace": {
+    "country": "Austria",
+    "eventDate": "2026-06-28",
+    "eventName": "Austrian Grand Prix",
+    "format": "conventional",
+    "location": "Spielberg",
+    "round": 8
+  },
+  "prediction": {
+    "drivers": [
+      {
+        "code": "HAM",
+        "name": "Lewis Hamilton",
+        "recentPoints": 129.0,
+        "team": "Ferrari",
+        "teamColor": "#ED1131",
+        "winOdds": 0.414
+      },
+      {
+        "code": "ANT",
+        "name": "Kimi Antonelli",
+        "recentPoints": 75.0,
+        "team": "Mercedes",
+        "teamColor": "#00D7B6",
+        "winOdds": 0.14
+      },
+      {
+        "code": "HAD",
+        "name": "Isack Hadjar",
+        "recentPoints": 58.0,
+        "team": "Red Bull Racing",
+        "teamColor": "#4781D7",
+        "winOdds": 0.084
+      },
+      {
+        "code": "RUS",
+        "name": "George Russell",
+        "recentPoints": 54.0,
+        "team": "Mercedes",
+        "teamColor": "#00D7B6",
+        "winOdds": 0.073
+      },
+      {
+        "code": "GAS",
+        "name": "Pierre Gasly",
+        "recentPoints": 52.0,
+        "team": "Alpine",
+        "teamColor": "#00A1E8",
+        "winOdds": 0.067
+      },
+      {
+        "code": "VER",
+        "name": "Max Verstappen",
+        "recentPoints": 51.0,
+        "team": "Red Bull Racing",
+        "teamColor": "#4781D7",
+        "winOdds": 0.065
+      }
+    ],
+    "method": "Heuristic: recency-weighted points over the last 3 races, raised to a power to concentrate on front-runners, normalized to shares. A transparent form index — not a trained model.",
+    "recentRounds": 3
+  },
+  "schemaVersion": 1,
+  "season": 2026,
+  "standings": [
+    {
+      "avgFinish": 3.3,
+      "bestFinish": 1,
+      "code": "ANT",
+      "finishes": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        16
+      ],
+      "name": "Kimi Antonelli",
+      "podiums": 6,
+      "points": 143.0,
+      "team": "Mercedes",
+      "teamColor": "#00D7B6",
+      "wins": 5
+    },
+    {
+      "avgFinish": 3.4,
+      "bestFinish": 1,
+      "code": "HAM",
+      "finishes": [
+        4,
+        3,
+        6,
+        6,
+        2,
+        2,
+        1
+      ],
+      "name": "Lewis Hamilton",
+      "podiums": 4,
+      "points": 104.0,
+      "team": "Ferrari",
+      "teamColor": "#ED1131",
+      "wins": 1
+    },
+    {
+      "avgFinish": 6.3,
+      "bestFinish": 1,
+      "code": "RUS",
+      "finishes": [
+        1,
+        2,
+        4,
+        4,
+        19,
+        12,
+        2
+      ],
+      "name": "George Russell",
+      "podiums": 3,
+      "points": 85.0,
+      "team": "Mercedes",
+      "teamColor": "#00D7B6",
+      "wins": 1
+    },
+    {
+      "avgFinish": 7.7,
+      "bestFinish": 3,
+      "code": "LEC",
+      "finishes": [
+        3,
+        4,
+        3,
+        8,
+        4,
+        17,
+        15
+      ],
+      "name": "Charles Leclerc",
+      "podiums": 2,
+      "points": 58.0,
+      "team": "Ferrari",
+      "teamColor": "#ED1131",
+      "wins": 0
+    },
+    {
+      "avgFinish": 9.4,
+      "bestFinish": 2,
+      "code": "PIA",
+      "finishes": [
+        21,
+        19,
+        2,
+        3,
+        11,
+        5,
+        5
+      ],
+      "name": "Oscar Piastri",
+      "podiums": 2,
+      "points": 53.0,
+      "team": "McLaren",
+      "teamColor": "#F47600",
+      "wins": 0
+    },
+    {
+      "avgFinish": 10.3,
+      "bestFinish": 2,
+      "code": "NOR",
+      "finishes": [
+        5,
+        20,
+        5,
+        2,
+        18,
+        19,
+        3
+      ],
+      "name": "Lando Norris",
+      "podiums": 2,
+      "points": 53.0,
+      "team": "McLaren",
+      "teamColor": "#F47600",
+      "wins": 0
+    },
+    {
+      "avgFinish": 9.1,
+      "bestFinish": 3,
+      "code": "VER",
+      "finishes": [
+        6,
+        16,
+        8,
+        5,
+        3,
+        22,
+        4
+      ],
+      "name": "Max Verstappen",
+      "podiums": 1,
+      "points": 49.0,
+      "team": "Red Bull Racing",
+      "teamColor": "#4781D7",
+      "wins": 0
+    },
+    {
+      "avgFinish": 8.9,
+      "bestFinish": 3,
+      "code": "GAS",
+      "finishes": [
+        10,
+        6,
+        7,
+        21,
+        8,
+        3,
+        7
+      ],
+      "name": "Pierre Gasly",
+      "podiums": 1,
+      "points": 40.0,
+      "team": "Alpine",
+      "teamColor": "#00A1E8",
+      "wins": 0
+    },
+    {
+      "avgFinish": 11.0,
+      "bestFinish": 4,
+      "code": "HAD",
+      "finishes": [
+        20,
+        8,
+        12,
+        22,
+        5,
+        4,
+        6
+      ],
+      "name": "Isack Hadjar",
+      "podiums": 0,
+      "points": 34.0,
+      "team": "Red Bull Racing",
+      "teamColor": "#4781D7",
+      "wins": 0
+    },
+    {
+      "avgFinish": 10.0,
+      "bestFinish": 6,
+      "code": "LAW",
+      "finishes": [
+        13,
+        7,
+        9,
+        20,
+        7,
+        6,
+        8
+      ],
+      "name": "Liam Lawson",
+      "podiums": 0,
+      "points": 26.0,
+      "team": "Racing Bulls",
+      "teamColor": "#6C98FF",
+      "wins": 0
+    },
+    {
+      "avgFinish": 13.1,
+      "bestFinish": 5,
+      "code": "BEA",
+      "finishes": [
+        7,
+        5,
+        22,
+        11,
+        10,
+        20,
+        17
+      ],
+      "name": "Oliver Bearman",
+      "podiums": 0,
+      "points": 17.0,
+      "team": "Haas F1 Team",
+      "teamColor": "#9C9FA2",
+      "wins": 0
+    },
+    {
+      "avgFinish": 11.0,
+      "bestFinish": 6,
+      "code": "COL",
+      "finishes": [
+        14,
+        10,
+        16,
+        7,
+        6,
+        14,
+        10
+      ],
+      "name": "Franco Colapinto",
+      "podiums": 0,
+      "points": 16.0,
+      "team": "Alpine",
+      "teamColor": "#00A1E8",
+      "wins": 0
+    },
+    {
+      "avgFinish": 12.3,
+      "bestFinish": 7,
+      "code": "LIN",
+      "finishes": [
+        8,
+        12,
+        14,
+        14,
+        22,
+        7,
+        9
+      ],
+      "name": "Arvid Lindblad",
+      "podiums": 0,
+      "points": 12.0,
+      "team": "Racing Bulls",
+      "teamColor": "#6C98FF",
+      "wins": 0
+    },
+    {
+      "avgFinish": 12.1,
+      "bestFinish": 9,
+      "code": "SAI",
+      "finishes": [
+        15,
+        9,
+        15,
+        9,
+        9,
+        16,
+        12
+      ],
+      "name": "Carlos Sainz",
+      "podiums": 0,
+      "points": 6.0,
+      "team": "Williams",
+      "teamColor": "#1868DB",
+      "wins": 0
+    },
+    {
+      "avgFinish": 15.9,
+      "bestFinish": 8,
+      "code": "ALB",
+      "finishes": [
+        12,
+        22,
+        20,
+        10,
+        21,
+        8,
+        18
+      ],
+      "name": "Alexander Albon",
+      "podiums": 0,
+      "points": 5.0,
+      "team": "Williams",
+      "teamColor": "#1868DB",
+      "wins": 0
+    },
+    {
+      "avgFinish": 12.0,
+      "bestFinish": 9,
+      "code": "OCO",
+      "finishes": [
+        11,
+        14,
+        10,
+        13,
+        14,
+        9,
+        13
+      ],
+      "name": "Esteban Ocon",
+      "podiums": 0,
+      "points": 3.0,
+      "team": "Haas F1 Team",
+      "teamColor": "#9C9FA2",
+      "wins": 0
+    },
+    {
+      "avgFinish": 12.9,
+      "bestFinish": 9,
+      "code": "BOR",
+      "finishes": [
+        9,
+        21,
+        13,
+        12,
+        13,
+        11,
+        11
+      ],
+      "name": "Gabriel Bortoleto",
+      "podiums": 0,
+      "points": 2.0,
+      "team": "Audi",
+      "teamColor": "#F50537",
+      "wins": 0
+    },
+    {
+      "avgFinish": 16.7,
+      "bestFinish": 10,
+      "code": "ALO",
+      "finishes": [
+        18,
+        17,
+        18,
+        15,
+        20,
+        10,
+        19
+      ],
+      "name": "Fernando Alonso",
+      "podiums": 0,
+      "points": 1.0,
+      "team": "Aston Martin",
+      "teamColor": "#229971",
+      "wins": 0
+    },
+    {
+      "avgFinish": 15.4,
+      "bestFinish": 11,
+      "code": "HUL",
+      "finishes": [
+        22,
+        11,
+        11,
+        19,
+        12,
+        13,
+        20
+      ],
+      "name": "Nico Hulkenberg",
+      "podiums": 0,
+      "points": 0.0,
+      "team": "Audi",
+      "teamColor": "#F50537",
+      "wins": 0
+    },
+    {
+      "avgFinish": 15.7,
+      "bestFinish": 14,
+      "code": "PER",
+      "finishes": [
+        16,
+        15,
+        17,
+        16,
+        17,
+        15,
+        14
+      ],
+      "name": "Sergio Perez",
+      "podiums": 0,
+      "points": 0.0,
+      "team": "Cadillac",
+      "teamColor": "#909090",
+      "wins": 0
+    },
+    {
+      "avgFinish": 18.1,
+      "bestFinish": 13,
+      "code": "BOT",
+      "finishes": [
+        19,
+        13,
+        19,
+        18,
+        16,
+        21,
+        21
+      ],
+      "name": "Valtteri Bottas",
+      "podiums": 0,
+      "points": 0.0,
+      "team": "Cadillac",
+      "teamColor": "#909090",
+      "wins": 0
+    },
+    {
+      "avgFinish": 18.3,
+      "bestFinish": 15,
+      "code": "STR",
+      "finishes": [
+        17,
+        18,
+        21,
+        17,
+        15,
+        18,
+        22
+      ],
+      "name": "Lance Stroll",
+      "podiums": 0,
+      "points": 0.0,
+      "team": "Aston Martin",
+      "teamColor": "#229971",
+      "wins": 0
+    }
+  ]
+}

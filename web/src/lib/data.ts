@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import type { IndexData, TeamData } from '../types'
+import type { IndexData, StandingsData, TeamData } from '../types'
 
 // import.meta.env.BASE_URL is the Vite `base` (ends with '/'), so data fetches
 // resolve correctly whether served at the root or a GitHub Pages subpath.
@@ -17,6 +17,21 @@ export function useIndex() {
   useEffect(() => {
     let live = true
     getJSON<IndexData>('index.json')
+      .then((d) => live && setData(d))
+      .catch((e) => live && setError(String(e)))
+    return () => {
+      live = false
+    }
+  }, [])
+  return { data, error }
+}
+
+export function useStandings() {
+  const [data, setData] = useState<StandingsData | null>(null)
+  const [error, setError] = useState<string | null>(null)
+  useEffect(() => {
+    let live = true
+    getJSON<StandingsData>('standings.json')
       .then((d) => live && setData(d))
       .catch((e) => live && setError(String(e)))
     return () => {

@@ -93,6 +93,35 @@ def _completed_from_schedule(schedule_df: pd.DataFrame, today: date) -> list[dic
     return rows
 
 
+def _next_from_schedule(schedule_df: pd.DataFrame, today: date) -> dict | None:
+    """The earliest round whose EventDate is still in the future (the next race)."""
+    rows = []
+    for _, r in schedule_df.iterrows():
+        rnd = r["RoundNumber"]
+        if pd.isna(rnd) or int(rnd) == 0:
+            continue
+        d = pd.Timestamp(r["EventDate"]).date()
+        if d > today:
+            rows.append((int(rnd), r))
+    if not rows:
+        return None
+    rows.sort(key=lambda x: x[0])
+    rnd, r = rows[0]
+    return {
+        "round": rnd,
+        "eventName": str(r["EventName"]),
+        "country": str(r["Country"]),
+        "location": str(r["Location"]),
+        "eventDate": pd.Timestamp(r["EventDate"]).date().isoformat(),
+        "format": str(r["EventFormat"]),
+    }
+
+
+def next_race(year: int, today: date | None = None) -> dict | None:
+    schedule = fastf1.get_event_schedule(year, include_testing=False)
+    return _next_from_schedule(schedule, today or date.today())
+
+
 def _canonical_from_round_pairs(round_pairs: list[dict]) -> dict:
     """Given one team's per-round pair dicts (in round order), pick the canonical
     pair (most frequent driver-code set; ties -> earliest occurrence) and flag a

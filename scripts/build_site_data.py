@@ -38,7 +38,7 @@ from src.loaders import (                         # noqa: E402
     get_lap_telemetry,
 )
 from src.segments import resample_to_distance_grid  # noqa: E402
-from src import teams, serialize, benchmarks, race  # noqa: E402
+from src import teams, serialize, benchmarks, race, standings  # noqa: E402
 import fastf1                                     # noqa: E402
 
 CACHE = ROOT / "fastf1_cache"
@@ -219,7 +219,31 @@ def main():
             },
         })
 
-    if not only:  # only rewrite the manifest on a full build
+    if not only:  # standings + manifest are season-wide; only on a full build
+        print("== standings + next-race prediction ==")
+        per_round = standings.season_results(season, round_nums)
+        table = standings.build_standings(per_round)
+        prediction = standings.predict_next(per_round)
+        nxt = teams.next_race(season)
+        standings_doc = {
+            "schemaVersion": serialize.SCHEMA_VERSION,
+            "season": season,
+            "nextRace": nxt,
+            "standings": table,
+            "prediction": {
+                "method": (
+                    "Heuristic: recency-weighted points over the last 3 races, "
+                    "raised to a power to concentrate on front-runners, normalized "
+                    "to shares. A transparent form index — not a trained model."
+                ),
+                "recentRounds": 3,
+                "drivers": prediction,
+            },
+        }
+        write_json_if_changed(DATA_DIR / "standings.json", standings_doc)
+        print(f"   wrote standings.json ({len(table)} drivers; next: "
+              f"{nxt['eventName'] if nxt else 'season over'})")
+
         index = serialize.build_index(
             season=season, rounds=round_infos, teams=index_teams,
             last_updated=datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),

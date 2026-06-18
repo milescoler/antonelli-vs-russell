@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+/* F1.com / F1TV palette: carbon-dark background, the F1 red, Titillium type. */
+@theme {
+  --color-f1-red: #e10600;
+  --color-f1-red-dim: #b30500;
+  --color-carbon: #15151e;
+  --color-carbon-soft: #1d1d29;
+  --color-carbon-card: #1f1f2b;
+  --color-carbon-line: #2c2c3a;
+  --font-display: "Titillium Web", ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
 :root {
   color-scheme: dark;
 }
@@ -9,9 +20,34 @@ body,
 #root {
   margin: 0;
   min-height: 100%;
-  background: #0a0a0b;
+  background: var(--color-carbon);
 }
 
 body {
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-display);
+  color: #e6e6ec;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* F1-style section headings: condensed, uppercase, tight. */
+.f1-kicker {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* The signature F1 red left-bar used on headings/cards. */
+.f1-bar {
+  position: relative;
+  padding-left: 0.75rem;
+}
+.f1-bar::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  bottom: 0.15em;
+  width: 4px;
+  border-radius: 2px;
+  background: var(--color-f1-red);
 }

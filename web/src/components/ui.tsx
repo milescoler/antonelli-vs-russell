@@ -12,11 +12,11 @@ export function Panel({
   children: ReactNode
 }) {
   return (
-    <section className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-4 sm:p-5">
-      <div className="mb-3 flex items-baseline justify-between gap-3">
-        <div>
-          <h3 className="text-sm font-semibold tracking-tight text-zinc-100">{title}</h3>
-          {subtitle && <p className="mt-0.5 text-xs text-zinc-500">{subtitle}</p>}
+    <section className="rounded-lg border border-carbon-line bg-carbon-card p-4 sm:p-5">
+      <div className="mb-3 flex items-start justify-between gap-3">
+        <div className="f1-bar">
+          <h3 className="text-sm font-bold uppercase tracking-wide text-white">{title}</h3>
+          {subtitle && <p className="mt-0.5 text-xs normal-case text-zinc-500">{subtitle}</p>}
         </div>
         {right}
       </div>
@@ -28,16 +28,16 @@ export function Panel({
 type Tone = 'zinc' | 'amber' | 'red' | 'sky'
 
 const TONES: Record<Tone, string> = {
-  zinc: 'border-zinc-700 bg-zinc-800/60 text-zinc-300',
+  zinc: 'border-carbon-line bg-carbon-soft text-zinc-300',
   amber: 'border-amber-700/50 bg-amber-900/30 text-amber-300',
-  red: 'border-red-800/50 bg-red-950/40 text-red-300',
+  red: 'border-f1-red/50 bg-f1-red/15 text-red-300',
   sky: 'border-sky-800/50 bg-sky-950/40 text-sky-300',
 }
 
 export function Badge({ children, tone = 'zinc' }: { children: ReactNode; tone?: Tone }) {
   return (
     <span
-      className={`inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] font-medium ${TONES[tone]}`}
+      className={`inline-flex items-center rounded-sm border px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide ${TONES[tone]}`}
     >
       {children}
     </span>
