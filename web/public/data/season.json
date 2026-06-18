@@ -1,138 +1,138 @@
 {
-  "lastUpdated": "2026-06-18T01:27:29Z",
+  "lastUpdated": "2026-06-18T02:08:19Z",
   "meta": {
     "drivers": [
       {
         "code": "ALB",
         "name": "Alexander Albon",
         "team": "Williams",
-        "teamColor": "#1868DB"
+        "teamColor": null
       },
       {
         "code": "ALO",
         "name": "Fernando Alonso",
         "team": "Aston Martin",
-        "teamColor": "#229971"
+        "teamColor": null
       },
       {
         "code": "ANT",
-        "name": "Kimi Antonelli",
+        "name": "Andrea Kimi Antonelli",
         "team": "Mercedes",
-        "teamColor": "#00D7B6"
+        "teamColor": null
       },
       {
         "code": "BEA",
         "name": "Oliver Bearman",
         "team": "Haas F1 Team",
-        "teamColor": "#9C9FA2"
+        "teamColor": null
       },
       {
         "code": "BOR",
         "name": "Gabriel Bortoleto",
         "team": "Audi",
-        "teamColor": "#F50537"
+        "teamColor": null
       },
       {
         "code": "BOT",
         "name": "Valtteri Bottas",
-        "team": "Cadillac",
-        "teamColor": "#909090"
+        "team": "Cadillac F1 Team",
+        "teamColor": null
       },
       {
         "code": "COL",
         "name": "Franco Colapinto",
-        "team": "Alpine",
-        "teamColor": "#00A1E8"
+        "team": "Alpine F1 Team",
+        "teamColor": null
       },
       {
         "code": "GAS",
         "name": "Pierre Gasly",
-        "team": "Alpine",
-        "teamColor": "#00A1E8"
+        "team": "Alpine F1 Team",
+        "teamColor": null
       },
       {
         "code": "HAD",
         "name": "Isack Hadjar",
-        "team": "Red Bull Racing",
-        "teamColor": "#4781D7"
+        "team": "Red Bull",
+        "teamColor": null
       },
       {
         "code": "HAM",
         "name": "Lewis Hamilton",
         "team": "Ferrari",
-        "teamColor": "#ED1131"
+        "teamColor": null
       },
       {
         "code": "HUL",
-        "name": "Nico Hulkenberg",
+        "name": "Nico Hülkenberg",
         "team": "Audi",
-        "teamColor": "#F50537"
+        "teamColor": null
       },
       {
         "code": "LAW",
         "name": "Liam Lawson",
-        "team": "Racing Bulls",
-        "teamColor": "#6C98FF"
+        "team": "RB F1 Team",
+        "teamColor": null
       },
       {
         "code": "LEC",
         "name": "Charles Leclerc",
         "team": "Ferrari",
-        "teamColor": "#ED1131"
+        "teamColor": null
       },
       {
         "code": "LIN",
         "name": "Arvid Lindblad",
-        "team": "Racing Bulls",
-        "teamColor": "#6C98FF"
+        "team": "RB F1 Team",
+        "teamColor": null
       },
       {
         "code": "NOR",
         "name": "Lando Norris",
         "team": "McLaren",
-        "teamColor": "#F47600"
+        "teamColor": null
       },
       {
         "code": "OCO",
         "name": "Esteban Ocon",
         "team": "Haas F1 Team",
-        "teamColor": "#9C9FA2"
+        "teamColor": null
       },
       {
         "code": "PER",
-        "name": "Sergio Perez",
-        "team": "Cadillac",
-        "teamColor": "#909090"
+        "name": "Sergio Pérez",
+        "team": "Cadillac F1 Team",
+        "teamColor": null
       },
       {
         "code": "PIA",
         "name": "Oscar Piastri",
         "team": "McLaren",
-        "teamColor": "#F47600"
+        "teamColor": null
       },
       {
         "code": "RUS",
         "name": "George Russell",
         "team": "Mercedes",
-        "teamColor": "#00D7B6"
+        "teamColor": null
       },
       {
         "code": "SAI",
         "name": "Carlos Sainz",
         "team": "Williams",
-        "teamColor": "#1868DB"
+        "teamColor": null
       },
       {
         "code": "STR",
         "name": "Lance Stroll",
         "team": "Aston Martin",
-        "teamColor": "#229971"
+        "teamColor": null
       },
       {
         "code": "VER",
         "name": "Max Verstappen",
-        "team": "Red Bull Racing",
-        "teamColor": "#4781D7"
+        "team": "Red Bull",
+        "teamColor": null
       }
     ],
     "rounds": [
@@ -286,10 +286,10 @@
       ],
       "code": "ANT",
       "mean": 0.128,
-      "name": "Kimi Antonelli",
+      "name": "Andrea Kimi Antonelli",
       "rank": 1,
       "team": "Mercedes",
-      "teamColor": "#00D7B6"
+      "teamColor": null
     },
     {
       "byRound": [
@@ -327,7 +327,7 @@
       "name": "George Russell",
       "rank": 2,
       "team": "Mercedes",
-      "teamColor": "#00D7B6"
+      "teamColor": null
     },
     {
       "byRound": [
@@ -365,7 +365,7 @@
       "name": "Lewis Hamilton",
       "rank": 3,
       "team": "Ferrari",
-      "teamColor": "#ED1131"
+      "teamColor": null
     },
     {
       "byRound": [
@@ -403,7 +403,7 @@
       "name": "Charles Leclerc",
       "rank": 4,
       "team": "Ferrari",
-      "teamColor": "#ED1131"
+      "teamColor": null
     },
     {
       "byRound": [
@@ -441,7 +441,7 @@
       "name": "Oscar Piastri",
       "rank": 5,
       "team": "McLaren",
-      "teamColor": "#F47600"
+      "teamColor": null
     },
     {
       "byRound": [
@@ -474,8 +474,8 @@
       "mean": 0.642,
       "name": "Max Verstappen",
       "rank": 6,
-      "team": "Red Bull Racing",
-      "teamColor": "#4781D7"
+      "team": "Red Bull",
+      "teamColor": null
     },
     {
       "byRound": [
@@ -513,7 +513,7 @@
       "name": "Lando Norris",
       "rank": 7,
       "team": "McLaren",
-      "teamColor": "#F47600"
+      "teamColor": null
     },
     {
       "byRound": [
@@ -550,8 +550,8 @@
       "mean": 0.884,
       "name": "Isack Hadjar",
       "rank": 8,
-      "team": "Red Bull Racing",
-      "teamColor": "#4781D7"
+      "team": "Red Bull",
+      "teamColor": null
     },
     {
       "byRound": [
@@ -588,8 +588,8 @@
       "mean": 1.65,
       "name": "Pierre Gasly",
       "rank": 9,
-      "team": "Alpine",
-      "teamColor": "#00A1E8"
+      "team": "Alpine F1 Team",
+      "teamColor": null
     },
     {
       "byRound": [
@@ -626,8 +626,8 @@
       "mean": 1.788,
       "name": "Liam Lawson",
       "rank": 10,
-      "team": "Racing Bulls",
-      "teamColor": "#6C98FF"
+      "team": "RB F1 Team",
+      "teamColor": null
     },
     {
       "byRound": [
@@ -662,10 +662,10 @@
       ],
       "code": "HUL",
       "mean": 1.879,
-      "name": "Nico Hulkenberg",
+      "name": "Nico Hülkenberg",
       "rank": 11,
       "team": "Audi",
-      "teamColor": "#F50537"
+      "teamColor": null
     },
     {
       "byRound": [
@@ -702,8 +702,8 @@
       "mean": 1.921,
       "name": "Arvid Lindblad",
       "rank": 12,
-      "team": "Racing Bulls",
-      "teamColor": "#6C98FF"
+      "team": "RB F1 Team",
+      "teamColor": null
     },
     {
       "byRound": [
@@ -740,8 +740,8 @@
       "mean": 2.038,
       "name": "Franco Colapinto",
       "rank": 13,
-      "team": "Alpine",
-      "teamColor": "#00A1E8"
+      "team": "Alpine F1 Team",
+      "teamColor": null
     },
     {
       "byRound": [
@@ -779,7 +779,7 @@
       "name": "Oliver Bearman",
       "rank": 14,
       "team": "Haas F1 Team",
-      "teamColor": "#9C9FA2"
+      "teamColor": null
     },
     {
       "byRound": [
@@ -813,7 +813,7 @@
       "name": "Carlos Sainz",
       "rank": 15,
       "team": "Williams",
-      "teamColor": "#1868DB"
+      "teamColor": null
     },
     {
       "byRound": [
@@ -851,7 +851,7 @@
       "name": "Esteban Ocon",
       "rank": 16,
       "team": "Haas F1 Team",
-      "teamColor": "#9C9FA2"
+      "teamColor": null
     },
     {
       "byRound": [
@@ -889,7 +889,7 @@
       "name": "Gabriel Bortoleto",
       "rank": 17,
       "team": "Audi",
-      "teamColor": "#F50537"
+      "teamColor": null
     },
     {
       "byRound": [
@@ -927,7 +927,7 @@
       "name": "Alexander Albon",
       "rank": 18,
       "team": "Williams",
-      "teamColor": "#1868DB"
+      "teamColor": null
     },
     {
       "byRound": [
@@ -965,7 +965,7 @@
       "name": "Fernando Alonso",
       "rank": 19,
       "team": "Aston Martin",
-      "teamColor": "#229971"
+      "teamColor": null
     },
     {
       "byRound": [
@@ -1000,10 +1000,10 @@
       ],
       "code": "PER",
       "mean": 4.369,
-      "name": "Sergio Perez",
+      "name": "Sergio Pérez",
       "rank": 20,
-      "team": "Cadillac",
-      "teamColor": "#909090"
+      "team": "Cadillac F1 Team",
+      "teamColor": null
     },
     {
       "byRound": [
@@ -1040,8 +1040,8 @@
       "mean": 4.535,
       "name": "Valtteri Bottas",
       "rank": 21,
-      "team": "Cadillac",
-      "teamColor": "#909090"
+      "team": "Cadillac F1 Team",
+      "teamColor": null
     },
     {
       "byRound": [
@@ -1075,815 +1075,10 @@
       "name": "Lance Stroll",
       "rank": 22,
       "team": "Aston Martin",
-      "teamColor": "#229971"
+      "teamColor": null
     }
   ],
-  "racePace": [
-    {
-      "byRound": [
-        {
-          "round": 1,
-          "value": 0.0
-        },
-        {
-          "round": 2,
-          "value": 0.0
-        },
-        {
-          "round": 3,
-          "value": 0.0
-        },
-        {
-          "round": 4,
-          "value": 0.0
-        },
-        {
-          "round": 5,
-          "value": 0.0
-        },
-        {
-          "round": 6,
-          "value": 0.0
-        },
-        {
-          "round": 7,
-          "value": 0.877
-        }
-      ],
-      "code": "ANT",
-      "mean": 0.125,
-      "name": "Kimi Antonelli",
-      "rank": 1,
-      "team": "Mercedes",
-      "teamColor": "#00D7B6"
-    },
-    {
-      "byRound": [
-        {
-          "round": 1,
-          "value": 0.357
-        },
-        {
-          "round": 2,
-          "value": 0.517
-        },
-        {
-          "round": 3,
-          "value": 1.274
-        },
-        {
-          "round": 4,
-          "value": 1.255
-        },
-        {
-          "round": 5,
-          "value": 0.594
-        },
-        {
-          "round": 6,
-          "value": 0.471
-        },
-        {
-          "round": 7,
-          "value": 0.0
-        }
-      ],
-      "code": "HAM",
-      "mean": 0.638,
-      "name": "Lewis Hamilton",
-      "rank": 2,
-      "team": "Ferrari",
-      "teamColor": "#ED1131"
-    },
-    {
-      "byRound": [
-        {
-          "round": 1,
-          "value": 0.181
-        },
-        {
-          "round": 2,
-          "value": 0.479
-        },
-        {
-          "round": 3,
-          "value": 0.376
-        },
-        {
-          "round": 4,
-          "value": 0.542
-        },
-        {
-          "round": 5,
-          "value": 1.005
-        },
-        {
-          "round": 6,
-          "value": 0.524
-        },
-        {
-          "round": 7,
-          "value": 1.633
-        }
-      ],
-      "code": "LEC",
-      "mean": 0.677,
-      "name": "Charles Leclerc",
-      "rank": 3,
-      "team": "Ferrari",
-      "teamColor": "#ED1131"
-    },
-    {
-      "byRound": [
-        {
-          "round": 1,
-          "value": 0.088
-        },
-        {
-          "round": 2,
-          "value": 0.044
-        },
-        {
-          "round": 3,
-          "value": 0.653
-        },
-        {
-          "round": 4,
-          "value": 0.955
-        },
-        {
-          "round": 5,
-          "value": 1.007
-        },
-        {
-          "round": 6,
-          "value": 1.636
-        },
-        {
-          "round": 7,
-          "value": 1.01
-        }
-      ],
-      "code": "RUS",
-      "mean": 0.77,
-      "name": "George Russell",
-      "rank": 4,
-      "team": "Mercedes",
-      "teamColor": "#00D7B6"
-    },
-    {
-      "byRound": [
-        {
-          "round": 1,
-          "value": 0.623
-        },
-        {
-          "round": 2,
-          "value": 1.49
-        },
-        {
-          "round": 3,
-          "value": 1.146
-        },
-        {
-          "round": 4,
-          "value": 1.167
-        },
-        {
-          "round": 5,
-          "value": 0.654
-        },
-        {
-          "round": 7,
-          "value": 0.864
-        }
-      ],
-      "code": "VER",
-      "mean": 0.991,
-      "name": "Max Verstappen",
-      "rank": 5,
-      "team": "Red Bull Racing",
-      "teamColor": "#4781D7"
-    },
-    {
-      "byRound": [
-        {
-          "round": 1,
-          "value": 0.623
-        },
-        {
-          "round": 3,
-          "value": 0.675
-        },
-        {
-          "round": 4,
-          "value": 0.182
-        },
-        {
-          "round": 5,
-          "value": 1.935
-        },
-        {
-          "round": 6,
-          "value": 2.384
-        },
-        {
-          "round": 7,
-          "value": 1.118
-        }
-      ],
-      "code": "NOR",
-      "mean": 1.153,
-      "name": "Lando Norris",
-      "rank": 6,
-      "team": "McLaren",
-      "teamColor": "#F47600"
-    },
-    {
-      "byRound": [
-        {
-          "round": 3,
-          "value": 0.248
-        },
-        {
-          "round": 4,
-          "value": 0.802
-        },
-        {
-          "round": 5,
-          "value": 1.966
-        },
-        {
-          "round": 6,
-          "value": 2.063
-        },
-        {
-          "round": 7,
-          "value": 1.774
-        }
-      ],
-      "code": "PIA",
-      "mean": 1.37,
-      "name": "Oscar Piastri",
-      "rank": 7,
-      "team": "McLaren",
-      "teamColor": "#F47600"
-    },
-    {
-      "byRound": [
-        {
-          "round": 1,
-          "value": 2.826
-        },
-        {
-          "round": 2,
-          "value": 1.723
-        },
-        {
-          "round": 3,
-          "value": 2.313
-        },
-        {
-          "round": 4,
-          "value": 2.915
-        },
-        {
-          "round": 5,
-          "value": 1.067
-        },
-        {
-          "round": 6,
-          "value": 1.557
-        },
-        {
-          "round": 7,
-          "value": 1.951
-        }
-      ],
-      "code": "HAD",
-      "mean": 2.05,
-      "name": "Isack Hadjar",
-      "rank": 8,
-      "team": "Red Bull Racing",
-      "teamColor": "#4781D7"
-    },
-    {
-      "byRound": [
-        {
-          "round": 1,
-          "value": 2.632
-        },
-        {
-          "round": 2,
-          "value": 1.242
-        },
-        {
-          "round": 3,
-          "value": 1.134
-        },
-        {
-          "round": 4,
-          "value": 2.762
-        },
-        {
-          "round": 5,
-          "value": 2.439
-        },
-        {
-          "round": 6,
-          "value": 2.273
-        },
-        {
-          "round": 7,
-          "value": 3.507
-        }
-      ],
-      "code": "GAS",
-      "mean": 2.284,
-      "name": "Pierre Gasly",
-      "rank": 9,
-      "team": "Alpine",
-      "teamColor": "#00A1E8"
-    },
-    {
-      "byRound": [
-        {
-          "round": 1,
-          "value": 2.597
-        },
-        {
-          "round": 2,
-          "value": 1.678
-        },
-        {
-          "round": 3,
-          "value": 1.562
-        },
-        {
-          "round": 4,
-          "value": 2.911
-        },
-        {
-          "round": 5,
-          "value": 2.603
-        },
-        {
-          "round": 6,
-          "value": 2.683
-        },
-        {
-          "round": 7,
-          "value": 3.616
-        }
-      ],
-      "code": "LAW",
-      "mean": 2.521,
-      "name": "Liam Lawson",
-      "rank": 10,
-      "team": "Racing Bulls",
-      "teamColor": "#6C98FF"
-    },
-    {
-      "byRound": [
-        {
-          "round": 1,
-          "value": 3.151
-        },
-        {
-          "round": 2,
-          "value": 2.081
-        },
-        {
-          "round": 3,
-          "value": 2.296
-        },
-        {
-          "round": 4,
-          "value": 1.573
-        },
-        {
-          "round": 5,
-          "value": 1.994
-        },
-        {
-          "round": 6,
-          "value": 3.631
-        },
-        {
-          "round": 7,
-          "value": 3.553
-        }
-      ],
-      "code": "COL",
-      "mean": 2.611,
-      "name": "Franco Colapinto",
-      "rank": 11,
-      "team": "Alpine",
-      "teamColor": "#00A1E8"
-    },
-    {
-      "byRound": [
-        {
-          "round": 1,
-          "value": 2.02
-        },
-        {
-          "round": 3,
-          "value": 2.449
-        },
-        {
-          "round": 4,
-          "value": 2.616
-        },
-        {
-          "round": 5,
-          "value": 2.643
-        },
-        {
-          "round": 6,
-          "value": 2.94
-        },
-        {
-          "round": 7,
-          "value": 3.42
-        }
-      ],
-      "code": "BOR",
-      "mean": 2.681,
-      "name": "Gabriel Bortoleto",
-      "rank": 12,
-      "team": "Audi",
-      "teamColor": "#F50537"
-    },
-    {
-      "byRound": [
-        {
-          "round": 1,
-          "value": 2.223
-        },
-        {
-          "round": 2,
-          "value": 2.246
-        },
-        {
-          "round": 3,
-          "value": 2.058
-        },
-        {
-          "round": 4,
-          "value": 2.782
-        },
-        {
-          "round": 6,
-          "value": 3.339
-        },
-        {
-          "round": 7,
-          "value": 3.511
-        }
-      ],
-      "code": "LIN",
-      "mean": 2.693,
-      "name": "Arvid Lindblad",
-      "rank": 13,
-      "team": "Racing Bulls",
-      "teamColor": "#6C98FF"
-    },
-    {
-      "byRound": [
-        {
-          "round": 1,
-          "value": 3.17
-        },
-        {
-          "round": 2,
-          "value": 2.436
-        },
-        {
-          "round": 3,
-          "value": 2.827
-        },
-        {
-          "round": 4,
-          "value": 1.878
-        },
-        {
-          "round": 5,
-          "value": 2.15
-        },
-        {
-          "round": 6,
-          "value": 3.296
-        },
-        {
-          "round": 7,
-          "value": 3.9
-        }
-      ],
-      "code": "SAI",
-      "mean": 2.808,
-      "name": "Carlos Sainz",
-      "rank": 14,
-      "team": "Williams",
-      "teamColor": "#1868DB"
-    },
-    {
-      "byRound": [
-        {
-          "round": 2,
-          "value": 2.086
-        },
-        {
-          "round": 3,
-          "value": 2.329
-        },
-        {
-          "round": 4,
-          "value": 2.416
-        },
-        {
-          "round": 5,
-          "value": 2.176
-        },
-        {
-          "round": 6,
-          "value": 3.867
-        },
-        {
-          "round": 7,
-          "value": 4.012
-        }
-      ],
-      "code": "HUL",
-      "mean": 2.814,
-      "name": "Nico Hulkenberg",
-      "rank": 15,
-      "team": "Audi",
-      "teamColor": "#F50537"
-    },
-    {
-      "byRound": [
-        {
-          "round": 1,
-          "value": 1.939
-        },
-        {
-          "round": 2,
-          "value": 1.16
-        },
-        {
-          "round": 3,
-          "value": 3.407
-        },
-        {
-          "round": 4,
-          "value": 2.267
-        },
-        {
-          "round": 5,
-          "value": 2.514
-        },
-        {
-          "round": 6,
-          "value": 5.011
-        },
-        {
-          "round": 7,
-          "value": 4.033
-        }
-      ],
-      "code": "BEA",
-      "mean": 2.905,
-      "name": "Oliver Bearman",
-      "rank": 16,
-      "team": "Haas F1 Team",
-      "teamColor": "#9C9FA2"
-    },
-    {
-      "byRound": [
-        {
-          "round": 1,
-          "value": 2.689
-        },
-        {
-          "round": 2,
-          "value": 2.053
-        },
-        {
-          "round": 3,
-          "value": 1.524
-        },
-        {
-          "round": 4,
-          "value": 2.675
-        },
-        {
-          "round": 5,
-          "value": 4.026
-        },
-        {
-          "round": 6,
-          "value": 3.498
-        },
-        {
-          "round": 7,
-          "value": 4.392
-        }
-      ],
-      "code": "OCO",
-      "mean": 2.98,
-      "name": "Esteban Ocon",
-      "rank": 17,
-      "team": "Haas F1 Team",
-      "teamColor": "#9C9FA2"
-    },
-    {
-      "byRound": [
-        {
-          "round": 1,
-          "value": 2.791
-        },
-        {
-          "round": 3,
-          "value": 3.513
-        },
-        {
-          "round": 4,
-          "value": 2.021
-        },
-        {
-          "round": 5,
-          "value": 4.801
-        },
-        {
-          "round": 6,
-          "value": 3.245
-        },
-        {
-          "round": 7,
-          "value": 4.679
-        }
-      ],
-      "code": "ALB",
-      "mean": 3.508,
-      "name": "Alexander Albon",
-      "rank": 18,
-      "team": "Williams",
-      "teamColor": "#1868DB"
-    },
-    {
-      "byRound": [
-        {
-          "round": 1,
-          "value": 5.515
-        },
-        {
-          "round": 2,
-          "value": 3.762
-        },
-        {
-          "round": 3,
-          "value": 3.301
-        },
-        {
-          "round": 4,
-          "value": 4.231
-        },
-        {
-          "round": 5,
-          "value": 4.046
-        },
-        {
-          "round": 6,
-          "value": 3.872
-        },
-        {
-          "round": 7,
-          "value": 5.276
-        }
-      ],
-      "code": "PER",
-      "mean": 4.286,
-      "name": "Sergio Perez",
-      "rank": 19,
-      "team": "Cadillac",
-      "teamColor": "#909090"
-    },
-    {
-      "byRound": [
-        {
-          "round": 1,
-          "value": 5.339
-        },
-        {
-          "round": 2,
-          "value": 4.124
-        },
-        {
-          "round": 3,
-          "value": 4.717
-        },
-        {
-          "round": 4,
-          "value": 4.211
-        },
-        {
-          "round": 5,
-          "value": 6.635
-        },
-        {
-          "round": 6,
-          "value": 3.448
-        },
-        {
-          "round": 7,
-          "value": 6.019
-        }
-      ],
-      "code": "ALO",
-      "mean": 4.928,
-      "name": "Fernando Alonso",
-      "rank": 20,
-      "team": "Aston Martin",
-      "teamColor": "#229971"
-    },
-    {
-      "byRound": [
-        {
-          "round": 1,
-          "value": 5.299
-        },
-        {
-          "round": 2,
-          "value": 4.882
-        },
-        {
-          "round": 3,
-          "value": 5.272
-        },
-        {
-          "round": 4,
-          "value": 3.548
-        },
-        {
-          "round": 5,
-          "value": 6.667
-        },
-        {
-          "round": 6,
-          "value": 3.506
-        },
-        {
-          "round": 7,
-          "value": 6.013
-        }
-      ],
-      "code": "STR",
-      "mean": 5.027,
-      "name": "Lance Stroll",
-      "rank": 21,
-      "team": "Aston Martin",
-      "teamColor": "#229971"
-    },
-    {
-      "byRound": [
-        {
-          "round": 1,
-          "value": 5.766
-        },
-        {
-          "round": 2,
-          "value": 3.517
-        },
-        {
-          "round": 3,
-          "value": 4.081
-        },
-        {
-          "round": 4,
-          "value": 5.463
-        },
-        {
-          "round": 5,
-          "value": 5.267
-        },
-        {
-          "round": 6,
-          "value": 6.066
-        },
-        {
-          "round": 7,
-          "value": 6.78
-        }
-      ],
-      "code": "BOT",
-      "mean": 5.277,
-      "name": "Valtteri Bottas",
-      "rank": 22,
-      "team": "Cadillac",
-      "teamColor": "#909090"
-    }
-  ],
+  "racePace": [],
   "schemaVersion": 1,
   "season": 2026,
   "source": "FastF1 3.8.1",
@@ -1893,77 +1088,77 @@
         "podiums": 9,
         "points": 228.0,
         "team": "Mercedes",
-        "teamColor": "#00D7B6",
+        "teamColor": null,
         "wins": 6
       },
       {
         "podiums": 6,
         "points": 162.0,
         "team": "Ferrari",
-        "teamColor": "#ED1131",
+        "teamColor": null,
         "wins": 1
       },
       {
         "podiums": 4,
         "points": 106.0,
         "team": "McLaren",
-        "teamColor": "#F47600",
+        "teamColor": null,
         "wins": 0
       },
       {
         "podiums": 1,
         "points": 83.0,
-        "team": "Red Bull Racing",
-        "teamColor": "#4781D7",
+        "team": "Red Bull",
+        "teamColor": null,
         "wins": 0
       },
       {
         "podiums": 1,
         "points": 56.0,
-        "team": "Alpine",
-        "teamColor": "#00A1E8",
+        "team": "Alpine F1 Team",
+        "teamColor": null,
         "wins": 0
       },
       {
         "podiums": 0,
         "points": 38.0,
-        "team": "Racing Bulls",
-        "teamColor": "#6C98FF",
+        "team": "RB F1 Team",
+        "teamColor": null,
         "wins": 0
       },
       {
         "podiums": 0,
         "points": 20.0,
         "team": "Haas F1 Team",
-        "teamColor": "#9C9FA2",
+        "teamColor": null,
         "wins": 0
       },
       {
         "podiums": 0,
         "points": 11.0,
         "team": "Williams",
-        "teamColor": "#1868DB",
+        "teamColor": null,
         "wins": 0
       },
       {
         "podiums": 0,
         "points": 2.0,
         "team": "Audi",
-        "teamColor": "#F50537",
+        "teamColor": null,
         "wins": 0
       },
       {
         "podiums": 0,
         "points": 1.0,
         "team": "Aston Martin",
-        "teamColor": "#229971",
+        "teamColor": null,
         "wins": 0
       },
       {
         "podiums": 0,
         "points": 0.0,
-        "team": "Cadillac",
-        "teamColor": "#909090",
+        "team": "Cadillac F1 Team",
+        "teamColor": null,
         "wins": 0
       }
     ],
@@ -1981,11 +1176,11 @@
           1,
           16
         ],
-        "name": "Kimi Antonelli",
+        "name": "Andrea Kimi Antonelli",
         "podiums": 6,
         "points": 143.0,
         "team": "Mercedes",
-        "teamColor": "#00D7B6",
+        "teamColor": null,
         "wins": 5
       },
       {
@@ -2005,7 +1200,7 @@
         "podiums": 4,
         "points": 104.0,
         "team": "Ferrari",
-        "teamColor": "#ED1131",
+        "teamColor": null,
         "wins": 1
       },
       {
@@ -2025,7 +1220,7 @@
         "podiums": 3,
         "points": 85.0,
         "team": "Mercedes",
-        "teamColor": "#00D7B6",
+        "teamColor": null,
         "wins": 1
       },
       {
@@ -2045,7 +1240,7 @@
         "podiums": 2,
         "points": 58.0,
         "team": "Ferrari",
-        "teamColor": "#ED1131",
+        "teamColor": null,
         "wins": 0
       },
       {
@@ -2065,7 +1260,7 @@
         "podiums": 2,
         "points": 53.0,
         "team": "McLaren",
-        "teamColor": "#F47600",
+        "teamColor": null,
         "wins": 0
       },
       {
@@ -2085,7 +1280,7 @@
         "podiums": 2,
         "points": 53.0,
         "team": "McLaren",
-        "teamColor": "#F47600",
+        "teamColor": null,
         "wins": 0
       },
       {
@@ -2104,8 +1299,8 @@
         "name": "Max Verstappen",
         "podiums": 1,
         "points": 49.0,
-        "team": "Red Bull Racing",
-        "teamColor": "#4781D7",
+        "team": "Red Bull",
+        "teamColor": null,
         "wins": 0
       },
       {
@@ -2124,8 +1319,8 @@
         "name": "Pierre Gasly",
         "podiums": 1,
         "points": 40.0,
-        "team": "Alpine",
-        "teamColor": "#00A1E8",
+        "team": "Alpine F1 Team",
+        "teamColor": null,
         "wins": 0
       },
       {
@@ -2144,8 +1339,8 @@
         "name": "Isack Hadjar",
         "podiums": 0,
         "points": 34.0,
-        "team": "Red Bull Racing",
-        "teamColor": "#4781D7",
+        "team": "Red Bull",
+        "teamColor": null,
         "wins": 0
       },
       {
@@ -2164,8 +1359,8 @@
         "name": "Liam Lawson",
         "podiums": 0,
         "points": 26.0,
-        "team": "Racing Bulls",
-        "teamColor": "#6C98FF",
+        "team": "RB F1 Team",
+        "teamColor": null,
         "wins": 0
       },
       {
@@ -2185,7 +1380,7 @@
         "podiums": 0,
         "points": 17.0,
         "team": "Haas F1 Team",
-        "teamColor": "#9C9FA2",
+        "teamColor": null,
         "wins": 0
       },
       {
@@ -2204,8 +1399,8 @@
         "name": "Franco Colapinto",
         "podiums": 0,
         "points": 16.0,
-        "team": "Alpine",
-        "teamColor": "#00A1E8",
+        "team": "Alpine F1 Team",
+        "teamColor": null,
         "wins": 0
       },
       {
@@ -2224,8 +1419,8 @@
         "name": "Arvid Lindblad",
         "podiums": 0,
         "points": 12.0,
-        "team": "Racing Bulls",
-        "teamColor": "#6C98FF",
+        "team": "RB F1 Team",
+        "teamColor": null,
         "wins": 0
       },
       {
@@ -2245,7 +1440,7 @@
         "podiums": 0,
         "points": 6.0,
         "team": "Williams",
-        "teamColor": "#1868DB",
+        "teamColor": null,
         "wins": 0
       },
       {
@@ -2265,7 +1460,7 @@
         "podiums": 0,
         "points": 5.0,
         "team": "Williams",
-        "teamColor": "#1868DB",
+        "teamColor": null,
         "wins": 0
       },
       {
@@ -2285,7 +1480,7 @@
         "podiums": 0,
         "points": 3.0,
         "team": "Haas F1 Team",
-        "teamColor": "#9C9FA2",
+        "teamColor": null,
         "wins": 0
       },
       {
@@ -2305,7 +1500,7 @@
         "podiums": 0,
         "points": 2.0,
         "team": "Audi",
-        "teamColor": "#F50537",
+        "teamColor": null,
         "wins": 0
       },
       {
@@ -2325,7 +1520,7 @@
         "podiums": 0,
         "points": 1.0,
         "team": "Aston Martin",
-        "teamColor": "#229971",
+        "teamColor": null,
         "wins": 0
       },
       {
@@ -2341,11 +1536,11 @@
           13,
           20
         ],
-        "name": "Nico Hulkenberg",
+        "name": "Nico Hülkenberg",
         "podiums": 0,
         "points": 0.0,
         "team": "Audi",
-        "teamColor": "#F50537",
+        "teamColor": null,
         "wins": 0
       },
       {
@@ -2361,11 +1556,11 @@
           15,
           14
         ],
-        "name": "Sergio Perez",
+        "name": "Sergio Pérez",
         "podiums": 0,
         "points": 0.0,
-        "team": "Cadillac",
-        "teamColor": "#909090",
+        "team": "Cadillac F1 Team",
+        "teamColor": null,
         "wins": 0
       },
       {
@@ -2384,8 +1579,8 @@
         "name": "Valtteri Bottas",
         "podiums": 0,
         "points": 0.0,
-        "team": "Cadillac",
-        "teamColor": "#909090",
+        "team": "Cadillac F1 Team",
+        "teamColor": null,
         "wins": 0
       },
       {
@@ -2405,2955 +1600,10 @@
         "podiums": 0,
         "points": 0.0,
         "team": "Aston Martin",
-        "teamColor": "#229971",
+        "teamColor": null,
         "wins": 0
       }
     ]
   },
-  "tire": [
-    {
-      "code": "ALB",
-      "name": "Alexander Albon",
-      "stints": [
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.3091,
-          "medianLap_s": 86.436,
-          "nClean": 9,
-          "round": 1,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.038,
-          "medianLap_s": 85.662,
-          "nClean": 17,
-          "round": 1,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": 0.0161,
-          "medianLap_s": 84.858,
-          "nClean": 23,
-          "round": 1,
-          "stint": 3
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0468,
-          "medianLap_s": 97.058,
-          "nClean": 19,
-          "round": 3,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0879,
-          "medianLap_s": 95.464,
-          "nClean": 17,
-          "round": 3,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 93.427,
-          "nClean": 1,
-          "round": 3,
-          "stint": 7
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0087,
-          "medianLap_s": 95.097,
-          "nClean": 17,
-          "round": 4,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.0077,
-          "medianLap_s": 94.29,
-          "nClean": 27,
-          "round": 4,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.7627,
-          "medianLap_s": 79.138,
-          "nClean": 10,
-          "round": 5,
-          "stint": 1
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.02,
-          "medianLap_s": 79.131,
-          "nClean": 41,
-          "round": 6,
-          "stint": 1
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.375,
-          "medianLap_s": 79.909,
-          "nClean": 13,
-          "round": 6,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.6625,
-          "medianLap_s": 76.604,
-          "nClean": 7,
-          "round": 6,
-          "stint": 6
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 86.108,
-          "nClean": 11,
-          "round": 7,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 85.372,
-          "nClean": 14,
-          "round": 7,
-          "stint": 2
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 84.343,
-          "nClean": 3,
-          "round": 7,
-          "stint": 3
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": null,
-          "medianLap_s": 83.62,
-          "nClean": 14,
-          "round": 7,
-          "stint": 4
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": null,
-          "medianLap_s": 82.666,
-          "nClean": 2,
-          "round": 7,
-          "stint": 5
-        }
-      ],
-      "team": "Williams",
-      "teamColor": "#1868DB"
-    },
-    {
-      "code": "ALO",
-      "name": "Fernando Alonso",
-      "stints": [
-        {
-          "compound": "SOFT",
-          "degSlope": -0.095,
-          "medianLap_s": 87.598,
-          "nClean": 9,
-          "round": 1,
-          "stint": 1
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": 0.3532,
-          "medianLap_s": 86.376,
-          "nClean": 7,
-          "round": 1,
-          "stint": 3
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0806,
-          "medianLap_s": 100.352,
-          "nClean": 22,
-          "round": 2,
-          "stint": 1
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0094,
-          "medianLap_s": 98.517,
-          "nClean": 19,
-          "round": 3,
-          "stint": 1
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0093,
-          "medianLap_s": 97.337,
-          "nClean": 25,
-          "round": 3,
-          "stint": 3
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0012,
-          "medianLap_s": 96.451,
-          "nClean": 31,
-          "round": 4,
-          "stint": 1
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": 0.0162,
-          "medianLap_s": 95.203,
-          "nClean": 12,
-          "round": 4,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.0607,
-          "medianLap_s": 80.514,
-          "nClean": 14,
-          "round": 5,
-          "stint": 1
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": null,
-          "medianLap_s": 80.645,
-          "nClean": 2,
-          "round": 5,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 82.343,
-          "nClean": 1,
-          "round": 6,
-          "stint": 1
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": 0.0179,
-          "medianLap_s": 79.338,
-          "nClean": 53,
-          "round": 6,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.6557,
-          "medianLap_s": 78.056,
-          "nClean": 7,
-          "round": 6,
-          "stint": 7
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 87.381,
-          "nClean": 19,
-          "round": 7,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 85.851,
-          "nClean": 15,
-          "round": 7,
-          "stint": 2
-        }
-      ],
-      "team": "Aston Martin",
-      "teamColor": "#229971"
-    },
-    {
-      "code": "ANT",
-      "name": "Kimi Antonelli",
-      "stints": [
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.3526,
-          "medianLap_s": 84.037,
-          "nClean": 9,
-          "round": 1,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0136,
-          "medianLap_s": 82.967,
-          "nClean": 40,
-          "round": 1,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.1239,
-          "medianLap_s": 97.403,
-          "nClean": 8,
-          "round": 2,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0401,
-          "medianLap_s": 96.15,
-          "nClean": 39,
-          "round": 2,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0447,
-          "medianLap_s": 95.095,
-          "nClean": 20,
-          "round": 3,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0,
-          "medianLap_s": 92.918,
-          "nClean": 26,
-          "round": 3,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0119,
-          "medianLap_s": 93.069,
-          "nClean": 16,
-          "round": 4,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.0002,
-          "medianLap_s": 92.354,
-          "nClean": 28,
-          "round": 4,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.0764,
-          "medianLap_s": 76.047,
-          "nClean": 25,
-          "round": 5,
-          "stint": 1
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0575,
-          "medianLap_s": 75.019,
-          "nClean": 31,
-          "round": 5,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.01,
-          "medianLap_s": 76.838,
-          "nClean": 35,
-          "round": 6,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0581,
-          "medianLap_s": 76.127,
-          "nClean": 21,
-          "round": 6,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.0914,
-          "medianLap_s": 74.008,
-          "nClean": 7,
-          "round": 6,
-          "stint": 5
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 83.227,
-          "nClean": 12,
-          "round": 7,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 82.614,
-          "nClean": 21,
-          "round": 7,
-          "stint": 2
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 81.406,
-          "nClean": 20,
-          "round": 7,
-          "stint": 3
-        }
-      ],
-      "team": "Mercedes",
-      "teamColor": "#00D7B6"
-    },
-    {
-      "code": "BEA",
-      "name": "Oliver Bearman",
-      "stints": [
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.1279,
-          "medianLap_s": 85.668,
-          "nClean": 13,
-          "round": 1,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.0139,
-          "medianLap_s": 84.574,
-          "nClean": 36,
-          "round": 1,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.141,
-          "medianLap_s": 99.47,
-          "nClean": 8,
-          "round": 2,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0463,
-          "medianLap_s": 97.405,
-          "nClean": 39,
-          "round": 2,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0056,
-          "medianLap_s": 96.764,
-          "nClean": 14,
-          "round": 3,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 95.905,
-          "nClean": 3,
-          "round": 3,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0141,
-          "medianLap_s": 95.106,
-          "nClean": 16,
-          "round": 4,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.0403,
-          "medianLap_s": 94.356,
-          "nClean": 27,
-          "round": 4,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.1645,
-          "medianLap_s": 77.67,
-          "nClean": 23,
-          "round": 5,
-          "stint": 1
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0533,
-          "medianLap_s": 76.695,
-          "nClean": 31,
-          "round": 5,
-          "stint": 2
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.1401,
-          "medianLap_s": 80.485,
-          "nClean": 25,
-          "round": 6,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 86.114,
-          "nClean": 16,
-          "round": 7,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 84.43,
-          "nClean": 19,
-          "round": 7,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": null,
-          "medianLap_s": 84.106,
-          "nClean": 19,
-          "round": 7,
-          "stint": 3
-        }
-      ],
-      "team": "Haas F1 Team",
-      "teamColor": "#9C9FA2"
-    },
-    {
-      "code": "BOR",
-      "name": "Gabriel Bortoleto",
-      "stints": [
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.1274,
-          "medianLap_s": 85.785,
-          "nClean": 13,
-          "round": 1,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0581,
-          "medianLap_s": 84.428,
-          "nClean": 13,
-          "round": 1,
-          "stint": 2
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.0483,
-          "medianLap_s": 84.47,
-          "nClean": 23,
-          "round": 1,
-          "stint": 3
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0398,
-          "medianLap_s": 96.651,
-          "nClean": 19,
-          "round": 3,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.051,
-          "medianLap_s": 95.017,
-          "nClean": 26,
-          "round": 3,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0653,
-          "medianLap_s": 95.368,
-          "nClean": 22,
-          "round": 4,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.0272,
-          "medianLap_s": 93.955,
-          "nClean": 21,
-          "round": 4,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.1965,
-          "medianLap_s": 78.41,
-          "nClean": 12,
-          "round": 5,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.024,
-          "medianLap_s": 77.109,
-          "nClean": 37,
-          "round": 5,
-          "stint": 3
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0528,
-          "medianLap_s": 79.959,
-          "nClean": 40,
-          "round": 6,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.5613,
-          "medianLap_s": 78.953,
-          "nClean": 12,
-          "round": 6,
-          "stint": 3
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.1984,
-          "medianLap_s": 77.588,
-          "nClean": 7,
-          "round": 6,
-          "stint": 8
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 86.301,
-          "nClean": 13,
-          "round": 7,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 84.397,
-          "nClean": 16,
-          "round": 7,
-          "stint": 2
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 83.881,
-          "nClean": 16,
-          "round": 7,
-          "stint": 3
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": null,
-          "medianLap_s": 82.088,
-          "nClean": 6,
-          "round": 7,
-          "stint": 4
-        }
-      ],
-      "team": "Audi",
-      "teamColor": "#F50537"
-    },
-    {
-      "code": "BOT",
-      "name": "Valtteri Bottas",
-      "stints": [
-        {
-          "compound": "HARD",
-          "degSlope": -0.2709,
-          "medianLap_s": 87.738,
-          "nClean": 9,
-          "round": 1,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 91.359,
-          "nClean": 2,
-          "round": 1,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0693,
-          "medianLap_s": 101.303,
-          "nClean": 8,
-          "round": 2,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0251,
-          "medianLap_s": 99.695,
-          "nClean": 37,
-          "round": 2,
-          "stint": 2
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.0836,
-          "medianLap_s": 98.823,
-          "nClean": 17,
-          "round": 3,
-          "stint": 1
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0572,
-          "medianLap_s": 97.066,
-          "nClean": 25,
-          "round": 3,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 96.617,
-          "nClean": 3,
-          "round": 4,
-          "stint": 1
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": 0.13,
-          "medianLap_s": 96.665,
-          "nClean": 8,
-          "round": 4,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0414,
-          "medianLap_s": 96.481,
-          "nClean": 7,
-          "round": 4,
-          "stint": 3
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0302,
-          "medianLap_s": 98.091,
-          "nClean": 22,
-          "round": 4,
-          "stint": 4
-        },
-        {
-          "compound": "INTERMEDIATE",
-          "degSlope": null,
-          "medianLap_s": 87.677,
-          "nClean": 1,
-          "round": 5,
-          "stint": 1
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": null,
-          "medianLap_s": 80.665,
-          "nClean": 4,
-          "round": 5,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0471,
-          "medianLap_s": 79.691,
-          "nClean": 13,
-          "round": 5,
-          "stint": 3
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": 0.0793,
-          "medianLap_s": 79.133,
-          "nClean": 16,
-          "round": 5,
-          "stint": 4
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.3286,
-          "medianLap_s": 78.557,
-          "nClean": 13,
-          "round": 5,
-          "stint": 5
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0035,
-          "medianLap_s": 81.293,
-          "nClean": 13,
-          "round": 6,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 86.925,
-          "nClean": 12,
-          "round": 7,
-          "stint": 1
-        }
-      ],
-      "team": "Cadillac",
-      "teamColor": "#909090"
-    },
-    {
-      "code": "COL",
-      "name": "Franco Colapinto",
-      "stints": [
-        {
-          "compound": "HARD",
-          "degSlope": -0.2885,
-          "medianLap_s": 86.935,
-          "nClean": 7,
-          "round": 1,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.0173,
-          "medianLap_s": 85.63,
-          "nClean": 28,
-          "round": 1,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": 0.1127,
-          "medianLap_s": 83.912,
-          "nClean": 9,
-          "round": 1,
-          "stint": 3
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0249,
-          "medianLap_s": 98.865,
-          "nClean": 23,
-          "round": 2,
-          "stint": 1
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0892,
-          "medianLap_s": 97.426,
-          "nClean": 21,
-          "round": 2,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0008,
-          "medianLap_s": 96.702,
-          "nClean": 15,
-          "round": 3,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0496,
-          "medianLap_s": 95.145,
-          "nClean": 28,
-          "round": 3,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0044,
-          "medianLap_s": 94.275,
-          "nClean": 21,
-          "round": 4,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.0066,
-          "medianLap_s": 93.612,
-          "nClean": 23,
-          "round": 4,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.1319,
-          "medianLap_s": 77.383,
-          "nClean": 24,
-          "round": 5,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0346,
-          "medianLap_s": 76.61,
-          "nClean": 29,
-          "round": 5,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0054,
-          "medianLap_s": 79.127,
-          "nClean": 33,
-          "round": 6,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.0907,
-          "medianLap_s": 80.543,
-          "nClean": 21,
-          "round": 6,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.3938,
-          "medianLap_s": 77.095,
-          "nClean": 7,
-          "round": 6,
-          "stint": 6
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": null,
-          "medianLap_s": 85.255,
-          "nClean": 10,
-          "round": 7,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 84.443,
-          "nClean": 20,
-          "round": 7,
-          "stint": 2
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 83.662,
-          "nClean": 24,
-          "round": 7,
-          "stint": 3
-        }
-      ],
-      "team": "Alpine",
-      "teamColor": "#00A1E8"
-    },
-    {
-      "code": "GAS",
-      "name": "Pierre Gasly",
-      "stints": [
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.151,
-          "medianLap_s": 85.989,
-          "nClean": 9,
-          "round": 1,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.0055,
-          "medianLap_s": 85.062,
-          "nClean": 40,
-          "round": 1,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0602,
-          "medianLap_s": 98.622,
-          "nClean": 8,
-          "round": 2,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0694,
-          "medianLap_s": 97.203,
-          "nClean": 38,
-          "round": 2,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0009,
-          "medianLap_s": 95.831,
-          "nClean": 20,
-          "round": 3,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0144,
-          "medianLap_s": 94.04,
-          "nClean": 26,
-          "round": 3,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 95.046,
-          "nClean": 3,
-          "round": 4,
-          "stint": 1
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.1781,
-          "medianLap_s": 77.774,
-          "nClean": 23,
-          "round": 5,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0414,
-          "medianLap_s": 76.585,
-          "nClean": 29,
-          "round": 5,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0043,
-          "medianLap_s": 78.52,
-          "nClean": 43,
-          "round": 6,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.1837,
-          "medianLap_s": 77.957,
-          "nClean": 12,
-          "round": 6,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.2341,
-          "medianLap_s": 76.054,
-          "nClean": 7,
-          "round": 6,
-          "stint": 5
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 85.759,
-          "nClean": 12,
-          "round": 7,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 84.652,
-          "nClean": 23,
-          "round": 7,
-          "stint": 2
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 83.116,
-          "nClean": 21,
-          "round": 7,
-          "stint": 3
-        }
-      ],
-      "team": "Alpine",
-      "teamColor": "#00A1E8"
-    },
-    {
-      "code": "HAD",
-      "name": "Isack Hadjar",
-      "stints": [
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0569,
-          "medianLap_s": 85.363,
-          "nClean": 9,
-          "round": 1,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0597,
-          "medianLap_s": 98.662,
-          "nClean": 7,
-          "round": 2,
-          "stint": 2
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0388,
-          "medianLap_s": 97.936,
-          "nClean": 38,
-          "round": 2,
-          "stint": 3
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0101,
-          "medianLap_s": 96.672,
-          "nClean": 17,
-          "round": 3,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0384,
-          "medianLap_s": 94.823,
-          "nClean": 26,
-          "round": 3,
-          "stint": 2
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 95.188,
-          "nClean": 3,
-          "round": 4,
-          "stint": 1
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.0871,
-          "medianLap_s": 76.629,
-          "nClean": 25,
-          "round": 5,
-          "stint": 1
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0832,
-          "medianLap_s": 75.673,
-          "nClean": 17,
-          "round": 5,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.3476,
-          "medianLap_s": 75.163,
-          "nClean": 7,
-          "round": 5,
-          "stint": 3
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": null,
-          "medianLap_s": 75.204,
-          "nClean": 4,
-          "round": 5,
-          "stint": 4
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0546,
-          "medianLap_s": 78.618,
-          "nClean": 30,
-          "round": 6,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0129,
-          "medianLap_s": 77.728,
-          "nClean": 25,
-          "round": 6,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.3996,
-          "medianLap_s": 76.088,
-          "nClean": 7,
-          "round": 6,
-          "stint": 5
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 84.577,
-          "nClean": 13,
-          "round": 7,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 83.259,
-          "nClean": 15,
-          "round": 7,
-          "stint": 2
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 82.426,
-          "nClean": 21,
-          "round": 7,
-          "stint": 3
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": null,
-          "medianLap_s": 80.632,
-          "nClean": 2,
-          "round": 7,
-          "stint": 4
-        }
-      ],
-      "team": "Red Bull Racing",
-      "teamColor": "#4781D7"
-    },
-    {
-      "code": "HAM",
-      "name": "Lewis Hamilton",
-      "stints": [
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0502,
-          "medianLap_s": 84.17,
-          "nClean": 20,
-          "round": 1,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0226,
-          "medianLap_s": 82.74,
-          "nClean": 28,
-          "round": 1,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.1349,
-          "medianLap_s": 98.227,
-          "nClean": 8,
-          "round": 2,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0355,
-          "medianLap_s": 96.697,
-          "nClean": 39,
-          "round": 2,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0312,
-          "medianLap_s": 95.319,
-          "nClean": 20,
-          "round": 3,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.0258,
-          "medianLap_s": 93.719,
-          "nClean": 26,
-          "round": 3,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0248,
-          "medianLap_s": 94.024,
-          "nClean": 17,
-          "round": 4,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.0524,
-          "medianLap_s": 93.283,
-          "nClean": 27,
-          "round": 4,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.0709,
-          "medianLap_s": 76.463,
-          "nClean": 25,
-          "round": 5,
-          "stint": 1
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0363,
-          "medianLap_s": 75.197,
-          "nClean": 30,
-          "round": 5,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0179,
-          "medianLap_s": 77.099,
-          "nClean": 26,
-          "round": 6,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0173,
-          "medianLap_s": 76.797,
-          "nClean": 30,
-          "round": 6,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": 0.0748,
-          "medianLap_s": 75.049,
-          "nClean": 7,
-          "round": 6,
-          "stint": 6
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": null,
-          "medianLap_s": 82.89,
-          "nClean": 9,
-          "round": 7,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 82.541,
-          "nClean": 14,
-          "round": 7,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 80.979,
-          "nClean": 11,
-          "round": 7,
-          "stint": 3
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 80.987,
-          "nClean": 21,
-          "round": 7,
-          "stint": 4
-        }
-      ],
-      "team": "Ferrari",
-      "teamColor": "#ED1131"
-    },
-    {
-      "code": "HUL",
-      "name": "Nico Hulkenberg",
-      "stints": [
-        {
-          "compound": "HARD",
-          "degSlope": -0.0599,
-          "medianLap_s": 98.799,
-          "nClean": 24,
-          "round": 2,
-          "stint": 1
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0651,
-          "medianLap_s": 97.05,
-          "nClean": 18,
-          "round": 2,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0894,
-          "medianLap_s": 96.632,
-          "nClean": 19,
-          "round": 3,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0758,
-          "medianLap_s": 94.531,
-          "nClean": 26,
-          "round": 3,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 94.727,
-          "nClean": 2,
-          "round": 4,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.2121,
-          "medianLap_s": 78.432,
-          "nClean": 12,
-          "round": 5,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0117,
-          "medianLap_s": 77.041,
-          "nClean": 36,
-          "round": 5,
-          "stint": 3
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.2001,
-          "medianLap_s": 79.766,
-          "nClean": 10,
-          "round": 6,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.0892,
-          "medianLap_s": 79.504,
-          "nClean": 44,
-          "round": 6,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.604,
-          "medianLap_s": 76.734,
-          "nClean": 7,
-          "round": 6,
-          "stint": 7
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": null,
-          "medianLap_s": 85.106,
-          "nClean": 11,
-          "round": 7,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 84.537,
-          "nClean": 14,
-          "round": 7,
-          "stint": 2
-        }
-      ],
-      "team": "Audi",
-      "teamColor": "#F50537"
-    },
-    {
-      "code": "LAW",
-      "name": "Liam Lawson",
-      "stints": [
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.262,
-          "medianLap_s": 86.661,
-          "nClean": 9,
-          "round": 1,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0724,
-          "medianLap_s": 85.255,
-          "nClean": 17,
-          "round": 1,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": 0.0316,
-          "medianLap_s": 84.232,
-          "nClean": 23,
-          "round": 1,
-          "stint": 3
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0771,
-          "medianLap_s": 99.709,
-          "nClean": 7,
-          "round": 2,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0576,
-          "medianLap_s": 97.894,
-          "nClean": 37,
-          "round": 2,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0057,
-          "medianLap_s": 96.716,
-          "nClean": 19,
-          "round": 3,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0263,
-          "medianLap_s": 94.795,
-          "nClean": 26,
-          "round": 3,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 95.184,
-          "nClean": 3,
-          "round": 4,
-          "stint": 1
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.1225,
-          "medianLap_s": 77.876,
-          "nClean": 23,
-          "round": 5,
-          "stint": 1
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.041,
-          "medianLap_s": 76.718,
-          "nClean": 29,
-          "round": 5,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0015,
-          "medianLap_s": 78.903,
-          "nClean": 42,
-          "round": 6,
-          "stint": 1
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.0544,
-          "medianLap_s": 77.745,
-          "nClean": 12,
-          "round": 6,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.4856,
-          "medianLap_s": 76.047,
-          "nClean": 7,
-          "round": 6,
-          "stint": 5
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 84.783,
-          "nClean": 9,
-          "round": 7,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 84.879,
-          "nClean": 22,
-          "round": 7,
-          "stint": 2
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 83.586,
-          "nClean": 23,
-          "round": 7,
-          "stint": 3
-        }
-      ],
-      "team": "Racing Bulls",
-      "teamColor": "#6C98FF"
-    },
-    {
-      "code": "LEC",
-      "name": "Charles Leclerc",
-      "stints": [
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0883,
-          "medianLap_s": 83.981,
-          "nClean": 17,
-          "round": 1,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0028,
-          "medianLap_s": 83.014,
-          "nClean": 31,
-          "round": 1,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.1073,
-          "medianLap_s": 98.062,
-          "nClean": 8,
-          "round": 2,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0311,
-          "medianLap_s": 96.795,
-          "nClean": 39,
-          "round": 2,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0037,
-          "medianLap_s": 95.287,
-          "nClean": 15,
-          "round": 3,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0364,
-          "medianLap_s": 93.494,
-          "nClean": 29,
-          "round": 3,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0203,
-          "medianLap_s": 93.689,
-          "nClean": 11,
-          "round": 4,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0112,
-          "medianLap_s": 92.941,
-          "nClean": 33,
-          "round": 4,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.0904,
-          "medianLap_s": 76.469,
-          "nClean": 25,
-          "round": 5,
-          "stint": 1
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0154,
-          "medianLap_s": 75.917,
-          "nClean": 31,
-          "round": 5,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0034,
-          "medianLap_s": 77.313,
-          "nClean": 33,
-          "round": 6,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0376,
-          "medianLap_s": 76.474,
-          "nClean": 23,
-          "round": 6,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 83.536,
-          "nClean": 14,
-          "round": 7,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 82.768,
-          "nClean": 21,
-          "round": 7,
-          "stint": 2
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 81.942,
-          "nClean": 20,
-          "round": 7,
-          "stint": 3
-        }
-      ],
-      "team": "Ferrari",
-      "teamColor": "#ED1131"
-    },
-    {
-      "code": "LIN",
-      "name": "Arvid Lindblad",
-      "stints": [
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0694,
-          "medianLap_s": 85.445,
-          "nClean": 12,
-          "round": 1,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.0238,
-          "medianLap_s": 84.707,
-          "nClean": 36,
-          "round": 1,
-          "stint": 2
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0403,
-          "medianLap_s": 99.248,
-          "nClean": 32,
-          "round": 2,
-          "stint": 1
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.1347,
-          "medianLap_s": 96.338,
-          "nClean": 11,
-          "round": 2,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0288,
-          "medianLap_s": 96.513,
-          "nClean": 16,
-          "round": 3,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0467,
-          "medianLap_s": 94.885,
-          "nClean": 27,
-          "round": 3,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0101,
-          "medianLap_s": 95.953,
-          "nClean": 17,
-          "round": 4,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.0267,
-          "medianLap_s": 94.681,
-          "nClean": 25,
-          "round": 4,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0259,
-          "medianLap_s": 79.3,
-          "nClean": 56,
-          "round": 6,
-          "stint": 1
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.5633,
-          "medianLap_s": 76.245,
-          "nClean": 7,
-          "round": 6,
-          "stint": 5
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 85.716,
-          "nClean": 20,
-          "round": 7,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 84.347,
-          "nClean": 13,
-          "round": 7,
-          "stint": 2
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 83.09,
-          "nClean": 22,
-          "round": 7,
-          "stint": 3
-        }
-      ],
-      "team": "Racing Bulls",
-      "teamColor": "#6C98FF"
-    },
-    {
-      "code": "NOR",
-      "name": "Lando Norris",
-      "stints": [
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.2263,
-          "medianLap_s": 85.573,
-          "nClean": 9,
-          "round": 1,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.014,
-          "medianLap_s": 83.961,
-          "nClean": 17,
-          "round": 1,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0368,
-          "medianLap_s": 82.953,
-          "nClean": 23,
-          "round": 1,
-          "stint": 3
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0005,
-          "medianLap_s": 95.281,
-          "nClean": 14,
-          "round": 3,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0187,
-          "medianLap_s": 93.691,
-          "nClean": 30,
-          "round": 3,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0018,
-          "medianLap_s": 93.048,
-          "nClean": 17,
-          "round": 4,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.0049,
-          "medianLap_s": 92.428,
-          "nClean": 27,
-          "round": 4,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.4322,
-          "medianLap_s": 78.053,
-          "nClean": 8,
-          "round": 5,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0534,
-          "medianLap_s": 76.614,
-          "nClean": 17,
-          "round": 5,
-          "stint": 3
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0052,
-          "medianLap_s": 78.471,
-          "nClean": 42,
-          "round": 6,
-          "stint": 1
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 83.319,
-          "nClean": 11,
-          "round": 7,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 82.453,
-          "nClean": 20,
-          "round": 7,
-          "stint": 2
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 81.262,
-          "nClean": 23,
-          "round": 7,
-          "stint": 3
-        }
-      ],
-      "team": "McLaren",
-      "teamColor": "#F47600"
-    },
-    {
-      "code": "OCO",
-      "name": "Esteban Ocon",
-      "stints": [
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.2115,
-          "medianLap_s": 85.632,
-          "nClean": 9,
-          "round": 1,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0027,
-          "medianLap_s": 85.181,
-          "nClean": 40,
-          "round": 1,
-          "stint": 2
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0244,
-          "medianLap_s": 99.017,
-          "nClean": 20,
-          "round": 2,
-          "stint": 1
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0973,
-          "medianLap_s": 98.016,
-          "nClean": 14,
-          "round": 2,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.0548,
-          "medianLap_s": 96.461,
-          "nClean": 7,
-          "round": 2,
-          "stint": 3
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.039,
-          "medianLap_s": 96.55,
-          "nClean": 17,
-          "round": 3,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0224,
-          "medianLap_s": 94.779,
-          "nClean": 26,
-          "round": 3,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0202,
-          "medianLap_s": 95.213,
-          "nClean": 21,
-          "round": 4,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.0321,
-          "medianLap_s": 94.434,
-          "nClean": 22,
-          "round": 4,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.3912,
-          "medianLap_s": 80.625,
-          "nClean": 11,
-          "round": 5,
-          "stint": 1
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0349,
-          "medianLap_s": 78.607,
-          "nClean": 10,
-          "round": 5,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.0592,
-          "medianLap_s": 77.459,
-          "nClean": 30,
-          "round": 5,
-          "stint": 3
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.3371,
-          "medianLap_s": 79.707,
-          "nClean": 7,
-          "round": 6,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.0986,
-          "medianLap_s": 79.325,
-          "nClean": 47,
-          "round": 6,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.591,
-          "medianLap_s": 77.057,
-          "nClean": 7,
-          "round": 6,
-          "stint": 6
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": null,
-          "medianLap_s": 85.775,
-          "nClean": 11,
-          "round": 7,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 85.332,
-          "nClean": 19,
-          "round": 7,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 83.923,
-          "nClean": 19,
-          "round": 7,
-          "stint": 3
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": null,
-          "medianLap_s": 82.377,
-          "nClean": 2,
-          "round": 7,
-          "stint": 4
-        }
-      ],
-      "team": "Haas F1 Team",
-      "teamColor": "#9C9FA2"
-    },
-    {
-      "code": "PER",
-      "name": "Sergio Perez",
-      "stints": [
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0774,
-          "medianLap_s": 87.625,
-          "nClean": 13,
-          "round": 1,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.019,
-          "medianLap_s": 87.956,
-          "nClean": 21,
-          "round": 1,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": 0.1942,
-          "medianLap_s": 86.21,
-          "nClean": 11,
-          "round": 1,
-          "stint": 3
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0468,
-          "medianLap_s": 101.022,
-          "nClean": 8,
-          "round": 2,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.0031,
-          "medianLap_s": 99.75,
-          "nClean": 37,
-          "round": 2,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0202,
-          "medianLap_s": 97.961,
-          "nClean": 19,
-          "round": 3,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0286,
-          "medianLap_s": 96.227,
-          "nClean": 26,
-          "round": 3,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0093,
-          "medianLap_s": 96.52,
-          "nClean": 19,
-          "round": 4,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.0147,
-          "medianLap_s": 95.821,
-          "nClean": 24,
-          "round": 4,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.1902,
-          "medianLap_s": 79.057,
-          "nClean": 9,
-          "round": 5,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.1145,
-          "medianLap_s": 78.463,
-          "nClean": 11,
-          "round": 5,
-          "stint": 3
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.0683,
-          "medianLap_s": 78.112,
-          "nClean": 7,
-          "round": 5,
-          "stint": 4
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": null,
-          "medianLap_s": 80.992,
-          "nClean": 2,
-          "round": 6,
-          "stint": 1
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 78.694,
-          "nClean": 3,
-          "round": 6,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0456,
-          "medianLap_s": 79.775,
-          "nClean": 46,
-          "round": 6,
-          "stint": 3
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.6626,
-          "medianLap_s": 77.393,
-          "nClean": 7,
-          "round": 6,
-          "stint": 7
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": null,
-          "medianLap_s": 86.053,
-          "nClean": 10,
-          "round": 7,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 86.336,
-          "nClean": 17,
-          "round": 7,
-          "stint": 2
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 84.883,
-          "nClean": 5,
-          "round": 7,
-          "stint": 3
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 85.083,
-          "nClean": 19,
-          "round": 7,
-          "stint": 4
-        }
-      ],
-      "team": "Cadillac",
-      "teamColor": "#909090"
-    },
-    {
-      "code": "PIA",
-      "name": "Oscar Piastri",
-      "stints": [
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0107,
-          "medianLap_s": 95.087,
-          "nClean": 16,
-          "round": 3,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0286,
-          "medianLap_s": 93.496,
-          "nClean": 28,
-          "round": 3,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0049,
-          "medianLap_s": 93.774,
-          "nClean": 18,
-          "round": 4,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0202,
-          "medianLap_s": 92.602,
-          "nClean": 26,
-          "round": 4,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.5193,
-          "medianLap_s": 77.857,
-          "nClean": 9,
-          "round": 5,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0393,
-          "medianLap_s": 76.861,
-          "nClean": 30,
-          "round": 5,
-          "stint": 3
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.0241,
-          "medianLap_s": 76.439,
-          "nClean": 13,
-          "round": 5,
-          "stint": 4
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0132,
-          "medianLap_s": 78.439,
-          "nClean": 46,
-          "round": 6,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.1324,
-          "medianLap_s": 76.863,
-          "nClean": 9,
-          "round": 6,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.3838,
-          "medianLap_s": 76.187,
-          "nClean": 7,
-          "round": 6,
-          "stint": 6
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 83.784,
-          "nClean": 12,
-          "round": 7,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 82.922,
-          "nClean": 20,
-          "round": 7,
-          "stint": 2
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 82.126,
-          "nClean": 24,
-          "round": 7,
-          "stint": 3
-        }
-      ],
-      "team": "McLaren",
-      "teamColor": "#F47600"
-    },
-    {
-      "code": "RUS",
-      "name": "George Russell",
-      "stints": [
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.1016,
-          "medianLap_s": 84.714,
-          "nClean": 10,
-          "round": 1,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.0007,
-          "medianLap_s": 83.034,
-          "nClean": 40,
-          "round": 1,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.1096,
-          "medianLap_s": 97.379,
-          "nClean": 8,
-          "round": 2,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.059,
-          "medianLap_s": 96.158,
-          "nClean": 39,
-          "round": 2,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.01,
-          "medianLap_s": 94.987,
-          "nClean": 19,
-          "round": 3,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0393,
-          "medianLap_s": 93.469,
-          "nClean": 26,
-          "round": 3,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0259,
-          "medianLap_s": 93.846,
-          "nClean": 10,
-          "round": 4,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.0023,
-          "medianLap_s": 93.249,
-          "nClean": 34,
-          "round": 4,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.0718,
-          "medianLap_s": 76.273,
-          "nClean": 25,
-          "round": 5,
-          "stint": 1
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0518,
-          "medianLap_s": 78.474,
-          "nClean": 29,
-          "round": 6,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0591,
-          "medianLap_s": 77.099,
-          "nClean": 26,
-          "round": 6,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.2437,
-          "medianLap_s": 77.596,
-          "nClean": 5,
-          "round": 6,
-          "stint": 6
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 82.58,
-          "nClean": 10,
-          "round": 7,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 82.844,
-          "nClean": 22,
-          "round": 7,
-          "stint": 2
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 81.525,
-          "nClean": 22,
-          "round": 7,
-          "stint": 3
-        }
-      ],
-      "team": "Mercedes",
-      "teamColor": "#00D7B6"
-    },
-    {
-      "code": "SAI",
-      "name": "Carlos Sainz",
-      "stints": [
-        {
-          "compound": "SOFT",
-          "degSlope": -0.3215,
-          "medianLap_s": 86.872,
-          "nClean": 9,
-          "round": 1,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.1484,
-          "medianLap_s": 85.704,
-          "nClean": 17,
-          "round": 1,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0452,
-          "medianLap_s": 85.445,
-          "nClean": 10,
-          "round": 1,
-          "stint": 3
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.5826,
-          "medianLap_s": 84.094,
-          "nClean": 10,
-          "round": 1,
-          "stint": 4
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0019,
-          "medianLap_s": 99.987,
-          "nClean": 7,
-          "round": 2,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0307,
-          "medianLap_s": 98.585,
-          "nClean": 37,
-          "round": 2,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.05,
-          "medianLap_s": 96.893,
-          "nClean": 19,
-          "round": 3,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0438,
-          "medianLap_s": 95.089,
-          "nClean": 26,
-          "round": 3,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0074,
-          "medianLap_s": 94.843,
-          "nClean": 18,
-          "round": 4,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.02,
-          "medianLap_s": 93.996,
-          "nClean": 26,
-          "round": 4,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.075,
-          "medianLap_s": 77.368,
-          "nClean": 21,
-          "round": 5,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0432,
-          "medianLap_s": 76.652,
-          "nClean": 31,
-          "round": 5,
-          "stint": 3
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.016,
-          "medianLap_s": 79.126,
-          "nClean": 50,
-          "round": 6,
-          "stint": 1
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": null,
-          "medianLap_s": 79.605,
-          "nClean": 4,
-          "round": 6,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": null,
-          "medianLap_s": 85.662,
-          "nClean": 12,
-          "round": 7,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 84.785,
-          "nClean": 14,
-          "round": 7,
-          "stint": 2
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 84.183,
-          "nClean": 21,
-          "round": 7,
-          "stint": 3
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 82.267,
-          "nClean": 4,
-          "round": 7,
-          "stint": 4
-        }
-      ],
-      "team": "Williams",
-      "teamColor": "#1868DB"
-    },
-    {
-      "code": "STR",
-      "name": "Lance Stroll",
-      "stints": [
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.1205,
-          "medianLap_s": 88.079,
-          "nClean": 9,
-          "round": 1,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.0998,
-          "medianLap_s": 87.48,
-          "nClean": 9,
-          "round": 1,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": 0.0855,
-          "medianLap_s": 86.387,
-          "nClean": 5,
-          "round": 1,
-          "stint": 3
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": null,
-          "medianLap_s": 86.32,
-          "nClean": 3,
-          "round": 1,
-          "stint": 4
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": null,
-          "medianLap_s": 85.707,
-          "nClean": 3,
-          "round": 1,
-          "stint": 5
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.1484,
-          "medianLap_s": 101.083,
-          "nClean": 8,
-          "round": 2,
-          "stint": 1
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0077,
-          "medianLap_s": 98.426,
-          "nClean": 19,
-          "round": 3,
-          "stint": 1
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 97.366,
-          "nClean": 2,
-          "round": 3,
-          "stint": 3
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0039,
-          "medianLap_s": 96.582,
-          "nClean": 11,
-          "round": 4,
-          "stint": 1
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": 0.0307,
-          "medianLap_s": 95.834,
-          "nClean": 14,
-          "round": 4,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.0398,
-          "medianLap_s": 95.105,
-          "nClean": 16,
-          "round": 4,
-          "stint": 3
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.4429,
-          "medianLap_s": 81.383,
-          "nClean": 10,
-          "round": 5,
-          "stint": 1
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.0052,
-          "medianLap_s": 80.465,
-          "nClean": 25,
-          "round": 5,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.1233,
-          "medianLap_s": 79.522,
-          "nClean": 12,
-          "round": 5,
-          "stint": 3
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 81.991,
-          "nClean": 2,
-          "round": 6,
-          "stint": 1
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": 0.0178,
-          "medianLap_s": 79.314,
-          "nClean": 51,
-          "round": 6,
-          "stint": 2
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 86.301,
-          "nClean": 3,
-          "round": 7,
-          "stint": 1
-        }
-      ],
-      "team": "Aston Martin",
-      "teamColor": "#229971"
-    },
-    {
-      "code": "VER",
-      "name": "Max Verstappen",
-      "stints": [
-        {
-          "compound": "HARD",
-          "degSlope": -0.143,
-          "medianLap_s": 85.019,
-          "nClean": 12,
-          "round": 1,
-          "stint": 1
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": 0.0357,
-          "medianLap_s": 83.56,
-          "nClean": 20,
-          "round": 1,
-          "stint": 2
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.0723,
-          "medianLap_s": 82.858,
-          "nClean": 16,
-          "round": 1,
-          "stint": 3
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.0506,
-          "medianLap_s": 99.465,
-          "nClean": 7,
-          "round": 2,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0704,
-          "medianLap_s": 97.587,
-          "nClean": 27,
-          "round": 2,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0387,
-          "medianLap_s": 95.741,
-          "nClean": 20,
-          "round": 3,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": -0.0212,
-          "medianLap_s": 93.981,
-          "nClean": 26,
-          "round": 3,
-          "stint": 2
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 93.464,
-          "nClean": 3,
-          "round": 4,
-          "stint": 1
-        },
-        {
-          "compound": "HARD",
-          "degSlope": 0.0141,
-          "medianLap_s": 93.592,
-          "nClean": 43,
-          "round": 4,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": -0.0783,
-          "medianLap_s": 76.423,
-          "nClean": 25,
-          "round": 5,
-          "stint": 1
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": -0.0492,
-          "medianLap_s": 75.465,
-          "nClean": 30,
-          "round": 5,
-          "stint": 2
-        },
-        {
-          "compound": "SOFT",
-          "degSlope": null,
-          "medianLap_s": 83.378,
-          "nClean": 10,
-          "round": 7,
-          "stint": 1
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 82.811,
-          "nClean": 15,
-          "round": 7,
-          "stint": 2
-        },
-        {
-          "compound": "HARD",
-          "degSlope": null,
-          "medianLap_s": 81.829,
-          "nClean": 9,
-          "round": 7,
-          "stint": 3
-        },
-        {
-          "compound": "MEDIUM",
-          "degSlope": null,
-          "medianLap_s": 81.489,
-          "nClean": 22,
-          "round": 7,
-          "stint": 4
-        }
-      ],
-      "team": "Red Bull Racing",
-      "teamColor": "#4781D7"
-    }
-  ]
+  "tire": []
 }
