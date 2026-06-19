@@ -108,6 +108,10 @@ def main() -> None:
         try:
             session = data_loading.load_session(year, rnd, "Q")
         except Exception as exc:                 # noqa: BLE001
+            # A session-load failure means we cannot enumerate this race's teammate
+            # pairs at all (pair identity comes from session.results), so the race is
+            # skipped here and has no matchups in the index. The race still appears
+            # under index.races (from season.json); the skip is logged below, not silent.
             print(f"  R{rnd} {slug}: cannot load Q ({exc!r}) - skipping race")
             continue
         names = _name_lookup(session.results)
