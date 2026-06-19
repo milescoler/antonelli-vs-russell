@@ -88,6 +88,79 @@ def test_assemble_race_has_four_factors_and_placeholder_where():
     assert "stintPace" in out["factors"]["tyre"] or "stints" in out["factors"]["tyre"]
 
 
+def test_verdict_from_where_real_when_sector_significant():
+    """verdict_from_where returns 'real' when at least one sector is significant."""
+    payload = {
+        "meta": {
+            "nPairs": 10,
+            "nUniqueLapsA": 8,
+            "nUniqueLapsB": 7,
+            "winnerCode": "ANT",
+            "p2Code": "RUS",
+            "driverA": {"code": "ANT"},
+            "driverB": {"code": "RUS"},
+            "marginCurveS": -1.23,
+        },
+        "sectors": [
+            {"i": 1, "deltaMean": -0.15, "ciLow": -0.25, "ciHigh": -0.05, "significant": True, "faster": "ANT"},
+            {"i": 2, "deltaMean": 0.02, "ciLow": -0.08, "ciHigh": 0.12, "significant": False, "faster": "RUS"},
+        ],
+        "attribution": [],
+        "callouts": {"topSignificant": [1], "noiseTrap": 2},
+        "deltaCurve": [],
+        "corners": [],
+        "track": [],
+    }
+    v = race_win.verdict_from_where(payload)
+    assert v["verdict"] == "real"
+    assert v["magnitudeS"] is not None
+    assert abs(v["magnitudeS"] - (-0.15)) < 1e-9
+    assert "ANT" in v["headline"]
+    assert "1 of 2" in v["headline"]
+    assert "8 vs 7" in v["caveat"]
+
+
+def test_verdict_from_where_insufficient_passthrough():
+    """verdict_from_where passes through an 'insufficient' payload unchanged."""
+    payload = {
+        "verdict": "insufficient",
+        "reason": "fewer than 4 comparable laps",
+    }
+    v = race_win.verdict_from_where(payload)
+    assert v["verdict"] == "insufficient"
+    assert v["magnitudeS"] is None
+    assert "too few" in v["headline"]
+    assert v["caveat"] == "fewer than 4 comparable laps"
+
+
+def test_verdict_from_where_noise_when_no_significant_sectors():
+    """verdict_from_where returns 'noise' when no sector is significant."""
+    payload = {
+        "meta": {
+            "nPairs": 5,
+            "nUniqueLapsA": 4,
+            "nUniqueLapsB": 3,
+            "winnerCode": "NOR",
+            "p2Code": "ANT",
+            "driverA": {"code": "NOR"},
+            "driverB": {"code": "ANT"},
+            "marginCurveS": -0.5,
+        },
+        "sectors": [
+            {"i": 1, "deltaMean": -0.03, "ciLow": -0.10, "ciHigh": 0.04, "significant": False, "faster": "NOR"},
+        ],
+        "attribution": [],
+        "callouts": {"topSignificant": [], "noiseTrap": 1},
+        "deltaCurve": [],
+        "corners": [],
+        "track": [],
+    }
+    v = race_win.verdict_from_where(payload)
+    assert v["verdict"] == "noise"
+    assert v["magnitudeS"] is None
+    assert "0 of 1" in v["headline"]
+
+
 def test_index_entry_marks_valid_and_excluded():
     from importlib.util import spec_from_file_location, module_from_spec
     from pathlib import Path

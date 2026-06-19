@@ -87,6 +87,54 @@ def principals_from_results(results: pd.DataFrame) -> dict:
     }
 
 
+def verdict_from_where(payload: dict) -> dict:
+    """Convert a raw where-on-track engine payload into a verdict block.
+
+    Args:
+        payload: the JSON dict printed by the engine CLI (either a full decomp
+                 result or {"verdict": "insufficient", "reason": ...}).
+
+    Returns a dict with keys: verdict, magnitudeS, headline, caveat.
+    """
+    if payload.get("verdict") == "insufficient":
+        return {
+            "verdict": "insufficient",
+            "magnitudeS": None,
+            "headline": "too few comparable laps to decompose where on track",
+            "caveat": payload.get("reason"),
+        }
+
+    sectors = payload.get("sectors", [])
+    meta = payload.get("meta", {})
+    sig = [s for s in sectors if s.get("significant")]
+    n_sig = len(sig)
+    N = len(sectors)
+
+    if n_sig > 0:
+        verdict = "real"
+        magnitude_s = sum(s["deltaMean"] for s in sig if s.get("deltaMean") is not None) or None
+    else:
+        verdict = "noise"
+        magnitude_s = None
+
+    winner_code = meta.get("winnerCode") or meta.get("driverA", {}).get("code", "winner")
+    headline = f"{winner_code} gained in {n_sig} of {N} micro-sectors"
+
+    n_a = meta.get("nUniqueLapsA")
+    n_b = meta.get("nUniqueLapsB")
+    caveat = (
+        f"based on {n_a} vs {n_b} unique comparable laps — "
+        "significance is exploratory at this sample size"
+    )
+
+    return {
+        "verdict": verdict,
+        "magnitudeS": magnitude_s,
+        "headline": headline,
+        "caveat": caveat,
+    }
+
+
 def assemble_race(*, principals, start_df, stint_df, deg_df, gap_df,
                   round_number, slug, event_name, year) -> dict:
     w, p2 = principals["winner"]["code"], principals["p2"]["code"]

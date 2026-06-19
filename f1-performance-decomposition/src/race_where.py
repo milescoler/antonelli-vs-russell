@@ -320,8 +320,12 @@ def decompose_where(winner_laps: list[data_loading.Lap],
 
     meta = {
         "nPairs": len(pairs),
+        "nUniqueLapsA": len(used_w_idx),
+        "nUniqueLapsB": len(used_p_idx),
         "winnerCode": winner_code,
         "p2Code": p2_code,
+        "driverA": {"code": winner_code},
+        "driverB": {"code": p2_code},
         "marginCurveS": web_export._num(float(mean_curve[-1]), 4),
     }
 
@@ -334,3 +338,72 @@ def decompose_where(winner_laps: list[data_loading.Lap],
         "callouts": callouts,
         "track": track,
     }
+
+
+# --------------------------------------------------------------------------- #
+# CLI entry point
+# --------------------------------------------------------------------------- #
+
+def main() -> None:
+    """CLI: python -m src.race_where --year 2026 --gp Monaco --a ANT --b RUS"""
+    import argparse
+    import json
+    import sys
+    import logging
+    from pathlib import Path
+
+    # Route all log noise to stderr so stdout stays clean JSON
+    logging.basicConfig(stream=sys.stderr, level=logging.WARNING,
+                        format="%(levelname)s %(name)s: %(message)s")
+    # Suppress noisy FastF1/urllib loggers
+    for _noisy in ("fastf1", "urllib3", "requests", "matplotlib"):
+        logging.getLogger(_noisy).setLevel(logging.ERROR)
+
+    parser = argparse.ArgumentParser(description="Where-on-track factor 1 decomposition CLI")
+    parser.add_argument("--year", type=int, required=True)
+    parser.add_argument("--gp", required=True)
+    parser.add_argument("--a", required=True, dest="driver_a", help="Winner driver code")
+    parser.add_argument("--b", required=True, dest="driver_b", help="P2 driver code")
+    args = parser.parse_args()
+
+    # Point cache at the shared repo-root cache (so we reuse already-downloaded data)
+    repo_cache = Path(__file__).resolve().parents[2] / "fastf1_cache"
+    config.CACHE_DIR = repo_cache
+
+    try:
+        winner_laps, p2_laps = load_race_laps(args.year, args.gp, args.driver_a, args.driver_b)
+    except Exception as exc:
+        sys.stderr.write(f"ERROR load_race_laps: {exc}\n")
+        sys.exit(1)
+
+    # Try to load corner distances from the session
+    corner_distances = None
+    try:
+        import fastf1
+        from src import data_loading as _dl
+        _dl.enable_cache()
+        session = fastf1.get_session(args.year, args.gp, "R")
+        # Session is already loaded by load_race_laps; if corner data is cheap, get it
+        session.load(telemetry=False, laps=False, weather=False, messages=False)
+        circuit_info = session.get_circuit_info()
+        corner_distances = circuit_info.corners["Distance"].to_numpy()
+    except Exception as exc:
+        sys.stderr.write(f"WARNING corner distances unavailable ({exc}); using equal-bin fallback\n")
+        corner_distances = None
+
+    result = decompose_where(winner_laps, p2_laps, corner_distances)
+
+    if result is None:
+        payload = {
+            "verdict": "insufficient",
+            "reason": "fewer than %d comparable laps" % config.MIN_COMPARABLE_PAIRS,
+        }
+    else:
+        payload = result
+
+    print(json.dumps(payload))
+    sys.exit(0)
+
+
+if __name__ == "__main__":
+    main()

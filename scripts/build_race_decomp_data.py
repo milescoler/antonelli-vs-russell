@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import subprocess
 import sys
 from pathlib import Path
 
@@ -24,6 +25,45 @@ from src.loaders import setup_cache                     # noqa: E402
 DATA_DIR = ROOT / "web" / "public" / "data" / "race"
 CACHE = ROOT / "fastf1_cache"
 HERO_SLUG = "monaco"   # a clean pole-to-flag win; NOT canadian (inherited)
+DECOMP_ROOT = ROOT / "f1-performance-decomposition"
+
+
+def _where_factor(year: int, rnd: int, winner: str, p2: str) -> dict:
+    """Run the where-on-track engine via subprocess and return a factors.where dict."""
+    try:
+        r = subprocess.run(
+            [sys.executable, "-m", "src.race_where",
+             "--year", str(year), "--gp", str(rnd), "--a", winner, "--b", p2],
+            cwd=str(DECOMP_ROOT),
+            capture_output=True,
+            text=True,
+            timeout=600,
+        )
+        if r.returncode != 0:
+            return {
+                "verdict": "insufficient",
+                "magnitudeS": None,
+                "headline": "where-on-track decomposition failed",
+                "caveat": (r.stderr or "")[-300:],
+                "decomp": None,
+            }
+        # Last line of stdout is the JSON (preceding lines may be log noise on stderr,
+        # but we redirect logs there; still take last line defensively)
+        last_line = r.stdout.strip().splitlines()[-1]
+        payload = json.loads(last_line)
+        v = race_win.verdict_from_where(payload)
+        return {
+            **v,
+            "decomp": (None if payload.get("verdict") == "insufficient" else payload),
+        }
+    except Exception as exc:
+        return {
+            "verdict": "insufficient",
+            "magnitudeS": None,
+            "headline": "where-on-track decomposition errored",
+            "caveat": str(exc),
+            "decomp": None,
+        }
 
 
 def _canonical(obj) -> str:
@@ -48,9 +88,13 @@ def build_one_race(year: int, round_info: dict) -> dict:
     stint_df = race_mod.stint_pace(year, rnd, [w, p2])
     deg_df = race_mod.tire_deg(year, rnd, [w, p2])
     gap_df = race_mod.gap_to_rival(year, rnd, w)
-    return race_win.assemble_race(principals=principals, start_df=start_df, stint_df=stint_df,
-                                  deg_df=deg_df, gap_df=gap_df, round_number=rnd, slug=slug,
-                                  event_name=name, year=year)
+    payload = race_win.assemble_race(principals=principals, start_df=start_df, stint_df=stint_df,
+                                     deg_df=deg_df, gap_df=gap_df, round_number=rnd, slug=slug,
+                                     event_name=name, year=year)
+    # Factor 1: where on track — computed via subprocess (non-fatal: failure → honest insufficient)
+    print(f"  [{slug}] computing where-on-track factor (subprocess)…", flush=True)
+    payload["factors"]["where"] = _where_factor(year, rnd, w, p2)
+    return payload
 
 
 def index_entry(*, slug, round_number, payload=None, reason=None) -> dict:

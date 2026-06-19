@@ -287,8 +287,9 @@
       "verdict": "noise"
     },
     "where": {
+      "caveat": "fewer than 4 comparable laps",
       "decomp": null,
-      "headline": "computed in the where-on-track pass",
+      "headline": "too few comparable laps to decompose where on track",
       "magnitudeS": null,
       "verdict": "insufficient"
     }
