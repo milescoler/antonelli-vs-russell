@@ -5,9 +5,14 @@ thin; the pure logic operates on DataFrames so it is unit-tested offline.
 """
 from __future__ import annotations
 
+import re
+
 import pandas as pd
 
 from src import serialize, race_verdict
+
+# Lapped-but-classified statuses: "+1 Lap", "+2 Laps", etc.
+_LAPPED_RE = re.compile(r"^\+\d+ Laps?$")
 
 
 def _hex(color) -> str | None:
@@ -25,6 +30,17 @@ def _driver(row) -> dict:
     }
 
 
+def _is_dnf(status: str) -> bool:
+    """True when status represents a true retirement (not a classified finisher
+    that is merely lapped). Lapped finishers have statuses like '+1 Lap',
+    '+2 Laps', etc. — those are NOT retirements."""
+    if status == "Finished":
+        return False
+    if _LAPPED_RE.match(status):
+        return False
+    return True
+
+
 def principals_from_results(results: pd.DataFrame) -> dict:
     res = results.sort_values("Position")
     win_row = res[res["Position"] == 1.0]
@@ -37,7 +53,26 @@ def principals_from_results(results: pd.DataFrame) -> dict:
     margin_s = None if pd.isna(t) else float(pd.to_timedelta(t).total_seconds())
 
     classified = res[res["Position"].notna()]
-    any_dnf = bool((classified["Status"].astype(str) != "Finished").any())
+    any_dnf = bool(classified["Status"].astype(str).apply(_is_dnf).any())
+
+    winner_code = str(win_row["Abbreviation"])
+
+    # Detect inherited win: find the polesitter (GridPosition == 1.0) and check
+    # if they retired before the end of the race (true DNF, not lapped).
+    pole_rows = res[res["GridPosition"] == 1.0] if "GridPosition" in res.columns else res.iloc[0:0]
+    if not pole_rows.empty:
+        pole_row = pole_rows.iloc[0]
+        pole_code = str(pole_row["Abbreviation"])
+        pole_status = str(pole_row["Status"])
+        winner_inherited = (pole_code != winner_code) and _is_dnf(pole_status)
+        pole_sitter = pole_code
+    else:
+        winner_inherited = False
+        pole_sitter = None
+
+    winner_started_pole = bool(
+        not pd.isna(win_row.get("GridPosition")) and float(win_row["GridPosition"]) == 1.0
+    )
 
     return {
         "winner": _driver(win_row),
@@ -46,12 +81,17 @@ def principals_from_results(results: pd.DataFrame) -> dict:
         "anyDnf": any_dnf,
         "winnerStatus": str(win_row["Status"]),
         "p2Status": str(p2_row["Status"]),
+        "winnerInherited": winner_inherited,
+        "poleSitter": pole_sitter,
+        "winnerStartedPole": winner_started_pole,
     }
 
 
 def assemble_race(*, principals, start_df, stint_df, deg_df, gap_df,
                   round_number, slug, event_name, year) -> dict:
     w, p2 = principals["winner"]["code"], principals["p2"]["code"]
+
+    inherited = bool(principals.get("winnerInherited", False))
 
     start_rows = serialize.serialize_start(start_df, a_code=w, b_code=p2)
     pace_rows = serialize.serialize_stint_pace(stint_df)
@@ -61,7 +101,7 @@ def assemble_race(*, principals, start_df, stint_df, deg_df, gap_df,
 
     pace_v = race_verdict.pace_verdict(pace_rows, w, p2)
     tyre_v = race_verdict.tyre_verdict(deg_rows, w, p2)
-    start_v = race_verdict.start_verdict(start_rows, w, p2)
+    start_v = race_verdict.start_verdict(start_rows, w, p2, inherited=inherited)
 
     factors = {
         "where": {"verdict": "insufficient", "magnitudeS": None,
@@ -74,7 +114,10 @@ def assemble_race(*, principals, start_df, stint_df, deg_df, gap_df,
     return {
         "meta": {"race": slug, "eventName": event_name, "round": int(round_number),
                  "year": int(year), "winner": principals["winner"], "p2": principals["p2"],
-                 "marginS": principals["marginS"], "anyDnf": principals["anyDnf"]},
+                 "marginS": principals["marginS"], "anyDnf": principals["anyDnf"],
+                 "winnerInherited": inherited,
+                 "poleSitter": principals.get("poleSitter"),
+                 "winnerStartedPole": principals.get("winnerStartedPole")},
         "signConvention": "winner_minus_p2",
         "factors": factors,
         "caveats": {"anyDnf": principals["anyDnf"], "fuelNotCorrected": True,

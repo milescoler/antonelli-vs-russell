@@ -20,26 +20,28 @@ def _row(rows, code):
     return None
 
 
-def start_verdict(start_rows: list[dict], winner_code: str, p2_code: str) -> dict:
+def start_verdict(start_rows: list[dict], winner_code: str, p2_code: str,
+                  *, inherited: bool = False) -> dict:
     w = _row(start_rows, winner_code)
     gained = (w or {}).get("positionsGained")
-    # Inherited: any classified-ahead rival DNF'd (a non-winner/non-P2 row that retired).
-    rival_dnf = any(r["dnf"] for r in start_rows
-                    if r["code"] not in (winner_code, p2_code))
-    if rival_dnf:
-        verdict, caveat = "inherited", "a rival ahead retired; track position was inherited"
+    if inherited:
+        verdict = "inherited"
+        caveat = "lead inherited when the polesitter retired"
+        headline = f"{winner_code} inherited the lead after the polesitter retired"
     elif gained is None:
         verdict, caveat = "insufficient", "no lap-1 data"
+        headline = "no lap-1 data"
     elif gained >= START_REAL_PLACES:
         verdict, caveat = "real", "conflates start skill with grid position and lap-1 luck"
+        headline = f"{winner_code} {'+' if gained >= 0 else ''}{gained} places on lap 1"
     else:
         verdict, caveat = "noise", "lap-1 swing within normal first-lap scatter"
+        headline = f"{winner_code} {'+' if (gained or 0) >= 0 else ''}{gained} places on lap 1"
     return {
         "magnitudeS": (None if gained is None else float(gained)),
         "magnitudeUnit": "places",
         "verdict": verdict,
-        "headline": f"{winner_code} {'+' if (gained or 0) >= 0 else ''}{gained} places on lap 1"
-                    if gained is not None else "no lap-1 data",
+        "headline": headline,
         "caveat": caveat,
     }
 

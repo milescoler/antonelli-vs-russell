@@ -13,17 +13,19 @@ def test_start_verdict_real_when_winner_gains_and_holds():
     assert v["magnitudeUnit"] == "places"
 
 
-def test_start_verdict_inherited_when_rival_dnf():
+def test_start_verdict_inherited_when_flag_passed():
+    # The inherited flag is determined upstream (principals_from_results) and
+    # threaded in explicitly. The polesitter (RUS) is not in start_rows because
+    # they retired and may not have completed lap 1; the flag carries the signal.
     rows = [
         {"role": "A", "code": "ANT", "grid": 2, "lap1Pos": 2, "positionsGained": 0,
          "finish": 1, "status": "Finished", "dnf": False},
         {"role": "P2", "code": "NOR", "grid": 5, "lap1Pos": 5, "positionsGained": 0,
          "finish": 2, "status": "Finished", "dnf": False},
-        {"role": "WINNER_RIVAL_DNF", "code": "RUS", "grid": 1, "lap1Pos": 1,
-         "positionsGained": 0, "finish": None, "status": "Retired", "dnf": True},
     ]
-    v = rv.start_verdict(rows, "ANT", "NOR")
+    v = rv.start_verdict(rows, "ANT", "NOR", inherited=True)
     assert v["verdict"] == "inherited"
+    assert "inherited" in v["headline"].lower() or "polesitter" in v["headline"].lower()
 
 
 def test_start_verdict_noise_when_small_swing():

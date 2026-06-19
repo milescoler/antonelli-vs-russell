@@ -3,15 +3,16 @@ from src import race_win
 
 
 def _results(rows):
-    cols = ["Position", "Abbreviation", "FullName", "TeamName", "TeamColor", "Time", "Status"]
+    cols = ["Position", "Abbreviation", "FullName", "TeamName", "TeamColor", "Time", "Status",
+            "GridPosition"]
     return pd.DataFrame(rows, columns=cols)
 
 
 def test_principals_resolves_winner_p2_and_margin():
     res = _results([
-        (1.0, "ANT", "Kimi Antonelli", "Mercedes", "27F4D2", pd.Timedelta(0), "Finished"),
-        (2.0, "NOR", "Lando Norris", "McLaren", "FF8000", pd.Timedelta(seconds=8.4), "Finished"),
-        (3.0, "LEC", "Charles Leclerc", "Ferrari", "E80020", pd.Timedelta(seconds=12.1), "Finished"),
+        (1.0, "ANT", "Kimi Antonelli", "Mercedes", "27F4D2", pd.Timedelta(0), "Finished", 1.0),
+        (2.0, "NOR", "Lando Norris", "McLaren", "FF8000", pd.Timedelta(seconds=8.4), "Finished", 2.0),
+        (3.0, "LEC", "Charles Leclerc", "Ferrari", "E80020", pd.Timedelta(seconds=12.1), "Finished", 3.0),
     ])
     p = race_win.principals_from_results(res)
     assert p["winner"]["code"] == "ANT" and p["p2"]["code"] == "NOR"
@@ -22,19 +23,47 @@ def test_principals_resolves_winner_p2_and_margin():
 
 def test_principals_margin_none_when_p2_lapped_and_flags_dnf():
     res = _results([
-        (1.0, "ANT", "Kimi Antonelli", "Mercedes", "27F4D2", pd.Timedelta(0), "Finished"),
-        (2.0, "NOR", "Lando Norris", "McLaren", "FF8000", pd.NaT, "+1 Lap"),
-        (3.0, "RUS", "George Russell", "Mercedes", "27F4D2", pd.NaT, "Retired"),
+        (1.0, "ANT", "Kimi Antonelli", "Mercedes", "27F4D2", pd.Timedelta(0), "Finished", 1.0),
+        (2.0, "NOR", "Lando Norris", "McLaren", "FF8000", pd.NaT, "+1 Lap", 2.0),
+        (3.0, "RUS", "George Russell", "Mercedes", "27F4D2", pd.NaT, "Retired", 3.0),
     ])
     p = race_win.principals_from_results(res)
     assert p["marginS"] is None
     assert p["anyDnf"] is True   # a classified runner did not Finish
 
 
+def test_inherited_win_detected_when_polesitter_retires():
+    """Polesitter (GridPosition==1) retires; a different driver wins → inherited."""
+    res = _results([
+        (1.0, "NOR", "Lando Norris", "McLaren", "FF8000", pd.Timedelta(0), "Finished", 5.0),
+        (2.0, "LEC", "Charles Leclerc", "Ferrari", "E80020", pd.Timedelta(seconds=5.2), "Finished", 2.0),
+        (3.0, "ANT", "Kimi Antonelli", "Mercedes", "27F4D2", pd.NaT, "Retired", 1.0),
+    ])
+    p = race_win.principals_from_results(res)
+    assert p["winnerInherited"] is True
+    assert p["poleSitter"] == "ANT"
+    assert p["winnerStartedPole"] is False
+    assert p["anyDnf"] is True
+
+
+def test_pole_to_flag_win_not_inherited():
+    """Winner started from pole (GridPosition==1) and finished → not inherited."""
+    res = _results([
+        (1.0, "ANT", "Kimi Antonelli", "Mercedes", "27F4D2", pd.Timedelta(0), "Finished", 1.0),
+        (2.0, "NOR", "Lando Norris", "McLaren", "FF8000", pd.Timedelta(seconds=8.4), "Finished", 2.0),
+        (3.0, "LEC", "Charles Leclerc", "Ferrari", "E80020", pd.Timedelta(seconds=12.1), "Finished", 3.0),
+    ])
+    p = race_win.principals_from_results(res)
+    assert p["winnerInherited"] is False
+    assert p["winnerStartedPole"] is True
+    assert p["poleSitter"] == "ANT"
+
+
 def test_assemble_race_has_four_factors_and_placeholder_where():
     principals = {"winner": {"code": "ANT", "name": "Kimi Antonelli", "team": "Mercedes", "color": "#27F4D2"},
                   "p2": {"code": "NOR", "name": "Lando Norris", "team": "McLaren", "color": "#FF8000"},
-                  "marginS": 8.4, "anyDnf": False, "winnerStatus": "Finished", "p2Status": "Finished"}
+                  "marginS": 8.4, "anyDnf": False, "winnerStatus": "Finished", "p2Status": "Finished",
+                  "winnerInherited": False, "poleSitter": "ANT", "winnerStartedPole": True}
     start_df = pd.DataFrame([
         ("R", "ANT", "ANT", 3, 1, 2, 1.0, "Finished"),
         ("R", "RUS", "NOR", 1, 2, -1, 2.0, "Finished"),

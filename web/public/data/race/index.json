@@ -1,0 +1,105 @@
+{
+  "entries": [
+    {
+      "marginS": 2.974,
+      "p2": "ANT",
+      "realFactorCount": 0,
+      "round": 1,
+      "slug": "australian",
+      "valid": true,
+      "winner": "RUS"
+    },
+    {
+      "marginS": 5.515,
+      "p2": "RUS",
+      "realFactorCount": 0,
+      "round": 2,
+      "slug": "chinese",
+      "valid": true,
+      "winner": "ANT"
+    },
+    {
+      "marginS": 13.722,
+      "p2": "PIA",
+      "realFactorCount": 1,
+      "round": 3,
+      "slug": "japanese",
+      "valid": true,
+      "winner": "ANT"
+    },
+    {
+      "marginS": 3.2640000000000002,
+      "p2": "NOR",
+      "realFactorCount": 0,
+      "round": 4,
+      "slug": "miami",
+      "valid": true,
+      "winner": "ANT"
+    },
+    {
+      "marginS": 10.768,
+      "p2": "HAM",
+      "realFactorCount": 1,
+      "round": 5,
+      "slug": "canadian",
+      "valid": true,
+      "winner": "ANT"
+    },
+    {
+      "marginS": 6.271,
+      "p2": "HAM",
+      "realFactorCount": 2,
+      "round": 6,
+      "slug": "monaco",
+      "valid": true,
+      "winner": "ANT"
+    },
+    {
+      "marginS": 19.561,
+      "p2": "RUS",
+      "realFactorCount": 2,
+      "round": 7,
+      "slug": "barcelona",
+      "valid": true,
+      "winner": "HAM"
+    }
+  ],
+  "hero": "monaco",
+  "races": [
+    {
+      "name": "Australian Grand Prix",
+      "round": 1,
+      "slug": "australian"
+    },
+    {
+      "name": "Chinese Grand Prix",
+      "round": 2,
+      "slug": "chinese"
+    },
+    {
+      "name": "Japanese Grand Prix",
+      "round": 3,
+      "slug": "japanese"
+    },
+    {
+      "name": "Miami Grand Prix",
+      "round": 4,
+      "slug": "miami"
+    },
+    {
+      "name": "Canadian Grand Prix",
+      "round": 5,
+      "slug": "canadian"
+    },
+    {
+      "name": "Monaco Grand Prix",
+      "round": 6,
+      "slug": "monaco"
+    },
+    {
+      "name": "Barcelona Grand Prix",
+      "round": 7,
+      "slug": "barcelona"
+    }
+  ]
+}
