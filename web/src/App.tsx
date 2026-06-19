@@ -1,4 +1,5 @@
 import { HashRouter, NavLink, Route, Routes } from 'react-router-dom'
+import { Decomposition } from './pages/Decomposition'
 import { Dashboard } from './pages/Dashboard'
 import { Telemetry } from './pages/Telemetry'
 import { About } from './pages/About'
@@ -22,7 +23,10 @@ function Nav() {
         </NavLink>
         <nav className="flex items-center gap-5">
           <NavLink to="/" className={link} end>
-            Dashboard
+            Lap Gap
+          </NavLink>
+          <NavLink to="/season" className={link}>
+            Season
           </NavLink>
           <NavLink to="/telemetry" className={link}>
             Telemetry
@@ -57,7 +61,8 @@ export function App() {
         <Nav />
         <main className="mx-auto max-w-6xl px-4 py-7">
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/" element={<Decomposition />} />
+            <Route path="/season" element={<Dashboard />} />
             <Route path="/telemetry" element={<Telemetry />} />
             <Route path="/about" element={<About />} />
           </Routes>
