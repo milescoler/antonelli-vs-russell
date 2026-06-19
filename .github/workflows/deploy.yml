@@ -59,6 +59,10 @@ jobs:
       - name: Build decomposition data
         run: python scripts/build_decomp_data.py
 
+      # Race-win decomposition JSON (the new flagship). Independent of season.json.
+      - name: Build race-win decomposition data
+        run: python scripts/build_race_decomp_data.py
+
       # Commit the regenerated JSON if (and only if) it changed, so the repo
       # stays the source of truth and the site builds even when FastF1 is down.
       - name: Commit data if changed
