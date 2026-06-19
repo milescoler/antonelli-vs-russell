@@ -100,3 +100,25 @@ def test_build_index_separates_valid_and_excluded():
 
 def test_matchup_key():
     assert web_export.matchup_key("canadian", "RUS", "ANT") == "canadian__RUS_ANT"
+
+
+def test_faster_field_follows_sign_convention():
+    res = run.run_pipeline(use_synthetic=True, driver_a="RUS", driver_b="ANT")
+    meta = {"slug": "canadian", "eventName": "Synthetic GP", "round": 5,
+            "year": config.YEAR, "session": "Q",
+            "driverAName": "George Russell", "driverBName": "Kimi Antonelli",
+            "team": "Mercedes", "teamColor": "#27F4D2"}
+    p = web_export.matchup_payload(res, meta)
+    for s in p["sectors"]:
+        dm = s["deltaMean"]
+        if dm is None:
+            assert s["faster"] is None
+        elif dm > 0:
+            assert s["faster"] == "ANT"   # A=RUS slower => B=ANT faster
+        elif dm < 0:
+            assert s["faster"] == "RUS"   # A=RUS faster
+    # noiseTrap, if present, is the largest-|deltaMean| insignificant sector
+    noise = [s for s in p["sectors"] if not s["significant"] and s["deltaMean"] is not None]
+    if noise:
+        want = max(noise, key=lambda s: abs(s["deltaMean"]))["i"]
+        assert p["callouts"]["noiseTrap"] == want

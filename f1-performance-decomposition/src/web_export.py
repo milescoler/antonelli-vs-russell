@@ -89,7 +89,7 @@ def matchup_payload(res: dict, race_meta: dict, *, max_points: int = 200) -> dic
         "ciLow": _num(r["ci_low"], 4), "ciHigh": _num(r["ci_high"], 4),
         "significant": bool(r["significant"]),
         "faster": (None if not np.isfinite(r["delta_s_mean"])
-                   else (res["driver_a"] if r["delta_s_mean"] > 0 else res["driver_b"])),
+                   else (res["driver_b"] if r["delta_s_mean"] > 0 else res["driver_a"])),
     } for _, r in res["table"].sort_values("sector").iterrows()]
     # note: delta = t_A - t_B, so deltaMean > 0 => A slower => B faster in that sector.
 
@@ -105,7 +105,8 @@ def matchup_payload(res: dict, race_meta: dict, *, max_points: int = 200) -> dic
     noise = table[~table["significant"]]
     callouts = {
         "topSignificant": [int(s) for s in res["top"]["sector"].tolist()] if len(res["top"]) else [],
-        "noiseTrap": (int(noise.iloc[0]["sector"]) if len(noise) else None),
+        "noiseTrap": (int(noise.loc[noise["delta_s_mean"].abs().idxmax(), "sector"])
+                      if len(noise) else None),
     }
 
     return {
