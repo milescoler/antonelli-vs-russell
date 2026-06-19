@@ -45,13 +45,12 @@ export function Badge({ children, tone = 'zinc' }: { children: ReactNode; tone?:
   )
 }
 
-// Links out to the full analysis (case study, notebooks, source). The dashboard
-// is the descriptive layer; the inference lives in the repo, so every surface
+// Links out to the full analysis (method write-up, source). The dashboard
+// is the interactive layer; the inference lives in the repo, so every surface
 // offers a path to it.
 export function StudyLinks({ className = '' }: { className?: string }) {
   const items: [string, string][] = [
-    ['Case study', STUDY_LINKS.caseStudy],
-    ['Notebooks', STUDY_LINKS.notebooks],
+    ['Method write-up', STUDY_LINKS.caseStudy],
     ['Source', STUDY_LINKS.source],
   ]
   return (

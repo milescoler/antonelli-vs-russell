@@ -4,7 +4,6 @@
 const REPO = 'https://github.com/milescoler/antonelli-vs-russell'
 
 export const STUDY_LINKS = {
-  caseStudy: `${REPO}/blob/main/docs/case_study.md`,
-  notebooks: `${REPO}/tree/main/notebooks`,
+  caseStudy: `${REPO}/blob/main/f1-performance-decomposition/REPORT.md`,
   source: REPO,
 } as const
