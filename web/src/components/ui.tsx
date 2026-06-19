@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { STUDY_LINKS } from '../lib/links'
 
 export function Panel({
   title,
@@ -40,6 +41,34 @@ export function Badge({ children, tone = 'zinc' }: { children: ReactNode; tone?:
       className={`inline-flex items-center rounded-sm border px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide ${TONES[tone]}`}
     >
       {children}
+    </span>
+  )
+}
+
+// Links out to the full analysis (case study, notebooks, source). The dashboard
+// is the descriptive layer; the inference lives in the repo, so every surface
+// offers a path to it.
+export function StudyLinks({ className = '' }: { className?: string }) {
+  const items: [string, string][] = [
+    ['Case study', STUDY_LINKS.caseStudy],
+    ['Notebooks', STUDY_LINKS.notebooks],
+    ['Source', STUDY_LINKS.source],
+  ]
+  return (
+    <span className={className}>
+      {items.map(([label, href], i) => (
+        <span key={href}>
+          {i > 0 && <span className="px-1.5 text-zinc-600">·</span>}
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold underline decoration-zinc-600 underline-offset-2 transition hover:text-f1-red hover:decoration-f1-red"
+          >
+            {label}
+          </a>
+        </span>
+      ))}
     </span>
   )
 }

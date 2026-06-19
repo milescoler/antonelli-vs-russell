@@ -1,0 +1,832 @@
+{
+  "hero": "canadian__RUS_ANT",
+  "matchups": [
+    {
+      "a": "ALB",
+      "b": "SAI",
+      "key": "australian__ALB_SAI",
+      "race": "australian",
+      "reason": "No clean laps for one of the drivers - cannot decompose.",
+      "team": "Williams",
+      "teamColor": "#1868DB",
+      "valid": false
+    },
+    {
+      "a": "ALO",
+      "b": "STR",
+      "key": "australian__ALO_STR",
+      "race": "australian",
+      "reason": "No clean laps for one of the drivers - cannot decompose.",
+      "team": "Aston Martin",
+      "teamColor": "#229971",
+      "valid": false
+    },
+    {
+      "a": "BEA",
+      "b": "OCO",
+      "key": "australian__BEA_OCO",
+      "officialGapS": -0.18,
+      "race": "australian",
+      "significantCount": 2,
+      "team": "Haas F1 Team",
+      "teamColor": "#9C9FA2",
+      "valid": true
+    },
+    {
+      "a": "BOR",
+      "b": "HUL",
+      "key": "australian__BOR_HUL",
+      "officialGapS": -0.082,
+      "race": "australian",
+      "significantCount": 6,
+      "team": "Audi",
+      "teamColor": "#F50537",
+      "valid": true
+    },
+    {
+      "a": "GAS",
+      "b": "COL",
+      "key": "australian__GAS_COL",
+      "officialGapS": -0.699,
+      "race": "australian",
+      "significantCount": 1,
+      "team": "Alpine",
+      "teamColor": "#00A1E8",
+      "valid": true
+    },
+    {
+      "a": "HAD",
+      "b": "VER",
+      "key": "australian__HAD_VER",
+      "race": "australian",
+      "reason": "No clean laps for one of the drivers - cannot decompose.",
+      "team": "Red Bull Racing",
+      "teamColor": "#4781D7",
+      "valid": false
+    },
+    {
+      "a": "LAW",
+      "b": "LIN",
+      "key": "australian__LAW_LIN",
+      "race": "australian",
+      "reason": "delta curve endpoint -0.052s != official gap 0.023s (residual -0.0746s > tol 0.05s)",
+      "team": "Racing Bulls",
+      "teamColor": "#6C98FF",
+      "valid": false
+    },
+    {
+      "a": "LEC",
+      "b": "HAM",
+      "key": "australian__LEC_HAM",
+      "race": "australian",
+      "reason": "delta curve endpoint -0.060s != official gap -0.151s (residual 0.0912s > tol 0.05s)",
+      "team": "Ferrari",
+      "teamColor": "#ED1131",
+      "valid": false
+    },
+    {
+      "a": "PER",
+      "b": "BOT",
+      "key": "australian__PER_BOT",
+      "race": "australian",
+      "reason": "delta curve endpoint -0.836s != official gap -0.639s (residual -0.1973s > tol 0.05s)",
+      "team": "Cadillac",
+      "teamColor": "#909090",
+      "valid": false
+    },
+    {
+      "a": "PIA",
+      "b": "NOR",
+      "key": "australian__PIA_NOR",
+      "race": "australian",
+      "reason": "delta curve endpoint 0.005s != official gap -0.095s (residual 0.1003s > tol 0.05s)",
+      "team": "McLaren",
+      "teamColor": "#F47600",
+      "valid": false
+    },
+    {
+      "a": "RUS",
+      "b": "ANT",
+      "key": "australian__RUS_ANT",
+      "race": "australian",
+      "reason": "delta curve endpoint -0.178s != official gap -0.293s (residual 0.1153s > tol 0.05s)",
+      "team": "Mercedes",
+      "teamColor": "#00D7B6",
+      "valid": false
+    },
+    {
+      "a": "BEA",
+      "b": "OCO",
+      "key": "barcelona__BEA_OCO",
+      "race": "barcelona",
+      "reason": "delta curve endpoint -0.369s != official gap -0.684s (residual 0.3148s > tol 0.05s)",
+      "team": "Haas F1 Team",
+      "teamColor": "#9C9FA2",
+      "valid": false
+    },
+    {
+      "a": "COL",
+      "b": "GAS",
+      "key": "barcelona__COL_GAS",
+      "race": "barcelona",
+      "reason": "delta curve endpoint -0.235s != official gap -0.070s (residual -0.1651s > tol 0.05s)",
+      "team": "Alpine",
+      "teamColor": "#00A1E8",
+      "valid": false
+    },
+    {
+      "a": "HAM",
+      "b": "LEC",
+      "key": "barcelona__HAM_LEC",
+      "race": "barcelona",
+      "reason": "delta curve endpoint -0.461s != official gap -0.538s (residual 0.0766s > tol 0.05s)",
+      "team": "Ferrari",
+      "teamColor": "#ED1131",
+      "valid": false
+    },
+    {
+      "a": "HUL",
+      "b": "BOR",
+      "key": "barcelona__HUL_BOR",
+      "race": "barcelona",
+      "reason": "delta curve endpoint -0.465s != official gap -0.233s (residual -0.2322s > tol 0.05s)",
+      "team": "Audi",
+      "teamColor": "#F50537",
+      "valid": false
+    },
+    {
+      "a": "LAW",
+      "b": "LIN",
+      "key": "barcelona__LAW_LIN",
+      "race": "barcelona",
+      "reason": "delta curve endpoint -0.363s != official gap -0.255s (residual -0.1076s > tol 0.05s)",
+      "team": "Racing Bulls",
+      "teamColor": "#6C98FF",
+      "valid": false
+    },
+    {
+      "a": "NOR",
+      "b": "PIA",
+      "key": "barcelona__NOR_PIA",
+      "officialGapS": -0.089,
+      "race": "barcelona",
+      "significantCount": 1,
+      "team": "McLaren",
+      "teamColor": "#F47600",
+      "valid": true
+    },
+    {
+      "a": "PER",
+      "b": "BOT",
+      "key": "barcelona__PER_BOT",
+      "race": "barcelona",
+      "reason": "delta curve endpoint -0.425s != official gap -0.212s (residual -0.2130s > tol 0.05s)",
+      "team": "Cadillac",
+      "teamColor": "#909090",
+      "valid": false
+    },
+    {
+      "a": "RUS",
+      "b": "ANT",
+      "key": "barcelona__RUS_ANT",
+      "race": "barcelona",
+      "reason": "delta curve endpoint -0.153s != official gap -0.319s (residual 0.1656s > tol 0.05s)",
+      "team": "Mercedes",
+      "teamColor": "#00D7B6",
+      "valid": false
+    },
+    {
+      "a": "SAI",
+      "b": "ALB",
+      "key": "barcelona__SAI_ALB",
+      "officialGapS": -0.543,
+      "race": "barcelona",
+      "significantCount": 2,
+      "team": "Williams",
+      "teamColor": "#1868DB",
+      "valid": true
+    },
+    {
+      "a": "STR",
+      "b": "ALO",
+      "key": "barcelona__STR_ALO",
+      "race": "barcelona",
+      "reason": "delta curve endpoint -0.224s != official gap -0.057s (residual -0.1667s > tol 0.05s)",
+      "team": "Aston Martin",
+      "teamColor": "#229971",
+      "valid": false
+    },
+    {
+      "a": "VER",
+      "b": "HAD",
+      "key": "barcelona__VER_HAD",
+      "officialGapS": -0.056,
+      "race": "barcelona",
+      "significantCount": 6,
+      "team": "Red Bull Racing",
+      "teamColor": "#4781D7",
+      "valid": true
+    },
+    {
+      "a": "ALO",
+      "b": "STR",
+      "key": "canadian__ALO_STR",
+      "race": "canadian",
+      "reason": "delta curve endpoint -1.342s != official gap -0.999s (residual -0.3425s > tol 0.05s)",
+      "team": "Aston Martin",
+      "teamColor": "#229971",
+      "valid": false
+    },
+    {
+      "a": "BEA",
+      "b": "OCO",
+      "key": "canadian__BEA_OCO",
+      "race": "canadian",
+      "reason": "delta curve endpoint -0.488s != official gap -0.429s (residual -0.0591s > tol 0.05s)",
+      "team": "Haas F1 Team",
+      "teamColor": "#9C9FA2",
+      "valid": false
+    },
+    {
+      "a": "COL",
+      "b": "GAS",
+      "key": "canadian__COL_GAS",
+      "officialGapS": -0.49,
+      "race": "canadian",
+      "significantCount": 2,
+      "team": "Alpine",
+      "teamColor": "#00A1E8",
+      "valid": true
+    },
+    {
+      "a": "HAM",
+      "b": "LEC",
+      "key": "canadian__HAM_LEC",
+      "officialGapS": -0.108,
+      "race": "canadian",
+      "significantCount": 3,
+      "team": "Ferrari",
+      "teamColor": "#ED1131",
+      "valid": true
+    },
+    {
+      "a": "HUL",
+      "b": "BOR",
+      "key": "canadian__HUL_BOR",
+      "officialGapS": -0.185,
+      "race": "canadian",
+      "significantCount": 2,
+      "team": "Audi",
+      "teamColor": "#F50537",
+      "valid": true
+    },
+    {
+      "a": "LIN",
+      "b": "LAW",
+      "key": "canadian__LIN_LAW",
+      "officialGapS": -0.617,
+      "race": "canadian",
+      "significantCount": 3,
+      "team": "Racing Bulls",
+      "teamColor": "#6C98FF",
+      "valid": true
+    },
+    {
+      "a": "NOR",
+      "b": "PIA",
+      "key": "canadian__NOR_PIA",
+      "race": "canadian",
+      "reason": "delta curve endpoint -0.185s != official gap -0.052s (residual -0.1327s > tol 0.05s)",
+      "team": "McLaren",
+      "teamColor": "#F47600",
+      "valid": false
+    },
+    {
+      "a": "PER",
+      "b": "BOT",
+      "key": "canadian__PER_BOT",
+      "race": "canadian",
+      "reason": "delta curve endpoint -1.090s != official gap -0.843s (residual -0.2474s > tol 0.05s)",
+      "team": "Cadillac",
+      "teamColor": "#909090",
+      "valid": false
+    },
+    {
+      "a": "RUS",
+      "b": "ANT",
+      "key": "canadian__RUS_ANT",
+      "officialGapS": -0.068,
+      "race": "canadian",
+      "significantCount": 2,
+      "team": "Mercedes",
+      "teamColor": "#00D7B6",
+      "valid": true
+    },
+    {
+      "a": "SAI",
+      "b": "ALB",
+      "key": "canadian__SAI_ALB",
+      "race": "canadian",
+      "reason": "delta curve endpoint -0.500s != official gap -0.578s (residual 0.0778s > tol 0.05s)",
+      "team": "Williams",
+      "teamColor": "#1868DB",
+      "valid": false
+    },
+    {
+      "a": "VER",
+      "b": "HAD",
+      "key": "canadian__VER_HAD",
+      "race": "canadian",
+      "reason": "delta curve endpoint -0.185s != official gap -0.028s (residual -0.1571s > tol 0.05s)",
+      "team": "Red Bull Racing",
+      "teamColor": "#4781D7",
+      "valid": false
+    },
+    {
+      "a": "ALO",
+      "b": "STR",
+      "key": "chinese__ALO_STR",
+      "race": "chinese",
+      "reason": "delta curve endpoint -0.101s != official gap -0.792s (residual 0.6913s > tol 0.05s)",
+      "team": "Aston Martin",
+      "teamColor": "#229971",
+      "valid": false
+    },
+    {
+      "a": "ANT",
+      "b": "RUS",
+      "key": "chinese__ANT_RUS",
+      "race": "chinese",
+      "reason": "delta curve endpoint 0.124s != official gap -0.222s (residual 0.3459s > tol 0.05s)",
+      "team": "Mercedes",
+      "teamColor": "#00D7B6",
+      "valid": false
+    },
+    {
+      "a": "BEA",
+      "b": "OCO",
+      "key": "chinese__BEA_OCO",
+      "race": "chinese",
+      "reason": "delta curve endpoint 0.789s != official gap -0.341s (residual 1.1297s > tol 0.05s)",
+      "team": "Haas F1 Team",
+      "teamColor": "#9C9FA2",
+      "valid": false
+    },
+    {
+      "a": "BOT",
+      "b": "PER",
+      "key": "chinese__BOT_PER",
+      "race": "chinese",
+      "reason": "delta curve endpoint -1.960s != official gap -1.470s (residual -0.4903s > tol 0.05s)",
+      "team": "Cadillac",
+      "teamColor": "#909090",
+      "valid": false
+    },
+    {
+      "a": "GAS",
+      "b": "COL",
+      "key": "chinese__GAS_COL",
+      "race": "chinese",
+      "reason": "delta curve endpoint 0.066s != official gap -0.484s (residual 0.5496s > tol 0.05s)",
+      "team": "Alpine",
+      "teamColor": "#00A1E8",
+      "valid": false
+    },
+    {
+      "a": "HAM",
+      "b": "LEC",
+      "key": "chinese__HAM_LEC",
+      "race": "chinese",
+      "reason": "delta curve endpoint -0.083s != official gap -0.013s (residual -0.0699s > tol 0.05s)",
+      "team": "Ferrari",
+      "teamColor": "#ED1131",
+      "valid": false
+    },
+    {
+      "a": "HUL",
+      "b": "BOR",
+      "key": "chinese__HUL_BOR",
+      "race": "chinese",
+      "reason": "delta curve endpoint -1.508s != official gap -0.195s (residual -1.3134s > tol 0.05s)",
+      "team": "Audi",
+      "teamColor": "#F50537",
+      "valid": false
+    },
+    {
+      "a": "LAW",
+      "b": "LIN",
+      "key": "chinese__LAW_LIN",
+      "race": "chinese",
+      "reason": "delta curve endpoint 1.842s != official gap -0.019s (residual 1.8613s > tol 0.05s)",
+      "team": "Racing Bulls",
+      "teamColor": "#6C98FF",
+      "valid": false
+    },
+    {
+      "a": "PIA",
+      "b": "NOR",
+      "key": "chinese__PIA_NOR",
+      "officialGapS": -0.058,
+      "race": "chinese",
+      "significantCount": 1,
+      "team": "McLaren",
+      "teamColor": "#F47600",
+      "valid": true
+    },
+    {
+      "a": "SAI",
+      "b": "ALB",
+      "key": "chinese__SAI_ALB",
+      "race": "chinese",
+      "reason": "delta curve endpoint 0.664s != official gap -0.455s (residual 1.1186s > tol 0.05s)",
+      "team": "Williams",
+      "teamColor": "#1868DB",
+      "valid": false
+    },
+    {
+      "a": "VER",
+      "b": "HAD",
+      "key": "chinese__VER_HAD",
+      "race": "chinese",
+      "reason": "delta curve endpoint 1.655s != official gap -0.119s (residual 1.7739s > tol 0.05s)",
+      "team": "Red Bull Racing",
+      "teamColor": "#4781D7",
+      "valid": false
+    },
+    {
+      "a": "ALO",
+      "b": "STR",
+      "key": "japanese__ALO_STR",
+      "race": "japanese",
+      "reason": "delta curve endpoint -0.629s != official gap -0.274s (residual -0.3552s > tol 0.05s)",
+      "team": "Aston Martin",
+      "teamColor": "#229971",
+      "valid": false
+    },
+    {
+      "a": "ANT",
+      "b": "RUS",
+      "key": "japanese__ANT_RUS",
+      "race": "japanese",
+      "reason": "delta curve endpoint 7.667s != official gap -0.298s (residual 7.9651s > tol 0.05s)",
+      "team": "Mercedes",
+      "teamColor": "#00D7B6",
+      "valid": false
+    },
+    {
+      "a": "BOR",
+      "b": "HUL",
+      "key": "japanese__BOR_HUL",
+      "race": "japanese",
+      "reason": "delta curve endpoint -1.023s != official gap -0.368s (residual -0.6553s > tol 0.05s)",
+      "team": "Audi",
+      "teamColor": "#F50537",
+      "valid": false
+    },
+    {
+      "a": "GAS",
+      "b": "COL",
+      "key": "japanese__GAS_COL",
+      "race": "japanese",
+      "reason": "delta curve endpoint 2.095s != official gap -0.936s (residual 3.0307s > tol 0.05s)",
+      "team": "Alpine",
+      "teamColor": "#00A1E8",
+      "valid": false
+    },
+    {
+      "a": "HAD",
+      "b": "VER",
+      "key": "japanese__HAD_VER",
+      "race": "japanese",
+      "reason": "delta curve endpoint 0.047s != official gap -0.284s (residual 0.3313s > tol 0.05s)",
+      "team": "Red Bull Racing",
+      "teamColor": "#4781D7",
+      "valid": false
+    },
+    {
+      "a": "LEC",
+      "b": "HAM",
+      "key": "japanese__LEC_HAM",
+      "race": "japanese",
+      "reason": "delta curve endpoint -0.490s != official gap -0.264s (residual -0.2262s > tol 0.05s)",
+      "team": "Ferrari",
+      "teamColor": "#ED1131",
+      "valid": false
+    },
+    {
+      "a": "LIN",
+      "b": "LAW",
+      "key": "japanese__LIN_LAW",
+      "race": "japanese",
+      "reason": "delta curve endpoint 2.652s != official gap -0.386s (residual 3.0379s > tol 0.05s)",
+      "team": "Racing Bulls",
+      "teamColor": "#6C98FF",
+      "valid": false
+    },
+    {
+      "a": "OCO",
+      "b": "BEA",
+      "key": "japanese__OCO_BEA",
+      "race": "japanese",
+      "reason": "delta curve endpoint -4.901s != official gap -0.781s (residual -4.1197s > tol 0.05s)",
+      "team": "Haas F1 Team",
+      "teamColor": "#9C9FA2",
+      "valid": false
+    },
+    {
+      "a": "PER",
+      "b": "BOT",
+      "key": "japanese__PER_BOT",
+      "race": "japanese",
+      "reason": "delta curve endpoint 0.212s != official gap -0.124s (residual 0.3357s > tol 0.05s)",
+      "team": "Cadillac",
+      "teamColor": "#909090",
+      "valid": false
+    },
+    {
+      "a": "PIA",
+      "b": "NOR",
+      "key": "japanese__PIA_NOR",
+      "race": "japanese",
+      "reason": "delta curve endpoint -0.414s != official gap -0.277s (residual -0.1367s > tol 0.05s)",
+      "team": "McLaren",
+      "teamColor": "#F47600",
+      "valid": false
+    },
+    {
+      "a": "SAI",
+      "b": "ALB",
+      "key": "japanese__SAI_ALB",
+      "race": "japanese",
+      "reason": "delta curve endpoint 0.386s != official gap -0.161s (residual 0.5471s > tol 0.05s)",
+      "team": "Williams",
+      "teamColor": "#1868DB",
+      "valid": false
+    },
+    {
+      "a": "ALO",
+      "b": "STR",
+      "key": "miami__ALO_STR",
+      "race": "miami",
+      "reason": "delta curve endpoint -0.120s != official gap -0.066s (residual -0.0537s > tol 0.05s)",
+      "team": "Aston Martin",
+      "teamColor": "#229971",
+      "valid": false
+    },
+    {
+      "a": "ANT",
+      "b": "RUS",
+      "key": "miami__ANT_RUS",
+      "officialGapS": -0.399,
+      "race": "miami",
+      "significantCount": 3,
+      "team": "Mercedes",
+      "teamColor": "#00D7B6",
+      "valid": true
+    },
+    {
+      "a": "BEA",
+      "b": "OCO",
+      "key": "miami__BEA_OCO",
+      "race": "miami",
+      "reason": "delta curve endpoint -0.360s != official gap -0.432s (residual 0.0719s > tol 0.05s)",
+      "team": "Haas F1 Team",
+      "teamColor": "#9C9FA2",
+      "valid": false
+    },
+    {
+      "a": "BOT",
+      "b": "PER",
+      "key": "miami__BOT_PER",
+      "race": "miami",
+      "reason": "delta curve endpoint -0.110s != official gap -0.338s (residual 0.2276s > tol 0.05s)",
+      "team": "Cadillac",
+      "teamColor": "#909090",
+      "valid": false
+    },
+    {
+      "a": "COL",
+      "b": "GAS",
+      "key": "miami__COL_GAS",
+      "race": "miami",
+      "reason": "delta curve endpoint -0.114s != official gap -0.048s (residual -0.0661s > tol 0.05s)",
+      "team": "Alpine",
+      "teamColor": "#00A1E8",
+      "valid": false
+    },
+    {
+      "a": "HUL",
+      "b": "BOR",
+      "key": "miami__HUL_BOR",
+      "officialGapS": -4.298,
+      "race": "miami",
+      "significantCount": 14,
+      "team": "Audi",
+      "teamColor": "#F50537",
+      "valid": true
+    },
+    {
+      "a": "LAW",
+      "b": "LIN",
+      "key": "miami__LAW_LIN",
+      "race": "miami",
+      "reason": "delta curve endpoint -0.547s != official gap -0.634s (residual 0.0869s > tol 0.05s)",
+      "team": "Racing Bulls",
+      "teamColor": "#6C98FF",
+      "valid": false
+    },
+    {
+      "a": "LEC",
+      "b": "HAM",
+      "key": "miami__LEC_HAM",
+      "officialGapS": -0.176,
+      "race": "miami",
+      "significantCount": 2,
+      "team": "Ferrari",
+      "teamColor": "#ED1131",
+      "valid": true
+    },
+    {
+      "a": "NOR",
+      "b": "PIA",
+      "key": "miami__NOR_PIA",
+      "race": "miami",
+      "reason": "delta curve endpoint -0.218s != official gap -0.149s (residual -0.0690s > tol 0.05s)",
+      "team": "McLaren",
+      "teamColor": "#F47600",
+      "valid": false
+    },
+    {
+      "a": "SAI",
+      "b": "ALB",
+      "key": "miami__SAI_ALB",
+      "officialGapS": -0.18,
+      "race": "miami",
+      "significantCount": 2,
+      "team": "Williams",
+      "teamColor": "#1868DB",
+      "valid": true
+    },
+    {
+      "a": "VER",
+      "b": "HAD",
+      "key": "miami__VER_HAD",
+      "officialGapS": -0.825,
+      "race": "miami",
+      "significantCount": 6,
+      "team": "Red Bull Racing",
+      "teamColor": "#4781D7",
+      "valid": true
+    },
+    {
+      "a": "ALB",
+      "b": "SAI",
+      "key": "monaco__ALB_SAI",
+      "race": "monaco",
+      "reason": "delta curve endpoint 0.046s != official gap -0.028s (residual 0.0737s > tol 0.05s)",
+      "team": "Williams",
+      "teamColor": "#1868DB",
+      "valid": false
+    },
+    {
+      "a": "ALO",
+      "b": "STR",
+      "key": "monaco__ALO_STR",
+      "race": "monaco",
+      "reason": "delta curve endpoint -0.816s != official gap -0.712s (residual -0.1040s > tol 0.05s)",
+      "team": "Aston Martin",
+      "teamColor": "#229971",
+      "valid": false
+    },
+    {
+      "a": "ANT",
+      "b": "RUS",
+      "key": "monaco__ANT_RUS",
+      "race": "monaco",
+      "reason": "delta curve endpoint -0.260s != official gap -0.394s (residual 0.1338s > tol 0.05s)",
+      "team": "Mercedes",
+      "teamColor": "#00D7B6",
+      "valid": false
+    },
+    {
+      "a": "GAS",
+      "b": "COL",
+      "key": "monaco__GAS_COL",
+      "race": "monaco",
+      "reason": "delta curve endpoint -0.655s != official gap -0.769s (residual 0.1144s > tol 0.05s)",
+      "team": "Alpine",
+      "teamColor": "#00A1E8",
+      "valid": false
+    },
+    {
+      "a": "HAM",
+      "b": "LEC",
+      "key": "monaco__HAM_LEC",
+      "race": "monaco",
+      "reason": "delta curve endpoint -0.285s != official gap -0.072s (residual -0.2129s > tol 0.05s)",
+      "team": "Ferrari",
+      "teamColor": "#ED1131",
+      "valid": false
+    },
+    {
+      "a": "HUL",
+      "b": "BOR",
+      "key": "monaco__HUL_BOR",
+      "officialGapS": -0.781,
+      "race": "monaco",
+      "significantCount": 3,
+      "team": "Audi",
+      "teamColor": "#F50537",
+      "valid": true
+    },
+    {
+      "a": "LAW",
+      "b": "LIN",
+      "key": "monaco__LAW_LIN",
+      "officialGapS": -0.836,
+      "race": "monaco",
+      "significantCount": 3,
+      "team": "Racing Bulls",
+      "teamColor": "#6C98FF",
+      "valid": true
+    },
+    {
+      "a": "OCO",
+      "b": "BEA",
+      "key": "monaco__OCO_BEA",
+      "race": "monaco",
+      "reason": "delta curve endpoint 0.049s != official gap -0.092s (residual 0.1408s > tol 0.05s)",
+      "team": "Haas F1 Team",
+      "teamColor": "#9C9FA2",
+      "valid": false
+    },
+    {
+      "a": "PER",
+      "b": "BOT",
+      "key": "monaco__PER_BOT",
+      "race": "monaco",
+      "reason": "delta curve endpoint -0.722s != official gap -0.536s (residual -0.1860s > tol 0.05s)",
+      "team": "Cadillac",
+      "teamColor": "#909090",
+      "valid": false
+    },
+    {
+      "a": "PIA",
+      "b": "NOR",
+      "key": "monaco__PIA_NOR",
+      "officialGapS": -0.141,
+      "race": "monaco",
+      "significantCount": 4,
+      "team": "McLaren",
+      "teamColor": "#F47600",
+      "valid": true
+    },
+    {
+      "a": "VER",
+      "b": "HAD",
+      "key": "monaco__VER_HAD",
+      "race": "monaco",
+      "reason": "delta curve endpoint -0.444s != official gap -0.340s (residual -0.1039s > tol 0.05s)",
+      "team": "Red Bull Racing",
+      "teamColor": "#4781D7",
+      "valid": false
+    }
+  ],
+  "races": [
+    {
+      "name": "Australian Grand Prix",
+      "round": 1,
+      "slug": "australian"
+    },
+    {
+      "name": "Chinese Grand Prix",
+      "round": 2,
+      "slug": "chinese"
+    },
+    {
+      "name": "Japanese Grand Prix",
+      "round": 3,
+      "slug": "japanese"
+    },
+    {
+      "name": "Miami Grand Prix",
+      "round": 4,
+      "slug": "miami"
+    },
+    {
+      "name": "Canadian Grand Prix",
+      "round": 5,
+      "slug": "canadian"
+    },
+    {
+      "name": "Monaco Grand Prix",
+      "round": 6,
+      "slug": "monaco"
+    },
+    {
+      "name": "Barcelona Grand Prix",
+      "round": 7,
+      "slug": "barcelona"
+    }
+  ]
+}

@@ -18,8 +18,9 @@ export function Dashboard() {
           {data ? `${data.season} Season` : 'Season Dashboard'}
         </h1>
         <p className="mt-2 max-w-2xl text-sm text-zinc-400">
-          Championship standings, qualifying and race pace rankings, and tyre strategy data
-          across the {data ? data.season : '2026'} grid.
+          The descriptive layer behind a driver-vs-car study: standings, qualifying and race
+          pace, and tyre strategy across the {data ? data.season : '2026'} grid — the raw timing
+          this project pulls signal from.
         </p>
       </section>
 
