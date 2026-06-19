@@ -235,17 +235,7 @@
           "grid": 1,
           "lap1Pos": 2,
           "positionsGained": -1,
-          "role": "A",
-          "status": "Finished"
-        },
-        {
-          "code": "NOR",
-          "dnf": false,
-          "finish": 2,
-          "grid": 4,
-          "lap1Pos": 3,
-          "positionsGained": 1,
-          "role": "B",
+          "role": "WIN",
           "status": "Finished"
         },
         {

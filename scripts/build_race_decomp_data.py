@@ -84,7 +84,11 @@ def build_one_race(year: int, round_info: dict) -> dict:
     session = race_mod.load_race_session(year, rnd)
     principals = race_win.principals_from_results(session.results)
     w, p2 = principals["winner"]["code"], principals["p2"]["code"]
-    start_df = race_mod.start_summary(year, rnd, drv_a=w, drv_b=p2)
+    # When the win is inherited, drv_b=poleSitter so start_summary fetches the
+    # retired polesitter's row; _build_start_rows uses it as the POLE entry.
+    pole = principals.get("poleSitter")
+    start_drv_b = pole if (principals.get("winnerInherited") and pole and pole not in (w, p2)) else p2
+    start_df = race_mod.start_summary(year, rnd, drv_a=w, drv_b=start_drv_b)
     stint_df = race_mod.stint_pace(year, rnd, [w, p2])
     deg_df = race_mod.tire_deg(year, rnd, [w, p2])
     gap_df = race_mod.gap_to_rival(year, rnd, w)

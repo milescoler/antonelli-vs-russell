@@ -232,17 +232,7 @@
           "grid": 1,
           "lap1Pos": 2,
           "positionsGained": -1,
-          "role": "A",
-          "status": "Finished"
-        },
-        {
-          "code": "RUS",
-          "dnf": false,
-          "finish": 2,
-          "grid": 2,
-          "lap1Pos": 4,
-          "positionsGained": -2,
-          "role": "B",
+          "role": "WIN",
           "status": "Finished"
         },
         {

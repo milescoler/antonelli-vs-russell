@@ -193,10 +193,10 @@ export function RaceDecomp() {
             not in/out laps). Where-on-track uses{' '}
             <strong className="text-zinc-200">like-compound</strong> comparisons only. Fuel
             load is <strong className="text-zinc-200">not corrected</strong> — named
-            explicitly so you know. Comparable-lap selection picks representative mid-stint
-            laps per driver, then runs{' '}
-            <strong className="text-zinc-200">5,000-sample bootstrap CIs</strong> to
-            distinguish real sector edges from noise.
+            explicitly so you know. The where-on-track factor runs{' '}
+            <strong className="text-zinc-200">5,000-sample bootstrap CIs</strong> on
+            comparable mid-stint laps to separate real sector edges from noise. The tyre,
+            pace, and start verdicts are threshold-based point estimates — not CI-gated.
           </p>
           <p className="text-xs text-zinc-500">
             Full write-up: <StudyLinks className="text-zinc-300" />

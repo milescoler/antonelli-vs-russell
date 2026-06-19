@@ -268,18 +268,18 @@
           "grid": 2,
           "lap1Pos": 2,
           "positionsGained": 0,
-          "role": "A",
+          "role": "WIN",
           "status": "Finished"
         },
         {
-          "code": "HAM",
-          "dnf": false,
-          "finish": 2,
-          "grid": 5,
-          "lap1Pos": 4,
-          "positionsGained": 1,
-          "role": "B",
-          "status": "Finished"
+          "code": "RUS",
+          "dnf": true,
+          "finish": 19,
+          "grid": 1,
+          "lap1Pos": 3,
+          "positionsGained": -2,
+          "role": "POLE",
+          "status": "Retired"
         },
         {
           "code": "HAM",

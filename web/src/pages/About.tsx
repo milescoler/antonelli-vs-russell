@@ -79,8 +79,9 @@ export function About() {
         <div className="space-y-3 py-2 text-sm text-zinc-400">
           <p>
             <strong className="text-zinc-200">Monaco</strong> — pole-to-flag, multiple factors
-            ruled real: pace, tyre management, and track position all pointed the same way. The
-            clearest "everything aligned" race.
+            ruled real: pace, tyre management, and where on track all pointed the same way. The
+            start factor was noise (he simply led pole-to-flag). The clearest "everything
+            aligned" race.
           </p>
           <p>
             <strong className="text-zinc-200">Canada</strong> — Antonelli's win was{' '}
@@ -90,8 +91,11 @@ export function About() {
           </p>
           <p>
             <strong className="text-zinc-200">Japan</strong> — Antonelli won from pole despite
-            dropping five places on lap 1, then recovering. Real data; the tool traces exactly
-            which laps recovered which positions.
+            dropping five places on lap 1. The tool's honest read: the win was driven by{' '}
+            <strong className="text-zinc-200">race pace</strong> (real, ~0.28 s/lap faster);
+            the where-on-track factor is{' '}
+            <strong className="text-zinc-200">insufficient</strong> — too few comparable laps
+            to decompose the recovery lap by lap.
           </p>
           <p>
             <strong className="text-zinc-200">Australia</strong> — the winner was actually

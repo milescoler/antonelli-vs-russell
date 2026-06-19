@@ -36,7 +36,7 @@
 
 **Canada** — Antonelli's win was **inherited**. Polesitter Russell led until his DNF on lap 2; the tool says so explicitly rather than crediting a pass that didn't happen.
 
-**Japan** — Antonelli won from pole despite dropping **five places on lap 1**, then recovering. Real data; the tool traces exactly which laps recovered which positions and verdicts them **real**.
+**Japan** — Antonelli won from pole despite dropping **five places on lap 1**. The tool's honest read: the win was driven by **race pace** (real, ~0.28 s/lap faster); the where-on-track factor is **insufficient** (too few comparable laps to decompose lap-by-lap recovery). The start swing itself is **noise** — within normal first-lap scatter.
 
 **Australia** — the winner was actually **slower on race pace**. Track position, not outright speed, decided it. The tool calls this out rather than attributing the win to pace it can't find.
 

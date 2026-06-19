@@ -223,17 +223,7 @@
           "grid": 1,
           "lap1Pos": 6,
           "positionsGained": -5,
-          "role": "A",
-          "status": "Finished"
-        },
-        {
-          "code": "PIA",
-          "dnf": false,
-          "finish": 2,
-          "grid": 3,
-          "lap1Pos": 1,
-          "positionsGained": 2,
-          "role": "B",
+          "role": "WIN",
           "status": "Finished"
         },
         {

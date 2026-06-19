@@ -112,7 +112,7 @@ def verdict_from_where(payload: dict) -> dict:
 
     if n_sig > 0:
         verdict = "real"
-        magnitude_s = sum(s["deltaMean"] for s in sig if s.get("deltaMean") is not None) or None
+        magnitude_s = sum(s["deltaMean"] for s in sig if s.get("deltaMean") is not None)
     else:
         verdict = "noise"
         magnitude_s = None
@@ -135,13 +135,72 @@ def verdict_from_where(payload: dict) -> dict:
     }
 
 
+def _build_start_rows(start_df, *, winner_code: str, p2_code: str,
+                       inherited: bool, pole_sitter: str | None) -> list[dict]:
+    """Build deduplicated start rows with roles WIN / P2 / POLE (POLE only when the
+    inherited-win polesitter differs from both winner and P2).
+
+    start_summary emits up to three rows (winner-slot, b-slot, P2-finisher slot).
+    When not inherited the b-slot and P2-finisher are both P2 → duplicate.
+    When inherited the b-slot is the polesitter.
+
+    Result roles:
+      - "WIN"  — the race winner (always present)
+      - "P2"   — the P2 finisher (always present, unless same as winner — impossible)
+      - "POLE" — the retired polesitter (only when inherited AND pole ∉ {winner, P2})
+    Each code appears at most once.
+    """
+    import math
+
+    def _row_dict(r) -> dict:
+        status = str(r["status"])
+        finish_raw = r["finish"]
+        finish = None if (finish_raw is None or (isinstance(finish_raw, float) and math.isnan(finish_raw))) \
+            else int(finish_raw)
+        return {
+            "code": str(r["code"]),
+            "grid": (None if (r["grid"] is None or (isinstance(r["grid"], float) and math.isnan(r["grid"])))
+                     else int(r["grid"])),
+            "lap1Pos": (None if (r["lap1_pos"] is None or (isinstance(r["lap1_pos"], float) and math.isnan(r["lap1_pos"])))
+                        else int(r["lap1_pos"])),
+            "positionsGained": (None if (r["positions_gained"] is None or (isinstance(r["positions_gained"], float) and math.isnan(r["positions_gained"])))
+                                else int(r["positions_gained"])),
+            "finish": finish,
+            "status": status,
+            "dnf": bool(finish is None or status != "Finished"),
+        }
+
+    df_by_code = {str(r["code"]): r for _, r in start_df.iterrows()}
+
+    rows = []
+    seen = set()
+
+    def _add(code, role):
+        if code in seen or code not in df_by_code:
+            return
+        seen.add(code)
+        rows.append({"role": role, **_row_dict(df_by_code[code])})
+
+    _add(winner_code, "WIN")
+    # Add POLE (retired polesitter) only when inherited and distinct from winner/P2
+    if inherited and pole_sitter and pole_sitter not in (winner_code, p2_code):
+        _add(pole_sitter, "POLE")
+    _add(p2_code, "P2")
+
+    return rows
+
+
 def assemble_race(*, principals, start_df, stint_df, deg_df, gap_df,
                   round_number, slug, event_name, year) -> dict:
     w, p2 = principals["winner"]["code"], principals["p2"]["code"]
 
     inherited = bool(principals.get("winnerInherited", False))
+    pole_sitter = principals.get("poleSitter")
 
-    start_rows = serialize.serialize_start(start_df, a_code=w, b_code=p2)
+    start_rows = _build_start_rows(
+        start_df, winner_code=w, p2_code=p2, inherited=inherited, pole_sitter=pole_sitter
+    )
+    # start_verdict still looks up the winner by code — works with new row structure
     pace_rows = serialize.serialize_stint_pace(stint_df)
     deg_rows = serialize.serialize_tire_deg(deg_df)
     gap = serialize.serialize_gap_trace(gap_df, w) if gap_df is not None and len(gap_df) else \

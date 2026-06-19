@@ -30,12 +30,22 @@ function GainedCell({ gained }: { gained: number | null }) {
   return <span className="tabular-nums text-zinc-500">0</span>
 }
 
+const ROLE_LABEL: Record<string, string> = {
+  WIN: 'WIN',
+  P2: 'P2',
+  POLE: 'POLE',
+  // legacy (pre-fix) shapes — kept for safety
+  A: 'WIN',
+  B: 'POLE',
+}
+
 function StartRowItem({ row }: { row: StartRow }) {
+  const roleLabel = ROLE_LABEL[row.role] ?? row.role
   return (
     <tr className="border-b border-carbon-line/50 last:border-0">
       {/* role */}
       <td className="py-2 pr-3 text-[10px] font-semibold uppercase tracking-wide text-zinc-500">
-        {row.role}
+        {roleLabel}
       </td>
       {/* code */}
       <td className="py-2 pr-3">

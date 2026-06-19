@@ -37,7 +37,7 @@ function Footer() {
     <footer className="mt-16 border-t border-carbon-line">
       <div className="mx-auto max-w-6xl px-4 py-6 text-xs text-zinc-600">
         <div className="mb-2">
-          The full driver-vs-car analysis: <StudyLinks className="text-zinc-500" />
+          Race-win decomposition method & findings: <StudyLinks className="text-zinc-500" />
         </div>
         Real qualifying, race and points data via FastF1 · not affiliated with Formula 1.
         Built by Cole Richards.
