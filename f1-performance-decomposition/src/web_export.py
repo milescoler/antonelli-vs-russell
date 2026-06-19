@@ -55,13 +55,11 @@ def _num(x, n: int = 4):
 
 
 def _downsample_idx(n: int, max_points: int) -> list[int]:
+    """Indices subsampling 0..n-1 to at most ``max_points`` points, always
+    including the first and last (so the curve still ends at the finish line)."""
     if n <= max_points:
         return list(range(n))
-    step = max(1, n // max_points)
-    idx = list(range(0, n, step))
-    if idx[-1] != n - 1:
-        idx.append(n - 1)          # always pin the finish line
-    return idx
+    return sorted({int(round(i)) for i in np.linspace(0, n - 1, max_points)})
 
 
 def _corner_labels(corner_distances) -> list[dict]:

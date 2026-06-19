@@ -40,8 +40,7 @@ def test_matchup_payload_shape_and_reconciliation():
     assert p["meta"]["driverB"]["code"] == "ANT"
     assert abs(p["meta"]["reconResidualS"]) <= config.RECONCILE_TOLERANCE_S
     # curve is downsampled, ends at the official gap, starts at 0
-    # Note: downsampling can exceed max_points by ~1 due to always pinning the finish line
-    assert len(p["deltaCurve"]) <= max_points + 10
+    assert len(p["deltaCurve"]) <= 120
     assert p["deltaCurve"][0]["delta"] == 0.0
     assert abs(p["deltaCurve"][-1]["delta"] - p["meta"]["officialGapS"]) <= config.RECONCILE_TOLERANCE_S
     # one sector row per micro-sector, each carries a CI + significance flag
