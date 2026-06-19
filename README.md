@@ -4,6 +4,15 @@
 
 That question is hard because driver and car are tangled together in every result. This project pulls them apart three different ways, each controlling for the car from a different angle. The throughline: **a fast car flatters a driver everywhere — so the interesting signal is whatever survives once you divide the car out.**
 
+## The method (and why it's the real subject)
+
+The real subject here isn't Antonelli — it's **measurement discipline**. "Is he good?" is a signal-vs-noise problem, because driver and car are tangled in every result. Two moves do the work:
+
+1. **Controlled comparison** — divide the car out three different ways (same car, same race, same track across years) so the confound is held fixed and what's left is mostly driver.
+2. **Honest uncertainty** — refuse to call a noisy result a finding: drop corrupted sensor data, reconcile each lap's segment deltas back to its official time, down-weight tiny samples (NaN, not a confident-looking number), and trust the signal that survives rather than the race-to-race swing.
+
+The clearest proof this is honest: an early version of the qualifying chapter reported large per-corner deltas that were really a **frozen speed sensor** at Japan — a freeze-detection filter collapsed them to ~0. The transferable skill is pulling signal out of noisy things, and knowing when you *haven't*.
+
 > **One-page summary:** [`case_study.pdf`](case_study.pdf)
 > **Notebooks (no code):** [Ch1 — Qualifying](notebooks/01_antonelli_vs_russell_no_code.pdf) · [Ch2 — Race wins](notebooks/02_how_antonelli_wins_races_no_code.pdf) · [Ch3 — Track history](notebooks/03_driver_vs_car_track_history_no_code.pdf)
 

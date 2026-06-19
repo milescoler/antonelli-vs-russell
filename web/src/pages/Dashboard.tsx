@@ -1,4 +1,4 @@
-import { Panel } from '../components/ui'
+import { Panel, StudyLinks } from '../components/ui'
 import { StandingsBoard } from '../components/StandingsBoard'
 import { PaceTable } from '../components/PaceTable'
 import { TireStrategy } from '../components/TireStrategy'
@@ -18,9 +18,30 @@ export function Dashboard() {
           {data ? `${data.season} Season` : 'Season Dashboard'}
         </h1>
         <p className="mt-2 max-w-2xl text-sm text-zinc-400">
-          Championship standings, qualifying and race pace rankings, and tyre strategy data
-          across the {data ? data.season : '2026'} grid.
+          The descriptive layer behind a driver-vs-car study: standings, qualifying and race
+          pace, and tyre strategy across the {data ? data.season : '2026'} grid — the raw timing
+          this project pulls signal from.
         </p>
+      </section>
+
+      {/* Thesis strip — names the method and points to the full analysis */}
+      <section className="rounded-lg border border-carbon-line bg-carbon-soft p-4 sm:p-5">
+        <div className="f1-bar">
+          <div className="f1-kicker text-[11px] uppercase tracking-widest text-f1-red">
+            The question
+          </div>
+          <p className="mt-1.5 max-w-3xl text-sm leading-relaxed text-zinc-300">
+            How much of Antonelli's 5-from-7 start is the <em className="not-italic text-white">driver</em>,
+            and how much is the <em className="not-italic text-white">Mercedes</em>? A fast car flatters a
+            driver everywhere, so the only trustworthy signal is whatever survives once you divide the car
+            out. The study does that three ways — same car (teammate), same race, same track across years —
+            and is ruthless about labeling noise as noise instead of dressing it up as a finding. This
+            dashboard is the descriptive layer it runs on.
+          </p>
+          <p className="mt-3 text-xs text-zinc-500">
+            Read the full analysis: <StudyLinks className="text-zinc-300" />
+          </p>
+        </div>
       </section>
 
       {/* Error state */}

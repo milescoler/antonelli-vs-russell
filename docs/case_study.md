@@ -4,6 +4,10 @@
 
 **Antonelli won 5 of his first 7 races — then Barcelona broke the run: Russell out-qualified him and he retired. How much is the driver, and how much is the Mercedes?** Driver and car are tangled in every result, so this project pulls them apart three ways — each controlling for the car from a different angle. The throughline: a fast car flatters a driver *everywhere*, so the signal worth trusting is whatever survives once the car is divided out.
 
+## The method (and why it's the real subject)
+
+The real subject here isn't Antonelli — it's **measurement discipline**. "Is he good?" is a signal-vs-noise problem, because driver and car are tangled in every result. Two moves do the work: **controlled comparison** — divide the car out three ways (same car, same race, same track across years) so the confound is held fixed; and **honest uncertainty** — refuse to call a noisy result a finding (drop corrupted sensor data, reconcile each decomposition back to the official lap time, down-weight tiny samples, and trust the signal that survives rather than the race-to-race swing). The clearest proof it's honest is in *What I learned* below: a frozen speed sensor at Japan that a freeze-detection filter caught and collapsed to ~0.
+
 ![Year-over-year: Antonelli vs Russell at the same seven tracks](../figures/year_over_year.png)
 
 ## Chapter 1 — Qualifying (same car, same season)
