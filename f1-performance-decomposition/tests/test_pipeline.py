@@ -13,7 +13,7 @@ import pandas as pd
 import pytest
 
 import config
-from src import synthetic, resampling, delta as delta_mod, stats, attribution
+from src import run, synthetic, resampling, delta as delta_mod, stats, attribution
 
 
 @pytest.fixture(scope="module")
@@ -131,3 +131,14 @@ def test_attribution_produces_narrative(pipeline):
     assert len(attrib) == len(top)
     if len(attrib):
         assert attrib.iloc[0]["narrative"]
+
+
+def test_run_pipeline_accepts_explicit_drivers():
+    # Synthetic fixture, but driven by explicit codes rather than config defaults.
+    res = run.run_pipeline(use_synthetic=True, driver_a="LEC", driver_b="HAM")
+    assert res["driver_a"] == "LEC" and res["driver_b"] == "HAM"
+    # Still reconciles (correctness gate) and attributes to the passed codes.
+    assert abs(res["residual"]) <= config.RECONCILE_TOLERANCE_S
+    if len(res["attrib"]):
+        narr = " ".join(res["attrib"]["narrative"].tolist())
+        assert ("LEC" in narr) or ("HAM" in narr)

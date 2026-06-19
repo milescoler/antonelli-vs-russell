@@ -36,22 +36,29 @@ def _corner_distances_from_session(session) -> np.ndarray | None:
     return None
 
 
-def gather_inputs(use_synthetic: bool):
+def gather_inputs(use_synthetic: bool, *, year=None, gp=None, session=None,
+                  driver_a=None, driver_b=None):
     """Return (laps_a, laps_b, corner_distances, label)."""
+    da = driver_a or config.DRIVER_A
+    db = driver_b or config.DRIVER_B
     if use_synthetic:
         from src import synthetic
-        a, b = synthetic.load_drivers(driver_a=config.DRIVER_A, driver_b=config.DRIVER_B)
+        a, b = synthetic.load_drivers(driver_a=da, driver_b=db)
         return a, b, synthetic.corner_distances(), "SYNTHETIC FIXTURE"
-    session = data_loading.load_session()
-    a = data_loading.select_clean_laps(session, config.DRIVER_A)
-    b = data_loading.select_clean_laps(session, config.DRIVER_B)
-    cd = _corner_distances_from_session(session)
-    label = f"{config.YEAR} {config.GRAND_PRIX} {config.SESSION}"
+    session_obj = data_loading.load_session(year, gp, session)
+    a = data_loading.select_clean_laps(session_obj, da)
+    b = data_loading.select_clean_laps(session_obj, db)
+    cd = _corner_distances_from_session(session_obj)
+    label = f"{year or config.YEAR} {gp or config.GRAND_PRIX} {session or config.SESSION}"
     return a, b, cd, label
 
 
-def run_pipeline(use_synthetic: bool = False) -> dict:
-    laps_a, laps_b, corner_distances, label = gather_inputs(use_synthetic)
+def run_pipeline(use_synthetic: bool = False, *, year=None, gp=None, session=None,
+                 driver_a=None, driver_b=None) -> dict:
+    da = driver_a or config.DRIVER_A
+    db = driver_b or config.DRIVER_B
+    laps_a, laps_b, corner_distances, label = gather_inputs(
+        use_synthetic, year=year, gp=gp, session=session, driver_a=da, driver_b=db)
     if not laps_a.laps or not laps_b.laps:
         raise RuntimeError("No clean laps for one of the drivers - cannot decompose.")
 
@@ -87,10 +94,11 @@ def run_pipeline(use_synthetic: bool = False) -> dict:
     top = stats.top_significant_sectors(table)
 
     # Attribution at the key micro-sectors.
-    attrib = attribution.attribute(top, repr_a, repr_b) if len(top) else pd.DataFrame()
+    attrib = attribution.attribute(top, repr_a, repr_b, da, db) if len(top) else pd.DataFrame()
 
     return dict(
         label=label, use_synthetic=use_synthetic,
+        driver_a=da, driver_b=db,
         grid=g, delta=dlt, edges=edges, corner_distances=corner_distances,
         decomp=decomp, table=table, top=top, attrib=attrib,
         repr_a=repr_a, repr_b=repr_b,
@@ -116,7 +124,7 @@ def write_outputs(res: dict) -> None:
 
 
 def _findings_markdown(res: dict) -> str:
-    a, b = config.DRIVER_A, config.DRIVER_B
+    a, b = res["driver_a"], res["driver_b"]
     lines = [
         f"*Source: {res['label']}"
         + ("  ⚠️ synthetic fixture, not real F1 data.*" if res["use_synthetic"] else ".*"),
