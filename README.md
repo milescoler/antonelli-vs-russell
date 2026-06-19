@@ -1,22 +1,14 @@
-# Separating the Driver from the Car: How Good Is Kimi Antonelli, Really?
+# Pulling Signal From Noise: Where Does an F1 Lap Gap Come From?
 
-**Antonelli won 5 of his first 7 races — then Barcelona broke the run: Russell out-qualified him and he retired. How much of the winning is him, and how much is the Mercedes?**
+**Two teammates, same car, ~0.07s apart over a qualifying lap. How much of that gap is real driver skill, and how much is lap-to-lap luck?** This project decomposes a single lap-time gap **spatially** (a cumulative time-delta curve sliced into corner-anchored micro-sectors) and **statistically** (a 5,000-sample bootstrap that flags which corners are real and which are noise), then names the driver input behind each real one.
 
-That question is hard because driver and car are tangled together in every result. This project pulls them apart three different ways, each controlling for the car from a different angle. The throughline: **a fast car flatters a driver everywhere — so the interesting signal is whatever survives once you divide the car out.**
+> **Live flagship:** the interactive decomposition — hero story + explore any teammate pair at any race — is the front page of the [Pitwall web app](https://milescoler.github.io/antonelli-vs-russell/). One-page method write-up: [`f1-performance-decomposition/REPORT.md`](f1-performance-decomposition/REPORT.md).
 
-## The method (and why it's the real subject)
+The real subject isn't any one driver — it's **measurement discipline**: align two irregularly-sampled traces on a common distance axis, reconcile the decomposition against the officially-measured gap (a hard correctness gate), and use confidence intervals to refuse to call a noisy swing a finding. The clearest proof it's honest: an early qualifying result showed large per-corner deltas that were really a frozen speed sensor at Japan — a freeze-detection filter collapsed them to ~0.
 
-The real subject here isn't Antonelli — it's **measurement discipline**. "Is he good?" is a signal-vs-noise problem, because driver and car are tangled in every result. Two moves do the work:
+## Companion analysis — a season-wide driver-vs-car study
 
-1. **Controlled comparison** — divide the car out three different ways (same car, same race, same track across years) so the confound is held fixed and what's left is mostly driver.
-2. **Honest uncertainty** — refuse to call a noisy result a finding: drop corrupted sensor data, reconcile each lap's segment deltas back to its official time, down-weight tiny samples (NaN, not a confident-looking number), and trust the signal that survives rather than the race-to-race swing.
-
-The clearest proof this is honest: an early version of the qualifying chapter reported large per-corner deltas that were really a **frozen speed sensor** at Japan — a freeze-detection filter collapsed them to ~0. The transferable skill is pulling signal out of noisy things, and knowing when you *haven't*.
-
-> **One-page summary:** [`case_study.pdf`](case_study.pdf)
-> **Notebooks (no code):** [Ch1 — Qualifying](notebooks/01_antonelli_vs_russell_no_code.pdf) · [Ch2 — Race wins](notebooks/02_how_antonelli_wins_races_no_code.pdf) · [Ch3 — Track history](notebooks/03_driver_vs_car_track_history_no_code.pdf)
-
----
+Alongside the single-lap decomposition, a three-chapter season study controls for the car three more ways (same car across a season, same race, same track across years):
 
 ## The three chapters
 
