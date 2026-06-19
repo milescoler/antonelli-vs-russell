@@ -1,6 +1,34 @@
+import json
+from pathlib import Path
+import importlib.util
+
 import pandas as pd
 from src import web_export, run
 import config
+
+
+def _load_build_script():
+    # Import scripts/build_decomp_data.py by path (it lives outside the package).
+    repo_root = Path(__file__).resolve().parents[2]
+    spec = importlib.util.spec_from_file_location(
+        "build_decomp_data", repo_root / "scripts" / "build_decomp_data.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def test_synthetic_demo_writes_valid_json(tmp_path):
+    build = _load_build_script()
+    build.build_synthetic_demo(tmp_path)
+
+    index = json.loads((tmp_path / "index.json").read_text())
+    assert index["hero"] in {m["key"] for m in index["matchups"]}
+    hero = next(m for m in index["matchups"] if m["key"] == index["hero"])
+    assert hero["valid"] is True
+
+    payload = json.loads((tmp_path / f"{index['hero']}.json").read_text())
+    assert payload["deltaCurve"][0]["delta"] == 0.0
+    assert "sectors" in payload and "callouts" in payload
 
 
 def _results():
