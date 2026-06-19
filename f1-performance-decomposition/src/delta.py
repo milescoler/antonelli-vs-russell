@@ -127,3 +127,15 @@ def reconcile(delta_endpoint: float,
     tolerance = tolerance if tolerance is not None else config.RECONCILE_TOLERANCE_S
     residual = float(delta_endpoint - official_gap)
     return abs(residual) <= tolerance, residual
+
+
+def reconcile_driver(resampled_lap: pd.DataFrame,
+                     official_lap_time: float,
+                     tolerance: float | None = None) -> tuple[bool, float]:
+    """Per-driver gate: the lap's own measured telemetry time at its own finish
+    must match its own official lap time. Independent of the other driver, so the
+    grid-truncation tail does not enter the residual."""
+    tol = config.RECONCILE_TOLERANCE_S if tolerance is None else tolerance
+    t = time_at_distance(resampled_lap)
+    resid = float(t[-1] - official_lap_time)
+    return abs(resid) <= tol, resid

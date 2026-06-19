@@ -1,131 +1,69 @@
-# Pulling Signal From Noise: Where Does an F1 Lap Gap Come From?
+# What Won the Race?
 
-**Two teammates, same car, ~0.07s apart over a qualifying lap. How much of that gap is real driver skill, and how much is lap-to-lap luck?** This project decomposes a single lap-time gap **spatially** (a cumulative time-delta curve sliced into corner-anchored micro-sectors) and **statistically** (a 5,000-sample bootstrap that flags which corners are real and which are noise), then names the driver input behind each real one.
+**For a given F1 race, decompose the winning margin (winner vs P2) into four causes and issue a verdict on each.** This is an outcome-attribution problem under uncertainty — F1 is the worked example; the method is the point.
 
-> **Live flagship:** the interactive decomposition — hero story + explore any teammate pair at any race — is the front page of the [Pitwall web app](https://milescoler.github.io/antonelli-vs-russell/). One-page method write-up: [`f1-performance-decomposition/REPORT.md`](f1-performance-decomposition/REPORT.md).
-
-The real subject isn't any one driver — it's **measurement discipline**: align two irregularly-sampled traces on a common distance axis, reconcile the decomposition against the officially-measured gap (a hard correctness gate), and use confidence intervals to refuse to call a noisy swing a finding. The clearest proof it's honest: an early qualifying result showed large per-corner deltas that were really a frozen speed sensor at Japan — a freeze-detection filter collapsed them to ~0.
-
-## Companion analysis — a season-wide driver-vs-car study
-
-Alongside the single-lap decomposition, a three-chapter season study controls for the car three more ways (same car across a season, same race, same track across years):
-
-## The three chapters
-
-| Chapter | Question | How it removes the car | Notebook |
-|--------|----------|------------------------|----------|
-| **1 — Qualifying** | Is he faster than his teammate? | Same car, same season (Russell) | [`01`](notebooks/01_antonelli_vs_russell.ipynb) |
-| **2 — Race wins** | How does he convert pace into wins? | Same car, same race (Russell + the per-race P2 finisher) | [`02`](notebooks/02_how_antonelli_wins_races.ipynb) |
-| **3 — Track history** | Are his wins at "driver tracks" or "car tracks"? | Same track, across years (overperformance vs each season's own baseline) | [`03`](notebooks/03_driver_vs_car_track_history.ipynb) |
-
-**2026 race record through Barcelona (R7):**
-
-| Round | Race | Grid → Finish | |
-|---|---|---|---|
-| 1 | Australia | P2 → **P2** | a finishing loss (lost to Russell) |
-| 2 | China | P1 → **P1** | win from pole |
-| 3 | Japan | P1 → **P1** | win from pole |
-| 4 | Miami | P1 → **P1** | win from pole |
-| 5 | Canada | P2 → **P1** | led by L2; Russell (pole) retired |
-| 6 | Monaco | P1 → **P1** | pole to flag-to-flag win |
-| 7 | Barcelona | P3 → **DNF** | streak-breaker: Russell took pole, then Antonelli retired |
+> **Live tool:** [milescoler.github.io/antonelli-vs-russell](https://milescoler.github.io/antonelli-vs-russell/)
+> **Method write-up:** [`f1-performance-decomposition/REPORT.md`](f1-performance-decomposition/REPORT.md)
 
 ---
 
-## Chapter 1 — Qualifying (getting to the front)
+## The Four Factors
 
-Antonelli and Russell drive the same Mercedes, so their fastest-lap delta is mostly driver.
-
-- **He out-qualifies Russell more often than not, but the trend is noisy, not monotone.** Round by round (positive = Antonelli faster): R1 −0.29 → R2 +0.22 → R3 +0.30 → R4 +0.40 → **R5 −0.07** → **R6 +0.39** → **R7 −0.32**, seven-race mean **+0.09 s**. The clean early climb broke at Canada, snapped back with a dominant Monaco pole, then broke again at Barcelona — where Russell took pole and out-qualified him for the first time this season.
-- **The segment-level split is essentially flat** — straights +0.009, slow corners −0.005, fast corners −0.007, medium corners −0.011 s/lap (all within ±0.011). His edge isn't concentrated in one phase of the lap.
-- **Where a concrete mechanism *does* show up is fast-corner commitment:** at corners ≥200 kph he brakes ~**15 m later** and gets to full throttle ~**19 m sooner** than Russell (14 data points across seven races — directional).
-- **The most durable signal is year-over-year.** Against his 2025 rookie season at the same seven tracks, Antonelli has gained **+0.46 s/track** on Russell (range −0.06–0.77). Still a clear compression of the gap to his teammate — though Barcelona is the first track where he didn't improve on his rookie self.
-
-![Year-over-year: Antonelli vs Russell, rookie vs sophomore, same 7 tracks](figures/year_over_year.png)
-
-![Headline: per-segment time delta across seven races](figures/headline_segment_delta.png)
-
-![Where each driver gains time across the lap](figures/track_delta_map.png)
+| Factor | Question | Verdict options |
+|--------|----------|-----------------|
+| **Where on track / which laps** | Which corners or stint windows actually built the gap? | Real / Noise / Insufficient data |
+| **Tyre strategy & degradation** | Did one driver gain from undercut, overcut, or slower tyre wear? | Real / Noise / Inherited / Insufficient data |
+| **Race pace** | On comparable laps (same compound, similar tyre age), who was faster? | Real / Noise / Insufficient data |
+| **Start & track position** | Did the result turn on grid slot, a lap-1 move, or traffic that never cleared? | Real / Noise / Inherited |
 
 ---
 
-## Chapter 2 — Race wins (converting it)
+## The Method
 
-Qualifying explains the grid; it doesn't explain the wins. Same teammate control, plus the actual P2 finisher of each race as a field reference. Sign convention: **positive = Antonelli better**. Clean lap = green-flag racing lap (`TrackStatus == '1'`, not lap 1, not in/out/pit).
+**Comparable laps** — race pace is read only across matching compounds at similar tyre age. No apples-to-oranges stint comparisons.
 
-- **Start & lap 1.** Monaco is the clean case (pole → flag-to-flag); Canada is the converted-then-inherited case (P2 → led by lap 2 → won after Russell's retirement); Australia is the honest counter-case (P2 → P2 — a finishing-position loss, not a start failure); Barcelona is the bluntest counter-case yet (qualified only P3, briefly passed Russell, then retired — no finish at all).
-- **Pace & control.** On the four pole-to-win races the per-lap gap trace shows Antonelli leading and *extending*. Canada is the exception — that lead was partly inherited. Stint pace is read only across matching compounds, and is **not** fuel-corrected (named, not modelled).
-- **Tire degradation.** Per-stint clean-lap slope vs tire age, ANT vs Russell, like-compound only; stints under 5 clean laps report NaN rather than a noisy number.
+**Bootstrap CIs** — the where-on-track factor uses 5,000 resamples to put confidence intervals on each track sector. A sector earns a "real" verdict only when the CI excludes zero. Stints under five clean laps report no verdict rather than a noisy number.
 
-![Grid → lap 1 → finish, per race](figures/start_conversion.png)
-![Race-control gap trace per round](figures/gap_trace.png)
-![Race pace by stint](figures/stint_pace.png)
-![Tire degradation by stint](figures/tire_deg.png)
+**Per-driver reconciliation** — each factor is cross-checked so verdicts are consistent (e.g., a pace verdict of "noise" can't coexist with a pace-derived gap being called "real").
+
+**Honest exclusion** — safety-car and VSC laps are excluded. Fuel load is named but not modelled. Claims are "in this dataset," not real-world F1 history.
 
 ---
 
-## Chapter 3 — Track history (driver track or car track?)
+## Findings — Proof the Method is Honest
 
-The teammate comparison removes the car *within* a season. This removes it *across* seasons. For each driver-year we take *(their average finish over the season's **other** rounds) − (their finish at this track)*: positive means they did better here than their own season norm, with car quality largely divided out. Averaged over many years that's a driver's **track affinity**; the same arithmetic on **teams** exposes track-specific *car* strengths. `finish` excludes DNF rounds; `grid` (qualifying) is the DNF-free cross-check.
+**Monaco** — clean pole-to-flag win; multiple factors ruled **real** (pace, tyre management, track position all pointed the same direction). The clearest "everything aligned" case.
 
-- **Monaco, the centerpiece.** Restricting to drivers/teams with ≥3 years at the circuit, the largest *persistent* overperformance belongs to teams about as much as to any single driver — so in this dataset Monaco reads as much like a **car track** as the archetypal "driver's track." A useful, slightly counter-reputational result.
-- **Every 2026 track in context.** Each circuit is tagged driver- vs car-dependent and shown against Mercedes' historical standing and Antonelli's own (tiny-sample) overperformance — so each of his wins gets a "how much was the car here?" read.
+**Canada** — Antonelli's win was **inherited**. Polesitter Russell led until his DNF on lap 2; the tool says so explicitly rather than crediting a pass that didn't happen.
 
-![Monaco: driver overperformance (≥3 yrs)](figures/track_affinity_monaco.png)
-![Monaco: driver track or car track?](figures/driver_vs_car_monaco.png)
-![Each 2026 track: car strength vs Antonelli's own edge](figures/track_summary.png)
+**Japan** — Antonelli won from pole despite dropping **five places on lap 1**. The tool's honest read: the win was driven by **race pace** (real, ~0.28 s/lap faster); the where-on-track factor is **insufficient** (too few comparable laps to decompose lap-by-lap recovery). The start swing itself is **noise** — within normal first-lap scatter.
 
-> **Data note:** Chapter 3 runs on this project's data source, whose history is internally consistent but **not** real-world F1. Every claim here is *"in this dataset"* — read from the numbers, not from real-world reputation.
+**Australia** — the winner was actually **slower on race pace**. Track position, not outright speed, decided it. The tool calls this out rather than attributing the win to pace it can't find.
 
 ---
 
-## Updating after a new race
+## Measurement Discipline
 
-The whole pipeline is driven by one list. To bring the project current after a Grand Prix:
+The clearest proof the method is honest: an early telemetry pass at Japan found large per-sector deltas that turned out to be a **frozen speed sensor** — a freeze-detection filter collapsed them to ~0. Catching that, and knowing when you *haven't* found real signal, is the whole skill.
 
-1. Append the new race to `RACES` in [`src/season.py`](src/season.py) — the single edit point.
-2. Run `python scripts/refresh.py` (fetches any missing session, re-executes all three notebooks, regenerates every figure and PDF).
-3. Commit the regenerated artifacts.
-
-The first Chapter-3 run is slow — it downloads ~16 seasons of results-only data into `fastf1_cache/` (gitignored). After that it's local and fast.
+The sensor-freeze detection is documented in [`f1-performance-decomposition/REPORT.md`](f1-performance-decomposition/REPORT.md).
 
 ---
 
-## Method
-
-**Qualifying (Ch1):** FastF1 telemetry for 2026 qualifying. Each driver's fastest valid lap, resampled onto a uniform 5 m distance grid; segment time read from FastF1's `Time` channel; segment delta = `Russell − Antonelli` (positive = Antonelli faster). A sensor-quality filter excludes segments where a frozen `Speed` sensor corrupts the telemetry (see Limitations).
-
-**Race (Ch2):** FastF1 Race sessions, laps only. Metrics build on a shared clean-lap filter (`TrackStatus == '1'`, not lap 1, not in/out/pit). Start conversion, per-stint median pace, per-lap gap-to-rival, and tire-degradation slope.
-
-**Track history (Ch3):** results-only loads across `YEARS` (2010–2025). Overperformance = season baseline (over a driver's other rounds) minus their result at the track; aggregated per driver and per team, with a small-n flag (`MIN_TRACK_YEARS = 3`).
-
----
-
-## Project structure
+## Project Structure
 
 ```
 f1_project/
 ├── README.md
-├── case_study.pdf
 ├── requirements.txt
-├── notebooks/
-│   ├── 01_antonelli_vs_russell.ipynb            # Ch1 — qualifying
-│   ├── 02_how_antonelli_wins_races.ipynb        # Ch2 — race wins
-│   ├── 03_driver_vs_car_track_history.ipynb     # Ch3 — track history
-│   └── *_no_code.pdf / *.pdf                     # exported reading copies
-├── src/
-│   ├── season.py          # single source of truth: RACES + YEARS
-│   ├── loaders.py         # FastF1 qualifying session/lap/telemetry loading
-│   ├── benchmarks.py      # teammate comparison + sensor-quality filter (Ch1)
-│   ├── segments.py        # circuit segmentation + time-delta math (Ch1)
-│   ├── race.py            # race-session metrics: start/pace/tire/gap (Ch2)
-│   ├── track_history.py   # cross-year overperformance engine (Ch3)
-│   └── plotting.py        # all styled chart helpers
+├── f1-performance-decomposition/   # engine: decomposition method + REPORT.md
 ├── scripts/
-│   └── refresh.py         # one-command season refresh
-├── figures/               # exported PNGs used in this README
-├── docs/                  # case study + design specs / implementation plans
-└── tests/                 # invariant tests for each module
+│   └── build_race_decomp_data.py  # fetch + build all race JSON
+├── src/                            # shared loaders, filters, bootstrap logic
+├── web/                            # React/Vite interactive tool (Tailwind + Recharts)
+│   ├── src/pages/RaceDecomp.tsx   # main decomposition view
+│   └── src/pages/About.tsx        # method + findings summary
+└── tests/                         # invariant tests
 ```
 
 ---
@@ -136,8 +74,10 @@ f1_project/
 git clone https://github.com/milescoler/antonelli-vs-russell.git
 cd f1_project
 pip install -r requirements.txt
-python scripts/refresh.py     # fetch data, run all notebooks, regenerate outputs
-pytest tests/                 # invariant checks (skip cleanly if cache is empty)
+python scripts/build_race_decomp_data.py   # fetch sessions, build race JSON
+pytest tests/                              # invariant checks
+# Web (dev):
+cd web && npm install && npm run dev
 ```
 
 Tested with FastF1 3.8.x, Python 3.12. The first run downloads session data into `./fastf1_cache/` (gitignored); subsequent runs are local.
@@ -146,13 +86,11 @@ Tested with FastF1 3.8.x, Python 3.12. The first run downloads session data into
 
 ## Limitations
 
-- **Sample size.** Seven 2026 races (one a DNF), and the race-mechanism chapter has even thinner data than qualifying. Findings are directional, not conclusive.
-- **Synthetic historical data (Ch3).** Claims are "in this dataset," not real F1 history.
-- **DNF handling (Ch3).** Finish-based overperformance excludes DNF/lapped rounds — this removes luck/reliability noise but discards information; the grid cross-check is the DNF-free corroboration.
-- **Small samples (Ch3).** Drivers/teams below `MIN_TRACK_YEARS` are flagged; Antonelli's own 1–2 years are directional only; the driver-vs-car call is a qualitative read, not a fitted model.
-- **Team rebrands** over a 16-season window are treated as-is, not stitched into lineages.
-- **Q-session timing, traffic, tire age, setup divergence** (Ch1) and **no fuel/strategy correction, SC/VSC laps excluded** (Ch2) — named, not modelled away.
-- **Telemetry sensor freezes.** FastF1's car telemetry occasionally stops reporting changes for long stretches — Antonelli's Japan qualifying lap is the clearest case (speed stuck at 189 kph, `nGear` stuck in 4th from ≈4000 m). A sliding-window check flags and excludes five Japan segments from the Ch1 category headline; lap- and sector-level deltas (from timing beams) are unaffected.
+- **Sample size.** Findings are directional, not conclusive — each race is a single data point.
+- **Fuel load.** Not corrected. Stint-pace comparisons reflect on-track conditions, not a corrected baseline.
+- **Synthetic historical data.** The data source is internally consistent but not real-world F1. Every claim is "in this dataset."
+- **Small-stint exclusion.** Stints under five clean laps return no pace verdict rather than a noisy one.
+- **Telemetry sensor freezes.** A sliding-window freeze-detection filter excludes corrupted sectors (Japan qualifying is the documented case).
 
 ---
 

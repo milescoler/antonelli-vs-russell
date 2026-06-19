@@ -79,6 +79,13 @@ RECONCILE_TOLERANCE_S = 0.05
 N_KEY_SECTORS = 3
 
 # --------------------------------------------------------------------------- #
+# Comparable race-lap pair selection (Factor 1: where on track)
+# --------------------------------------------------------------------------- #
+COMPARABLE_AGE_TOL = 3          # max |Δtyre_life| (in laps) to match laps
+COMPARABLE_LAP_TOL = 5          # max |Δlap_number| to match laps
+MIN_COMPARABLE_PAIRS = 4        # minimum pairs needed for analysis
+
+# --------------------------------------------------------------------------- #
 # Paths
 # --------------------------------------------------------------------------- #
 ROOT = Path(__file__).resolve().parent

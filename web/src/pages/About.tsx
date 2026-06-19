@@ -5,88 +5,134 @@ export function About() {
     <div className="space-y-9">
       <section className="f1-bar">
         <div className="f1-kicker text-[11px] text-f1-red uppercase tracking-widest">
-          Pitwall
+          What Won the Race?
         </div>
         <h1 className="text-3xl font-black uppercase italic tracking-tight text-white sm:text-4xl">
           About
         </h1>
         <p className="mt-2 max-w-2xl text-sm text-zinc-400">
-          What Pitwall tracks, the question behind it, and how it works.
+          The question, the method, and what the tool actually does.
         </p>
       </section>
 
       <Panel
-        title="The Question Behind the Dashboard"
-        subtitle="Separating the driver from the car."
+        title="The Question"
+        subtitle="Outcome attribution under uncertainty."
       >
         <div className="space-y-3 py-2 text-sm text-zinc-400">
           <p>
-            This dashboard is the descriptive front end of a study with one goal: separate{' '}
-            <strong className="text-zinc-200">driver skill (signal)</strong> from{' '}
-            <strong className="text-zinc-200">car performance (noise)</strong>. A fast car flatters
-            a driver everywhere, so the study controls for the car three ways — same car (Antonelli
-            vs his teammate Russell), same race, and same track across seasons — and is{' '}
-            <strong className="text-zinc-200">disciplined about uncertainty</strong>, so a noisy
-            swing is never reported as a real edge.
+            After every race, one driver wins by some margin. But{' '}
+            <strong className="text-zinc-200">why?</strong> This tool decomposes the winning
+            margin — winner vs P2 finisher — into four causes and issues a verdict on each:
+          </p>
+          <ul className="ml-4 list-disc space-y-1">
+            <li>
+              <strong className="text-zinc-200">Where on track / which laps</strong> — which
+              corners or stint windows actually built the gap
+            </li>
+            <li>
+              <strong className="text-zinc-200">Tyre strategy &amp; degradation</strong> — did
+              one driver gain from undercut, overcut, or slower tyre wear?
+            </li>
+            <li>
+              <strong className="text-zinc-200">Race pace</strong> — on comparable laps
+              (same compound, similar tyre age), who was actually faster?
+            </li>
+            <li>
+              <strong className="text-zinc-200">Start &amp; track position</strong> — did the
+              result turn on a grid slot, a lap-1 move, or traffic that never cleared?
+            </li>
+          </ul>
+          <p>
+            Each factor receives a verdict:{' '}
+            <strong className="text-zinc-200">real</strong> (the data support it),{' '}
+            <strong className="text-zinc-200">noise</strong> (bootstrap CIs span zero),{' '}
+            <strong className="text-zinc-200">inherited</strong> (the gap came from a rival
+            retirement), or{' '}
+            <strong className="text-zinc-200">insufficient data</strong> (too few comparable
+            laps to say).
+          </p>
+        </div>
+      </Panel>
+
+      <Panel title="The Method" subtitle="Comparable laps, bootstrap CIs, honest exclusion.">
+        <div className="space-y-3 py-2 text-sm text-zinc-400">
+          <p>
+            Race pace is read only across{' '}
+            <strong className="text-zinc-200">matching compounds at similar tyre age</strong>{' '}
+            — apples-to-apples stint windows. The where-on-track factor uses a{' '}
+            <strong className="text-zinc-200">5,000-sample bootstrap</strong> to put confidence
+            intervals on each track sector; a sector only earns a "real" verdict when the CI
+            excludes zero. Stints under five clean laps report no verdict rather than a noisy
+            number.
           </p>
           <p>
-            The clearest example of why that discipline matters: an early version of the qualifying
-            analysis found large per-corner gaps at Japan that turned out to be a{' '}
+            Fuel load is <strong className="text-zinc-200">not corrected</strong> — named, not
+            modelled. Safety-car and VSC laps are excluded. Claims are{' '}
+            <strong className="text-zinc-200">"in this dataset"</strong>, not real-world F1
+            history.
+          </p>
+        </div>
+      </Panel>
+
+      <Panel title="What the Results Actually Show" subtitle="Three examples of honest findings.">
+        <div className="space-y-3 py-2 text-sm text-zinc-400">
+          <p>
+            <strong className="text-zinc-200">Monaco</strong> — pole-to-flag, multiple factors
+            ruled real: pace, tyre management, and where on track all pointed the same way. The
+            start factor was noise (he simply led pole-to-flag). The clearest "everything
+            aligned" race.
+          </p>
+          <p>
+            <strong className="text-zinc-200">Canada</strong> — Antonelli's win was{' '}
+            <strong className="text-zinc-200">inherited</strong>: polesitter Russell led until
+            his DNF on lap 2. The tool says so explicitly rather than crediting a pass that
+            didn't happen.
+          </p>
+          <p>
+            <strong className="text-zinc-200">Japan</strong> — Antonelli won from pole despite
+            dropping five places on lap 1. The tool's honest read: the win was driven by{' '}
+            <strong className="text-zinc-200">race pace</strong> (real, ~0.28 s/lap faster);
+            the where-on-track factor is{' '}
+            <strong className="text-zinc-200">insufficient</strong> — too few comparable laps
+            to decompose the recovery lap by lap.
+          </p>
+          <p>
+            <strong className="text-zinc-200">Australia</strong> — the winner was actually
+            slower on race pace; track position, not outright speed, decided it. The tool calls
+            this out rather than attributing the win to pace it can't find.
+          </p>
+        </div>
+      </Panel>
+
+      <Panel title="Measurement Discipline" subtitle="Why the honest exclusions matter.">
+        <div className="space-y-3 py-2 text-sm text-zinc-400">
+          <p>
+            The clearest proof the method is honest: an early telemetry pass at Japan found
+            large per-sector deltas that turned out to be a{' '}
             <strong className="text-zinc-200">frozen speed sensor</strong> — a freeze-detection
             filter collapsed them to ~0. Catching that, and knowing when you{' '}
             <em className="not-italic text-zinc-200">haven't</em> found real signal, is the whole
             skill.
           </p>
+          <p>
+            The same discipline runs through every verdict here: small samples are flagged,
+            noisy factors are called noise, and inherited wins are called inherited. If the data
+            can't support a verdict, the tool says so.
+          </p>
           <p className="text-xs text-zinc-500">
-            Read the full analysis: <StudyLinks className="text-zinc-300" />
+            Full method write-up: <StudyLinks className="text-zinc-300" />
           </p>
         </div>
       </Panel>
 
-      <Panel title="What Pitwall Is" subtitle="A 2026 F1 season performance dashboard.">
+      <Panel title="Scope &amp; Affiliation" subtitle="">
         <div className="space-y-3 py-2 text-sm text-zinc-400">
           <p>
-            Pitwall is a performance dashboard for the{' '}
-            <strong className="text-zinc-200">2026 Formula 1 season</strong>. It covers
-            championship standings for drivers and constructors, qualifying and race pace
-            rankings, tyre strategy data, and single-lap telemetry — all in one place.
-          </p>
-          <p>
-            The goal is straightforward: present what the timing sheets actually say, without
-            model assumptions layered on top.
-          </p>
-        </div>
-      </Panel>
-
-      <Panel title="Data" subtitle="Where the numbers come from and what they mean.">
-        <div className="space-y-3 py-2 text-sm text-zinc-400">
-          <p>
-            All session data — qualifying times, race laps, points, and tyre information — is
-            sourced from <strong className="text-zinc-200">FastF1</strong>, the open-source
-            Python library for Formula 1 telemetry and timing. Data is updated after each
-            completed round.
-          </p>
-          <p>
-            Pace figures are expressed as a percentage off the session's fastest time, which
-            normalises for track and conditions. With approximately{' '}
-            <strong className="text-zinc-200">7 rounds</strong> completed so far, sample sizes
-            are small — trends are directional, not definitive.
-          </p>
-        </div>
-      </Panel>
-
-      <Panel title="What Pitwall Is Not" subtitle="Scope and affiliation.">
-        <div className="space-y-3 py-2 text-sm text-zinc-400">
-          <p>
-            Pitwall is deliberately descriptive: it shows what the timing sheets say — not
-            win-probability estimates, betting odds, or predictions. The inference — dividing the
-            car out from the driver, with the noise checks that go with it — lives in the case
-            study and notebooks, kept separate on purpose so the raw numbers and the analysis never
-            get confused.
-          </p>
-          <p>
-            Pitwall is not affiliated with Formula 1, Formula One Management, the FIA, or any
-            constructor or driver. All data is for informational purposes only.
+            This tool is descriptive and analytical — it does not produce win-probability
+            estimates, betting odds, or predictions. It is not affiliated with Formula 1,
+            Formula One Management, the FIA, or any constructor or driver. All data is for
+            informational purposes only.
           </p>
         </div>
       </Panel>

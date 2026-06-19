@@ -192,3 +192,130 @@ export interface DecompIndex {
   races: { slug: string; name: string; round: number }[]
   matchups: IndexMatchup[]
 }
+
+// --- Race-win decomposition (race/*.json) ---
+
+export type Verdict = 'real' | 'noise' | 'inherited' | 'insufficient'
+
+export interface FactorBase {
+  verdict: Verdict
+  magnitudeS: number | null
+  magnitudeUnit?: string
+  headline: string
+  caveat: string | null
+}
+
+export interface WhereDecomp {
+  deltaCurve: CurvePoint[]
+  corners: CornerMark[]
+  sectors: Sector[]
+  attribution: AttributionItem[]
+  callouts: { topSignificant: number[]; noiseTrap: number | null }
+  track: TrackPoint[]
+  meta: {
+    driverA: { code: string }
+    driverB: { code: string }
+    nPairs: number
+    nUniqueLapsA: number
+    nUniqueLapsB: number
+    marginCurveS: number | null
+  }
+}
+
+export interface WhereFactor extends FactorBase {
+  decomp: WhereDecomp | null
+}
+
+export interface TyreStint {
+  code: string
+  stint: number
+  compound: string
+  degSlope_s_per_lap: number | null
+  nClean: number
+  medianLaptime_s?: number | null
+}
+
+export interface TyreFactor extends FactorBase {
+  stints: TyreStint[]
+}
+
+export interface GapTrace {
+  driverCode: string
+  laps: number[]
+  gap_s: (number | null)[]
+  leading: boolean[]
+}
+
+export interface PaceFactor extends FactorBase {
+  stints: TyreStint[]
+  gapTrace: GapTrace
+}
+
+export interface StartRow {
+  role: string
+  code: string
+  grid: number | null
+  lap1Pos: number | null
+  positionsGained: number | null
+  finish: number | null
+  status: string
+  dnf: boolean
+}
+
+export interface StartFactor extends FactorBase {
+  rows: StartRow[]
+}
+
+export interface RaceDriverRef {
+  code: string
+  name: string
+  team: string
+  color: string
+}
+
+export interface RaceMeta {
+  race: string
+  eventName: string
+  round: number
+  year: number
+  winner: RaceDriverRef
+  p2: RaceDriverRef
+  marginS: number | null
+  anyDnf: boolean
+  winnerInherited: boolean
+  winnerStartedPole: boolean
+  poleSitter: string | null
+}
+
+export interface RaceDecomp {
+  meta: RaceMeta
+  signConvention: string
+  factors: {
+    where: WhereFactor
+    tyre: TyreFactor
+    pace: PaceFactor
+    start: StartFactor
+  }
+  caveats: {
+    anyDnf: boolean
+    fuelNotCorrected: boolean
+    noCleanLapsDriver: string[]
+  }
+}
+
+export interface RaceIndexEntry {
+  slug: string
+  round: number
+  valid: boolean
+  winner?: string
+  p2?: string
+  marginS?: number | null
+  realFactorCount?: number
+  reason?: string
+}
+
+export interface RaceDecompIndex {
+  hero: string
+  races: { slug: string; name: string; round: number }[]
+  entries: RaceIndexEntry[]
+}

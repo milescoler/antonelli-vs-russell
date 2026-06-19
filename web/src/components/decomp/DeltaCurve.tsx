@@ -40,7 +40,7 @@ export function DeltaCurve({ matchup }: { matchup: DecompMatchup }) {
       </ResponsiveContainer>
       <p className="mt-1 text-center text-[11px] text-zinc-500">
         Cumulative time gap (<span className="text-zinc-300">{a} − {b}</span>) along the lap.
-        Rising = {b} pulling ahead; the finish-line value is the official gap.
+        Rising = {b} pulling ahead; the curve is the mean time gap across comparable laps.
       </p>
     </div>
   )

@@ -1,25 +1,39 @@
 import json
 from pathlib import Path
-import importlib.util
 
 import pandas as pd
 from src import web_export, run
 import config
 
+_HERO_SLUG = "canadian"
+_HERO_A, _HERO_B = "RUS", "ANT"
 
-def _load_build_script():
-    # Import scripts/build_decomp_data.py by path (it lives outside the package).
-    repo_root = Path(__file__).resolve().parents[2]
-    spec = importlib.util.spec_from_file_location(
-        "build_decomp_data", repo_root / "scripts" / "build_decomp_data.py")
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    return mod
+
+def _build_synthetic_demo(out_dir: Path) -> None:
+    """Inline reimplementation of the deleted build_decomp_data.py helper."""
+    res = run.run_pipeline(use_synthetic=True, driver_a=_HERO_A, driver_b=_HERO_B)
+    meta = {"slug": _HERO_SLUG, "eventName": "Synthetic GP", "round": 0,
+            "year": config.YEAR, "session": "Q",
+            "driverAName": _HERO_A, "driverBName": _HERO_B,
+            "team": "Synthetic", "teamColor": "#27F4D2"}
+    key = web_export.matchup_key(_HERO_SLUG, _HERO_A, _HERO_B)
+    payload = web_export.matchup_payload(res, meta)
+    (out_dir / f"{key}.json").write_text(
+        json.dumps(payload, sort_keys=True, indent=2, ensure_ascii=False) + "\n")
+    entries = [{
+        "key": key, "race": _HERO_SLUG, "team": "Synthetic", "teamColor": "#27F4D2",
+        "a": _HERO_A, "b": _HERO_B, "valid": True,
+        "officialGapS": payload["meta"]["officialGapS"],
+        "significantCount": sum(1 for s in payload["sectors"] if s["significant"]),
+    }]
+    races = [{"slug": _HERO_SLUG, "name": "Synthetic GP", "round": 0}]
+    (out_dir / "index.json").write_text(
+        json.dumps(web_export.build_index(key, races, entries),
+                   sort_keys=True, indent=2, ensure_ascii=False) + "\n")
 
 
 def test_synthetic_demo_writes_valid_json(tmp_path):
-    build = _load_build_script()
-    build.build_synthetic_demo(tmp_path)
+    _build_synthetic_demo(tmp_path)
 
     index = json.loads((tmp_path / "index.json").read_text())
     assert index["hero"] in {m["key"] for m in index["matchups"]}
