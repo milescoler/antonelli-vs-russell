@@ -133,6 +133,19 @@ def test_attribution_produces_narrative(pipeline):
         assert attrib.iloc[0]["narrative"]
 
 
+def test_reconcile_driver_passes_when_telemetry_matches_official():
+    import numpy as np, pandas as pd
+    from src import delta as d
+    grid = np.linspace(0, 1000, 501)
+    # telemetry time linear in distance: 0..40s over the lap
+    lap = pd.DataFrame({"Distance": grid, "Time": np.linspace(0, 40.0, 501),
+                        "Speed": np.full(501, 90.0)})
+    ok, resid = d.reconcile_driver(lap, official_lap_time=40.0, tolerance=0.05)
+    assert ok and abs(resid) <= 0.05
+    bad, resid2 = d.reconcile_driver(lap, official_lap_time=41.0, tolerance=0.05)
+    assert not bad
+
+
 def test_run_pipeline_accepts_explicit_drivers():
     # Synthetic fixture, but driven by explicit codes rather than config defaults.
     res = run.run_pipeline(use_synthetic=True, driver_a="LEC", driver_b="HAM")

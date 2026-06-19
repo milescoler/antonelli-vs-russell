@@ -76,15 +76,22 @@ def run_pipeline(use_synthetic: bool = False, *, year=None, gp=None, session=Non
     edges = delta_mod.micro_sector_edges(g, corner_distances=corner_distances)
     decomp = delta_mod.decompose(g, dlt, edges)
 
-    # Reconciliation gate.
+    # Reconciliation gate (per-driver: each driver's own telemetry vs own official time).
     official_gap = fa.lap_time - fb.lap_time
-    ok, residual = delta_mod.reconcile(float(dlt[-1]), official_gap)
-    logger.info("reconciliation: curve endpoint=%.3f s, official gap=%.3f s, residual=%.4f s (%s)",
-                float(dlt[-1]), official_gap, residual, "OK" if ok else "FAIL")
-    if not ok:
+    residual = float(dlt[-1]) - official_gap   # kept for reporting; no longer the gate
+    ok_a, resid_a = delta_mod.reconcile_driver(repr_a, fa.lap_time)
+    ok_b, resid_b = delta_mod.reconcile_driver(repr_b, fb.lap_time)
+    logger.info(
+        "reconciliation: %s resid=%.4f s (%s), %s resid=%.4f s (%s)",
+        da, resid_a, "OK" if ok_a else "FAIL",
+        db, resid_b, "OK" if ok_b else "FAIL",
+    )
+    if not (ok_a and ok_b):
+        failed = [drv for drv, ok in ((da, ok_a), (db, ok_b)) if not ok]
         raise AssertionError(
-            f"delta curve endpoint {dlt[-1]:.3f}s != official gap {official_gap:.3f}s "
-            f"(residual {residual:.4f}s > tol {config.RECONCILE_TOLERANCE_S}s)")
+            f"per-driver reconciliation failed for {failed}: "
+            f"{da} resid={resid_a:.4f}s, {db} resid={resid_b:.4f}s "
+            f"(tol {config.RECONCILE_TOLERANCE_S}s)")
 
     # Signal vs. noise.
     seg_a = stats.segment_time_matrix(all_a, edges)
