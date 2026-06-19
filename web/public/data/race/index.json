@@ -1,46 +1,67 @@
 {
   "entries": [
     {
-      "reason": "The data you are trying to access has not been loaded yet. See `Session.load`",
+      "marginS": 2.974,
+      "p2": "ANT",
+      "realFactorCount": 1,
       "round": 1,
       "slug": "australian",
-      "valid": false
+      "valid": true,
+      "winner": "RUS"
     },
     {
-      "reason": "The data you are trying to access has not been loaded yet. See `Session.load`",
+      "marginS": 5.515,
+      "p2": "RUS",
+      "realFactorCount": 1,
       "round": 2,
       "slug": "chinese",
-      "valid": false
+      "valid": true,
+      "winner": "ANT"
     },
     {
-      "reason": "The data you are trying to access has not been loaded yet. See `Session.load`",
+      "marginS": 13.722,
+      "p2": "PIA",
+      "realFactorCount": 1,
       "round": 3,
       "slug": "japanese",
-      "valid": false
+      "valid": true,
+      "winner": "ANT"
     },
     {
-      "reason": "The data you are trying to access has not been loaded yet. See `Session.load`",
+      "marginS": 3.2640000000000002,
+      "p2": "NOR",
+      "realFactorCount": 1,
       "round": 4,
       "slug": "miami",
-      "valid": false
+      "valid": true,
+      "winner": "ANT"
     },
     {
-      "reason": "The data you are trying to access has not been loaded yet. See `Session.load`",
+      "marginS": 10.768,
+      "p2": "HAM",
+      "realFactorCount": 2,
       "round": 5,
       "slug": "canadian",
-      "valid": false
+      "valid": true,
+      "winner": "ANT"
     },
     {
-      "reason": "The data you are trying to access has not been loaded yet. See `Session.load`",
+      "marginS": 6.271,
+      "p2": "HAM",
+      "realFactorCount": 3,
       "round": 6,
       "slug": "monaco",
-      "valid": false
+      "valid": true,
+      "winner": "ANT"
     },
     {
-      "reason": "The data you are trying to access has not been loaded yet. See `Session.load`",
+      "marginS": 19.561,
+      "p2": "RUS",
+      "realFactorCount": 3,
       "round": 7,
       "slug": "barcelona",
-      "valid": false
+      "valid": true,
+      "winner": "HAM"
     }
   ],
   "hero": "monaco",
