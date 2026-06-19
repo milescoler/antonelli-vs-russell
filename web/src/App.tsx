@@ -1,5 +1,6 @@
 import { HashRouter, NavLink, Route, Routes } from 'react-router-dom'
 import { Decomposition } from './pages/Decomposition'
+import { RaceDecomp } from './pages/RaceDecomp'
 import { Dashboard } from './pages/Dashboard'
 import { Telemetry } from './pages/Telemetry'
 import { About } from './pages/About'
@@ -24,6 +25,9 @@ function Nav() {
         <nav className="flex items-center gap-5">
           <NavLink to="/" className={link} end>
             Lap Gap
+          </NavLink>
+          <NavLink to="/race" className={link}>
+            Race Win
           </NavLink>
           <NavLink to="/season" className={link}>
             Season
@@ -62,6 +66,7 @@ export function App() {
         <main className="mx-auto max-w-6xl px-4 py-7">
           <Routes>
             <Route path="/" element={<Decomposition />} />
+            <Route path="/race" element={<RaceDecomp />} />
             <Route path="/season" element={<Dashboard />} />
             <Route path="/telemetry" element={<Telemetry />} />
             <Route path="/about" element={<About />} />
