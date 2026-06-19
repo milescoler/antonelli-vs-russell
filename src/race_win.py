@@ -7,6 +7,8 @@ from __future__ import annotations
 
 import pandas as pd
 
+from src import serialize, race_verdict
+
 
 def _hex(color) -> str | None:
     if isinstance(color, str) and color:
@@ -44,4 +46,38 @@ def principals_from_results(results: pd.DataFrame) -> dict:
         "anyDnf": any_dnf,
         "winnerStatus": str(win_row["Status"]),
         "p2Status": str(p2_row["Status"]),
+    }
+
+
+def assemble_race(*, principals, start_df, stint_df, deg_df, gap_df,
+                  round_number, slug, event_name, year) -> dict:
+    w, p2 = principals["winner"]["code"], principals["p2"]["code"]
+
+    start_rows = serialize.serialize_start(start_df, a_code=w, b_code=p2)
+    pace_rows = serialize.serialize_stint_pace(stint_df)
+    deg_rows = serialize.serialize_tire_deg(deg_df)
+    gap = serialize.serialize_gap_trace(gap_df, w) if gap_df is not None and len(gap_df) else \
+        {"driverCode": w, "laps": [], "gap_s": [], "leading": []}
+
+    pace_v = race_verdict.pace_verdict(pace_rows, w, p2)
+    tyre_v = race_verdict.tyre_verdict(deg_rows, w, p2)
+    start_v = race_verdict.start_verdict(start_rows, w, p2)
+
+    factors = {
+        "where": {"verdict": "insufficient", "magnitudeS": None,
+                  "headline": "computed in the where-on-track pass", "decomp": None},
+        "tyre": {**tyre_v, "stints": [r for r in deg_rows if r["code"] in (w, p2)]},
+        "pace": {**pace_v, "gapTrace": gap,
+                 "stints": [r for r in pace_rows if r["code"] in (w, p2)]},
+        "start": {**start_v, "rows": start_rows},
+    }
+    return {
+        "meta": {"race": slug, "eventName": event_name, "round": int(round_number),
+                 "year": int(year), "winner": principals["winner"], "p2": principals["p2"],
+                 "marginS": principals["marginS"], "anyDnf": principals["anyDnf"]},
+        "signConvention": "winner_minus_p2",
+        "factors": factors,
+        "caveats": {"anyDnf": principals["anyDnf"], "fuelNotCorrected": True,
+                    "noCleanLapsDriver": [c for c in (w, p2)
+                                          if c not in {r["code"] for r in pace_rows}]},
     }
