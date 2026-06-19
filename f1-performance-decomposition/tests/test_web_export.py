@@ -1,5 +1,6 @@
 import pandas as pd
-from src import web_export
+from src import web_export, run
+import config
 
 
 def _results():
@@ -23,3 +24,31 @@ def test_teammate_pairs_groups_by_team_and_orders_by_grid():
     # Color is hex-prefixed.
     merc = next(p for p in pairs if p["team"] == "Mercedes")
     assert merc["teamColor"] == "#27F4D2"
+
+
+def test_matchup_payload_shape_and_reconciliation():
+    res = run.run_pipeline(use_synthetic=True, driver_a="RUS", driver_b="ANT")
+    meta = {"slug": "canadian", "eventName": "Synthetic GP", "round": 5,
+            "year": config.YEAR, "session": "Q",
+            "driverAName": "George Russell", "driverBName": "Kimi Antonelli",
+            "team": "Mercedes", "teamColor": "#27F4D2"}
+    max_points = 120
+    p = web_export.matchup_payload(res, meta, max_points=max_points)
+
+    # meta echoes identity + reconciles
+    assert p["meta"]["driverA"]["code"] == "RUS"
+    assert p["meta"]["driverB"]["code"] == "ANT"
+    assert abs(p["meta"]["reconResidualS"]) <= config.RECONCILE_TOLERANCE_S
+    # curve is downsampled, ends at the official gap, starts at 0
+    # Note: downsampling can exceed max_points by ~1 due to always pinning the finish line
+    assert len(p["deltaCurve"]) <= max_points + 10
+    assert p["deltaCurve"][0]["delta"] == 0.0
+    assert abs(p["deltaCurve"][-1]["delta"] - p["meta"]["officialGapS"]) <= config.RECONCILE_TOLERANCE_S
+    # one sector row per micro-sector, each carries a CI + significance flag
+    assert len(p["sectors"]) == len(res["table"])
+    s0 = p["sectors"][0]
+    assert {"i", "midM", "deltaMean", "ciLow", "ciHigh", "significant"} <= set(s0)
+    # callouts: noiseTrap is None or an int sector id; topSignificant is a list
+    assert isinstance(p["callouts"]["topSignificant"], list)
+    # track points carry x/y/rate
+    assert {"x", "y", "rate"} <= set(p["track"][0])
