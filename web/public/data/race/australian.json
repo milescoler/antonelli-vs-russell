@@ -263,7 +263,7 @@
         {
           "code": "ANT",
           "compound": "MEDIUM",
-          "degSlope_s_per_lap": -0.3526,
+          "degSlope_s_per_lap": -0.3525,
           "nClean": 9,
           "stint": 1
         },
