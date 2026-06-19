@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import type { SeasonData, SessionTelemetry } from '../types'
 import type { DecompIndex, DecompMatchup } from '../types'
+import type { RaceDecompIndex, RaceDecomp } from '../types'
 
 // import.meta.env.BASE_URL is the Vite `base` (ends with '/'), so data fetches
 // resolve correctly whether served at the root or a GitHub Pages subpath.
@@ -75,5 +76,38 @@ export function useDecompMatchup(key: string | undefined) {
       live = false
     }
   }, [key])
+  return { data, error }
+}
+
+export function useRaceIndex() {
+  const [data, setData] = useState<RaceDecompIndex | null>(null)
+  const [error, setError] = useState<string | null>(null)
+  useEffect(() => {
+    let live = true
+    getJSON<RaceDecompIndex>('race/index.json')
+      .then((d) => live && setData(d))
+      .catch((e) => live && setError(String(e)))
+    return () => {
+      live = false
+    }
+  }, [])
+  return { data, error }
+}
+
+export function useRaceDecomp(slug: string | undefined) {
+  const [data, setData] = useState<RaceDecomp | null>(null)
+  const [error, setError] = useState<string | null>(null)
+  useEffect(() => {
+    if (!slug) return
+    let live = true
+    setData(null)
+    setError(null)
+    getJSON<RaceDecomp>(`race/${slug}.json`)
+      .then((d) => live && setData(d))
+      .catch((e) => live && setError(String(e)))
+    return () => {
+      live = false
+    }
+  }, [slug])
   return { data, error }
 }
