@@ -36,7 +36,7 @@ export function DecompTrackMap({ matchup }: { matchup: DecompMatchup }) {
         aria-label={`Where time is won and lost, ${a} vs ${b}`}>
         {Array.from({ length: n - 1 }, (_, i) => (
           <line key={i} x1={sx(pts[i].x)} y1={sy(pts[i].y)} x2={sx(pts[i + 1].x)} y2={sy(pts[i + 1].y)}
-            stroke={rateColor((pts[i].rate ?? 0) / maxRate)} strokeWidth={5}
+            stroke={rateColor((pts[i].rate ?? 0) / maxRate)} strokeWidth={3.5}
             strokeLinecap="round" strokeLinejoin="round" />
         ))}
         <circle cx={sx(pts[0].x)} cy={sy(pts[0].y)} r={6} fill="white" stroke="#e10600" strokeWidth={2} />

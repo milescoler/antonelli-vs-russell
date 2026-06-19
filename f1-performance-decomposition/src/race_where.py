@@ -305,7 +305,10 @@ def decompose_where(winner_laps: list[data_loading.Lap],
     # Corners
     corners = web_export._corner_labels(corner_distances_arr)
 
-    # Track map from representative winner lap + mean_curve rate
+    # Track map from representative winner lap + mean_curve rate. Use a denser
+    # sampling than the delta curve so tight corners (Monaco hairpin/chicanes)
+    # keep their geometry instead of smoothing into a blob.
+    track_idx = web_export._downsample_idx(len(grid), 600)
     rate = np.gradient(mean_curve, grid)
     x_arr = repr_w["X"].to_numpy()
     y_arr = repr_w["Y"].to_numpy()
@@ -315,7 +318,7 @@ def decompose_where(winner_laps: list[data_loading.Lap],
             "y": web_export._num(float(y_arr[i]), 1),
             "rate": web_export._num(float(rate[i]), 6),
         }
-        for i in ci_idx
+        for i in track_idx
     ]
 
     meta = {
