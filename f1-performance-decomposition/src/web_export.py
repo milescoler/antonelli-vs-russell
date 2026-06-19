@@ -74,12 +74,12 @@ def matchup_payload(res: dict, race_meta: dict, *, max_points: int = 200) -> dic
     delta = np.asarray(res["delta"], dtype=float)
     repr_a = res["repr_a"]
     rate = np.gradient(delta, grid)             # s per m: slope of the curve
+    x_arr = repr_a["X"].to_numpy()
+    y_arr = repr_a["Y"].to_numpy()
 
     ci = _downsample_idx(len(grid), max_points)
     delta_curve = [{"d": _num(grid[i], 1), "delta": _num(delta[i], 4)} for i in ci]
-    track = [{"x": _num(repr_a["X"].to_numpy()[i], 1),
-              "y": _num(repr_a["Y"].to_numpy()[i], 1),
-              "rate": _num(rate[i], 6)} for i in ci]
+    track = [{"x": _num(x_arr[i], 1), "y": _num(y_arr[i], 1), "rate": _num(rate[i], 6)} for i in ci]
 
     sectors = [{
         "i": int(r["sector"]),
