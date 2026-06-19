@@ -1,8 +1,5 @@
 import { HashRouter, NavLink, Route, Routes } from 'react-router-dom'
-import { Decomposition } from './pages/Decomposition'
 import { RaceDecomp } from './pages/RaceDecomp'
-import { Dashboard } from './pages/Dashboard'
-import { Telemetry } from './pages/Telemetry'
 import { About } from './pages/About'
 import { StudyLinks } from './components/ui'
 
@@ -16,7 +13,7 @@ function Nav() {
         <NavLink to="/" className="flex items-center gap-2">
           <span className="h-5 w-1.5 rounded-sm bg-f1-red" />
           <span className="text-base font-black uppercase italic tracking-tight text-white">
-            Pitwall
+            What Won the Race?
           </span>
           <span className="ml-1 text-[10px] font-bold uppercase tracking-widest text-zinc-500">
             F1 2026
@@ -24,16 +21,7 @@ function Nav() {
         </NavLink>
         <nav className="flex items-center gap-5">
           <NavLink to="/" className={link} end>
-            Lap Gap
-          </NavLink>
-          <NavLink to="/race" className={link}>
             Race Win
-          </NavLink>
-          <NavLink to="/season" className={link}>
-            Season
-          </NavLink>
-          <NavLink to="/telemetry" className={link}>
-            Telemetry
           </NavLink>
           <NavLink to="/about" className={link}>
             About
@@ -65,10 +53,7 @@ export function App() {
         <Nav />
         <main className="mx-auto max-w-6xl px-4 py-7">
           <Routes>
-            <Route path="/" element={<Decomposition />} />
-            <Route path="/race" element={<RaceDecomp />} />
-            <Route path="/season" element={<Dashboard />} />
-            <Route path="/telemetry" element={<Telemetry />} />
+            <Route path="/" element={<RaceDecomp />} />
             <Route path="/about" element={<About />} />
           </Routes>
         </main>
