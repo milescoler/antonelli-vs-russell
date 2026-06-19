@@ -57,3 +57,18 @@ def test_assemble_race_has_four_factors_and_placeholder_where():
     assert out["factors"]["pace"]["verdict"] == "real"
     assert out["meta"]["marginS"] == 8.4
     assert "stintPace" in out["factors"]["tyre"] or "stints" in out["factors"]["tyre"]
+
+
+def test_index_entry_marks_valid_and_excluded():
+    from importlib.util import spec_from_file_location, module_from_spec
+    from pathlib import Path
+    root = Path(__file__).resolve().parents[1]
+    spec = spec_from_file_location("build_race", root / "scripts" / "build_race_decomp_data.py")
+    mod = module_from_spec(spec); spec.loader.exec_module(mod)
+    valid = mod.index_entry(slug="canadian", round_number=5, payload={
+        "meta": {"winner": {"code": "ANT"}, "p2": {"code": "NOR"}, "marginS": 8.4},
+        "factors": {"where": {"verdict": "insufficient"}, "tyre": {"verdict": "noise"},
+                    "pace": {"verdict": "real"}, "start": {"verdict": "real"}}})
+    assert valid["valid"] is True and valid["realFactorCount"] == 2 and valid["slug"] == "canadian"
+    excl = mod.index_entry(slug="japanese", round_number=3, reason="no classified P2")
+    assert excl["valid"] is False and excl["reason"] == "no classified P2"
