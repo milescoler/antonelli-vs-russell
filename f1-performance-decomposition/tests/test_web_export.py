@@ -51,3 +51,24 @@ def test_matchup_payload_shape_and_reconciliation():
     assert isinstance(p["callouts"]["topSignificant"], list)
     # track points carry x/y/rate
     assert {"x", "y", "rate"} <= set(p["track"][0])
+
+
+def test_build_index_separates_valid_and_excluded():
+    races = [{"slug": "canadian", "name": "Canadian Grand Prix", "round": 5}]
+    entries = [
+        {"key": "canadian__RUS_ANT", "race": "canadian", "team": "Mercedes",
+         "teamColor": "#27F4D2", "a": "RUS", "b": "ANT",
+         "valid": True, "officialGapS": -0.07, "significantCount": 3},
+        {"key": "barcelona__RUS_ANT", "race": "barcelona", "team": "Mercedes",
+         "teamColor": "#27F4D2", "a": "RUS", "b": "ANT",
+         "valid": False, "reason": "No clean laps for one of the drivers"},
+    ]
+    idx = web_export.build_index("canadian__RUS_ANT", races, entries)
+    assert idx["hero"] == "canadian__RUS_ANT"
+    assert idx["matchups"][0]["key"] == "barcelona__RUS_ANT"   # sorted by key
+    excluded = [m for m in idx["matchups"] if not m["valid"]]
+    assert excluded and "reason" in excluded[0]
+
+
+def test_matchup_key():
+    assert web_export.matchup_key("canadian", "RUS", "ANT") == "canadian__RUS_ANT"

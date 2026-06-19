@@ -128,3 +128,15 @@ def matchup_payload(res: dict, race_meta: dict, *, max_points: int = 200) -> dic
         "callouts": callouts,
         "track": track,
     }
+
+
+def matchup_key(slug: str, a: str, b: str) -> str:
+    return f"{slug}__{a}_{b}"
+
+
+def build_index(hero_key: str, races: list[dict], entries: list[dict]) -> dict:
+    return {
+        "hero": hero_key,
+        "races": sorted(races, key=lambda r: r["round"]),
+        "matchups": sorted(entries, key=lambda e: e["key"]),
+    }
