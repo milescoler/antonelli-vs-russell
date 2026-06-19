@@ -12,8 +12,7 @@ on:
     paths:
       - 'web/**'
       - 'src/**'
-      - 'scripts/build_site_data.py'
-      - 'scripts/build_decomp_data.py'
+      - 'scripts/build_race_decomp_data.py'
       - 'f1-performance-decomposition/**'
       - '.github/workflows/deploy.yml'
 
@@ -51,15 +50,7 @@ jobs:
           restore-keys: |
             fastf1-
 
-      - name: Build site data
-        run: python scripts/build_site_data.py
-
-      # Decomposition JSON for the web flagship; runs after season.json (which it
-      # reads for round identity) and before the commit step so the data ships.
-      - name: Build decomposition data
-        run: python scripts/build_decomp_data.py
-
-      # Race-win decomposition JSON (the new flagship). Independent of season.json.
+      # Race-win decomposition JSON (the flagship).
       - name: Build race-win decomposition data
         run: python scripts/build_race_decomp_data.py
 

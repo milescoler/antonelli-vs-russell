@@ -1,7 +1,7 @@
 """Export the decomposition `res` dict to the web JSON contract, and derive the
 teammate matchups to run. Pure functions only — no FastF1, no file IO — so they
-are unit-tested offline. The build script (scripts/build_decomp_data.py) does the
-IO and calls these.
+are unit-tested offline. The build script (scripts/build_race_decomp_data.py) does
+the IO and calls these.
 """
 from __future__ import annotations
 
