@@ -122,3 +122,73 @@ export interface SessionTelemetry {
   }
   drivers: TelemetryDriver[]
 }
+
+// --- Lap decomposition (decomp/*.json) ---
+
+export interface CurvePoint { d: number; delta: number | null }
+export interface CornerMark { d: number | null; label: string }
+
+export interface Sector {
+  i: number
+  startM: number | null
+  endM: number | null
+  midM: number | null
+  deltaMean: number | null
+  ciLow: number | null
+  ciHigh: number | null
+  significant: boolean
+  faster: string | null
+}
+
+export interface AttributionItem {
+  sector: number
+  driverFaster: string
+  deltaS: number | null
+  significant: boolean
+  narrative: string
+}
+
+export interface TrackPoint { x: number | null; y: number | null; rate: number | null }
+
+export interface DecompDriver { code: string; name: string; team: string; color: string | null }
+
+export interface DecompMatchup {
+  meta: {
+    race: string
+    eventName: string
+    round: number
+    year: number
+    session: string
+    driverA: DecompDriver
+    driverB: DecompDriver
+    officialGapS: number | null
+    reconResidualS: number | null
+    nCleanLapsA: number
+    nCleanLapsB: number
+  }
+  deltaCurve: CurvePoint[]
+  corners: CornerMark[]
+  sectors: Sector[]
+  attribution: AttributionItem[]
+  callouts: { topSignificant: number[]; noiseTrap: number | null }
+  track: TrackPoint[]
+}
+
+export interface IndexMatchup {
+  key: string
+  race: string
+  team: string
+  teamColor: string | null
+  a: string
+  b: string
+  valid: boolean
+  officialGapS?: number | null
+  significantCount?: number
+  reason?: string
+}
+
+export interface DecompIndex {
+  hero: string
+  races: { slug: string; name: string; round: number }[]
+  matchups: IndexMatchup[]
+}
