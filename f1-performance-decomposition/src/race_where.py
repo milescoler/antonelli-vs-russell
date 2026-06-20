@@ -51,7 +51,7 @@ def paired_sector_bootstrap(pair_deltas, *, n_boot=None, confidence=None, seed=N
 # --------------------------------------------------------------------------- #
 
 def load_race_laps(year: int, gp: str, winner: str, p2: str,
-                   ) -> tuple[list[data_loading.Lap], list[data_loading.Lap]]:
+                   ) -> tuple[list[data_loading.Lap], list[data_loading.Lap], object]:
     """Load and clean race laps for winner and P2 from a FastF1 Race session.
 
     Cleaning rules (race-specific; deliberately NOT the qualy 107% filter):
@@ -130,7 +130,7 @@ def load_race_laps(year: int, gp: str, winner: str, p2: str,
 
         logger.info("%s: kept %d race-clean laps", code, kept)
 
-    return winner_laps, p2_laps
+    return winner_laps, p2_laps, session
 
 
 # --------------------------------------------------------------------------- #
@@ -139,7 +139,8 @@ def load_race_laps(year: int, gp: str, winner: str, p2: str,
 
 def decompose_where(winner_laps: list[data_loading.Lap],
                     p2_laps: list[data_loading.Lap],
-                    corner_distances) -> dict | None:
+                    corner_distances,
+                    rotation: float = 0.0) -> dict | None:
     """Decompose where on track the winner built their gap over P2.
 
     Uses comparable pairs (same compound, similar tyre age & lap number) to
@@ -305,17 +306,31 @@ def decompose_where(winner_laps: list[data_loading.Lap],
     # Corners
     corners = web_export._corner_labels(corner_distances_arr)
 
-    # Track map from representative winner lap + mean_curve rate. Use a denser
-    # sampling than the delta curve so tight corners (Monaco hairpin/chicanes)
-    # keep their geometry instead of smoothing into a blob.
+    # Track map geometry: use the winner's FASTEST clean lap (the cleanest racing
+    # line — a single mid-race lap wanders in traffic / while defending), resampled
+    # onto the SAME grid so the rate stays aligned by distance, and rotated to the
+    # circuit's canonical orientation (FastF1 circuit_info.rotation). Dense sampling
+    # keeps tight corners (Monaco hairpin/chicanes) sharp.
+    geo_frames = [rw[i] for i in sorted(used_w_idx)]
+    # Drop any lap with degenerate position data (near-constant X), then average
+    # the rest for a smooth, robust racing line.
+    _ok = [df for df in geo_frames
+           if float(np.nanmax(df["X"].to_numpy()) - np.nanmin(df["X"].to_numpy())) > 100]
+    geo_frames = _ok or geo_frames
+    gx = np.mean(np.vstack([df["X"].to_numpy(dtype=float) for df in geo_frames]), axis=0)
+    gy = np.mean(np.vstack([df["Y"].to_numpy(dtype=float) for df in geo_frames]), axis=0)
+    if rotation:
+        th = np.deg2rad(rotation)
+        # FastF1 rotation convention: [x y] @ [[cos, sin], [-sin, cos]]
+        gx, gy = (gx * np.cos(th) - gy * np.sin(th),
+                  gx * np.sin(th) + gy * np.cos(th))
+
     track_idx = web_export._downsample_idx(len(grid), 600)
     rate = np.gradient(mean_curve, grid)
-    x_arr = repr_w["X"].to_numpy()
-    y_arr = repr_w["Y"].to_numpy()
     track = [
         {
-            "x": web_export._num(float(x_arr[i]), 1),
-            "y": web_export._num(float(y_arr[i]), 1),
+            "x": web_export._num(float(gx[i]), 1),
+            "y": web_export._num(float(gy[i]), 1),
             "rate": web_export._num(float(rate[i]), 6),
         }
         for i in track_idx
@@ -374,27 +389,25 @@ def main() -> None:
     config.CACHE_DIR = repo_cache
 
     try:
-        winner_laps, p2_laps = load_race_laps(args.year, args.gp, args.driver_a, args.driver_b)
+        winner_laps, p2_laps, session = load_race_laps(
+            args.year, args.gp, args.driver_a, args.driver_b)
     except Exception as exc:
         sys.stderr.write(f"ERROR load_race_laps: {exc}\n")
         sys.exit(1)
 
-    # Try to load corner distances from the session
+    # Corner distances + circuit rotation from the already-loaded session (which
+    # load_race_laps loaded WITH telemetry, so get_circuit_info() works).
     corner_distances = None
+    rotation = 0.0
     try:
-        import fastf1
-        from src import data_loading as _dl
-        _dl.enable_cache()
-        session = fastf1.get_session(args.year, args.gp, "R")
-        # Session is already loaded by load_race_laps; if corner data is cheap, get it
-        session.load(telemetry=False, laps=False, weather=False, messages=False)
         circuit_info = session.get_circuit_info()
         corner_distances = circuit_info.corners["Distance"].to_numpy()
+        rotation = float(getattr(circuit_info, "rotation", 0.0) or 0.0)
     except Exception as exc:
-        sys.stderr.write(f"WARNING corner distances unavailable ({exc}); using equal-bin fallback\n")
+        sys.stderr.write(f"WARNING circuit info unavailable ({exc}); equal-bin fallback, no rotation\n")
         corner_distances = None
 
-    result = decompose_where(winner_laps, p2_laps, corner_distances)
+    result = decompose_where(winner_laps, p2_laps, corner_distances, rotation=rotation)
 
     if result is None:
         payload = {
