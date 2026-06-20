@@ -19,21 +19,15 @@ const VERDICT_TONE = {
   insufficient: 'zinc',
 } as const
 
-export function PaceFactor({ factor }: { factor: PaceFactorType }) {
+export function PaceFactor({ factor, embedded = false }: { factor: PaceFactorType; embedded?: boolean }) {
   const { gapTrace } = factor
   const data = gapTrace.laps.map((l, i) => ({
     lap: l,
     gap: gapTrace.gap_s[i],
   }))
 
-  const tone = VERDICT_TONE[factor.verdict]
-
-  return (
-    <Panel
-      title="Pace Factor"
-      right={<Badge tone={tone}>{factor.verdict}</Badge>}
-    >
-      <p className="mb-3 text-sm text-zinc-300">{factor.headline}</p>
+  const body = (
+    <>
       <div className="h-48">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={data} margin={{ top: 4, right: 12, bottom: 4, left: 0 }}>
@@ -74,6 +68,15 @@ export function PaceFactor({ factor }: { factor: PaceFactorType }) {
       {factor.caveat && (
         <p className="mt-1 text-[11px] text-zinc-600">{factor.caveat}</p>
       )}
+    </>
+  )
+
+  if (embedded) return body
+
+  return (
+    <Panel title="Pace Factor" right={<Badge tone={VERDICT_TONE[factor.verdict]}>{factor.verdict}</Badge>}>
+      <p className="mb-3 text-sm text-zinc-300">{factor.headline}</p>
+      {body}
     </Panel>
   )
 }

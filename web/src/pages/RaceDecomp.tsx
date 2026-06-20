@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Panel, Badge, StudyLinks } from '../components/ui'
+import { Panel, StudyLinks } from '../components/ui'
 import { DeltaCurve } from '../components/decomp/DeltaCurve'
 import { SectorVerdict } from '../components/decomp/SectorVerdict'
 import { AttributionList } from '../components/decomp/AttributionList'
@@ -9,13 +9,58 @@ import { PaceFactor } from '../components/race/PaceFactor'
 import { StartFactor } from '../components/race/StartFactor'
 import { RacePicker } from '../components/race/RacePicker'
 import { useRaceIndex, useRaceDecomp } from '../lib/data'
-import type { DecompMatchup, Verdict } from '../types'
+import type { DecompMatchup, Verdict, RaceDecomp as RaceDecompData } from '../types'
 
-const VERDICT_TONE: Record<Verdict, 'sky' | 'zinc' | 'amber'> = {
-  real: 'sky',
-  noise: 'zinc',
-  inherited: 'amber',
-  insufficient: 'zinc',
+type FactorKey = 'pace' | 'where' | 'tyre' | 'start'
+
+const FACTOR_META: { key: FactorKey; label: string; short: string }[] = [
+  { key: 'pace', label: 'Race pace', short: 'race pace' },
+  { key: 'where', label: 'Where on track', short: 'corner-level pace' },
+  { key: 'tyre', label: 'Tyre management', short: 'tyre management' },
+  { key: 'start', label: 'Start & track position', short: 'the start' },
+]
+
+const VERDICT_DOT: Record<Verdict, string> = {
+  real: 'bg-emerald-500',
+  noise: 'bg-zinc-600',
+  inherited: 'bg-amber-500',
+  insufficient: 'bg-zinc-700',
+}
+const VERDICT_STAMP: Record<Verdict, string> = {
+  real: 'REAL',
+  noise: 'noise',
+  inherited: 'inherited',
+  insufficient: 'n/a',
+}
+const VERDICT_STAMP_CLASS: Record<Verdict, string> = {
+  real: 'text-emerald-400',
+  noise: 'text-zinc-500',
+  inherited: 'text-amber-400',
+  insufficient: 'text-zinc-600',
+}
+// real first, then inherited, noise, insufficient
+const VERDICT_RANK: Record<Verdict, number> = { real: 0, inherited: 1, noise: 2, insufficient: 3 }
+
+function joinList(items: string[]): string {
+  if (items.length === 0) return ''
+  if (items.length === 1) return items[0]
+  if (items.length === 2) return `${items[0]} and ${items[1]}`
+  return `${items.slice(0, -1).join(', ')}, and ${items[items.length - 1]}`
+}
+
+function takeaway(race: RaceDecompData): string {
+  const reals = FACTOR_META.filter((f) => race.factors[f.key].verdict === 'real').map((f) => f.short)
+  const noises = FACTOR_META.filter((f) => race.factors[f.key].verdict === 'noise').map((f) => f.short)
+  let s = reals.length
+    ? `Won on ${joinList(reals)}.`
+    : 'No single factor stood out as a clear, repeatable cause at this sample size.'
+  if (race.meta.winnerInherited) {
+    s += ' The lead was inherited — a rival ahead retired.'
+  } else if (noises.length) {
+    const list = joinList(noises)
+    s += ` ${list.charAt(0).toUpperCase()}${list.slice(1)} ${noises.length > 1 ? 'were' : 'was'} within noise.`
+  }
+  return s
 }
 
 export function RaceDecomp() {
@@ -28,30 +73,54 @@ export function RaceDecomp() {
 
   const { data: race, error: raceError } = useRaceDecomp(pick || undefined)
 
-  // Count verdicts
-  const factorVerdicts = race
-    ? [
-        race.factors.where.verdict,
-        race.factors.tyre.verdict,
-        race.factors.pace.verdict,
-        race.factors.start.verdict,
-      ]
-    : []
-  const nReal = factorVerdicts.filter((v) => v === 'real').length
-  const nNoise = factorVerdicts.filter((v) => v === 'noise').length
+  // which factor's evidence is expanded (accordion); collapse when the race changes
+  const [open, setOpen] = useState<FactorKey | null>(null)
+  useEffect(() => {
+    setOpen(null)
+  }, [pick])
 
-  // Hero subtitle
-  const heroSub = race
-    ? `${race.meta.winner.name} beat ${race.meta.p2.name} by ${
-        race.meta.marginS !== null ? `${race.meta.marginS.toFixed(3)}s` : '—'
-      } at ${race.meta.eventName} — decomposed into four causes, each ruled real or noise.`
-    : 'Decomposing a race win into four causes and ruling each real or noise.'
-
-  // where factor decomp cast
   const whereDecomp =
     race?.factors.where.decomp != null
       ? (race.factors.where.decomp as unknown as DecompMatchup)
       : null
+
+  const margin = (m: number | null) => (m !== null ? `${m.toFixed(3)}s` : '—')
+
+  const heroSub = race
+    ? `${race.meta.winner.name} beat ${race.meta.p2.name} by ${margin(
+        race.meta.marginS,
+      )} at ${race.meta.eventName}. What actually caused the gap — and what was just luck?`
+    : 'Decomposing a race win into its real causes — and ruling out the noise.'
+
+  // factor rows, real-first
+  const rows = race
+    ? [...FACTOR_META].sort(
+        (a, b) =>
+          VERDICT_RANK[race.factors[a.key].verdict] - VERDICT_RANK[race.factors[b.key].verdict],
+      )
+    : []
+
+  function evidence(key: FactorKey) {
+    if (!race) return null
+    if (key === 'where') {
+      return whereDecomp ? (
+        <div className="space-y-5">
+          <DeltaCurve matchup={whereDecomp} />
+          <SectorVerdict matchup={whereDecomp} />
+          <AttributionList matchup={whereDecomp} />
+          <DecompTrackMap matchup={whereDecomp} />
+        </div>
+      ) : (
+        <p className="text-sm text-zinc-500">
+          No corner-level breakdown — the winner and runner-up never ran enough comparable laps
+          to decompose where on track.
+        </p>
+      )
+    }
+    if (key === 'tyre') return <TyreFactor factor={race.factors.tyre} embedded />
+    if (key === 'pace') return <PaceFactor factor={race.factors.pace} embedded />
+    return <StartFactor factor={race.factors.start} embedded />
+  }
 
   return (
     <div className="space-y-9">
@@ -77,71 +146,64 @@ export function RaceDecomp() {
         </p>
       )}
 
+      {/* Scorecard */}
       {race && (
-        <>
-          {/* Stat strip */}
-          <section className="grid grid-cols-3 gap-3">
-            {[
-              [
-                'Winning margin',
-                race.meta.marginS !== null
-                  ? `${race.meta.marginS.toFixed(3)}s`
-                  : '—',
-              ],
-              ['Real factors', `${nReal} / 4`],
-              ['Within noise', `${nNoise} / 4`],
-            ].map(([k, v]) => (
-              <div
-                key={k}
-                className="rounded-lg border border-carbon-line bg-carbon-soft p-3 text-center"
-              >
-                <div className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">
-                  {k}
+        <Panel
+          title="What actually won it?"
+          subtitle={`${race.meta.winner.code} beat ${race.meta.p2.code} by ${margin(
+            race.meta.marginS,
+          )} · tap a factor for the evidence`}
+        >
+          <div className="divide-y divide-carbon-line">
+            {rows.map((f) => {
+              const fx = race.factors[f.key]
+              const isOpen = open === f.key
+              return (
+                <div key={f.key}>
+                  <button
+                    onClick={() => setOpen(isOpen ? null : f.key)}
+                    className="flex w-full items-start gap-3 py-3 text-left transition hover:bg-carbon-soft/40"
+                    aria-expanded={isOpen}
+                  >
+                    <span className={`mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full ${VERDICT_DOT[fx.verdict]}`} />
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-semibold text-white">{f.label}</span>
+                        <span
+                          className={`text-[10px] font-bold uppercase tracking-wider ${VERDICT_STAMP_CLASS[fx.verdict]}`}
+                        >
+                          {VERDICT_STAMP[fx.verdict]}
+                        </span>
+                      </div>
+                      <p className="mt-0.5 text-sm text-zinc-400">{fx.headline}</p>
+                    </div>
+                    <span
+                      className={`mt-0.5 shrink-0 select-none text-lg leading-none text-zinc-600 transition-transform ${
+                        isOpen ? 'rotate-90' : ''
+                      }`}
+                    >
+                      ›
+                    </span>
+                  </button>
+                  {isOpen && (
+                    <div className="pb-6 pt-1">
+                      {evidence(f.key)}
+                      {f.key === 'where' && fx.caveat && (
+                        <p className="mt-3 text-[11px] text-zinc-600">{fx.caveat}</p>
+                      )}
+                    </div>
+                  )}
                 </div>
-                <div className="mt-1 font-mono text-sm text-white">{v}</div>
-              </div>
-            ))}
-          </section>
+              )
+            })}
+          </div>
 
-          {race.meta.winnerInherited && (
-            <p className="rounded border border-amber-700/50 bg-amber-900/30 px-3 py-2 text-xs text-amber-300">
-              Lead inherited — winner benefited from a rival DNF. Verdicts below account for this.
-            </p>
-          )}
-
-          {/* Where on track */}
-          <Panel
-            title="Where on track"
-            subtitle="Where did the winner gain time lap-to-lap?"
-            right={
-              <Badge tone={VERDICT_TONE[race.factors.where.verdict]}>
-                {race.factors.where.verdict}
-              </Badge>
-            }
-          >
-            <p className="mb-3 text-sm text-zinc-300">{race.factors.where.headline}</p>
-            {whereDecomp ? (
-              <div className="space-y-5">
-                <DeltaCurve matchup={whereDecomp} />
-                <SectorVerdict matchup={whereDecomp} />
-                <AttributionList matchup={whereDecomp} />
-                <DecompTrackMap matchup={whereDecomp} />
-              </div>
-            ) : null}
-            {race.factors.where.caveat && (
-              <p className="mt-3 text-[11px] text-zinc-600">{race.factors.where.caveat}</p>
-            )}
-          </Panel>
-
-          {/* Tyre */}
-          <TyreFactor factor={race.factors.tyre} />
-
-          {/* Pace */}
-          <PaceFactor factor={race.factors.pace} />
-
-          {/* Start */}
-          <StartFactor factor={race.factors.start} />
-        </>
+          {/* Auto takeaway */}
+          <p className="mt-4 rounded border border-carbon-line bg-carbon-soft/50 px-3 py-2.5 text-sm text-zinc-200">
+            <span className="font-semibold text-white">→ </span>
+            {takeaway(race)}
+          </p>
+        </Panel>
       )}
 
       {!race && !raceError && pick && (
@@ -151,33 +213,21 @@ export function RaceDecomp() {
       {/* Why this matters beyond F1 */}
       <Panel title="Why this matters beyond F1" subtitle="The transferable skill">
         <p className="py-1 text-sm text-zinc-400">
-          Decomposing an outcome (a race win) into its true causes and refusing to credit a
-          cause that's within noise is outcome attribution under uncertainty — the same shape as
+          Decomposing an outcome (a race win) into its true causes and refusing to credit a cause
+          that's within noise is outcome attribution under uncertainty — the same shape as
           root-cause analysis, A/B-test readouts, and anomaly detection.
         </p>
       </Panel>
 
       {/* Explorer */}
       {index && (
-        <Panel
-          title="Explore other races"
-          subtitle="Every race in the dataset — select to rerun the decomposition"
-        >
-          <div className="space-y-4 py-1">
+        <Panel title="Explore other races" subtitle="Pick any race and read its scorecard">
+          <div className="space-y-3 py-1">
             <RacePicker index={index} value={pick} onPick={setPick} />
-            {race ? (
+            {race && (
               <p className="text-xs text-zinc-500">
-                {race.meta.winner.name} beat {race.meta.p2.name} ·{' '}
-                {race.meta.eventName} ·{' '}
-                {race.meta.marginS !== null
-                  ? `${race.meta.marginS.toFixed(3)}s margin`
-                  : 'margin unknown'}
-                {' · '}
-                {nReal} real factor{nReal !== 1 ? 's' : ''}, {nNoise} noise
-              </p>
-            ) : (
-              <p className="py-6 text-center text-sm text-zinc-500">
-                Select a race above.
+                {race.meta.winner.name} beat {race.meta.p2.name} · {race.meta.eventName} ·{' '}
+                {margin(race.meta.marginS)} margin
               </p>
             )}
           </div>
@@ -188,15 +238,14 @@ export function RaceDecomp() {
       <Panel title="Method & trust" subtitle="Why you can believe the split">
         <div className="space-y-3 py-1 text-sm text-zinc-400">
           <p>
-            Laps are filtered to{' '}
-            <strong className="text-zinc-200">clean laps</strong> (green flag, not lap 1,
-            not in/out laps). Where-on-track uses{' '}
-            <strong className="text-zinc-200">like-compound</strong> comparisons only. Fuel
-            load is <strong className="text-zinc-200">not corrected</strong> — named
-            explicitly so you know. The where-on-track factor runs{' '}
-            <strong className="text-zinc-200">5,000-sample bootstrap CIs</strong> on
-            comparable mid-stint laps to separate real sector edges from noise. The tyre,
-            pace, and start verdicts are threshold-based point estimates — not CI-gated.
+            Laps are filtered to <strong className="text-zinc-200">clean laps</strong> (green flag,
+            not lap 1, not in/out laps). Where-on-track uses{' '}
+            <strong className="text-zinc-200">like-compound</strong> comparisons only. Fuel load is{' '}
+            <strong className="text-zinc-200">not corrected</strong> — named explicitly so you know.
+            The where-on-track factor runs{' '}
+            <strong className="text-zinc-200">5,000-sample bootstrap CIs</strong> on comparable
+            mid-stint laps to separate real sector edges from noise. The tyre, pace, and start
+            verdicts are threshold-based point estimates — not CI-gated.
           </p>
           <p className="text-xs text-zinc-500">
             Full write-up: <StudyLinks className="text-zinc-300" />

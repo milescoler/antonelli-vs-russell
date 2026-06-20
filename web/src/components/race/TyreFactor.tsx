@@ -64,7 +64,7 @@ function DriverStintRow({ code, stints }: { code: string; stints: TyreStint[] })
   )
 }
 
-export function TyreFactor({ factor }: { factor: TyreFactorType }) {
+export function TyreFactor({ factor, embedded = false }: { factor: TyreFactorType; embedded?: boolean }) {
   // Group stints by driver code, preserving insertion order (winner first)
   const driverOrder: string[] = []
   const byDriver: Record<string, TyreStint[]> = {}
@@ -76,14 +76,8 @@ export function TyreFactor({ factor }: { factor: TyreFactorType }) {
     byDriver[stint.code].push(stint)
   }
 
-  const tone = VERDICT_TONE[factor.verdict]
-
-  return (
-    <Panel
-      title="Tyre Factor"
-      right={<Badge tone={tone}>{factor.verdict}</Badge>}
-    >
-      <p className="mb-3 text-sm text-zinc-300">{factor.headline}</p>
+  const body = (
+    <>
       <div className="rounded border border-carbon-line bg-carbon-soft/30 px-3 py-1">
         {driverOrder.map((code) => (
           <DriverStintRow key={code} code={code} stints={byDriver[code]} />
@@ -92,6 +86,15 @@ export function TyreFactor({ factor }: { factor: TyreFactorType }) {
       {factor.caveat && (
         <p className="mt-2 text-[11px] text-zinc-600">{factor.caveat}</p>
       )}
+    </>
+  )
+
+  if (embedded) return body
+
+  return (
+    <Panel title="Tyre Factor" right={<Badge tone={VERDICT_TONE[factor.verdict]}>{factor.verdict}</Badge>}>
+      <p className="mb-3 text-sm text-zinc-300">{factor.headline}</p>
+      {body}
     </Panel>
   )
 }
