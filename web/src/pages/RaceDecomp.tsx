@@ -86,12 +86,6 @@ export function RaceDecomp() {
 
   const margin = (m: number | null) => (m !== null ? `${m.toFixed(3)}s` : '—')
 
-  const heroSub = race
-    ? `${race.meta.winner.name} beat ${race.meta.p2.name} by ${margin(
-        race.meta.marginS,
-      )} at ${race.meta.eventName}. What actually caused the gap — and what was just luck?`
-    : 'Decomposing a race win into its real causes — and ruling out the noise.'
-
   // factor rows, real-first
   const rows = race
     ? [...FACTOR_META].sort(
@@ -124,15 +118,32 @@ export function RaceDecomp() {
 
   return (
     <div className="space-y-9">
-      {/* Hero */}
+      {/* Hero — lead with the statistic: how much P1 beat P2 by */}
       <section className="f1-bar">
         <div className="f1-kicker text-[11px] uppercase tracking-widest text-f1-red">
-          Race-win decomposition
+          {race ? `${race.meta.eventName} · ${race.meta.year}` : 'Race-win decomposition'}
         </div>
-        <h1 className="text-3xl font-black uppercase italic tracking-tight text-white sm:text-4xl">
-          What actually won this race — and what was noise?
-        </h1>
-        <p className="mt-2 max-w-2xl text-sm text-zinc-400">{heroSub}</p>
+        {race ? (
+          <div className="mt-3">
+            <p className="text-base font-medium tracking-tight text-zinc-400 sm:text-lg">
+              <span className="font-semibold text-white">{race.meta.winner.name}</span> beat{' '}
+              <span className="font-semibold text-zinc-200">{race.meta.p2.name}</span> by
+            </p>
+            <div className="-mt-1 flex items-baseline gap-1.5">
+              <span className="text-6xl font-black tabular-nums tracking-tighter text-white sm:text-8xl">
+                {race.meta.marginS !== null ? race.meta.marginS.toFixed(3) : '—'}
+              </span>
+              <span className="text-3xl font-bold text-zinc-500 sm:text-4xl">s</span>
+            </div>
+            <p className="mt-3 max-w-xl text-sm text-zinc-500">
+              The winning margin, decomposed into its real causes — and the noise.
+            </p>
+          </div>
+        ) : (
+          <h1 className="mt-2 text-3xl font-black uppercase italic tracking-tight text-white sm:text-4xl">
+            What won the race?
+          </h1>
+        )}
       </section>
 
       {indexError && (
@@ -150,9 +161,7 @@ export function RaceDecomp() {
       {race && (
         <Panel
           title="What actually won it?"
-          subtitle={`${race.meta.winner.code} beat ${race.meta.p2.code} by ${margin(
-            race.meta.marginS,
-          )} · tap a factor for the evidence`}
+          subtitle="Four causes, each ruled real or noise · tap a factor for the evidence"
         >
           <div className="divide-y divide-carbon-line">
             {rows.map((f) => {
