@@ -62,6 +62,15 @@
       "slug": "barcelona",
       "valid": true,
       "winner": "HAM"
+    },
+    {
+      "marginS": 1.611,
+      "p2": "VER",
+      "realFactorCount": 0,
+      "round": 8,
+      "slug": "austrian",
+      "valid": true,
+      "winner": "RUS"
     }
   ],
   "hero": "monaco",
@@ -100,6 +109,11 @@
       "name": "Barcelona Grand Prix",
       "round": 7,
       "slug": "barcelona"
+    },
+    {
+      "name": "Austrian Grand Prix",
+      "round": 8,
+      "slug": "austrian"
     }
   ]
 }
