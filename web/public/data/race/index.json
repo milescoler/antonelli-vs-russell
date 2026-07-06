@@ -71,6 +71,15 @@
       "slug": "austrian",
       "valid": true,
       "winner": "RUS"
+    },
+    {
+      "marginS": 0.427,
+      "p2": "RUS",
+      "realFactorCount": 2,
+      "round": 9,
+      "slug": "british",
+      "valid": true,
+      "winner": "LEC"
     }
   ],
   "hero": "monaco",
@@ -114,6 +123,11 @@
       "name": "Austrian Grand Prix",
       "round": 8,
       "slug": "austrian"
+    },
+    {
+      "name": "British Grand Prix",
+      "round": 9,
+      "slug": "british"
     }
   ]
 }
