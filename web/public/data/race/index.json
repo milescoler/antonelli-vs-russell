@@ -65,6 +65,12 @@
       "round": 11,
       "slug": "hungarian",
       "valid": false
+    },
+    {
+      "reason": "The data you are trying to access has not been loaded yet. See `Session.load`",
+      "round": 12,
+      "slug": "dutch",
+      "valid": false
     }
   ],
   "hero": "monaco",
@@ -123,6 +129,11 @@
       "name": "Hungarian Grand Prix",
       "round": 11,
       "slug": "hungarian"
+    },
+    {
+      "name": "Dutch Grand Prix",
+      "round": 12,
+      "slug": "dutch"
     }
   ]
 }
