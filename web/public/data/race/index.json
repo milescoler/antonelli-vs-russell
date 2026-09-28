@@ -83,6 +83,12 @@
       "round": 14,
       "slug": "spanish",
       "valid": false
+    },
+    {
+      "reason": "The data you are trying to access has not been loaded yet. See `Session.load`",
+      "round": 15,
+      "slug": "azerbaijan",
+      "valid": false
     }
   ],
   "hero": "monaco",
@@ -156,6 +162,11 @@
       "name": "Spanish Grand Prix",
       "round": 14,
       "slug": "spanish"
+    },
+    {
+      "name": "Azerbaijan Grand Prix",
+      "round": 15,
+      "slug": "azerbaijan"
     }
   ]
 }
