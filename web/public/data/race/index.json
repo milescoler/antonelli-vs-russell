@@ -95,6 +95,12 @@
       "round": 16,
       "slug": "bahrain",
       "valid": false
+    },
+    {
+      "reason": "The data you are trying to access has not been loaded yet. See `Session.load`",
+      "round": 17,
+      "slug": "singapore",
+      "valid": false
     }
   ],
   "hero": "monaco",
@@ -178,6 +184,11 @@
       "name": "Bahrain Grand Prix",
       "round": 16,
       "slug": "bahrain"
+    },
+    {
+      "name": "Singapore Grand Prix",
+      "round": 17,
+      "slug": "singapore"
     }
   ]
 }
