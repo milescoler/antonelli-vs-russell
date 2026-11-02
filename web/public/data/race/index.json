@@ -107,6 +107,12 @@
       "round": 18,
       "slug": "united-states",
       "valid": false
+    },
+    {
+      "reason": "The data you are trying to access has not been loaded yet. See `Session.load`",
+      "round": 19,
+      "slug": "mexico-city",
+      "valid": false
     }
   ],
   "hero": "monaco",
@@ -200,6 +206,11 @@
       "name": "United States Grand Prix",
       "round": 18,
       "slug": "united-states"
+    },
+    {
+      "name": "Mexico City Grand Prix",
+      "round": 19,
+      "slug": "mexico-city"
     }
   ]
 }
