@@ -113,6 +113,12 @@
       "round": 19,
       "slug": "mexico-city",
       "valid": false
+    },
+    {
+      "reason": "any API: 500 calls/h",
+      "round": 20,
+      "slug": "s-o-paulo",
+      "valid": false
     }
   ],
   "hero": "monaco",
@@ -211,6 +217,11 @@
       "name": "Mexico City Grand Prix",
       "round": 19,
       "slug": "mexico-city"
+    },
+    {
+      "name": "São Paulo Grand Prix",
+      "round": 20,
+      "slug": "s-o-paulo"
     }
   ]
 }
