@@ -119,6 +119,12 @@
       "round": 20,
       "slug": "s-o-paulo",
       "valid": false
+    },
+    {
+      "reason": "any API: 500 calls/h",
+      "round": 21,
+      "slug": "las-vegas",
+      "valid": false
     }
   ],
   "hero": "monaco",
@@ -222,6 +228,11 @@
       "name": "São Paulo Grand Prix",
       "round": 20,
       "slug": "s-o-paulo"
+    },
+    {
+      "name": "Las Vegas Grand Prix",
+      "round": 21,
+      "slug": "las-vegas"
     }
   ]
 }
